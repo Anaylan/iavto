@@ -1,0 +1,116 @@
+.tab-nav {
+  position: relative;
+  display: block !important;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 32px 0 38px 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__item {
+    position: relative;
+    display: inline-block;
+    margin: 0 50px 0 0 !important;
+
+    &:last-child {
+      margin: 0 !important;
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 5;
+      display: inline-block;
+      bottom: 0;
+      left: 0;
+      width: calc(100% + 55px);
+      height: 1px;
+      background: #1e1e1e;
+    }
+  }
+
+  &__link {
+    position: relative !important;
+    display: inline-block !important;
+    background: none !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #2e2f31 !important;
+    text-transform: uppercase !important;
+    padding: 8px 8px 16px 8px !important;
+    margin: 0 !important;
+    transition: color 0.1s linear !important;
+
+    &:hover {
+      color: #2774ac !important;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      display: inline-block;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 3px;
+      border-radius: 10px;
+      background: #2774ac;
+      opacity: 0;
+      transition: opacity 0.1s linear;
+    }
+
+    &.active {
+      background: none !important;
+      color: #2774ac !important;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .tab-nav {
+    padding: 25px 0 30px 0;
+
+    &__item {
+      margin: 0 22px 0 0 !important;
+    }
+
+    &__link {
+      font-size: 14px !important;
+      padding: 6px 6px 14px 6px !important;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .tab-nav {
+    padding: 16px 0 22px 0;
+
+    &__item {
+      margin: 0 14px 0 0 !important;
+    }
+
+    &__link {
+      font-size: 13px !important;
+      padding: 9px 6px 10px 6px !important;
+    }
+  }
+}

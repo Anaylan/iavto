@@ -1,0 +1,497 @@
+.search {
+  &__body {
+    background: #f6f7fb;
+    border-radius: 20px;
+    padding: 60px 60px 50px 60px;
+  }
+
+  &__title {
+    margin: 0 0 25px 0;
+  }
+
+  &__subtitle {
+    margin: 0 0 32px 0;
+  }
+
+  &__form {
+  }
+
+  &__title-sm {
+    font-size: 30px;
+    font-weight: 500;
+    color: #2e2f31;
+    margin: 0 0 32px 0;
+  }
+}
+.search-form {
+  &__tariffs {
+  }
+
+  &__additional {
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 15px 20px;
+    -webkit-appearance: none !important;
+
+    &::placeholder {
+      color: #acacac;
+    }
+
+    &:focus {
+      border: 1px solid #2774ac;
+    }
+  }
+
+  &__btn {
+    display: block;
+    width: 100%;
+  }
+
+  &__btn:not(:first-child) {
+    margin: 0 0 0 30px;
+  }
+}
+.search-tariffs {
+  margin: 0 -11px 35px -11px !important;
+
+  &__item {
+    position: relative !important;
+    padding: 0 11px !important;
+    margin: 0 0 25px 0 !important;
+  }
+
+  &__checkbox {
+    position: relative;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    cursor: pointer;
+
+    border: 2px solid #2774ac;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #2e2f31;
+    padding: 25px;
+
+    input {
+      display: none;
+    }
+
+    span {
+      display: inline-block;
+      margin: 0 0 0 50px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 25px;
+      z-index: 1;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #2774ac;
+      border-radius: 5px;
+    }
+
+    &::after {
+      content: '';
+      display: none;
+      position: absolute;
+      top: 32px;
+      left: 35px;
+      z-index: 1;
+      width: 7px;
+      height: 12px;
+      border-right: 3px solid #4d4d4d;
+      border-bottom: 3px solid #4d4d4d;
+      box-sizing: border-box;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &.checkbox-active::before {
+      border: 1px solid #2774ac;
+      background-color: #2774ac;
+    }
+
+    &.checkbox-active::after {
+      display: block;
+      border-right: 3px solid #fff;
+      border-bottom: 3px solid #fff;
+    }
+  }
+}
+.search-additional {
+  margin: 0 -15px;
+
+  &__item {
+    position: relative;
+    padding: 0 15px;
+  }
+
+  &__select {
+    color: #686f6d;
+    cursor: pointer;
+    padding: 16.5px 20px;
+    margin: 0 0 25px 0;
+  }
+
+  &__option {
+  }
+
+  &__price {
+    p {
+      font-size: 16px;
+      color: #686f6d;
+      margin: 0 26px 0 0;
+    }
+
+    span {
+      display: inline-block;
+      height: 1px;
+      min-width: 11px;
+      background: #000;
+      margin: 0 10px;
+    }
+
+    input {
+      display: inline-block;
+      max-width: 157px;
+    }
+  }
+
+  .search-additional__radio-group {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid #e2e2e2;
+    overflow: hidden;
+    margin: 0 0 25px 0;
+  }
+
+  .search-additional__radio {
+    width: 100%;
+
+    &:not(:last-child) {
+      border-right: 1px solid #e2e2e2;
+    }
+
+    label {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      font-size: 16px;
+      color: #686f6d;
+      background: transparent;
+      padding: 16.5px 5px;
+      border-radius: 0px;
+      cursor: pointer;
+      transition: background-color 0.1s linear;
+    }
+
+    input[type='radio'] {
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+    }
+
+    input[type='radio']:checked + label {
+      background-color: #2774ac;
+      color: #fff;
+    }
+
+    input[type='radio']:disabled + label {
+      filter: grayscale(100%);
+    }
+
+    input[type='radio']:disabled + label {
+      color: #a3a3a3;
+      cursor: default;
+    }
+  }
+}
+.select-wrap {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 23px;
+    right: 32px;
+    z-index: 1;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #2774ac;
+    border-bottom: 2px solid #2774ac;
+    box-sizing: border-box;
+    pointer-events: none;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+.option-hide {
+  display: none;
+}
+.search-min .search-form__btn {
+  display: inline-block;
+  width: auto;
+}
+
+@media (max-width: 1023px) {
+  .search {
+    &__body {
+      background: #f6f7fb;
+      border-radius: 20px;
+      padding: 30px 30px 25px 30px;
+    }
+
+    &__title {
+      margin: 0 0 16px 0;
+    }
+
+    &__subtitle {
+      margin: 0 0 25px 0;
+    }
+
+    &__title-sm {
+      font-size: 28px;
+      margin: 0 0 25px 0;
+    }
+  }
+  .search-form {
+    &__input {
+      font-size: 14px;
+      padding: 12px 15px;
+    }
+
+    &__btn {
+      display: block;
+      width: 100%;
+    }
+
+    &__btn:not(:first-child) {
+      margin: 0 0 0 20px;
+    }
+  }
+  .search-tariffs {
+    margin: 0 -8px 35px -8px !important;
+
+    &__item {
+      position: relative !important;
+      padding: 0 8px !important;
+      margin: 0 0 20px 0 !important;
+    }
+
+    &__checkbox {
+      font-size: 16px;
+      border-radius: 10px;
+      padding: 16px;
+
+      span {
+        margin: 0 0 0 32px;
+      }
+
+      &::before {
+        top: 14px;
+        left: 16px;
+        width: 20px;
+        height: 20px;
+      }
+
+      &::after {
+        top: 22px;
+        left: 26px;
+      }
+    }
+  }
+  .search-additional {
+    margin: 0 -10px;
+
+    &__item {
+      padding: 0 10px;
+    }
+
+    &__select {
+      padding: 13px 16px;
+      margin: 0 0 25px 0;
+    }
+
+    &__price {
+      p {
+        font-size: 14px;
+        margin: 0 12px 0 0;
+      }
+
+      span {
+        min-width: 5px;
+        margin: 0 5px;
+      }
+
+      input {
+        display: inline-block;
+        max-width: 100px;
+      }
+    }
+
+    .search-additional__radio {
+      label {
+        font-size: 14px;
+        padding: 13px 5px;
+      }
+    }
+  }
+  .select-wrap {
+    position: relative;
+
+    &::after {
+      top: 19px;
+      right: 25px;
+      width: 8px;
+      height: 8px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .search-additional {
+    &__select {
+      margin: 0 0 10px 0;
+    }
+
+    &__price {
+      margin: 0 0 25px 0;
+
+      input {
+        display: inline-block;
+        max-width: 50%;
+
+        &:nth-child(2) {
+          max-width: calc(50% - 58px);
+        }
+      }
+
+      span {
+        min-width: 8px;
+        margin: 0 6px;
+      }
+    }
+  }
+  .search-tariffs {
+    margin: 0 -6px 18px -6px !important;
+
+    &__item {
+      padding: 0 6px !important;
+      margin: 0 0 10px 0 !important;
+    }
+
+    &__checkbox {
+      font-size: 14px;
+      padding: 12px;
+
+      span {
+        margin: 0 0 0 25px;
+      }
+
+      &::before {
+        top: 11px;
+        left: 12px;
+        width: 16px;
+        height: 16px;
+      }
+
+      &::after {
+        top: 22px;
+        left: 26px;
+      }
+
+      &::after {
+        top: 18px;
+        left: 20px;
+        width: 6px;
+        height: 9px;
+        border-right: 2px solid #4d4d4d;
+        border-bottom: 2px solid #4d4d4d;
+      }
+
+      &.checkbox-active::after {
+        border-right: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+      }
+    }
+  }
+  .search-min {
+    .search-additional {
+      &__price {
+        input {
+          max-width: 100%;
+
+          &:nth-child(2) {
+            max-width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .search-form {
+    &__btn {
+      display: block !important;
+      margin: 0 0 12px 0;
+
+      &:last-child {
+        margin: 0;
+      }
+
+      &:not(:first-child) {
+        margin: 0;
+      }
+    }
+  }
+  .search-additional {
+    &__item {
+      flex-wrap: wrap;
+    }
+
+    &__price {
+      input {
+        max-width: 100%;
+
+        &:nth-child(2) {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  .search-min {
+    .search-form__btn {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 374px) {
+  .search-additional {
+    &__price {
+      margin: 0 0 25px 0;
+
+      input {
+        display: inline-block;
+        max-width: 100%;
+      }
+    }
+  }
+  .search-tariffs {
+    &__item {
+      width: 100% !important;
+    }
+  }
+}

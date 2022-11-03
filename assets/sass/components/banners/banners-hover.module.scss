@@ -1,0 +1,60 @@
+.banners-hover {
+    position: absolute;
+    display: block;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    &__body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 16px;
+    }
+    &__title {
+        display: block;
+        width: 100%;
+        font-size: 30px;
+        text-align: center;
+        font-weight: 200;
+        color: #fff;
+        line-height: 1.2;
+        margin: 0 0 15px 0;
+    }
+    .icon {
+        width: 45px;
+        height: 45px;
+        &__item {
+            fill: #fff;
+        }
+    }
+}
+
+@media (max-width: 1023px) {
+    .banners-hover {
+        &__body {
+            padding: 12px;
+        }
+        &__title {
+            font-size: 25px;
+            margin: 0 0 10px 0;
+        }
+        .icon {
+            width: 34px;
+            height: 34px;
+        }
+    }
+}

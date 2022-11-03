@@ -1,0 +1,121 @@
+import { login } from 'api/AuthCrud'
+import { TITLE } from 'app/config'
+import { UserModel } from 'app/models'
+import * as header from 'app/redux/reducers/authReducer'
+import { Load } from 'assets/icon/icons'
+import auth_styles from 'assets/sass/components/auth.module.scss'
+import form from 'assets/sass/components/form.module.scss'
+import { useFormik } from 'formik'
+
+import { Button, FormInputWithLabel } from 'modules/UI'
+import Form from 'modules/UI/forms/Form'
+
+import Head from 'next/head'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { FC, Fragment, useState } from 'react'
+import { Container } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+
+export const Login: FC<UserModel> = () => {
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+  const router = useRouter()
+
+  const user = useSelector(({ header }) => header.title)
+
+
+  if (user) {
+    router.push('/')
+  }
+
+  // const massiv = JSON.parse(localStorage.getItem('persist:root').then(res=>))
+  // console.log(JSON.parse(massiv.auth))
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: (values) => {
+      setLoading(true)
+      login(values.email, values.password)
+        .then(({ data }) => {
+          console.log(data)
+          setLoading(false)
+          dispatch(header.actions.login(data.token))
+          if (data.token) {
+            router.push('/')
+          }
+        })
+        .catch((err) => {
+          setLoading(false)
+          console.log(err)
+        })
+    }
+  })
+
+  return (
+    <Fragment>
+      <Head>
+        <title>Авторизация | {TITLE}</title>
+      </Head>
+      <section className={`auth align-items-center`}>
+        <div className='text-center'>
+          {loading && (
+            <div>
+              <Load />
+            </div>
+          )}
+        </div>
+        <Container>
+          <div className={auth_styles['auth__body']}>
+            <h1 className={auth_styles['auth__title']}>
+              Вход в существующий аккаунт
+            </h1>
+            <Form onSubmit={formik.handleSubmit}>
+              <div className={form['form__body']}>
+                <FormInputWithLabel
+                  title={'Email'}
+                  name={'email'}
+                  required
+                  type={'email'}
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                />
+                <FormInputWithLabel
+                  title={'Пароль'}
+                  name={'password'}
+                  required
+                  type={'password'}
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                >
+                  <div className={form['form__help']}>
+                    <a href='#'>Забыли пароль?</a>
+                  </div>
+                </FormInputWithLabel>
+              </div>
+              <div className={form['form_' + '_bottom']}>
+                <div className={form['form__btn-group']}>
+                  <div className={form['form__btn-wrap']}>
+                    <Button type={'submit'}>Войти</Button>
+                  </div>
+                  <div className={form['form__btn-wrap']}>
+                    <Link
+                      className={`${form['btn-main']} ${form['btn-main-trp']}`}
+                      href={'/auth/signup'}
+                    >
+                      Зарегистрироваться
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </Form>
+          </div>
+        </Container>
+      </section>
+    </Fragment>
+  )
+}
+
+export default Login

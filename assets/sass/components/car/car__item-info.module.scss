@@ -1,0 +1,127 @@
+.car__item-info {
+  display: block;
+  height: auto;
+  padding: 0;
+  margin: 0 0 25px 0;
+}
+
+.cars-item__info-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  box-shadow: 4px 4px 20px rgba(117, 115, 111, 0.18);
+  border-radius: 10px;
+  padding: 16px;
+}
+.cars-item__info-body {
+  flex: 1 1 auto;
+  margin: 0 0 18px 0;
+}
+.car__item-info .cars-item__info-content {
+  padding: 10px;
+}
+.car__item-info .cars-item__info-body {
+  padding: 15px 10px !important;
+  margin: 0 0 15px 0 !important;
+}
+
+.cars-item__price {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000;
+  margin: 0 0 18px 0;
+}
+
+.car__item-info .cars-item__price {
+  font-size: 25px;
+  font-weight: 600;
+}
+.cars-item__region {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 300;
+  color: #2e2f31;
+  margin: 0 0 17px 0;
+
+  .icon {
+    position: relative;
+    top: -1px;
+    width: 17px;
+    height: 17px;
+    margin: 0 8px 0 0;
+
+    &__item {
+      fill: #acacac;
+    }
+  }
+}
+.car__item-info .cars-item__region {
+}
+
+.cars-item__list li {
+  position: relative;
+  font-size: 15px;
+  color: #686f6d;
+  padding: 0 0 0 22px;
+  margin: 0 0 7px 0;
+
+  ::before {
+    content: '';
+    position: absolute;
+    z-index: 5;
+    display: inline-block;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #686f6d;
+  }
+}
+
+.car__item-info .cars-item__subtitle {
+  margin: 0 0 20px 0;
+}
+.car__item-info .cars-item__btn {
+  padding: 14px;
+  font-size: 20px;
+}
+
+@media (max-width: 1023px) {
+  .car__item-info {
+    margin: 0 0 20px 0;
+  }
+  .car__item-info .cars-item__info-content {
+    padding: 10px;
+  }
+  .car__item-info .cars-item__info-body {
+    padding: 10px 5px !important;
+    margin: 0 0 12px 0 !important;
+  }
+  .car__item-info .cars-item__price {
+    font-size: 20px;
+  }
+  .car__item-info .cars-item__region {
+    font-size: 15px;
+
+    .icon {
+      width: 17px;
+      height: 17px;
+      margin: 0 6px 0 0;
+    }
+  }
+  .car__item-info .cars-item__subtitle {
+    margin: 0 0 15px 0;
+  }
+  .cars-item__list li {
+    font-size: 14px;
+  }
+  .car__item-info .cars-item__btn {
+    padding: 10px;
+  }
+}

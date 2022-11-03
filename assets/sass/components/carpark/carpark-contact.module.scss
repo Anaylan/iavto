@@ -1,0 +1,27 @@
+.carpark-contact {
+}
+.carpark-contact .form__item {
+  flex-direction: column;
+}
+.carpark-contact .form__label {
+  min-width: auto;
+  margin: 0 0 8px 0;
+}
+.carpark-contact .form__input {
+  max-width: 600px;
+}
+.carpark-contact textarea {
+  height: 140px;
+  resize: none;
+}
+.carpark-contact .form__btn-group {
+  justify-content: start;
+}
+.carpark-contact .btn-main {
+}
+
+@media (max-width: 1023px) {
+}
+
+@media (max-width: 767px) {
+}

@@ -1,0 +1,26 @@
+@keyframes rotate-gear {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-example {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  display: block;
+  height: 90vmin;
+  width: 90vmin;
+}
+
+.gear-A {
+  animation: rotate-gear 21176ms linear infinite;
+}
+
+.gear-B {
+  animation: rotate-gear 10000ms linear infinite;
+}
