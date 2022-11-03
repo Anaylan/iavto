@@ -4,6 +4,6 @@ build
 .next
 .vc
 
-./.gitignore
+.gitignore
 
 .git
