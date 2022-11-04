@@ -1,9 +1,8 @@
-import React from 'react'
 
-import Head from 'next/head'
-import { TITLE } from 'app/config'
 import { getAllCarparks, getHotTender } from 'api/Company'
+import { TITLE } from 'app/config'
 import CarParkBlock from 'modules/templates/CarParkBlock'
+import Head from 'next/head'
 
 export default function Carparks() {
   return (

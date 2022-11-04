@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Heart, Star } from 'assets/icon/icons'
 import { ICarparkBlock, ICarparkModel } from 'app/models'
+import { Heart, Star } from 'assets/icon/icons'
+import React, { useEffect, useState } from 'react'
 
-import { Col, Container, Row } from 'react-bootstrap'
 import { URL_IMG } from 'app/config'
 import Link from 'next/link'
+import { Col, Container, Row } from 'react-bootstrap'
 
 import main from 'assets/sass/components/card/carparks.module.scss'
 import Image from 'next/image'
@@ -17,10 +17,10 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
 }) => {
   const [Carparks, setCarparks] = useState<ICarparkModel[]>([])
   useEffect(() => {
-    getData().then((res: any) => {
-      setCarparks(res.data)
+    getData().then(({data}: {data: ICarparkModel[]}) => {
+      setCarparks(data)
     })
-  }, [setCarparks])
+  }, [setCarparks, getData])
 
   return (
     <>
@@ -41,12 +41,12 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
                 : `${main['carparks__body']} gx-0 gy-0 carparks`
             }
           >
-            {Carparks &&
+            {Carparks.length ?
               Carparks.map((tender: ICarparkModel, key: number) => (
                 <Col key={key} {...columns}>
                   <TenderPark carPark={tender} lazy={large} />
                 </Col>
-              ))}
+              )) : <>Пусто</>}
           </Row>
         </Container>
       </section>

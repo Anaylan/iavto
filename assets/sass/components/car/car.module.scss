@@ -3,7 +3,7 @@
     margin: 0 0 32px 0 !important;
   }
   &__row {
-    margin: 0 -20px;
+    margin: 0 -20px !important;
   }
   &__col {
     padding: 0 20px !important;
@@ -32,7 +32,6 @@
   }
   &__top-views {
     display: flex;
-    align-items: center;
     font-size: 15px;
     font-weight: 300;
     color: #acacac;

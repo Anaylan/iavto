@@ -1,0 +1,152 @@
+.messenger-bottom {
+  position: relative;
+  width: 100%;
+  background-color: #f6f7fb;
+  border-top: 1px solid #fff;
+  &__form {
+    padding: 12px 0;
+  }
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__attach-file {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 9%;
+    background: none;
+    input {
+      display: none;
+    }
+    label {
+      margin: 0 0 3px 0;
+      cursor: pointer;
+      &:hover {
+        .icon {
+          &__item {
+            fill: #2774ac !important;
+          }
+        }
+      }
+    }
+    .icon {
+      width: 28px;
+      height: 28px;
+      &__item {
+        fill: #686f6d !important;
+      }
+    }
+  }
+  &__message {
+    width: 82%;
+    overflow: hidden;
+  }
+  &__input {
+    display: block;
+    width: 100%;
+    min-height: 36px;
+    max-height: 200px;
+    resize: none;
+    overflow-x: hidden;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #fff;
+    font-size: 15px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    padding: 8px 20px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    &::placeholder {
+      font-size: 15px;
+      color: #919191;
+    }
+    &[placeholder]:empty::before {
+      content: attr(placeholder);
+      font-size: 15px;
+      color: #919191;
+      cursor: text;
+    }
+    &[placeholder]:empty:focus::before {
+      content: '';
+    }
+  }
+  &__btn {
+    background: none;
+    cursor: pointer;
+    margin: 0 0 6px 0;
+    &:hover {
+      .icon {
+        &__item {
+          fill: #2774ac !important;
+        }
+      }
+    }
+    .icon {
+      width: 23px;
+      height: 23px;
+      &__item {
+        fill: #686f6d !important;
+      }
+    }
+  }
+  &__send {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: none;
+    width: 9%;
+    .messenger-bottom__btn {
+      margin: 0 10px 6px 0;
+    }
+    .icon {
+      &__item {
+        fill: #2774ac !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .messenger-bottom {
+    &__attach-file {
+      width: 12%;
+    }
+    &__message {
+      width: 76%;
+    }
+    &__send {
+      width: 12%;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .messenger-bottom {
+    &__attach-file {
+      width: 15%;
+    }
+    &__message {
+      width: 70%;
+    }
+    &__send {
+      width: 15%;
+    }
+  }
+}
+
+@media (max-width: 374px) {
+  .messenger-bottom {
+    &__attach-file {
+      width: 16.5%;
+    }
+    &__message {
+      width: 67%;
+    }
+    &__send {
+      width: 16.5%;
+    }
+  }
+}

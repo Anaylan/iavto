@@ -9,8 +9,8 @@ export interface UserDataModel {
   u_status: string
   telephone?: string | undefined
   created: Date
-  balance: number
-  partners_balance: number
+  balance: string
+  partners_balance: string
   modified: Date
   description?: string | undefined
   status?: number | undefined
@@ -20,6 +20,8 @@ export interface UserDataModel {
 export interface UserModel {
   data?: UserDataModel | null
   status: number
+  token?: string | undefined
+  message?: string
 }
 
 export interface UserLocation {

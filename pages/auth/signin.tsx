@@ -89,11 +89,10 @@ export const Login: FC<UserModel> = () => {
                   type={'password'}
                   onChange={formik.handleChange}
                   value={formik.values.password}
-                >
-                  <div className={form['form__help']}>
-                    <a href='#'>Забыли пароль?</a>
-                  </div>
-                </FormInputWithLabel>
+                />
+                <div className={form['form__help']}>
+                  <Link href='/auth/forgot-password'>Забыли пароль?</Link>
+                </div>
               </div>
               <div className={form['form_' + '_bottom']}>
                 <div className={form['form__btn-group']}>

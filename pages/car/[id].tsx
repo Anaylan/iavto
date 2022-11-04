@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios'
+import banner from 'assets/sass/components/banners/banners.module.scss'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -12,15 +12,14 @@ import { TITLE, URL_IMG } from 'app/config'
 import { ICarModel, ICarparkModel, ITabItems } from 'app/models'
 import { CarparkCard, CarparkInfo } from 'modules/elements'
 import {
-  ActionFollow,
-  CarparkTabs,
-  TabCar,
-  TabFeedback,
-  TabProfile,
-  TabReviews
+    ActionFollow,
+    CarparkTabs,
+    TabCar,
+    TabFeedback,
+    TabProfile,
+    TabReviews
 } from 'modules/UI'
 
-import banner from 'assets/sass/components/carpark/carpark-banner.module.scss'
 import styles from 'assets/sass/components/carpark/carpark.module.scss'
 
 export async function getServerSideProps({ params }: any) {
@@ -38,11 +37,7 @@ export default function Car({ car }: { car: ICarModel }) {
 
   useEffect(() => {
     getCarpark(car.cid).then(
-      ({
-        data
-      }: {
-        data: AxiosResponse<ICarparkModel, any> | ICarparkModel
-      }) => {
+      ({data}: {data:ICarparkModel}) => {
         setCarpark(data)
       }
     )
@@ -107,11 +102,7 @@ export default function Car({ car }: { car: ICarModel }) {
           )}
         </Container>
         {car && (
-          <>
-            <Container>
-              <CarparkTabs tabs={TabItems}></CarparkTabs>
-            </Container>
-          </>
+          <CarparkTabs tabs={TabItems}></CarparkTabs>
         )}
       </section>
     </>

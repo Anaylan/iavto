@@ -1,11 +1,11 @@
 import { TITLE } from 'app/config'
+import chat from 'assets/sass/components/chat/chat.module.scss'
+import messenger from 'assets/sass/components/chat/messenger/messenger.module.scss'
+import { ChatAside } from 'modules/elements/chat/ChatAside'
+import { ChatMessenger } from 'modules/elements/chat/ChatMessenger'
+import { MessengerBottom } from 'modules/elements/chat/MessengerBottom'
 import Head from 'next/head'
 import { Container } from 'react-bootstrap'
-import chatAside from '/assets/sass/components/chat/chat/chat-aside.module.scss'
-import chat from '/assets/sass/components/chat/chat/chat.module.scss'
-import { ChatAside} from '/modules/elements/chat/ChatAside'
-import { ChatMessenger} from '/modules/elements/chat/ChatMessenger'
-import { MessengerBottom} from '/modules/elements/chat/MessengerBottom'
 
 export default function Chat() {
   return (
@@ -13,12 +13,12 @@ export default function Chat() {
       <Head>
         <title>Чат | {TITLE}</title>
       </Head>
-      <section className='chat'>
+      <section className={chat['chat']}>
         <Container>
-          <div className='chat__body'>
+          <div className={chat['chat__body']}>
             <ChatAside />
-            <div className='chat__messenger messenger d-none d-lg-block'>
-              <div className='messenger__wrapper'>
+            <div className={` ${chat['chat__messenger']} ${messenger['messenger']} d-none d-lg-block `}>
+              <div className={messenger['messenger__wrapper']}>
                 <ChatMessenger />
                 <MessengerBottom />
               </div>

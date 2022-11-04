@@ -59,7 +59,7 @@
       border-radius: 10px;
     }
 
-    .progress-bar {
+    :global(.progress-bar) {
       background: #ffe600;
     }
   }

@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useMemo, useRef } from 'react'
+import { RefObject, useEffect, useMemo, useRef, useState } from 'react'
 import xss from 'xss'
 
 /**
@@ -7,7 +7,7 @@ import xss from 'xss'
 export const useObserver = (
   ref: RefObject<any>,
   canLoad: boolean,
-  isLoading: boolean,
+  isLoading: string | boolean | ((...args: any) => Promise<void>),
   callback: CallableFunction
 ) => {
   let observer: React.RefObject<any> = useRef()
@@ -145,16 +145,30 @@ export const useSearch = (value: string, array: any[]) => {
   return filteredArray
 }
 
-export const useChange = (value:any, onChange: CallableFunction) => {
-  function handleChange(event: Event) {
-    onChange()
-  }
-  
-  useEffect(()=>{
-    window.addEventListener('change', handleChange, false)
-    return () => {
-      // Unbind the event listener on clean up
-      window.removeEventListener('change', handleChange, false)
+export const useFetch = (callback: CallableFunction) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
+
+  // useEffect(async (...args: any) => {
+  //   try {
+  //     setIsLoading(true)
+  //     callback(...args)
+  //   } catch (e: any | unknown) {
+  //     setError(e.message)
+  //   } finally {
+  //     setIsLoading(false)
+  //   }
+  // }, [])
+  const fetching = async (...args: any) => {
+    try {
+      setIsLoading(true)
+      await callback(...args)
+    } catch (e: any | unknown) {
+      setError(e.message)
+    } finally {
+      setIsLoading(false)
     }
-  }, [value, onChange])
+  }
+
+  return [fetching, isLoading, error]
 }

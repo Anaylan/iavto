@@ -1,17 +1,14 @@
 import { getAllLocations, getLocation } from 'api/Regions'
 import { useOutsideAlerter, useSearch } from 'app/hooks'
 import { ILink, IRegionDropdown, IRegionItem } from 'app/models'
-import { regionActions } from 'app/redux/reducers/regionReducer'
+import { IRegionState, regionActions } from 'app/redux/reducers/regionReducer'
 import { Load, Location } from 'assets/icon/icons'
 import styles from 'assets/sass/components/header/bottom.module.scss'
 import Link from 'next/link'
 import React, {
-  useEffect,
+  useDeferredValue, useEffect,
   useRef,
-  useState,
-  useMemo,
-  useTransition,
-  useDeferredValue
+  useState
 } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,20 +35,12 @@ export const HeaderBottomLink: React.FC<ILink> = ({ href, title }) => {
 export const HeaderBottom: React.FC<IHeaderBottom> = ({ links }) => {
   return (
     <>
-      <div
-        className={`header__bottom ${styles['header-bottom']} d-none d-lg-block`}
-      >
+      <div className={`header__bottom ${styles['header-bottom']} d-none d-lg-block`}>
         <Container>
           <Row className='align-items-center justify-content-between'>
-            <ul
-              className={`${styles['header-bottom__list']} col d-flex align-items-center`}
-            >
+            <ul className={`${styles['header-bottom__list']} col d-flex align-items-center`}>
               {links.map((link, key) => (
-                <HeaderBottomLink
-                  key={key}
-                  href={link.href}
-                  title={link.title}
-                />
+                <HeaderBottomLink key={key} href={link.href} title={link.title}/>
               ))}
             </ul>
             <RegionSearch />
@@ -83,7 +72,7 @@ export const RegionSearch = () => {
       })
     }
     setCurrentLocation(name)
-  }, [])
+  }, [dispatch, name])
 
   const onClose = () => {
     if (UpActive) {
@@ -101,6 +90,8 @@ export const RegionSearch = () => {
   const onClick = (name: string, id: number) => {
     dispatch(regionActions.update(name, id))
     setCurrentLocation(name)
+    setActive(false)
+    location.reload();
   }
   return (
     <Col
@@ -143,7 +134,6 @@ export const RegionList: React.FC<IRegionDropdown> = ({
 
   const [loading, setLoading] = useState(false)
 
-  const [transitionValue, setTransitionValue] = useState<string>('')
 
   const [value, setValue] = useState<string>('')
   const defferedValue = useDeferredValue(value)
@@ -201,7 +191,7 @@ export const RegionList: React.FC<IRegionDropdown> = ({
               }}
               className={styles['region-popup__form-input']}
               type='text'
-              name='s'
+              name='city'
             />
           </div>
         </form>
@@ -221,11 +211,8 @@ export const RegionList: React.FC<IRegionDropdown> = ({
 
 export const RegionItem: React.FC<IChildRegion> = ({ region, onClick }) => {
   return (
-    <li className={styles['region-popup__item']}>
-      <div
-        onClick={() => onClick(region.name, region.id)}
-        className={styles['region-popup__content']}
-      >
+    <li onClick={() => onClick(region.name, region.id)} className={styles['region-popup__item']}>
+      <div className={styles['region-popup__content']}>
         <div className={styles['region-popup__region']}>{region.name}</div>
         <div className={styles['region-popup__parent-region']}>
           {region.region_name}

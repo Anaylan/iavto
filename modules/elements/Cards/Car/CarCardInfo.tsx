@@ -1,7 +1,7 @@
-﻿import info from 'assets/sass/components/car/car__item-info.module.scss'
+﻿import { ICarModel } from 'app/models'
 import { Location } from 'assets/icon/icons'
+import info from 'assets/sass/components/car/car__item-info.module.scss'
 import React from 'react'
-import { ICarModel } from 'app/models'
 
 //Swiper styles
 import Link from 'next/link'
@@ -32,7 +32,7 @@ export const CarCardInfo: React.FC<ICarModel> = ({ price, company_name }) => {
             <li>Есть возможность долгой аренды</li>
           </ul>
         </div>
-        <Link className='cars-item__btn btn-main' href='#'>
+        <Link className={`${info['cars-item__btn']} btn-main`} href='#'>
           Арендовать
         </Link>
       </div>

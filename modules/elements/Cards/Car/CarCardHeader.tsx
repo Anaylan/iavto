@@ -1,10 +1,9 @@
-﻿import React from 'react'
-import { ICarModel } from 'app/models'
-import { Col, Row } from 'react-bootstrap'
-import { Heart, Eye } from 'assets/icon/icons'
-import { Button } from 'modules/UI/buttons/Button'
+﻿import { ICarModel } from 'app/models'
+import { Eye, Heart, Prohibit } from 'assets/icon/icons'
 import car from 'assets/sass/components/car/car.module.scss'
-import Link from 'next/link'
+import { Button } from 'modules/UI/buttons/Button'
+import React from 'react'
+import { Col, Row } from 'react-bootstrap'
 
 interface ICarCardHeader {}
 
@@ -45,7 +44,7 @@ export const CarCardHeader: React.FC<ICarModel> = ({ mark, model, year }) => {
                 >
                   <div className='d-flex align-items-center'>
                     <div className={'icon'}>
-                      <Heart color={'icon__item'} />
+                      <Prohibit color={'icon__item'} />
                     </div>
                     <span>Пожаловаться</span>
                   </div>

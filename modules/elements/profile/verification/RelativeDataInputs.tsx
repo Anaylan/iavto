@@ -1,86 +1,77 @@
 ﻿import { FormInputWithoutLabel, FormLabel } from 'modules/UI'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 
 export const RelativeDataInputs = () => {
   return (
     <>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel type='text' children={'ФИО Родственника №1'} />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>ФИО Родственника №1</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='Иванов Иван Иванович'
+            placeholder='Иванов Иван Иванович'
             required
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel
-          type='text'
-          children={'Кем он для вас является'}
-        />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>Кем он для вас является</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='Папа'
+            placeholder='Папа'
             required
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel type='text' children={'ФИО Родственника №2'} />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>ФИО Родственника №2</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='Иванов Иван Иванович'
+            placeholder='Иванов Иван Иванович'
             required
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel
-          type='text'
-          children={'Кем он для вас является'}
-        />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>Кем он для вас является</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='Мама'
+            placeholder='Мама'
             required
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel type='text' children={'ФИО Родственника №3'} />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>ФИО Родственника №3</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='Иванов Иван Иванович'
+            placeholder='Иванов Иван Иванович'
             required
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel
-          type='text'
-          children={'Кем он для вас является'}
-        />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>Кем он для вас является</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='Бабушка'
+            placeholder='Бабушка'
             required
           />
         </div>

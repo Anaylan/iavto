@@ -1,7 +1,7 @@
 .messenger-bottom {
     position: relative;
     width: 100%;
-    background-color: #F6F7FB;
+    background-color: #f6f7fb;
     border-top: 1px solid #fff;
     &__form {
         padding: 12px 0;
@@ -12,7 +12,7 @@
     }
     &__attach-file {
         display: flex;
-        align-items: end;
+        align-items: flex-end;
         justify-content: center;
         width: 9%;
         background: none;
@@ -25,7 +25,7 @@
             &:hover {
                 .icon {
                     &__item {
-                        fill: #2774AC !important;
+                        fill: #2774ac !important;
                     }
                 }
             }
@@ -34,7 +34,7 @@
             width: 28px;
             height: 28px;
             &__item {
-                fill: #686F6D !important;
+                fill: #686f6d !important;
             }
         }
     }
@@ -80,7 +80,7 @@
         &:hover {
             .icon {
                 &__item {
-                    fill: #2774AC !important;
+                    fill: #2774ac !important;
                 }
             }
         }
@@ -88,13 +88,13 @@
             width: 23px;
             height: 23px;
             &__item {
-                fill: #686F6D !important;
+                fill: #686f6d !important;
             }
         }
     }
     &__send {
         display: flex;
-        align-items: end;
+        align-items: flex-end;
         justify-content: center;
         background: none;
         width: 9%;
@@ -103,7 +103,7 @@
         }
         .icon {
             &__item {
-                fill: #2774AC !important;
+                fill: #2774ac !important;
             }
         }
     }

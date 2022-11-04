@@ -1,5 +1,4 @@
 import { getCars, getCarsForCarpark } from 'api/Car'
-import { getCarpark } from 'api/Company'
 import { useSanitize } from 'app/hooks'
 import { ICarModel, ICarparkModel } from 'app/models'
 import { Star } from 'assets/icon/icons'
@@ -230,18 +229,18 @@ export const TabFeedback = () => {
   return (
     <div className={`${feedback['carpark-contact']} carpark-tab__body auth`}>
       <h1 className={`cars__title title`}>Задайте ваш вопрос автопарку</h1>
-      <Form>
+      <Form className={form['form']}>
         <div className={feedback['form__item']}>
-          <div className={feedback['form__label']}>Ваш вопрос</div>
+          <div className={`${feedback['form__label']} ${form['form__label']}`}>Ваш вопрос</div>
           <div className={form['form__wrap']}>
-            <Textarea />
+            <Textarea className={`${form['form__input']} ${feedback['form__input']}`} />
           </div>
         </div>
 
         <div className={form['form__bottom']}>
           <div className={feedback['form__btn-group']}>
             <div className={feedback['form__btn-wrap']}>
-              <Button type={'submit'}>Отправить</Button>
+              <Button className={feedback['btn-main']} type={'submit'}>Отправить</Button>
             </div>
           </div>
         </div>

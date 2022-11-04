@@ -7,7 +7,6 @@ import React, { useState } from 'react'
 // Import Swiper React components
 import { EffectFade, Thumbs } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { ThumbsMethods } from 'swiper/types'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -17,7 +16,7 @@ import 'swiper/css/thumbs'
 
 interface ICarCardSwiper {
   images: string[]
-  cid: number
+  cid: number | undefined
 }
 
 export const CarCardSwiper: React.FC<ICarCardSwiper> = ({ images, cid }) => {

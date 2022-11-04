@@ -1,10 +1,9 @@
-import React from "react";
-import message from '/assets/sass/components/chat/chat/messenger/message.module.scss'
-import messengerBody from '/assets/sass/components/chat/chat/messenger/messenger-body.module.scss'
-import messengerHeader from '/assets/sass/components/chat/chat/messenger/messenger-header.module.scss'
-import messenger from '/assets/sass/components/chat/chat/messenger/messenger.module.scss'
-import { ArrowLeft } from 'assets/icon/icons'
-
+import { ArrowLeft } from 'assets/icon/icons';
+import message from 'assets/sass/components/chat/messenger/message.module.scss';
+import messengerBody from 'assets/sass/components/chat/messenger/messenger-body.module.scss';
+import messengerHeader from 'assets/sass/components/chat/messenger/messenger-header.module.scss';
+import messenger from 'assets/sass/components/chat/messenger/messenger.module.scss';
+import Image from 'next/image';
 export const ChatMessenger = () => {
   return (
     <>
@@ -18,7 +17,7 @@ export const ChatMessenger = () => {
             </a>
             <a className={` ${messengerHeader['messenger-header__user']}`} href='#'>
             <span className={` ${messengerHeader['messenger-header__img']}`}>
-                <img src='img/user.png' alt='' />
+                <Image width={100} height={100} src='/media/user.png' alt='' />
             </span>
             <span className={` ${messengerHeader['messenger-header__username']}`}>
                 Сергей Улыбка
@@ -82,8 +81,7 @@ export const ChatMessenger = () => {
                         className={`${message['message-main__img']}`}
                         href='img/banners/01.png'
                         >
-                        <img
-                            src='img/banners/01.png'
+                        <Image width={100} height={100} src='/media/carpark.png'
                             alt=''
                             data-fancybox='messagePhotos1'
                             data-caption=''

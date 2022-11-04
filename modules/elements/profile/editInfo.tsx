@@ -1,40 +1,29 @@
-﻿import verif from 'assets/sass/components/profile/verification.module.scss'
-import form from 'assets/sass/components/profile/form.verification.module.scss'
-import { ProfileImg } from 'modules/UI/images/ProfileImg'
-import { Col, Container, Row } from 'react-bootstrap'
-import { FormInputWithoutLabel, FormLabel } from 'modules/UI'
-import { Textarea } from 'modules/UI/textarea/textarea'
+﻿import { UserDataModel } from 'app/models'
+import form from 'assets/sass/components/form.module.scss'
+import info from 'assets/sass/components/profile/infoprofile.module.scss'
+import verif from 'assets/sass/components/profile/verification.module.scss'
+import { FormInputWithMaskNotLabel, FormInputWithoutLabel, FormLabel, ProfileImg, Textarea } from 'modules/UI'
+import { Col, Container, Form, Row } from 'react-bootstrap'
 
-interface IUserInfoModel {
-  user: {
-    email: string
-    lastname?: string | undefined
-    firstname: string
-    secondname?: string | undefined
-    telephone?: string | undefined
-    avatar?: string | undefined
-    description?: string | undefined
-  }
-}
+const phoneNumberMask = [
+  '+', '7', ' ', '(', /[1-9]/, /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/
+]
 
-export const EditInfo = ({user}: {user: IUserInfoModel}) => {
+export const EditInfo = ({user}: {user: UserDataModel}) => {
   return (
     <section>
       <Container>
         <Row className={verif['info-profile__row']}>
-          <h1 className={`info-profile__title ${verif['title']} d-sm-none`}>
+          <h1 className={`${info['info-profile__title']} ${verif['title']} d-sm-none`}>
             Информация профиля
           </h1>
-
           <Col xs={12} sm={5} md={4}>
-            <ProfileImg avatar={user.image} />
+            <ProfileImg avatar={user.avatar} />
           </Col>
           <Col xs={12} md={8} sm={7}>
             <div className={verif['info-profile__body']}>
-              <form
-                className={`${verif['verification__form']} ${verif['form']}`}
-                action=''
-                method=''
+              <Form
+                className={`verification__form ${form['form']}`}
               >
                 <div className={verif['form__body']}>
                   <Row>
@@ -42,61 +31,54 @@ export const EditInfo = ({user}: {user: IUserInfoModel}) => {
                     <Col xs={12} md={9}>
                       <h1
                         className={
-                          'info-profile__title title d-none d-sm-block'
+                          `${info['info-profile__title']} title d-none d-sm-block`
                         }
                       >
                         Информация профиля
                       </h1>
                     </Col>
                     <Col xs={12} md={3}>
-                      <FormLabel type='text' children={'Ваше имя'} />
+                      <FormLabel type='text'>Ваше имя</FormLabel>
                     </Col>
                     <Col xs={12} md={9}>
-                      <div className={verif['form__wrap']}>
-                        <FormInputWithoutLabel
-                          type='text'
-                          placeholder='Иван Иванов'
-                          value={user.firstname}
+                      <FormInputWithoutLabel
+                        type='text'
+                        placeholder='Иван Иванов'
+                        defaultValue={user.firstname}
+                        disabled
                         />
-                      </div>
                     </Col>
                     <Col xs={12} md={3}>
-                      <FormLabel type='text' children={'Номер телефона'} />
+                      <FormLabel type='text'>Номер телефона</FormLabel>
                     </Col>
                     <Col xs={12} md={9}>
-                      <div className={verif['form__wrap']}>
-                        <FormInputWithoutLabel
-                          type='number'
-                          placeholder='+7 (999) 000-00-00'
-                          defaultValue={user.telephone}
-                          // value don't watch
-                        />
-                      </div>
+                      <FormInputWithMaskNotLabel
+                        type={'text'}
+                        mask={phoneNumberMask}
+                        defaultValue={user.telephone}
+                        disabled
+                      />
                     </Col>
                     <Col xs={12} md={3}>
-                      <FormLabel type='text' children={'E-mail'} />
+                      <FormLabel type='text'>E-mail</FormLabel>
                     </Col>
                     <Col xs={12} md={9}>
-                      <div className={verif['form__wrap']}>
-                        <FormInputWithoutLabel
-                          type='email'
-                          defaultValue={user.email}
-                        />
-                      </div>
+                      <FormInputWithoutLabel
+                        type='email'
+                        defaultValue={user.email}
+                      />
                     </Col>
                     <Col xs={12} md={3}>
-                      <FormLabel type='text' children={'О себе'} />
+                      <FormLabel type='text'>О себе</FormLabel>
                     </Col>
                     <Col xs={12} md={9}>
-                      <div className={verif['form__wrap']}>
-                        <Textarea type='text'>
-                          {user.desciption}
-                        </Textarea>
+                      <div className={form['form__wrap']}>
+                        <Textarea type='text' defaultValue={user.description} />
                       </div>
                     </Col>
                   </Row>
                 </div>
-              </form>
+              </Form>
             </div>
           </Col>
         </Row>

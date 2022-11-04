@@ -184,7 +184,8 @@ export default function Partners() {
                   className={`${banners['banners__img-wrap']} ${banners['banners__img-wrap_shadow']}`}
                 >
                   <span className={`${banners['banners__img']}`}>
-                    <img src='img/presentations/01.png' alt='' />
+                    <Image                       width={100}
+                      height={100} src='/media/presentations/01.png' alt='' />
                   </span> 
                   <span
                     className={`${banners['banners__hover']} ${bannersHover['banners-hover']}`}

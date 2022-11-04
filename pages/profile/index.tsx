@@ -4,30 +4,21 @@ import { TITLE } from 'app/config'
 import { UserModel } from 'app/models'
 
 import {
-  ProfileBalance,
-  ProfileCard,
-  ProfileDescription,
-  ProfileFavorites,
-  ProfileOrders,
-  ProfileParthners,
-  ProfileReviews,
-  ProfileSettings,
-  ProfileSupport
+    ProfileBalance,
+    ProfileCard,
+    ProfileDescription,
+    ProfileFavorites,
+    ProfileOrders,
+    ProfileParthners,
+    ProfileReviews,
+    ProfileSettings,
+    ProfileSupport
 } from 'modules/elements/profile/profile'
 import CarParkBlock from 'modules/templates/CarParkBlock'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
-
-// async function getServerSideProps() {
-//   const profile = await getUserByToken()
-//   return {
-//     props: {
-//       profile: profile
-//     }
-//   }
-// }
 
 const Profile = () => {
   const [profile, setProfile] = useState<UserModel>({ data: null, status: 200 })
@@ -52,7 +43,8 @@ const Profile = () => {
     if (profile.status === 403) {
       router.push('/auth/signin')
     }
-  }, [profile])
+    console.log('3')
+  }, [profile, router])
 
   return (
     <>

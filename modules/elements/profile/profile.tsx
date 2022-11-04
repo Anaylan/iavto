@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
-import { Col, Row } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 enum TypeFavorites {
   car = 1,
@@ -110,7 +110,7 @@ export const ProfileDescription = ({
 export const ProfileBalance = ({
   balance
 }: {
-  balance: number | undefined
+  balance: string | undefined
 }) => {
   return (
     <Col sx={12} sm={6} md={3} className={main['profile__col']}>
@@ -135,7 +135,7 @@ export const ProfileBalance = ({
 export const ProfileParthners = ({
   balance
 }: {
-  balance: number | undefined
+  balance: string | undefined
 }) => {
   return (
     <Col x={12} sm={6} md={3} className={main['profile__col']}>
@@ -203,7 +203,7 @@ export const ProfileReviews = () => {
   return (
     <>
       <Col xs={12} sm={6} md={3} className={main['profile__col']}>
-        <a className={main['profile__item']} href='#'>
+        <Link className={main['profile__item']} href='/reviews'>
           <div className={main['profile__body profile-body']}>
             <h3 className={main['profile-body__title']}>Мои отзывы</h3>
           </div>
@@ -212,7 +212,7 @@ export const ProfileReviews = () => {
               <span className={main['profile__value']}>150</span>отзывов
             </div>
           </div>
-        </a>
+        </Link>
       </Col>
     </>
   )

@@ -7,10 +7,10 @@ export interface ICarModel {
   year?: number
   price?: number
   transmission?: string
-  cid?: number
+  cid?: number | undefined
   vin?: string
   pledge?: number
-  description?: string | undefined
+  description?: string
   category_name?: string
   status?: number
   trans?: any

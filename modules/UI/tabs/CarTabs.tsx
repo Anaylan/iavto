@@ -1,7 +1,7 @@
-import React from 'react'
-import { Col, Row, Tab, Tabs, Nav } from 'react-bootstrap'
-import styles from 'assets/sass/components/tabs/tab-nav.module.scss'
 import { ITabItems } from 'app/models'
+import details from 'assets/sass/components/car/car__details.module.scss'
+import styles from 'assets/sass/components/tabs/tab-nav.module.scss'
+import { Container, Nav, Tab } from 'react-bootstrap'
 
 export const CarparkTabs = ({ tabs }: { tabs: ITabItems[] }) => {
   return (
@@ -11,20 +11,26 @@ export const CarparkTabs = ({ tabs }: { tabs: ITabItems[] }) => {
           id='left-tabs-example'
           defaultActiveKey={tabs[0].eventKey}
         >
-          <Nav
-            variant={'pills'}
-            fill
-            as={'ul'}
-            className={`${styles['tab-nav']} carpark__tab-nav`}
-          >
-            {tabs.map((item, key) => (
-              <TabLink key={key} title={item.title} eventKey={item.eventKey} />
-            ))}
-          </Nav>
-          <Tab.Content>
+          <Container>
+            <Nav
+              variant={'pills'}
+              fill
+              as={'ul'}
+              className={`${styles['tab-nav']} carpark__tab-nav`}
+            >
+              {tabs.map((item, key) => (
+                <TabLink key={key} title={item.title} eventKey={item.eventKey} />
+              ))}
+            </Nav>
+          </Container>
+          <Tab.Content className={`${styles['carpark__tabs']} row`}>
             {tabs.map((item, key) => (
               <Tab.Pane key={key} eventKey={item.eventKey}>
-                {item.contentChild}
+                <div className={`carpark-tab__body ${details['car']}`}>
+                  <Container>
+                    {item.contentChild}
+                  </Container>
+                </div>
               </Tab.Pane>
             ))}
           </Tab.Content>

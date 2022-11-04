@@ -1,9 +1,7 @@
 import Link from 'next/link'
 import {
   ForwardedRef,
-  forwardRef,
-  RefObject,
-  useEffect,
+  forwardRef, useEffect,
   useRef,
   useState,
   useTransition
@@ -30,11 +28,13 @@ interface Children extends ILink {
 }
 
 interface IHeaderTop {
+  links: any
+  desktop: any
   props?: {
     desktop: boolean
     links: ILink[]
   }
-  ref: RefObject<any> | ForwardedRef<any>
+  ref: ForwardedRef<any>
 }
 
 export const HeaderTopLink: React.FC<Children> = ({
@@ -65,7 +65,7 @@ export const HeaderTop: React.FC<IHeaderTop> = forwardRef((props, ref) => {
 
   const [isPending, startTransition] = useTransition()
 
-  const token = useSelector(({ header }) => header.title)
+  const token = useSelector(({ header }: {header: any}) => header.title)
 
   const [user, setUser] = useState<UserModel>({ status: 403, data: null })
 
@@ -92,7 +92,7 @@ export const HeaderTop: React.FC<IHeaderTop> = forwardRef((props, ref) => {
       }
     })
     console.log(user)
-  }, [token])
+  }, [dispatch, token])
 
   // useChange(token, ()=>{
   //   getUserByToken().then(({ data }: { data: UserModel }) => {
@@ -203,3 +203,5 @@ export const HeaderTop: React.FC<IHeaderTop> = forwardRef((props, ref) => {
     </>
   )
 })
+
+HeaderTop.displayName = "HeaderTop";

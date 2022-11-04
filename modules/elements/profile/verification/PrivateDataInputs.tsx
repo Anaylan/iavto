@@ -1,62 +1,75 @@
-﻿import { FormInputWithoutLabel, FormLabel } from 'modules/UI'
-import { Col, Container, Row } from 'react-bootstrap'
+﻿import { FormInputWithMaskNotLabel, FormInputWithoutLabel, FormLabel } from 'modules/UI'
+import { Col } from 'react-bootstrap'
 
-export const PrivateDataInputs = () => {
+interface IUserPrivateData {
+  lastname?: string | undefined
+  firstname: string
+  secondname?: string | undefined
+  telephone?: string | undefined
+}
+
+const phoneNumberMask = [
+  '+', '7', '(', /[1-9]/, /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/,'-', /\d/, /\d/, '-', /\d/, /\d/
+]
+
+export const PrivateDataInputs = ({user}: {user: IUserPrivateData}) => {
   return (
     <>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel type='text' children={'Ваше имя'} />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>Ваше имя</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='Иван'
+            placeholder='Иван'
+            defaultValue={user.firstname}
             required
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel type='text' children={'Ваша фамилия'} />
+      <Col xs={12} md={5} lg={4} className={'d-flex justify-content-md-end'}>
+        <FormLabel type='text'>Ваша фамилия</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='Иванов'
+            placeholder='Иванов'
+            defaultValue={user.lastname || ''}
             required
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel type='text' children={'Ваше отчество'} />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>Ваше отчество</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='Иванович'
+            placeholder='Иванович'
+            defaultValue={user.secondname || ''}
             required
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
         <FormLabel
-          type='text'
-          children={'Номер телефона для связи'}
-        />
+          type='text'>Номер телефона для связи</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
-          <FormInputWithoutLabel
-            type='number'
-            defaultValue='+7 (999) 000-00-00'
-            required
+          <FormInputWithMaskNotLabel
+            type={'phone'}
+            mask={phoneNumberMask}
+            placeholder='+7 (999) 000-00-00'
+            defaultValue={user.telephone}
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel type='text' children={'Дата рождения'} />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>Дата рождения</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
@@ -67,31 +80,28 @@ export const PrivateDataInputs = () => {
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
-        <FormLabel type='text' children={'Место рождения'} />
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
+        <FormLabel type='text'>Место рождения</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='г. Москва, Московская обл.'
+            placeholder='г. Москва, Московская обл.'
             required
           />
         </div>
       </Col>
-      <Col xs={12} md={5} lg={4} d-flex justify-content-md-end>
+      <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
         <FormLabel
-          type='text'
-          children={
-            'Ссылки на ваши социальные сети (через запятую)'
-          }
-        />
+          type='text'         
+        >Ссылки на ваши социальные сети (через запятую)</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
-            defaultValue='vk.com/... , ok.com/...'
+            placeholder='vk.com/... , ok.com/...'
             required
           />
         </div>

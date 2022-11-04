@@ -1,6 +1,6 @@
 import { API_URL } from 'app/config'
 
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
 import { UserLocation } from 'app/models'
 const REGION_API = 'https://api.sypexgeo.net'
@@ -18,9 +18,9 @@ export function getNameLocation() {
 }
 
 export function getAllLocations() {
-  return axios.get<AxiosResponse<UserLocation[]>>(REQUEST_LOCATIONS_URL)
+  return axios.get<UserLocation[]>(REQUEST_LOCATIONS_URL)
 }
 
 export function getLocation() {
-  return axios.get<AxiosResponse<UserLocation>>(REQUEST_LOCATION_URL)
+  return axios.get<UserLocation>(REQUEST_LOCATION_URL)
 }

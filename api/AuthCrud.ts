@@ -1,7 +1,6 @@
 import axiosAuth from 'app/axiosAuth'
 import { API_URL } from 'app/config'
 import { UserModel } from 'app/models'
-import { AxiosResponse } from 'axios'
 
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/auth/token`
 export const LOGIN_URL = `${API_URL}/auth`
@@ -21,7 +20,7 @@ export function register(
   lastname: string,
   phone: string
 ) {
-  return axiosAuth.post<any>(REGISTER_URL, {
+  return axiosAuth.post<UserModel>(REGISTER_URL, {
     email,
     password,
     firstname,
@@ -38,7 +37,9 @@ export function requestPassword(email: string) {
 export async function getUserByToken() {
   // Authorization head should be fulfilled in interceptor.
   // Check common redux folder => setupAxios
-  return axiosAuth.get<AxiosResponse<UserModel>>(
-    GET_USER_BY_ACCESSTOKEN_URL
-  )
+  return axiosAuth.get<UserModel>(GET_USER_BY_ACCESSTOKEN_URL)
+}
+
+export async function reset(email: string) {
+  return { data: 'отправил' }
 }

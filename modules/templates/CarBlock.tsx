@@ -1,11 +1,11 @@
-import React from 'react'
-import Link from 'next/link'
-import { Col, Container, Row } from 'react-bootstrap'
-import { Location } from 'assets/icon/icons'
-import { ICarModel } from 'app/models'
-import styles from 'assets/sass/components/card/car-list.module.scss'
 import { URL_IMG } from 'app/config'
+import { ICarModel } from 'app/models'
+import { Location } from 'assets/icon/icons'
+import styles from 'assets/sass/components/card/car-list.module.scss'
 import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 
 interface ICarArray {
   title: string
@@ -30,9 +30,9 @@ const CarBlock: React.FC<ICarArray> = ({ Cars, getData, title }) => {
             <h1 className={`cars__title title`}>{title}</h1>
 
             <Row>
-              {Cars.map((car, key: number) => (
+              {Cars.length? Cars.map((car, key: number) => (
                 <GenerateCar key={key} car={car} />
-              ))}
+              )) : <>Пусто</>}
             </Row>
           </Container>
         </section>

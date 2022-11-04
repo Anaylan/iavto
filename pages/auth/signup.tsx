@@ -47,20 +47,16 @@ const registrationSchema = Yup.object().shape({
     .required('Last name is required'),
   password: Yup.string()
     .min(3, 'Пароль: Minimum 8 symbols')
-    .required('Пароль обязателен для заполнения'),
-  number: Yup.string()
-    .min(10, 'Номер телефона: Минимум 5 символа')
-    .max(50, 'Номер телефона: Maximum 50 symbols')
-    .required('Номер телефона обязателен для заполнения'),
+    .required('Пароль обязателен для заполнения')
 })
 
 export const Register: React.FC<UserModel> = () => {
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string>()
   const dispatch = useDispatch()
-
   const router = useRouter()
 
-  const user = useSelector(({ header }) => header.title)
+  const user = useSelector(({ header }: { header: any }) => header.title)
 
   if (user) {
     router.push('/')
@@ -86,6 +82,10 @@ export const Register: React.FC<UserModel> = () => {
       )
         .then(({ data }) => {
           setLoading(false)
+          console.log(data)
+          if (data.message) {
+            setError(data.message)
+          }
           dispatch(header.actions.register(data.token))
           if (data.token) {
             router.replace('/')
@@ -93,6 +93,7 @@ export const Register: React.FC<UserModel> = () => {
         })
         .catch((err) => {
           setLoading(false)
+          console.log(err)
         })
     }
   })
@@ -108,73 +109,107 @@ export const Register: React.FC<UserModel> = () => {
             <h1 className={auth_styles['auth__title']}>Регистрация</h1>
 
             <Form onSubmit={formik.handleSubmit}>
+              <div className={'mt-2'}>
+                {formik.errors.email && formik.touched.email ? (
+                  <div>{formik.errors.email}</div>
+                ) : null}
+                {formik.touched.lastname && formik.errors.lastname ? (
+                  <div className={form['form__notification']}>
+                    {formik.errors.lastname}
+                  </div>
+                ) : null}
+                {formik.touched.firstname && formik.errors.firstname ? (
+                  <div className={form['form__notification']}>
+                    {formik.errors.firstname}
+                  </div>
+                ) : null}
+                {formik.touched.email && formik.errors.email ? (
+                  <div className={form['form__notification']}>
+                    {formik.errors.email}
+                  </div>
+                ) : null}
+                {formik.touched.password && formik.errors.password ? (
+                  <div className={form['form__notification']}>
+                    {formik.errors.password}
+                  </div>
+                ) : null}
+                {formik.touched.phone && formik.errors.phone ? (
+                  <div className={form['form__notification']}>
+                    {formik.errors.phone}
+                  </div>
+                ) : null}
+              </div>
+              {formik.status && (
+                <div className='mb-lg-15 alert alert-danger'>
+                  <div className='alert-text font-weight-bold'>
+                    {formik.status}
+                  </div>
+                </div>
+              )}
+              {error ? <div>{error}</div> : null}
               <div className={form['form__body']}>
                 <FormInputWithLabel
                   title={'Пароль'}
                   name={'password'}
                   type={'password'}
                   onChange={formik.handleChange}
-                  value={formik.values.password}
+                  placeholder={formik.values.password}
                   className={
                     '' +
-                    (formik.touched.password && !formik.errors.password
+                    (formik.touched.password && formik.errors.password
                       ? 'form-control is-valid'
                       : 'is-invalid form-control form-control-lg form-control-solid')
                   }
                 />
-
                 <FormInputWithLabel
                   title={'E-Mail'}
                   name={'email'}
                   type={'email'}
                   onChange={formik.handleChange}
-                  value={formik.values.email}
+                  placeholder={formik.values.email}
                   className={
                     '' +
-                    (formik.touched.email && !formik.errors.email
+                    (formik.touched.email && formik.errors.email
                       ? 'form-control is-valid'
                       : 'is-invalid form-control form-control-lg form-control-solid')
                   }
                 />
-
                 <FormInputWithLabel
                   title={'Имя'}
                   name={'firstname'}
                   type={'firstname'}
                   onChange={formik.handleChange}
-                  value={formik.values.firstname}
+                  placeholder={formik.values.firstname}
                   className={
                     '' +
-                    (formik.touched.firstname && !formik.errors.firstname
+                    (formik.touched.firstname && formik.errors.firstname
                       ? 'form-control is-valid'
                       : 'is-invalid form-control form-control-lg form-control-solid')
                   }
                 />
-
                 <FormInputWithLabel
                   title={'Фамилия'}
                   name={'lastname'}
                   type={'lastname'}
                   onChange={formik.handleChange}
-                  value={formik.values.lastname}
+                  placeholder={formik.values.lastname}
                   className={
                     '' +
-                    (formik.touched.lastname && !formik.errors.lastname
+                    (formik.touched.lastname && formik.errors.lastname
                       ? 'form-control is-valid'
                       : 'is-invalid form-control form-control-lg form-control-solid')
                   }
                 />
-                {/* <Field  name={'123'} /> */}
                 <FormInputWithMask
                   title={'Номер телефона'}
                   name={'phone'}
                   type={'phone'}
                   mask={phoneNumberMask}
-                  value={formik.values.phone}
+                  placeholder={formik.values.phone}
                   onChange={formik.handleChange}
                   className={
                     '' +
-                    (formik.touched.phone && !formik.errors.phone
+                    (formik.touched.phone && formik.errors.phone
                       ? 'form-control is-valid'
                       : 'is-invalid form-control form-control-lg form-control-solid')
                   }
@@ -186,11 +221,7 @@ export const Register: React.FC<UserModel> = () => {
                     <button
                       type={'submit'}
                       className={`${form['btn-main']} ${form['btn-main-trp']}`}
-                      disabled={
-                        formik.isSubmitting ||
-                        !formik.isValid ||
-                        !formik.values.acceptTerms
-                      }
+                      style={{ background: 'transparent' }}
                     >
                       Зарегистрироваться
                     </button>
@@ -198,33 +229,6 @@ export const Register: React.FC<UserModel> = () => {
                 </div>
               </div>
             </Form>
-            <div className={'mt-2'}>
-              {formik.touched.lastname && formik.errors.lastname && (
-                <div className={form['form__notification']}>
-                  {formik.errors.lastname}
-                </div>
-              )}
-              {formik.touched.firstname && formik.errors.firstname && (
-                <div className={form['form__notification']}>
-                  {formik.errors.firstname}
-                </div>
-              )}
-              {formik.touched.email && formik.errors.email && (
-                <div className={form['form__notification']}>
-                  {formik.errors.email}
-                </div>
-              )}
-              {formik.touched.password && formik.errors.password && (
-                <div className={form['form__notification']}>
-                  {formik.errors.password}
-                </div>
-              )}
-              {formik.touched.phone && formik.errors.phone && (
-                <div className={form['form__notification']}>
-                  {formik.errors.phone}
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </section>

@@ -1,12 +1,8 @@
-import { ICarparkModel } from '../company/CompanyModel'
 import React, {
-  FormEvent,
+  ButtonHTMLAttributes,
   FormHTMLAttributes,
-  HTMLAttributes,
   InputHTMLAttributes
 } from 'react'
-import { Props } from 'next/script'
-import { ImageProps } from 'react-bootstrap/Image'
 
 export interface ILoader {
   display?: boolean
@@ -174,24 +170,24 @@ export interface ILink {
   title: string
 }
 
-export interface IFormInput {
-  children: React.ReactNode | undefined
-  title: string
+export interface IFormInput extends InputHTMLAttributes<HTMLInputElement> {
+  className?: string | undefined
+  mask?: (string | RegExp)[]
   props?: InputHTMLAttributes<HTMLInputElement>
 }
 
-export interface IForm {
+export interface IForm extends FormHTMLAttributes<HTMLFormElement> {
   children: React.ReactNode | undefined
-  props?: any
+  props?: FormHTMLAttributes<HTMLFormElement>
 }
 
 export interface IFormBody {
-  children: React.ReactNode | undefined
+  children?: React.ReactNode | undefined
   props?: FormHTMLAttributes<FormData>
 }
 
-export interface IButton {
-  className: string | undefined
+export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string | undefined
   children: React.ReactNode
-  props?: InputHTMLAttributes<HTMLButtonElement>
+  props?: ButtonHTMLAttributes<HTMLButtonElement>
 }

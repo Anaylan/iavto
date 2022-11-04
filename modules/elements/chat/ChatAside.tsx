@@ -1,68 +1,44 @@
-import { Search } from 'assets/icon/icons'
-import chatAside from '/assets/sass/components/chat/chat/chat-aside.module.scss'
-import chat from '/assets/sass/components/chat/chat/chat.module.scss'
-
+import chatAside from 'assets/sass/components/chat/chat-aside.module.scss'
+import { SearchInput } from 'modules/UI'
+import Image from 'next/image'
 export const ChatAside = () => {
   return (
-    <div className={` ${chat['chat__aside']} ${chatAside['chat-aside']}`}>
+    <div className={` ${chatAside['chat-aside']}`}>
       <div className={` ${chatAside['chat-aside__wrapper']}`}>
         <div className={` ${chatAside['chat-aside__header']}`}>
-          <form
-            className={`${chatAside['header-top__form']}`}
-            method='GET'
-            action='/search'
-            accept-charset='UTF-8'
-            id='t-search'
-          >
-            <div className={`${chatAside['header-top__form-wrap']}`}>
-              <input
-                placeholder='Поиск по диалогам...'
-                type='text'
-                name='s'
-                autoComplete='off'
-              />
-              <div className={`${chatAside['header-top__form-btn']}`}>
-                <span className={`${chatAside['icon']}`}>
-                  <Search color={`${chatAside['icon__item']}`} />
-                </span>
-              </div>
-            </div>
-          </form>
+          <SearchInput placeholder={'Поиск по диалогам...'}/>
         </div>
         <div className={`${chatAside['chat-aside__body']}`}>
           <ul className={`${chatAside['chat-aside__list']}`}>
-            <li
-              className={` ${chatAside['chat-aside__item']} ${chatAside['chat-aside__item_edit']}`}
-            >
-              <a className={` ${chatAside['chat-aside__wrap']}`} href='#'>
-                <span className={` ${chatAside['chat-aside__photo']}`}>
-                  <img src='img/logo.png' alt='' />
+
+            
+          <li className={`${chatAside['chat-aside__item_edit']}`}>
+              <a className={`${chatAside['chat-aside__item-wrap']}`} href='#'>
+                <span className={`${chatAside['chat-aside__photo']}`}>
+                <Image src='/media/carpark.png' width={100} height={100} alt='' />
                 </span>
                 <span className={`${chatAside['chat-aside__main']}`}>
                   <span className={`${chatAside['chat-aside__main-top']}`}>
-                    <span className={`${chatAside['chat-aside__username']}`}>
-                      Поддержка ЯАВТО.РФ
-                    </span>
+                    <span className={`${chatAside['chat-aside__username']}`}>Поддержка ЯАВТО.РФ</span>
                     <time className={`${chatAside['chat-aside__date']}`} dateTime='2022-10-15'>
                       15.10.2022
                     </time>
                   </span>
                   <span className={`${chatAside['chat-aside__message-wrap']}`}>
-                    <span className={`${chatAside['chat-chat-aside__sender']}`}>
-                      Поддержка ЯАВТО.РФ
-                    </span>
+                    <span className={`${chatAside['chat-aside__sender']}`}>Поддержка ЯАВТО.РФ</span>
                     <span className={`${chatAside['chat-aside__message']}`}>
-                      Спасибо, что обратились к нам
+                    Спасибо, что обратились к нам
                     </span>
                   </span>
                 </span>
               </a>
             </li>
 
+
             <li className={`${chatAside['chat-aside__item']}`}>
               <a className={`${chatAside['chat-aside__item-wrap']}`} href='#'>
                 <span className={`${chatAside['chat-aside__photo']}`}>
-                  <img src='' alt='' />
+                  <Image src='/media/user.png' width={100} height={100} alt='' />
                 </span>
                 <span className={`${chatAside['chat-aside__main']}`}>
                   <span className={`${chatAside['chat-aside__main-top']}`}>
@@ -84,7 +60,7 @@ export const ChatAside = () => {
             <li className={`${chatAside['chat-aside__item']}`}>
               <a className={`${chatAside['chat-aside__item-wrap']}`} href='#'>
                 <span className={`${chatAside['chat-aside__photo']}`}>
-                  <img src='img/user.png' alt='' />
+                  <Image src='/media/user.png' width={100} height={100} alt='' />
                 </span>
                 <span className={`${chatAside['chat-aside__main']}`}>
                   <span className={`${chatAside['chat-aside__main-top']}`}>
