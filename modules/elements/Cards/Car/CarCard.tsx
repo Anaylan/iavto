@@ -16,6 +16,9 @@ interface ICarInfo {
 }
 
 export const CarInfo: React.FC<ICarInfo> = ({ Car }) => {
+  if (typeof Car.description !== 'string') {
+    Car.description = ''
+  }
   return (
     <>
       <CarCardHeader mark={Car.mark} model={Car.model} year={Car.year} />
@@ -26,7 +29,7 @@ export const CarInfo: React.FC<ICarInfo> = ({ Car }) => {
             xs={12}
             className={`${car['car__col']} order-1 order-md-2`}
           >
-            <CarCardSwiper cid={Car.cid} images={Car.img} />
+            <CarCardSwiper cid={Car.cid} images={Car.img!} />
             <CarCardBonuses />
           </Col>
 

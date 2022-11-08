@@ -1,12 +1,9 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  runtime: 'nodejs',
   reactStrictMode: true,
   swcMinify: true,
   compress: true,
-  concurrentFeatures: true,
-  unstable_runtimeJS: false,
   crossOrigin: 'anonymous',
   images: {
     domains: ['xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai'],
@@ -18,7 +15,9 @@ const nextConfig = {
         hostname: 'xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai'
       }
     ]
-  }
+  },
+  optimizeFonts: true,
+  productionBrowserSourceMaps: false
 }
 
 module.exports = nextConfig

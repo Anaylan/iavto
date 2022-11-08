@@ -1,4 +1,8 @@
-﻿import { FormInputWithMaskNotLabel, FormInputWithoutLabel, FormLabel } from 'modules/UI'
+﻿import {
+  FormInputWithMaskNotLabel,
+  FormInputWithoutLabel,
+  FormLabel
+} from 'modules/UI'
 import { Col } from 'react-bootstrap'
 
 interface IUserPrivateData {
@@ -9,10 +13,26 @@ interface IUserPrivateData {
 }
 
 const phoneNumberMask = [
-  '+', '7', '(', /[1-9]/, /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/,'-', /\d/, /\d/, '-', /\d/, /\d/
+  '+',
+  '7',
+  '(',
+  /[1-9]/,
+  /\d/,
+  /\d/,
+  ')',
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  '-',
+  /\d/,
+  /\d/,
+  '-',
+  /\d/,
+  /\d/
 ]
 
-export const PrivateDataInputs = ({user}: {user: IUserPrivateData}) => {
+export const PrivateDataInputs = ({ user }: { user: IUserPrivateData }) => {
   return (
     <>
       <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
@@ -55,8 +75,7 @@ export const PrivateDataInputs = ({user}: {user: IUserPrivateData}) => {
         </div>
       </Col>
       <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
-        <FormLabel
-          type='text'>Номер телефона для связи</FormLabel>
+        <FormLabel type='text'>Номер телефона для связи</FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
@@ -93,9 +112,9 @@ export const PrivateDataInputs = ({user}: {user: IUserPrivateData}) => {
         </div>
       </Col>
       <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
-        <FormLabel
-          type='text'         
-        >Ссылки на ваши социальные сети (через запятую)</FormLabel>
+        <FormLabel type='text'>
+          Ссылки на ваши социальные сети (через запятую)
+        </FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>

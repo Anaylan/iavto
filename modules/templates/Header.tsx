@@ -1,12 +1,12 @@
-import { useState, useRef, useEffect } from 'react'
+import { createRef, useRef, useState } from 'react'
 
-import { useWidth, useLoaded } from 'app/hooks'
 import { LinkType } from 'app/models'
 import { Chat, Heart, Package } from 'assets/icon/icons'
 import styles from 'assets/sass/components/header.module.scss'
 import header from 'assets/sass/components/header/top.module.scss'
 import { HeaderBody, HeaderBottom, HeaderTop } from 'modules/UI'
 
+import { useDesktop, useScroll } from 'app/hooks'
 import { Container } from 'react-bootstrap'
 
 const HeaderTopLinks: LinkType[] = [
@@ -49,8 +49,8 @@ const HeaderBottomLinks: LinkType[] = [
 ]
 
 const Header: React.FC = () => {
-  const [desktop, setDesktop] = useState<boolean>()
-  const header: React.RefObject<any> = useRef()
+  const [desktop, setDesktop] = useState<boolean>(true)
+  const header = useRef<HTMLElement>(null)
 
   // useEffect(() => {
   //   if (window.innerWidth <= 992) {
@@ -60,7 +60,7 @@ const Header: React.FC = () => {
   //   }
   // }, [])
 
-  useWidth(header, () => {
+  useDesktop(header, () => {
     if (window.innerWidth <= 992) {
       setDesktop(false)
     } else {
@@ -68,14 +68,27 @@ const Header: React.FC = () => {
     }
   })
 
-  useEffect(() => {
-    if (window.innerWidth <= 992) {
-      setDesktop(false)
-    } else {
-      setDesktop(true)
+  useScroll(header, () => {
+    if (header && header.current) {
+      if (window.innerWidth > 992) {
+        if (window.pageYOffset > 700) {
+          if (!header.current.classList.contains(styles['header-fixed'])) {
+            header.current.classList.add(styles['header-fixed'])
+          }
+        } else {
+          header.current.classList.remove(styles['header-fixed'])
+        }
+      } else {
+        if (window.pageYOffset > 65) {
+          if (!header.current.classList.contains(styles['header-fixed'])) {
+            header.current.classList.add(styles['header-fixed'])
+          }
+        } else {
+          header.current.classList.remove(styles['header-fixed'])
+        }
+      }
     }
-    console.log(desktop)
-  }, [])
+  })
 
   return (
     <>

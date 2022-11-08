@@ -18,9 +18,9 @@ const phoneNumberMask = [
   '+',
   '7',
   '(',
-  /[1-9]/,
-  /[1-9]/,
-  /[1-9]/,
+  /[0-9]/,
+  /\d/,
+  /\d/,
   ')',
   ' ',
   /\d/,
@@ -56,7 +56,9 @@ export const Register: React.FC<UserModel> = () => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const user = useSelector(({ header }: { header: any }) => header.title)
+  const user = useSelector(
+    ({ header }: { header: header.IAuthState }) => header.title
+  )
 
   if (user) {
     router.push('/')
@@ -86,7 +88,7 @@ export const Register: React.FC<UserModel> = () => {
           if (data.message) {
             setError(data.message)
           }
-          dispatch(header.actions.register(data.token))
+          data.token && dispatch(header.actions.register(data.token))
           if (data.token) {
             router.replace('/')
           }

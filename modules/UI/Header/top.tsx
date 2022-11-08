@@ -1,10 +1,15 @@
 import Link from 'next/link'
 import {
-  ForwardedRef,
-  forwardRef, useEffect,
+  PropsWithoutRef,
+  forwardRef,
+  useEffect,
   useRef,
   useState,
-  useTransition
+  useTransition,
+  ForwardRefExoticComponent,
+  RefObject,
+  RefAttributes,
+  MutableRefObject
 } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 
@@ -27,14 +32,19 @@ interface Children extends ILink {
   children?: React.ReactNode
 }
 
+interface IChildProps {
+  desktop: boolean
+  links: ILink[]
+}
+
 interface IHeaderTop {
-  links: any
-  desktop: any
+  links?: any
+  desktop?: any
   props?: {
     desktop: boolean
     links: ILink[]
   }
-  ref: ForwardedRef<any>
+  ref: any
 }
 
 export const HeaderTopLink: React.FC<Children> = ({
@@ -54,7 +64,7 @@ export const HeaderTopLink: React.FC<Children> = ({
   )
 }
 
-export const HeaderTop: React.FC<IHeaderTop> = forwardRef((props, ref) => {
+export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
   const menu: React.RefObject<any> = useRef(null)
   const button: React.RefObject<any> = useRef()
 
@@ -65,7 +75,7 @@ export const HeaderTop: React.FC<IHeaderTop> = forwardRef((props, ref) => {
 
   const [isPending, startTransition] = useTransition()
 
-  const token = useSelector(({ header }: {header: any}) => header.title)
+  const token = useSelector(({ header }: { header: any }) => header.title)
 
   const [user, setUser] = useState<UserModel>({ status: 403, data: null })
 
@@ -100,26 +110,6 @@ export const HeaderTop: React.FC<IHeaderTop> = forwardRef((props, ref) => {
   //   })
   //   console.log(user)
   // });
-
-  useScroll(ref, () => {
-    if (window.innerWidth > 992) {
-      if (window.pageYOffset > 700) {
-        if (!ref.current.classList.contains(styles['header-fixed'])) {
-          ref.current.classList.add(styles['header-fixed'])
-        }
-      } else {
-        ref.current.classList.remove(styles['header-fixed'])
-      }
-    } else {
-      if (window.pageYOffset > 65) {
-        if (!ref.current.classList.contains(styles['header-fixed'])) {
-          ref.current.classList.add(styles['header-fixed'])
-        }
-      } else {
-        ref.current.classList.remove(styles['header-fixed'])
-      }
-    }
-  })
 
   return (
     <>
@@ -174,7 +164,7 @@ export const HeaderTop: React.FC<IHeaderTop> = forwardRef((props, ref) => {
                     {user.status === 201 ? (
                       <HeaderTopLink
                         href={'/profile'}
-                        title={user.data.firstname}
+                        title={user.data?.firstname}
                       >
                         <User color={styles['icon__item']} />
                       </HeaderTopLink>
@@ -204,4 +194,4 @@ export const HeaderTop: React.FC<IHeaderTop> = forwardRef((props, ref) => {
   )
 })
 
-HeaderTop.displayName = "HeaderTop";
+HeaderTop.displayName = 'HeaderTop'

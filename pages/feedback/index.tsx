@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { TITLE } from '../_app'
+import { TITLE } from 'app/config'
 
 export default function Feedback() {
   return (

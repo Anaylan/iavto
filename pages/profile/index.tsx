@@ -4,38 +4,32 @@ import { TITLE } from 'app/config'
 import { UserModel } from 'app/models'
 
 import {
-    ProfileBalance,
-    ProfileCard,
-    ProfileDescription,
-    ProfileFavorites,
-    ProfileOrders,
-    ProfileParthners,
-    ProfileReviews,
-    ProfileSettings,
-    ProfileSupport
+  ProfileBalance,
+  ProfileCard,
+  ProfileDescription,
+  ProfileFavorites,
+  ProfileOrders,
+  ProfileParthners,
+  ProfileReviews,
+  ProfileSettings,
+  ProfileSupport
 } from 'modules/elements/profile/profile'
 import CarParkBlock from 'modules/templates/CarParkBlock'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
+import { useFetch } from 'app/hooks'
 
 const Profile = () => {
   const [profile, setProfile] = useState<UserModel>({ data: null, status: 200 })
-  const [isLoading, setLoading] = useState<boolean>(false)
-  useEffect(() => {
-    setLoading(true)
-    getUserByToken()
-      .then(({ data }: { data: UserModel }) => {
-        setProfile(data)
-        setLoading(false)
-        console.log(data)
-      })
-      .catch((err) => {
-        console.log(err)
-        setLoading(false)
-      })
-  }, [])
+  // const [isLoading, setLoading] = useState<boolean>(false)
+  const [isLoading, error] = useFetch(() => {
+    getUserByToken().then(({ data }: { data: UserModel }) => {
+      setProfile(data)
+      console.log(data)
+    })
+  })
 
   const router = useRouter()
 

@@ -37,6 +37,7 @@ export function requestPassword(email: string) {
 export async function getUserByToken() {
   // Authorization head should be fulfilled in interceptor.
   // Check common redux folder => setupAxios
+  console.log(axiosAuth.get<UserModel>(GET_USER_BY_ACCESSTOKEN_URL))
   return axiosAuth.get<UserModel>(GET_USER_BY_ACCESSTOKEN_URL)
 }
 

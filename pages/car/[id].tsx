@@ -12,12 +12,12 @@ import { TITLE, URL_IMG } from 'app/config'
 import { ICarModel, ICarparkModel, ITabItems } from 'app/models'
 import { CarparkCard, CarparkInfo } from 'modules/elements'
 import {
-    ActionFollow,
-    CarparkTabs,
-    TabCar,
-    TabFeedback,
-    TabProfile,
-    TabReviews
+  ActionFollow,
+  CarparkTabs,
+  TabCar,
+  TabFeedback,
+  TabProfile,
+  TabReviews
 } from 'modules/UI'
 
 import styles from 'assets/sass/components/carpark/carpark.module.scss'
@@ -36,11 +36,11 @@ export default function Car({ car }: { car: ICarModel }) {
   const [carpark, setCarpark] = useState<ICarparkModel>()
 
   useEffect(() => {
-    getCarpark(car.cid).then(
-      ({data}: {data:ICarparkModel}) => {
+    if (typeof car.cid === 'number') {
+      getCarpark(car.cid).then(({ data }: { data: ICarparkModel }) => {
         setCarpark(data)
-      }
-    )
+      })
+    }
   }, [car])
 
   const TabItems: ITabItems[] = [
@@ -82,7 +82,7 @@ export default function Car({ car }: { car: ICarModel }) {
                 className={banner['carpark-intro__banner']}
                 src={URL_IMG + carpark.cid + '/' + carpark.banner}
                 fill
-                alt={carpark.company_name}
+                alt={carpark.company_name ? carpark.company_name : ''}
               />
               <ActionFollow />
               <CarparkCard
@@ -101,9 +101,7 @@ export default function Car({ car }: { car: ICarModel }) {
             <></>
           )}
         </Container>
-        {car && (
-          <CarparkTabs tabs={TabItems}></CarparkTabs>
-        )}
+        {car && <CarparkTabs tabs={TabItems}></CarparkTabs>}
       </section>
     </>
   )

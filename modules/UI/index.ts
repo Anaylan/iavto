@@ -12,6 +12,8 @@ export * from './images/ProfileImg'
 // inputs
 export * from './inputs/FormInput'
 export * from './inputs/SearchInput'
+export * from './inputs/FilterInput'
+export * from './inputs/SearchCheckbox'
 // label
 export * from './label/FormLabel'
 // list
@@ -24,3 +26,13 @@ export * from './tabs/CarTabs'
 export * from './tabs/TabContent'
 // textareas
 export * from './textarea/textarea'
+// cols
+export * from './cols/SearchCol'
+// rows
+export * from './rows/SearchRow'
+// selects
+export * from './selects/SearchSelect'
+// titles
+export * from './titles/SearchTitles'
+// options
+export * from './options/SearchOption'

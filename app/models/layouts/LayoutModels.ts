@@ -3,6 +3,7 @@ import React, {
   FormHTMLAttributes,
   InputHTMLAttributes
 } from 'react'
+import { Mask } from 'react-text-mask'
 
 export interface ILoader {
   display?: boolean
@@ -167,12 +168,12 @@ export interface LinkType {
 
 export interface ILink {
   href: string
-  title: string
+  title: string | undefined
 }
 
 export interface IFormInput extends InputHTMLAttributes<HTMLInputElement> {
   className?: string | undefined
-  mask?: (string | RegExp)[]
+  mask?: Mask | ((value: string) => Mask)
   props?: InputHTMLAttributes<HTMLInputElement>
 }
 

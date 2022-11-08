@@ -24,7 +24,7 @@ function MyApp({ Component, ...rest }: AppProps) {
   return (
     <>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={store.__persistor}>
+        <PersistGate loading={null} persistor={store.persistor}>
           <Suspense fallback={<Load />}>
             <MasterLayout>
               <Component {...props.pageProps} />

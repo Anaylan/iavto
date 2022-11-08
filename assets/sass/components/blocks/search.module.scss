@@ -81,15 +81,6 @@
     padding: 25px;
 
     input {
-      display: none;
-    }
-
-    span {
-      display: inline-block;
-      margin: 0 0 0 50px;
-    }
-
-    &::before {
       content: '';
       position: absolute;
       top: 24px;
@@ -101,19 +92,9 @@
       border-radius: 5px;
     }
 
-    &::after {
-      content: '';
-      display: none;
-      position: absolute;
-      top: 32px;
-      left: 35px;
-      z-index: 1;
-      width: 7px;
-      height: 12px;
-      border-right: 3px solid #4d4d4d;
-      border-bottom: 3px solid #4d4d4d;
-      box-sizing: border-box;
-      transform: translate(-50%, -50%) rotate(45deg);
+    span {
+      display: inline-block;
+      margin: 0 0 0 50px;
     }
 
     &.checkbox-active::before {
@@ -234,9 +215,6 @@
     pointer-events: none;
     transform: translate(-50%, -50%) rotate(45deg);
   }
-}
-.option-hide {
-  display: none;
 }
 .search-min .search-form__btn {
   display: inline-block;

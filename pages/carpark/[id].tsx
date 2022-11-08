@@ -56,7 +56,7 @@ export default function Carpark({ autopark }: { autopark: ICarparkModel }) {
         <>
           <Head>
             <title>
-              {autopark.company_name.replace(' ', '')} | {TITLE}
+              {autopark.company_name} | {TITLE}
             </title>
           </Head>
           <section className={`carpark`}>
@@ -66,7 +66,7 @@ export default function Carpark({ autopark }: { autopark: ICarparkModel }) {
                   className={banner['carpark-intro__banner']}
                   src={URL_IMG + autopark.cid + '/' + autopark.banner}
                   fill
-                  alt={autopark.company_name}
+                  alt={autopark.company_name ? autopark.company_name : ''}
                 />
                 <ActionFollow />
                 <CarparkCard

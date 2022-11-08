@@ -5,6 +5,7 @@ const axiosAuth = Axios.create({
   baseURL: API_URL,
   headers: {
     'X-Requested-With': 'XMLHttpRequest'
-  }
+  },
+  withCredentials: false
 })
 export default axiosAuth

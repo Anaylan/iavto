@@ -5,7 +5,6 @@ interface IMenuListBottom {
 }
 
 interface IMenuListBottomItem {
-  href: string
   children: ReactNode
 }
 

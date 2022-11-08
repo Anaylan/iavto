@@ -1,4 +1,12 @@
-import { RefObject, useEffect, useMemo, useRef, useState } from 'react'
+import {
+  RefObject,
+  ForwardedRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  MutableRefObject
+} from 'react'
 import xss from 'xss'
 
 /**
@@ -127,11 +135,15 @@ export const useLoading = () => {}
  */
 export const useDesktop = (ref: RefObject<any>, onWidth: CallableFunction) => {
   useEffect(() => {
-    onWidth()
-    window.addEventListener('resize', onWidth(), false)
+    function handleWidth() {
+      onWidth()
+    }
+    window.addEventListener('load', handleWidth, false)
+    window.addEventListener('resize', handleWidth, false)
     return () => {
       // Unbind the event listener on clean up
-      window.removeEventListener('resize', onWidth(), false)
+      window.removeEventListener('load', handleWidth, false)
+      window.removeEventListener('resize', handleWidth, false)
     }
   }, [ref, onWidth])
 }
@@ -148,27 +160,31 @@ export const useSearch = (value: string, array: any[]) => {
 export const useFetch = (callback: CallableFunction) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
-
-  // useEffect(async (...args: any) => {
+  // async function fetching(...args: any) {
   //   try {
   //     setIsLoading(true)
-  //     callback(...args)
+  //     //console.log(isLoading)
+  //     await callback(...args)
   //   } catch (e: any | unknown) {
+  //     //console.log(isLoading)
   //     setError(e.message)
   //   } finally {
   //     setIsLoading(false)
   //   }
-  // }, [])
-  const fetching = async (...args: any) => {
+  // }
+  async function asyncCall() {
+    await callback()
+  }
+
+  useEffect(() => {
     try {
+      asyncCall()
       setIsLoading(true)
-      await callback(...args)
     } catch (e: any | unknown) {
       setError(e.message)
     } finally {
       setIsLoading(false)
     }
-  }
-
-  return [fetching, isLoading, error]
+  }, [])
+  return [isLoading, error]
 }

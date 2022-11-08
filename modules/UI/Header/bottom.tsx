@@ -5,11 +5,7 @@ import { IRegionState, regionActions } from 'app/redux/reducers/regionReducer'
 import { Load, Location } from 'assets/icon/icons'
 import styles from 'assets/sass/components/header/bottom.module.scss'
 import Link from 'next/link'
-import React, {
-  useDeferredValue, useEffect,
-  useRef,
-  useState
-} from 'react'
+import React, { useDeferredValue, useEffect, useRef, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -35,12 +31,20 @@ export const HeaderBottomLink: React.FC<ILink> = ({ href, title }) => {
 export const HeaderBottom: React.FC<IHeaderBottom> = ({ links }) => {
   return (
     <>
-      <div className={`header__bottom ${styles['header-bottom']} d-none d-lg-block`}>
+      <div
+        className={`header__bottom ${styles['header-bottom']} d-none d-lg-block`}
+      >
         <Container>
           <Row className='align-items-center justify-content-between'>
-            <ul className={`${styles['header-bottom__list']} col d-flex align-items-center`}>
+            <ul
+              className={`${styles['header-bottom__list']} col d-flex align-items-center`}
+            >
               {links.map((link, key) => (
-                <HeaderBottomLink key={key} href={link.href} title={link.title}/>
+                <HeaderBottomLink
+                  key={key}
+                  href={link.href}
+                  title={link.title}
+                />
               ))}
             </ul>
             <RegionSearch />
@@ -90,8 +94,8 @@ export const RegionSearch = () => {
   const onClick = (name: string, id: number) => {
     dispatch(regionActions.update(name, id))
     setCurrentLocation(name)
-    setActive(false)
-    location.reload();
+    setActive()
+    // location.reload();
   }
   return (
     <Col
@@ -133,7 +137,6 @@ export const RegionList: React.FC<IRegionDropdown> = ({
   const [pTop, setPTop] = useState(false)
 
   const [loading, setLoading] = useState(false)
-
 
   const [value, setValue] = useState<string>('')
   const defferedValue = useDeferredValue(value)
@@ -197,7 +200,7 @@ export const RegionList: React.FC<IRegionDropdown> = ({
         </form>
         <ul className={styles['region-popup__list']}>
           {!loading || locations ? (
-            filteredRegions.map((region: IRegionItem, key) => (
+            filteredRegions.map((region: IRegionItem, key: number) => (
               <RegionItem onClick={onClick} key={key} region={region} />
             ))
           ) : (
@@ -211,7 +214,10 @@ export const RegionList: React.FC<IRegionDropdown> = ({
 
 export const RegionItem: React.FC<IChildRegion> = ({ region, onClick }) => {
   return (
-    <li onClick={() => onClick(region.name, region.id)} className={styles['region-popup__item']}>
+    <li
+      onClick={() => onClick(region.name, region.id)}
+      className={styles['region-popup__item']}
+    >
       <div className={styles['region-popup__content']}>
         <div className={styles['region-popup__region']}>{region.name}</div>
         <div className={styles['region-popup__parent-region']}>

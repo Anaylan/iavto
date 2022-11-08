@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
-import form from 'assets/sass/components/form.module.scss'
 import { IForm } from 'app/models'
+import form from 'assets/sass/components/form.module.scss'
+import { FC } from 'react'
 
 const Form: FC<IForm> = ({ children, ...props }) => {
   return (
@@ -10,10 +10,6 @@ const Form: FC<IForm> = ({ children, ...props }) => {
       </form>
     </>
   )
-}
-
-const Body = () => {
-  return <></>
 }
 
 export default Form

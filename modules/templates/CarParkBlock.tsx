@@ -6,8 +6,10 @@ import { URL_IMG } from 'app/config'
 import Link from 'next/link'
 import { Col, Container, Row } from 'react-bootstrap'
 
+import { IRegionState } from 'app/redux/reducers/regionReducer'
 import main from 'assets/sass/components/card/carparks.module.scss'
 import Image from 'next/image'
+import { useSelector } from 'react-redux'
 
 const CarParkBlock: React.FC<ICarparkBlock> = ({
   getData,
@@ -15,12 +17,15 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
   title,
   large = false
 }) => {
+  const location: string | undefined = useSelector(
+    ({ region }: { region: IRegionState }) => region.name
+  )
   const [Carparks, setCarparks] = useState<ICarparkModel[]>([])
   useEffect(() => {
-    getData().then(({data}: {data: ICarparkModel[]}) => {
+    getData().then(({ data }: { data: ICarparkModel[] }) => {
       setCarparks(data)
     })
-  }, [setCarparks, getData])
+  }, [setCarparks, getData, location])
 
   return (
     <>
@@ -41,12 +46,15 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
                 : `${main['carparks__body']} gx-0 gy-0 carparks`
             }
           >
-            {Carparks.length ?
+            {Carparks.length ? (
               Carparks.map((tender: ICarparkModel, key: number) => (
                 <Col key={key} {...columns}>
                   <TenderPark carPark={tender} lazy={large} />
                 </Col>
-              )) : <>Пусто</>}
+              ))
+            ) : (
+              <>Пусто</>
+            )}
           </Row>
         </Container>
       </section>
@@ -62,10 +70,6 @@ export function TenderPark({
   carPark: ICarparkModel
   lazy: boolean
 }) {
-  let sliced = carPark.company_name.slice(0, 17)
-  if (sliced.length < carPark.company_name.length) {
-    sliced += '...'
-  }
   return (
     <>
       <div className={main['carparks__item']}>
@@ -105,7 +109,7 @@ export function TenderPark({
           className={main['carparks__item-title']}
           href={`/carpark/${carPark.cid}`}
         >
-          <span>{sliced}</span>
+          <span>{carPark.company_name}</span>
         </Link>
         <div className={main['carparks__content']}>
           <Link className={main['carparks__value']} href='#'>

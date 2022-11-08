@@ -3,4 +3,5 @@ export interface IPostModel {
   title: string
   description: string
   created: any
+  img: string
 }

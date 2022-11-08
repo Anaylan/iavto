@@ -1,26 +1,49 @@
 import { URL_IMG } from 'app/config'
+import { useFetch, useObserver } from 'app/hooks'
 import { ICarModel } from 'app/models'
-import { Location } from 'assets/icon/icons'
+import { IRegionState } from 'app/redux/reducers/regionReducer'
+import { Load, Location } from 'assets/icon/icons'
 import styles from 'assets/sass/components/card/car-list.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
 
 interface ICarArray {
   title: string
-  Cars: ICarModel[]
   getData: CallableFunction
 }
 
-const CarBlock: React.FC<ICarArray> = ({ Cars, getData, title }) => {
-  // const [Car, setCar] = useState([]);
-  // useEffect(() => {
-  //     getData().then((res : AxiosResponse<ICarModel>) => {
-  //         setCar(res.data);
-  //     });
-  //
-  // }, [setCar])
+const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
+  const router = useRouter()
+  const [cars, setCars] = useState<ICarModel[]>([])
+  // const [isLoading, setLoading] = useState<boolean>(false)
+  const location: string | undefined = useSelector(
+    ({ region }: { region: IRegionState }) => region.name
+  )
+  let triggerElement: React.RefObject<any> = useRef()
+  let totalCars = 10
+
+  const [isLoading, Errors] = useFetch(() => {
+    getData(0, totalCars, { ...router.query })
+      .then(({ data }: { data: ICarModel[] }) => {
+        setCars([...cars, ...data])
+        console.log(data)
+      })
+      .catch((err: string) => {})
+  })
+
+  useObserver(triggerElement, true, isLoading, () => {
+    getData(0, totalCars, { ...router.query })
+      .then(({ data }: { data: ICarModel[] }) => {
+        console.log(data)
+        setCars([...cars, ...data])
+        totalCars += 10
+      })
+      .catch((err: string) => {})
+  })
 
   return (
     <>
@@ -28,12 +51,29 @@ const CarBlock: React.FC<ICarArray> = ({ Cars, getData, title }) => {
         <section className={'cars'}>
           <Container>
             <h1 className={`cars__title title`}>{title}</h1>
-
             <Row>
-              {Cars.length? Cars.map((car, key: number) => (
-                <GenerateCar key={key} car={car} />
-              )) : <>Пусто</>}
+              {cars && cars.length ? (
+                cars.map((car: ICarModel, key: number) => (
+                  <GenerateCar key={key} car={car} />
+                ))
+              ) : (
+                <>Пусто</>
+              )}
             </Row>
+            <div ref={triggerElement} />
+            {isLoading && (
+              <>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: 50
+                  }}
+                >
+                  <Load />
+                </div>
+              </>
+            )}
           </Container>
         </section>
       }
@@ -59,7 +99,7 @@ export function GenerateCar({ car }: { car: ICarModel }) {
                   priority={false}
                   fill
                   sizes={'100%'}
-                  src={URL_IMG + `/` + car.cid + `/` + car.img[0]}
+                  src={URL_IMG + `/` + car.cid + `/` + car.img![0]}
                   alt={`${car.mark} ${car.model}`}
                 />
               </Link>
@@ -81,7 +121,7 @@ export function GenerateCar({ car }: { car: ICarModel }) {
                     <div className={styles['icon']}>
                       <Location color={styles['icon__item']} />
                     </div>
-                    <span>{car.city.name}</span>
+                    <span>{car.city?.name}</span>
                   </div>
                   <div className={styles['cars-item__label']}>
                     Характеристики
@@ -99,18 +139,6 @@ export function GenerateCar({ car }: { car: ICarModel }) {
                         <span>{car.horse_power}</span> л.с.
                       </div>
                     </li>
-                    <li>
-                      <div>Топливо</div>
-                      <div>
-                        <span>{car.fuel_type}</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div>Топливо</div>
-                      <div>
-                        <span>{car.fuel_type}</span>
-                      </div>
-                    </li>
                   </ul>
                 </div>
               </Col>
@@ -126,6 +154,7 @@ export function GenerateCar({ car }: { car: ICarModel }) {
                       <div>руб / сут</div>
                     </div>
                     <ul className={styles['cars-item__list']}>
+                      {/* Чего-то не хватает */}
                       <li>Без залога</li>
                       <li>Без комиссии</li>
                       <li>Есть возможность долгой аренды</li>

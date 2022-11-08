@@ -22,8 +22,9 @@ export const Login: FC<UserModel> = () => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const user = useSelector(({ header }) => header.title)
-
+  const user = useSelector(
+    ({ header }: { header: header.IAuthState }) => header.title
+  )
 
   if (user) {
     router.push('/')

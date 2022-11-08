@@ -3,7 +3,7 @@ import info from 'assets/sass/components/carpark/carpark-intro__info.module.scss
 
 interface ICarparkInfo {
   rating: number
-  orders: number
+  orders: number | null
 }
 
 export const CarparkInfo: React.FC<ICarparkInfo> = ({ rating, orders }) => {

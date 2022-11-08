@@ -3,7 +3,6 @@ import form from 'assets/sass/components/form.module.scss'
 import { FC } from 'react'
 import MaskedInput from 'react-text-mask'
 
-
 export const FormInputWithLabel: FC<IFormInput> = ({
   title,
   className,
@@ -14,10 +13,7 @@ export const FormInputWithLabel: FC<IFormInput> = ({
       <div className={form['form__item']}>
         <div className={form['form__label']}>{title}</div>
         <div className={form['form__wrap']}>
-          <input
-            className={`${form['form__input']}  ${className}`}
-            {...props}
-          />
+          <input className={`${form['form__input']} ${className}`} {...props} />
         </div>
       </div>
     </>
@@ -39,11 +35,18 @@ export const FormInputWithMask: FC<IFormInput> = ({
       <div className={form['form__item']}>
         <div className={form['form__label']}>{title}</div>
         <div className={form['form__wrap']}>
-          <MaskedInput
-            mask={mask}
-            className={`${form['form__input']} ${className}`}
-            {...props}
-          />
+          {mask ? (
+            <MaskedInput
+              mask={mask}
+              className={`${form['form__input']} ${className}`}
+              {...props}
+            />
+          ) : (
+            <input
+              className={`${form['form__input']} ${className}`}
+              {...props}
+            />
+          )}
         </div>
       </div>
     </>
@@ -73,11 +76,15 @@ export const FormInputWithMaskNotLabel: FC<IFormInput> = ({
   return (
     <>
       <div className={form['form__wrap']}>
-        <MaskedInput
-          mask={mask}
-          className={`${form['form__input']} ${className || ''}`}
-          {...props}
-        />
+        {mask ? (
+          <MaskedInput
+            mask={mask}
+            className={`${form['form__input']} ${className}`}
+            {...props}
+          />
+        ) : (
+          <input className={`${form['form__input']} ${className}`} {...props} />
+        )}
       </div>
     </>
   )

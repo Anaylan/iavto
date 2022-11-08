@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { getLastPosts } from 'api/Post'
+import { IPostModel } from 'app/models'
 import Image from 'next/image'
 import Link from 'next/link'
-import { IPostModel } from 'app/models'
-import { getLastPosts } from 'api/Post'
-
+import React, { useEffect, useState } from 'react'
+import { URL_IMG } from 'app/config'
 interface NewsProps {
   posts?: IPostModel[]
 }
@@ -15,9 +15,8 @@ const NewsBlock: React.FC<NewsProps> = () => {
   const [posts, setPosts] = useState<IPostModel[]>([])
 
   useEffect(() => {
-    getLastPosts().then((res) => {
-      // @ts-ignore
-      setPosts(res.data)
+    getLastPosts().then(({ data }: { data: IPostModel[] }) => {
+      setPosts(data)
     })
   }, [])
 
@@ -65,7 +64,12 @@ export const PostPreview: React.FC<PostProps> = ({ postInfo }) => {
     <React.Fragment>
       <div className='news__item news-item'>
         <div className='news-item__img'>
-          <Image src={`/media/carpark.png`} width={100} height={100} alt='' />
+          <Image
+            src={URL_IMG + '/news/' + postInfo.img}
+            width={100}
+            height={100}
+            alt=''
+          />
         </div>
         <div className='news-item__content'>
           <h4 className='news-item__title'>{postInfo.title}</h4>

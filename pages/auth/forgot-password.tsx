@@ -1,60 +1,42 @@
-import { reset } from 'api/AuthCrud';
-import { useFormik } from 'formik';
-import { Button, FormInputWithoutLabel } from 'modules/UI';
-import Form from 'modules/UI/forms/Form';
-import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import * as Yup from 'yup';
-const forgotPasswordSchema = Yup.object().shape({ 
-  email: Yup.string()
-    .email('Неправильный формат email')
-    .required('Email обязателен для заполнения'), 
-})
+import { EmailStep } from 'modules/elements/formStep/EmailStep'
+import { KeyStep } from 'modules/elements/formStep/KeyStep'
+import { PasswordStep } from 'modules/elements/formStep/PasswordStep'
+import { useRouter } from 'next/router'
+import { Fragment, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const ForgotPassword: React.FC = () => {
-  const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch()
+  // const [loading, setLoading] = useState(false)
+  const [step, setStep] = useState(1)
+  // const dispatch = useDispatch()
   const router = useRouter()
 
-  const user = useSelector(({ header }: {header: any}) => header.title)
+  const user = useSelector(({ header }: { header: any }) => header.title)
 
   if (user) {
     router.push('/')
   }
-  
-  const formik = useFormik({
-    initialValues: {
-      email: ''
-    },
-    validationSchema: forgotPasswordSchema,
-    onSubmit: (values) => {
-      setLoading(true)
-      reset(values.email)
-        .then(({ data }) => {
-          console.log(data)
-          setLoading(false)
-        })
-        .catch((err) => {
-          setLoading(false)
-          console.log(err)
-        })
-    }
-  })
 
-  return <Fragment>
-    <Form onSubmit={formik.handleSubmit}>
-      <h1 className='title'>Восстановление пароля</h1>
-      {formik.errors.email && formik.touched.email ? <div>{formik.errors.email}</div> : null}
-      <FormInputWithoutLabel name={'email'}
-                  required
-                  placeholder='Почта'
-                  type={'email'}
-                  onChange={formik.handleChange}
-                  value={formik.values.email} />
-      <Button type='submit'>Отправить</Button>
-    </Form>
-  </Fragment>
+  return (
+    <Fragment>
+      {step === 1 ? (
+        <>
+          <EmailStep step={step} setStep={setStep} />
+        </>
+      ) : null}
+
+      {step === 2 ? (
+        <>
+          <KeyStep step={step} setStep={setStep} />
+        </>
+      ) : null}
+      {step === 3 ? (
+        <>
+          <PasswordStep step={step} setStep={setStep} />
+        </>
+      ) : null}
+    </Fragment>
+  )
 }
 
 export default ForgotPassword

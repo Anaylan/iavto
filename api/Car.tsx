@@ -15,18 +15,19 @@ export function getCar(id: number) {
   })
 }
 
-export function getCars(from: number, to: number) {
+export function getCars(from: number, to: number, query: any) {
   // Authorization head should be fulfilled in interceptor.
   // Check common redux folder => setupAxios
   return axios.get<ICarModel[]>(GET_ALL_CARS, {
     params: {
       from,
-      to
+      to,
+      ...query
     }
   })
 }
 
-export function getCarsForCarpark(id: number) {
+export function getCarsForCarpark(id: string | string[] | undefined) {
   // Authorization head should be fulfilled in interceptor.
   // Check common redux folder => setupAxios
   return axios.get<ICarModel[]>(GET_CARS_FOR_CARPARK, {

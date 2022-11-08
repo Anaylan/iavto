@@ -1,5 +1,5 @@
 import { getCars, getCarsForCarpark } from 'api/Car'
-import { useSanitize } from 'app/hooks'
+import { sanitize } from 'libs/functions'
 import { ICarModel, ICarparkModel } from 'app/models'
 import { Star } from 'assets/icon/icons'
 import feedback from 'assets/sass/components/carpark/carpark-contact.module.scss'
@@ -15,28 +15,24 @@ import { useEffect, useState } from 'react'
 import { Col, ProgressBar, Row } from 'react-bootstrap'
 import { Button } from '../buttons/Button'
 import Form from '../forms/Form'
-import Textarea from '../textarea/textarea'
+import { Textarea } from '../textarea/textarea'
 
 export const TabCars = () => {
   const [cars, setCars] = useState<ICarModel[]>([])
-  const router = useRouter()
+  const { query } = useRouter()
 
   useEffect(() => {
-    getCarsForCarpark(router.query.id).then((res: any) => {
+    getCarsForCarpark(query.id).then((res: any) => {
       setCars(res.data)
     })
-  }, [])
+  }, [query.id])
 
   // console.log(cars)
 
   return (
     <>
       {cars.length ? (
-        <CarBlock
-          title={'Автомобили автопарка'}
-          Cars={cars}
-          getData={getCars}
-        />
+        <CarBlock title={'Автомобили автопарка'} getData={getCars} />
       ) : (
         <>ПУСТО</>
       )}
@@ -45,7 +41,9 @@ export const TabCars = () => {
 }
 
 export const TabProfile = () => {
-  const [carpark, setCarpark] = useState<ICarparkModel>({})
+  const [carpark, setCarpark] = useState<ICarparkModel | null>(null)
+
+  // const [carpark, setCarpark] = useState<ICarparkModel>()
   // const router = useSearchParams()
   // const { id } = router.query
   // useEffect(() => {
@@ -59,46 +57,57 @@ export const TabProfile = () => {
       <h3 className={profile['carpark-profile__subtitle']}>
         Профиль автопарка
       </h3>
-      <div className={profile['carpark-profile__about']}>
-        <p dangerouslySetInnerHTML={useSanitize(carpark.description)}></p>
-      </div>
 
-      <Row>
-        <Col xs={12} sm={4}>
-          <h3 className={profile['carpark-profile__subtitle']}>
-            Оценка товаров
-          </h3>
-          <div className={profile['carpark-profile__info']}>
-            <div className={profile['carpark-profile__label']}>
-              Средняя оценка автопарка
-            </div>
-            <div className={profile['carpark-profile__value']}>
-              <span>{carpark.rait || 5}</span> из 5
-            </div>
+      {carpark && (
+        <>
+          <div className={profile['carpark-profile__about']}>
+            <p
+              dangerouslySetInnerHTML={
+                carpark.description
+                  ? sanitize(carpark.description)
+                  : sanitize('')
+              }
+            ></p>
           </div>
-          <div className={profile['carpark-profile__info']}>
-            <div className={profile['carpark-profile__label']}>
-              Количество оценок
-            </div>
-            <div className={profile['carpark-profile__value']}>
-              <span>1 237</span>
-            </div>
-          </div>
-        </Col>
-        <Col xs={12} sm={4}>
-          <h3 className={profile['carpark-profile__subtitle']}>
-            Количество заказов
-          </h3>
-          <div className={profile['carpark-profile__info']}>
-            <div className={profile['carpark-profile__label']}>
-              Количество заказов
-            </div>
-            <div className={profile['carpark-profile__value']}>
-              <span>1 699</span>
-            </div>
-          </div>
-        </Col>
-      </Row>
+
+          <Row>
+            <Col xs={12} sm={4}>
+              <h3 className={profile['carpark-profile__subtitle']}>
+                Оценка товаров
+              </h3>
+              <div className={profile['carpark-profile__info']}>
+                <div className={profile['carpark-profile__label']}>
+                  Средняя оценка автопарка
+                </div>
+                <div className={profile['carpark-profile__value']}>
+                  <span>{carpark.rait || 5}</span> из 5
+                </div>
+              </div>
+              <div className={profile['carpark-profile__info']}>
+                <div className={profile['carpark-profile__label']}>
+                  Количество оценок
+                </div>
+                <div className={profile['carpark-profile__value']}>
+                  <span>1 237</span>
+                </div>
+              </div>
+            </Col>
+            <Col xs={12} sm={4}>
+              <h3 className={profile['carpark-profile__subtitle']}>
+                Количество заказов
+              </h3>
+              <div className={profile['carpark-profile__info']}>
+                <div className={profile['carpark-profile__label']}>
+                  Количество заказов
+                </div>
+                <div className={profile['carpark-profile__value']}>
+                  <span>1 699</span>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </>
+      )}
     </>
   )
 }
@@ -231,16 +240,22 @@ export const TabFeedback = () => {
       <h1 className={`cars__title title`}>Задайте ваш вопрос автопарку</h1>
       <Form className={form['form']}>
         <div className={feedback['form__item']}>
-          <div className={`${feedback['form__label']} ${form['form__label']}`}>Ваш вопрос</div>
+          <div className={`${feedback['form__label']} ${form['form__label']}`}>
+            Ваш вопрос
+          </div>
           <div className={form['form__wrap']}>
-            <Textarea className={`${form['form__input']} ${feedback['form__input']}`} />
+            <Textarea
+              className={`${form['form__input']} ${feedback['form__input']}`}
+            />
           </div>
         </div>
 
         <div className={form['form__bottom']}>
           <div className={feedback['form__btn-group']}>
             <div className={feedback['form__btn-wrap']}>
-              <Button className={feedback['btn-main']} type={'submit'}>Отправить</Button>
+              <Button className={feedback['btn-main']} type={'submit'}>
+                Отправить
+              </Button>
             </div>
           </div>
         </div>

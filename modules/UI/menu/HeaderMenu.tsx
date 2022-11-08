@@ -13,8 +13,6 @@ import Link from 'next/link'
 import { forwardRef } from 'react'
 
 export const HeaderMenu = forwardRef((props, ref) => {
-  console.log(props)
-
   return (
     <>
       <div
@@ -27,34 +25,34 @@ export const HeaderMenu = forwardRef((props, ref) => {
                 <SearchInput placeholder={'Поиск...'} />
                 <RegionSearch />
                 <MenuList>
-                  <MenuListItem href={'#'}>123</MenuListItem>
-                  <MenuListItem href={'#'}>123</MenuListItem>
-                  <MenuListItem href={'#'}>123</MenuListItem>
-                  <MenuListItem href={'#'}>123</MenuListItem>
-                  <MenuListItem href={'#'}>123</MenuListItem>
-                  <MenuListItem href={'#'}>123</MenuListItem>
-                  <MenuListItem href={'#'}>123</MenuListItem>
-                  <MenuListItem href={'#'}>123</MenuListItem>
-                  <MenuListItem href={'#'}>123</MenuListItem>
-                  <MenuListItem href={'#'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
+                  <MenuListItem href={'/'}>123</MenuListItem>
                 </MenuList>
               </div>
             </div>
             <MenuListBottom>
               <MenuListBottomItem>
-                <Link href={'#'}>123</Link>
+                <Link href={'/'}>123</Link>
               </MenuListBottomItem>
               <MenuListBottomItem>
-                <Link href={'#'}>123</Link>
+                <Link href={'/'}>123</Link>
               </MenuListBottomItem>
               <MenuListBottomItem>
-                <Link href={'#'}>123</Link>
+                <Link href={'/'}>123</Link>
               </MenuListBottomItem>
               <MenuListBottomItem>
-                <Link href={'#'}>123</Link>
+                <Link href={'/'}>123</Link>
               </MenuListBottomItem>
               <MenuListBottomItem>
-                <Link href={'#'}>123</Link>
+                <Link href={'/'}>123</Link>
               </MenuListBottomItem>
             </MenuListBottom>
             <div className='footer'>
@@ -70,3 +68,5 @@ export const HeaderMenu = forwardRef((props, ref) => {
     </>
   )
 })
+
+HeaderMenu.displayName = 'HeaderMenu'

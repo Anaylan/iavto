@@ -1,28 +1,26 @@
 import {
   applyMiddleware,
-  configureStore,
   createStore,
   getDefaultMiddleware,
-  Store
+  Store,
+  AnyAction
 } from '@reduxjs/toolkit'
-import { persistStore } from 'redux-persist'
 import { rootReducer, rootSaga } from './RootReducers'
-import { composeWithDevTools } from 'redux-devtools-extension'
 import createSagaMiddleware from 'redux-saga'
-import { Context, createWrapper } from 'next-redux-wrapper'
-
+import { createWrapper, MakeStore } from 'next-redux-wrapper'
+import { persistStore, persistReducer, Persistor } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [
   ...getDefaultMiddleware({
     immutableCheck: false,
-    serializableCheck: false,
-    thunk: true
+    serializableCheck: false
   }),
   sagaMiddleware
 ]
 
-interface IStoreProps {
-  isServer?: boolean
+interface IStoreProps extends Store<IStoreProps, AnyAction> {
+  persistor?: Persistor
 }
 
 const bindMiddleware = (middleware: any) => {
@@ -33,30 +31,26 @@ const bindMiddleware = (middleware: any) => {
   return applyMiddleware(...middleware)
 }
 
-const makeStore: IStoreProps = ({ isServer }: { isServer: boolean }) => {
-  if (isServer) {
-    //If it's on server side, create a store
-    return createStore(rootReducer, bindMiddleware(middleware))
-  } else {
-    //If it's on client side, create a store which will persist
-    const { persistStore, persistReducer } = require('redux-persist')
-    const storage = require('redux-persist/lib/storage').default
+// type Store = ReturnType<typeof makeStore>
 
-    const persistConfig = {
-      key: 'root',
-      storage
-    }
-
-    const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-    const store = createStore(persistedReducer, bindMiddleware(middleware))
-
-    store.__persistor = persistStore(store)
-
-    sagaMiddleware.run(rootSaga)
-
-    return store
+const makeStore: MakeStore<Store<IStoreProps, AnyAction>> = () => {
+  const persistConfig = {
+    key: 'root',
+    storage
   }
+
+  const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+  const store: IStoreProps = createStore(
+    persistedReducer,
+    bindMiddleware(middleware)
+  )
+
+  store.persistor = persistStore(store)
+
+  sagaMiddleware.run(rootSaga)
+
+  return store
 }
 
 export const wrapper = createWrapper(makeStore, { debug: true })
