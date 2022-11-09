@@ -16,7 +16,7 @@ const NewsBlock: React.FC<NewsProps> = () => {
 
   useEffect(() => {
     getLastPosts().then(({ data }: { data: IPostModel[] }) => {
-      setPosts(data)
+      setPosts(data.slice(0, 3))
     })
   }, [])
 
