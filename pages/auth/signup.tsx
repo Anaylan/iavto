@@ -66,13 +66,13 @@ export const Register: React.FC<UserModel> = () => {
 
   const formik = useFormik({
     initialValues: {
-      lastname: 'Иванов',
-      firstname: 'Иван',
-      email: 'ivan@mail.ru',
-      password: 'ivan123',
-      phone: '+7(000)000-00-00'
+      lastname: '',
+      firstname: '',
+      email: '',
+      password: '',
+      phone: ''
     },
-    validationSchema: registrationSchema,
+
     onSubmit: (values) => {
       setLoading(true)
       register(

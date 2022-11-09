@@ -36,9 +36,7 @@ export const CarparkTabs = ({ tabs }: { tabs: ITabItems[] }) => {
             ))}
           </Tab.Content>
         </Tab.Container>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </>
   )
 }

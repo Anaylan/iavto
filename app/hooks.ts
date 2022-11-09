@@ -1,11 +1,10 @@
 import {
+  MutableRefObject,
   RefObject,
-  ForwardedRef,
   useEffect,
   useMemo,
   useRef,
-  useState,
-  MutableRefObject
+  useState
 } from 'react'
 import xss from 'xss'
 
@@ -13,12 +12,12 @@ import xss from 'xss'
  * Hook that fetch new post from server
  */
 export const useObserver = (
-  ref: RefObject<any>,
+  ref: RefObject<HTMLElement>,
   canLoad: boolean,
   isLoading: string | boolean | ((...args: any) => Promise<void>),
   callback: CallableFunction
 ) => {
-  let observer: React.RefObject<any> = useRef()
+  let observer: MutableRefObject<any> = useRef()
 
   useEffect(() => {
     if (isLoading) {
@@ -32,7 +31,7 @@ export const useObserver = (
         callback()
       }
     }
-    // @ts-ignore
+
     observer.current = new IntersectionObserver(cb)
     observer.current.observe(ref.current)
   }, [isLoading])
@@ -95,7 +94,10 @@ export const useScroll = (ref: RefObject<any>, onScroll: CallableFunction) => {
 /**
  * Hook that alerts width of the document
  */
-export const useWidth = (ref: RefObject<any>, onSize: CallableFunction) => {
+export const useWidth = (
+  ref: RefObject<HTMLElement>,
+  onSize: CallableFunction
+) => {
   function handleChangeSize(event: Event) {
     onSize()
   }
@@ -133,16 +135,18 @@ export const useLoading = () => {}
 /**
  * Hook that verify window's width
  */
-export const useDesktop = (ref: RefObject<any>, onWidth: CallableFunction) => {
+export const useDesktop = (
+  ref: RefObject<HTMLElement>,
+  onWidth: CallableFunction
+) => {
   useEffect(() => {
     function handleWidth() {
       onWidth()
     }
-    window.addEventListener('load', handleWidth, false)
+    handleWidth()
     window.addEventListener('resize', handleWidth, false)
     return () => {
       // Unbind the event listener on clean up
-      window.removeEventListener('load', handleWidth, false)
       window.removeEventListener('resize', handleWidth, false)
     }
   }, [ref, onWidth])

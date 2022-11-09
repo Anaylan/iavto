@@ -5,6 +5,7 @@ import { TITLE } from 'app/config'
 import CarParkBlock from 'modules/templates/CarParkBlock'
 import Head from 'next/head'
 import dynamic from 'next/dist/shared/lib/dynamic'
+import { Container } from 'react-bootstrap'
 
 const DynamicCarBlock = dynamic(() => import('modules/templates/CarBlock'))
 
@@ -23,7 +24,9 @@ export default function Cars() {
         getData={getHotTender}
         large={true}
       />
-      <DynamicCarBlock title={'Автомобили'} getData={getCars} />
+      <Container>
+        <DynamicCarBlock title={'Автомобили'} getData={getCars} />
+      </Container>
     </>
   )
 }

@@ -1,7 +1,7 @@
-import { login } from 'api/AuthCrud'
+import { login, getUserByToken } from 'api/AuthCrud'
 import { TITLE } from 'app/config'
 import { UserModel } from 'app/models'
-import * as header from 'app/redux/reducers/authReducer'
+import * as auth from 'app/redux/reducers/authReducer'
 import { Load } from 'assets/icon/icons'
 import auth_styles from 'assets/sass/components/auth.module.scss'
 import form from 'assets/sass/components/form.module.scss'
@@ -23,7 +23,7 @@ export const Login: FC<UserModel> = () => {
   const router = useRouter()
 
   const user = useSelector(
-    ({ header }: { header: header.IAuthState }) => header.title
+    ({ header }: { header: auth.IAuthState }) => header.title
   )
 
   if (user) {
@@ -43,15 +43,12 @@ export const Login: FC<UserModel> = () => {
         .then(({ data }) => {
           console.log(data)
           setLoading(false)
-          dispatch(header.actions.login(data.token))
+          dispatch(auth.actions.login(data.token))
           if (data.token) {
             router.push('/')
           }
         })
-        .catch((err) => {
-          setLoading(false)
-          console.log(err)
-        })
+        .catch((err) => console.log(err))
     }
   })
 

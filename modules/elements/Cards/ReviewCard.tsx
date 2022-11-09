@@ -1,13 +1,11 @@
 import { Star } from 'assets/icon/icons'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Col, Row } from 'react-bootstrap'
 import carList from '/assets/sass/components/card/car-list.module.scss'
 import carparkReviews from '/assets/sass/components/carpark/carpark-reviews.module.scss'
 import reviews from '/assets/sass/components/reviews/reviews.module.scss'
-import { getAllReviews } from 'api/Review'
 import { IReviewModel } from 'app/models'
-import { URL_IMG } from 'app/config'
+import { month, dbFormatDate } from 'libs/functions'
 
 export const ReviewCard = ({ review }: { review: IReviewModel }) => {
   return (
@@ -18,7 +16,7 @@ export const ReviewCard = ({ review }: { review: IReviewModel }) => {
         <Row>
           <Col xs={12} md={4} className='d-flex'>
             <Link className={carList['cars-item__img']} href='#'>
-              <Image src={review.img} width={100} height={100} alt='' />
+              {/* <Image src={review.img} width={100} height={100} alt='' /> */}
             </Link>
           </Col>
           <Col xs={12} md={8}>
@@ -45,9 +43,9 @@ export const ReviewCard = ({ review }: { review: IReviewModel }) => {
                 <div className='d-flex'>
                   <time
                     className={`${carparkReviews['carpark-reviews__date']} ${reviews['carpark-reviews__date']}`}
-                    dateTime='2022-04-22'
+                    dateTime={review.date_created}
                   >
-                    {review.date}
+                    {dbFormatDate(review.date_created, month)}
                   </time>
                   <div
                     className={`${carparkReviews['carpark-reviews__rate']} ${reviews['carpark-reviews__rate']}`}
@@ -68,7 +66,7 @@ export const ReviewCard = ({ review }: { review: IReviewModel }) => {
             >
               <div className={carparkReviews['carpark-reviews__text']}>
                 <span>Комментарий:</span>
-                <p>{review.description}</p>
+                <p>{review.comment}</p>
               </div>
             </div>
           </Col>

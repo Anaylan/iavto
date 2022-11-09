@@ -11,3 +11,5 @@ export * from './profile/editInfo'
 export * from './profile/verification/DocumentsDataInputs'
 export * from './profile/verification/PrivateDataInputs'
 export * from './profile/verification/RelativeDataInputs'
+// emptyComponents
+export * from './emptyComponents/emptyComponent'

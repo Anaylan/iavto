@@ -6,10 +6,11 @@ import { Load, Location } from 'assets/icon/icons'
 import styles from 'assets/sass/components/card/car-list.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
+import { EmptyComponent } from 'modules/elements'
 
 interface ICarArray {
   title: string
@@ -49,32 +50,30 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
     <>
       {
         <section className={'cars'}>
-          <Container>
-            <h1 className={`cars__title title`}>{title}</h1>
-            <Row>
-              {cars && cars.length ? (
-                cars.map((car: ICarModel, key: number) => (
-                  <GenerateCar key={key} car={car} />
-                ))
-              ) : (
-                <>Пусто</>
-              )}
-            </Row>
-            <div ref={triggerElement} />
-            {isLoading && (
-              <>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    marginTop: 50
-                  }}
-                >
-                  <Load />
-                </div>
-              </>
+          <h1 className={`cars__title title`}>{title}</h1>
+          <Row>
+            {cars && cars.length ? (
+              cars.map((car: ICarModel, key: number) => (
+                <GenerateCar key={key} car={car} />
+              ))
+            ) : (
+              <EmptyComponent />
             )}
-          </Container>
+          </Row>
+          <div ref={triggerElement} />
+          {isLoading && (
+            <>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginTop: 50
+                }}
+              >
+                <Load />
+              </div>
+            </>
+          )}
         </section>
       }
     </>

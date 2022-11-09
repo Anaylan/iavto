@@ -2,7 +2,7 @@ import { getUserByToken } from 'api/AuthCrud'
 import { getHotTender } from 'api/Company'
 import { TITLE } from 'app/config'
 import { UserModel } from 'app/models'
-
+import { UserDataModel } from 'app/models'
 import {
   ProfileBalance,
   ProfileCard,
@@ -19,26 +19,37 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { Container, Row } from 'react-bootstrap'
-import { useFetch } from 'app/hooks'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import * as auth from 'app/redux/reducers/authReducer'
 
 const Profile = () => {
   const [profile, setProfile] = useState<UserModel>({ data: null, status: 200 })
-  // const [isLoading, setLoading] = useState<boolean>(false)
-  const [isLoading, error] = useFetch(() => {
-    getUserByToken().then(({ data }: { data: UserModel }) => {
-      setProfile(data)
-      console.log(data)
-    })
-  })
+  const dispatch = useDispatch()
 
   const router = useRouter()
-
+  const user = useSelector(
+    ({ header }: { header: UserDataModel }) => header.user
+  )
   useEffect(() => {
-    if (profile.status === 403) {
-      router.push('/auth/signin')
-    }
-    console.log('3')
-  }, [profile, router])
+    getUserByToken()
+      .then(({ data }: { data: UserModel }) => {
+        if (data.status === 403) {
+          router.push('/auth/signin')
+        }
+        if (user.id == data.data?.id) {
+          console.log('Красава')
+          setProfile(data)
+        } else {
+          console.log('Ты не ты')
+        }
+      })
+      .catch((err) => {
+        dispatch(auth.actions.logout())
+
+        router.push('/auth/signin')
+      })
+  }, [user, dispatch, router])
 
   return (
     <>

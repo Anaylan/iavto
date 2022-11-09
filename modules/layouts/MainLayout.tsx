@@ -8,7 +8,9 @@ type Props = {
   children?: React.ReactNode
 }
 
-const DynamicHeader = dynamic(() => import('../templates/Header'))
+const DynamicHeader = dynamic(() => import('../templates/Header'), {
+  ssr: false
+})
 
 const DynamicContent = dynamic(() => import('../templates/Content'), {
   suspense: true
@@ -28,9 +30,7 @@ const MasterLayout: React.FC<Props> = ({ children }) => {
           <DynamicHeader />
           <span id={'mt'} />
         </>
-      ) : (
-        <></>
-      )}
+      ) : null}
       <DynamicContent>{children}</DynamicContent>
       <Footer />
     </>

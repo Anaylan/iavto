@@ -9,7 +9,7 @@ import { HeaderBody, HeaderBottom, HeaderTop } from 'modules/UI'
 import { useDesktop, useScroll } from 'app/hooks'
 import { Container } from 'react-bootstrap'
 
-const HeaderTopLinks: LinkType[] = [
+export const HeaderTopLinks: LinkType[] = [
   {
     href: '/',
     children: <Heart color={header['icon__item']} />,
@@ -27,7 +27,7 @@ const HeaderTopLinks: LinkType[] = [
   }
 ]
 
-const HeaderBodyLinks: LinkType[] = [
+export const HeaderBodyLinks: LinkType[] = [
   { href: '/carpark', children: <></>, title: 'Автопарки' },
   { href: '/car', children: <></>, title: 'Автомобили' },
   { href: '/rules', children: <></>, title: 'Правила' },
@@ -36,7 +36,7 @@ const HeaderBodyLinks: LinkType[] = [
   { href: '/feedback', children: <></>, title: 'Обратная связь' }
 ]
 
-const HeaderBottomLinks: LinkType[] = [
+export const HeaderBottomLinks: LinkType[] = [
   {
     href: 'https://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/login.php',
     children: <></>,
@@ -51,14 +51,6 @@ const HeaderBottomLinks: LinkType[] = [
 const Header: React.FC = () => {
   const [desktop, setDesktop] = useState<boolean>(true)
   const header = useRef<HTMLElement>(null)
-
-  // useEffect(() => {
-  //   if (window.innerWidth <= 992) {
-  //     setDesktop(false)
-  //   } else {
-  //     setDesktop(true)
-  //   }
-  // }, [])
 
   useDesktop(header, () => {
     if (window.innerWidth <= 992) {
@@ -100,9 +92,7 @@ const Header: React.FC = () => {
               <HeaderBody links={HeaderBodyLinks} />
               <HeaderBottom links={HeaderBottomLinks} />
             </>
-          ) : (
-            <></>
-          )}
+          ) : null}
         </Container>
       </header>
     </>

@@ -97,9 +97,7 @@ export default function Car({ car }: { car: ICarModel }) {
                 rating={carpark.rait || 5}
               />
             </div>
-          ) : (
-            <></>
-          )}
+          ) : null}
         </Container>
         {car && <CarparkTabs tabs={TabItems}></CarparkTabs>}
       </section>

@@ -7,11 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "export": "yarn build && next export"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.0.0",
-    "@next/font": "^13.0.2",
     "@reduxjs/toolkit": "^1.8.6",
     "apexcharts": "^3.36.1",
     "axios": "^1.1.3",

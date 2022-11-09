@@ -75,7 +75,9 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
 
   const [isPending, startTransition] = useTransition()
 
-  const token = useSelector(({ header }: { header: any }) => header.title)
+  const token = useSelector(
+    ({ header }: { header: auth.IAuthState }) => header.title
+  )
 
   const [user, setUser] = useState<UserModel>({ status: 403, data: null })
 
@@ -101,7 +103,6 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
         }
       }
     })
-    console.log(user)
   }, [dispatch, token])
 
   // useChange(token, ()=>{
@@ -176,9 +177,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                   </ul>
                 </Col>
               </>
-            ) : (
-              <></>
-            )}
+            ) : null}
           </Row>
         </Container>
       </Col>
@@ -187,9 +186,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
         <>
           <HeaderMenu />
         </>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </>
   )
 })

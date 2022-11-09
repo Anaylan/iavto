@@ -10,6 +10,7 @@ import { IRegionState } from 'app/redux/reducers/regionReducer'
 import main from 'assets/sass/components/card/carparks.module.scss'
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
+import { EmptyComponent } from 'modules/elements'
 
 const CarParkBlock: React.FC<ICarparkBlock> = ({
   getData,
@@ -53,7 +54,7 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
                 </Col>
               ))
             ) : (
-              <>Пусто</>
+              <EmptyComponent />
             )}
           </Row>
         </Container>
@@ -97,7 +98,12 @@ export function TenderPark({
           )}
 
           <div className={`carparks__hover ${main['carparks-hover']}`}>
-            <div className={main['carparks-hover__item']}>
+            <div
+              onClick={() => {
+                console.log('Добавить избранное')
+              }}
+              className={main['carparks-hover__item']}
+            >
               <div>Добавить в</div>
               <span className={main['icon']}>
                 <Heart color={main['icon__item']} />

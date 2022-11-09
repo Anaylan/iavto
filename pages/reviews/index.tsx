@@ -8,13 +8,15 @@ import { useFetch } from 'app/hooks'
 import { useState } from 'react'
 import { getAllReviews } from 'api/Review'
 import { IReviewModel } from 'app/models'
+import { Load } from 'assets/icon/icons'
 
 export default function Reviews() {
   const [reviews, setReviews] = useState<IReviewModel[]>()
   const [isLoading, errors] = useFetch(() => {
-    const data: any = getAllReviews()
-    setReviews(data)
-    console.log(data)
+    getAllReviews().then(({ data }: { data: IReviewModel[] }) => {
+      setReviews(data)
+      console.log(data)
+    })
   })
   return (
     <>
@@ -37,6 +39,7 @@ export default function Reviews() {
                   ))}
               </Row>
             </div>
+            {isLoading ? <Load /> : null}
           </Container>
         </div>
       </section>

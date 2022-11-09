@@ -10,6 +10,15 @@ import tables from '/assets/sass/components/tables/tables.module.scss'
 // import verif from 'assets/sass/'
 import { Download } from 'assets/icon/icons'
 import { Button } from 'modules/UI'
+// import { RentWidget } from 'modules/elements/widgets/RentWidget'
+import dynamic from 'next/dynamic'
+
+const RentWidget = dynamic(
+  () => {
+    return import('modules/elements/widgets/RentWidget')
+  },
+  { ssr: false }
+)
 
 export default function Partners() {
   return (
@@ -17,21 +26,18 @@ export default function Partners() {
       <Head>
         <title>Партнёры | {TITLE}</title>
       </Head>
+
       <section className='charts'>
         <Container>
           <h1 className='title'>Информация о партнерстве</h1>
           <Row>
             <Col xs={12} lg={6}>
-              <div className='apexchart' />
-              <div className='card card-bordered' />
-              <div className='card-body' />
-              <div id='apexchart' />
+              Заработок
+              <RentWidget className='' chartColor='black' chartHeight='30px' />
             </Col>
             <Col xs={12} lg={6}>
-              <div className='apexchart' />
-              <div className='card card-bordered' />
-              <div className='card-body' />
-              <div id='apexchart2' />
+              Переходы по ссылке
+              <RentWidget className='' chartColor='black' chartHeight='30px' />
             </Col>
           </Row>
         </Container>
@@ -47,8 +53,12 @@ export default function Partners() {
             <li
               className={` ${tableNav['tables__tab-nav']} ${tableNav['tables-nav__item']} nav-item`}
               role='presentation'
-            > 
-              <Button className={`${tableNav['tables-nav__link']} nav-link active`}>Привлеченные клиенты</Button>
+            >
+              <Button
+                className={`${tableNav['tables-nav__link']} nav-link active`}
+              >
+                Привлеченные клиенты
+              </Button>
             </li>
             <li
               className={` ${tableNav['tables-nav__item']} nav-item`}
@@ -184,9 +194,13 @@ export default function Partners() {
                   className={`${banners['banners__img-wrap']} ${banners['banners__img-wrap_shadow']}`}
                 >
                   <span className={`${banners['banners__img']}`}>
-                    <Image                       width={100}
-                      height={100} src='/media/presentations/01.png' alt='' />
-                  </span> 
+                    <Image
+                      width={100}
+                      height={100}
+                      src='/media/presentations/01.png'
+                      alt=''
+                    />
+                  </span>
                   <span
                     className={`${banners['banners__hover']} ${bannersHover['banners-hover']}`}
                   >
