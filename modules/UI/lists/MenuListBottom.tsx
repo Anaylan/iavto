@@ -6,6 +6,7 @@ interface IMenuListBottom {
 
 interface IMenuListBottomItem {
   children: ReactNode
+  onClick: ((e: any) => void) | undefined
 }
 
 export const MenuListBottom: FC<IMenuListBottom> = ({ children }) => {
@@ -18,6 +19,9 @@ export const MenuListBottom: FC<IMenuListBottom> = ({ children }) => {
   )
 }
 
-export const MenuListBottomItem: FC<IMenuListBottomItem> = ({ children }) => {
-  return <li>{children}</li>
+export const MenuListBottomItem: FC<IMenuListBottomItem> = ({
+  children,
+  onClick
+}) => {
+  return <li onClick={onClick}>{children}</li>
 }

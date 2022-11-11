@@ -1,4 +1,4 @@
-import { reset } from 'api/AuthCrud'
+import { reset } from 'api/User'
 import { useFormik } from 'formik'
 import { FormInputWithoutLabel } from 'modules/UI'
 import React from 'react'

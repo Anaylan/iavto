@@ -2,6 +2,7 @@
 export * from './Cards/Car/CarCard'
 export * from './Cards/CarparkCard'
 export * from './Cards/Carpark_body'
+export * from './Cards/OrderCard'
 // chat
 export * from './chat/ChatAside'
 export * from './chat/ChatMessenger'

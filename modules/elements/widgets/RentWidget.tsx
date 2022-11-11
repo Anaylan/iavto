@@ -108,7 +108,17 @@ function getDate() {
   return arr2
 }
 const dataRent = {
-  money: [30, 40, 150, 90, 90, 70, 70],
+  money: [30, 40, 150, 90, 90, 70, 160],
+  days: getDate().slice().reverse()
+}
+
+const dataRent2 = {
+  money: [140, 60, 120, 140, 190, 170, 90],
+  days: getDate().slice().reverse()
+}
+
+const dataRent3 = {
+  money: [70, 90, 70, 160, 120, 40, 60],
   days: getDate().slice().reverse()
 }
 // end
@@ -128,39 +138,15 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
     series: [
       {
         name: 'Всего',
-        data: [
-          [Date.now() - 6 * 86400000, 0],
-          [Date.now() - 5 * 86400000, 500],
-          [Date.now() - 4 * 86400000, 300],
-          [Date.now() - 3 * 86400000, 300],
-          [Date.now() - 2 * 86400000, 600],
-          [Date.now() - 86400000, 300],
-          [Date.now(), 300]
-        ]
+        data: dataRent.money
       },
       {
         name: 'С действующих рефералов',
-        data: [
-          [Date.now() - 6 * 86400000, 300],
-          [Date.now() - 5 * 86400000, 200],
-          [Date.now() - 4 * 86400000, 600],
-          [Date.now() - 3 * 86400000, 200],
-          [Date.now() - 2 * 86400000, 100],
-          [Date.now() - 86400000, 0],
-          [Date.now(), 0]
-        ]
+        data: dataRent2.money
       },
       {
         name: 'С новых рефералов',
-        data: [
-          [Date.now() - 6 * 86400000, 0],
-          [Date.now() - 5 * 86400000, 300],
-          [Date.now() - 4 * 86400000, 100],
-          [Date.now() - 3 * 86400000, 100],
-          [Date.now() - 2 * 86400000, 300],
-          [Date.now() - 86400000, 200],
-          [Date.now(), 200]
-        ]
+        data: dataRent3.money
       }
     ],
     responsive: [
@@ -212,15 +198,7 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
       }
     },
     xaxis: {
-      type: 'datetime',
-      // datetimeFormatter: {
-      //   year: 'yyyy',
-      //   month: 'Mmm',
-      //   day: 'dd'
-      // },
-      // Вывести сегодняшний день и последние прошедшие 6
-      min: Date.now() - 6 * 86400000,
-      max: Date.now(),
+      categories: getDate().slice().reverse(),
       axisBorder: {
         show: false
       },
@@ -230,6 +208,12 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
       labels: {
         minHeight: 1,
         show: true,
+
+        // datetimeFormatter: {
+        //   year: 'yyyy',
+        //   month: 'Mmm',
+        //   day: 'dd'
+        // },
         style: {
           colors: '#a1a5b7',
           fontSize: '12px'
@@ -287,7 +271,7 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
     tooltip: {
       x: {
         show: true,
-        format: 'dd MMM yyyy',
+        format: 'dd Mmm yyyy',
         formatter: undefined
       },
       style: {

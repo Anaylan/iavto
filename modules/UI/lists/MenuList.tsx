@@ -9,6 +9,7 @@ interface IMenuList {
 interface IMenuListItem {
   href: string
   children: ReactNode
+  onClick?: ((e: any) => void) | undefined
 }
 
 export const MenuList: FC<IMenuList> = ({ children }) => {
@@ -19,11 +20,17 @@ export const MenuList: FC<IMenuList> = ({ children }) => {
   )
 }
 
-export const MenuListItem: FC<IMenuListItem> = ({ href, children }) => {
+export const MenuListItem: FC<IMenuListItem> = ({
+  href,
+  children,
+  onClick
+}) => {
   return (
     <>
       <li>
-        <Link href={href}>{children}</Link>
+        <Link onClick={onClick} href={href}>
+          {children}
+        </Link>
       </li>
     </>
   )

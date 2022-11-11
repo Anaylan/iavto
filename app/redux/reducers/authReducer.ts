@@ -3,7 +3,8 @@ import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
 import { Action } from '@redux-saga/types'
 import { UserDataModel } from 'app/models'
-import { getUserByToken } from 'api/AuthCrud'
+import { getUserByToken } from 'api/User'
+
 export const actionTypes = {
   Login: '[Login] Action',
   Logout: '[Logout] Action',

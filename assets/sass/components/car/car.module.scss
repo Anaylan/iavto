@@ -32,10 +32,13 @@
   }
   &__top-views {
     display: flex;
+    align-items: center;
     font-size: 15px;
     font-weight: 300;
     color: #acacac;
     .icon {
+      display: flex;
+      align-items: center;
       width: 21px;
       height: 21px;
       margin: 0 10px 0 0;
@@ -121,17 +124,52 @@
       margin: 0 0 12px 0;
     }
     &__top-views {
-      font-size: 14px;
+      font-size: 13px;
+      margin: 0 0 12px 10px;
+
       .icon {
-        width: 20px;
-        height: 20px;
-        margin: 0 8px 0 0;
+        width: 17px;
+        height: 17px;
+        margin: 0 6px 0 0;
       }
     }
     &__body {
     }
     &__slider-body {
       margin: 0 0 35px 0;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .car {
+    &__top-actions {
+      width: 100%;
+
+      .btn-main {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 374px) {
+  .car {
+    &__top-actions {
+      flex-wrap: wrap;
+
+      .btn-main {
+        margin: 0 0 10px 0;
+
+        &:nth-child(odd) {
+          margin: 0 0 10px 0;
+        }
+
+        &:last-child {
+          margin: 0;
+        }
+      }
     }
   }
 }

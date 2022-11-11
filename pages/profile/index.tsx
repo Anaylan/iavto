@@ -1,4 +1,4 @@
-import { getUserByToken } from 'api/AuthCrud'
+import { getUserByToken } from 'api/User'
 import { getHotTender } from 'api/Company'
 import { TITLE } from 'app/config'
 import { UserModel } from 'app/models'
@@ -38,16 +38,15 @@ const Profile = () => {
           router.push('/auth/signin')
         }
         if (user.id == data.data?.id) {
-          console.log('Красава')
           setProfile(data)
         } else {
-          console.log('Ты не ты')
+          dispatch(auth.actions.logout())
+          router.push('/')
         }
       })
       .catch((err) => {
         dispatch(auth.actions.logout())
-
-        router.push('/auth/signin')
+        router.push('/')
       })
   }, [user, dispatch, router])
 

@@ -5,10 +5,12 @@
   mark?: string
   model?: string
   year?: number
-  carpark?: string
+  company_name: string
   price?: number
   date_created?: string
   raiting?: number
-  img?: string
+  img?: string[]
   comment?: string
+  pid: number
+  rating: number
 }

@@ -1,4 +1,4 @@
-import { createRef, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { LinkType } from 'app/models'
 import { Chat, Heart, Package } from 'assets/icon/icons'
@@ -16,7 +16,7 @@ export const HeaderTopLinks: LinkType[] = [
     title: 'Избранное'
   },
   {
-    href: '/',
+    href: '/orders',
     children: <Package color={header['icon__item']} />,
     title: 'Заказы'
   },
@@ -56,6 +56,9 @@ const Header: React.FC = () => {
     if (window.innerWidth <= 992) {
       setDesktop(false)
     } else {
+      if (document.body.classList.contains('lock')) {
+        document.body.classList.remove('lock')
+      }
       setDesktop(true)
     }
   })

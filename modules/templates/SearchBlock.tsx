@@ -1,17 +1,6 @@
 import React, { FC, FormHTMLAttributes, ReactNode } from 'react'
 import styles from 'assets/sass/components/blocks/search.module.scss'
 import { Col, ColProps } from 'react-bootstrap'
-import { FilterInput } from 'modules/UI/inputs/FilterInput'
-// import {Button} from "modules/UI";
-
-// Эконом
-// Комфорт
-// Комфорт +
-// Минивэн
-// Premier
-// Élite
-// Cruise
-// Business
 
 interface ISearchBlock extends FormHTMLAttributes<HTMLFormElement> {
   title: string

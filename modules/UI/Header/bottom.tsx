@@ -4,9 +4,10 @@ import { ILink, IRegionDropdown, IRegionItem } from 'app/models'
 import { IRegionState, regionActions } from 'app/redux/reducers/regionReducer'
 import { Load, Location } from 'assets/icon/icons'
 import styles from 'assets/sass/components/header/bottom.module.scss'
+import header from 'assets/sass/components/header.module.scss'
 import Link from 'next/link'
 import React, { useDeferredValue, useEffect, useRef, useState } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, ColProps, Container, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
 interface IChildRegion {
@@ -47,7 +48,10 @@ export const HeaderBottom: React.FC<IHeaderBottom> = ({ links }) => {
                 />
               ))}
             </ul>
-            <RegionSearch />
+            <RegionSearch
+              className={`header-bottom__region d-flex justify-content-end ${styles['header-fixed']}`}
+              columns={{ md: 2, xs: 12, lg: 3 }}
+            />
           </Row>
         </Container>
       </div>
@@ -55,7 +59,13 @@ export const HeaderBottom: React.FC<IHeaderBottom> = ({ links }) => {
   )
 }
 
-export const RegionSearch = () => {
+export const RegionSearch = ({
+  className,
+  columns
+}: {
+  className: string
+  columns?: ColProps | undefined
+}) => {
   const dispatch = useDispatch()
   const [UpActive, setUpActive] = useState<boolean>(false)
   const [locations, setLocations] = useState<IRegionItem[]>([])
@@ -95,26 +105,29 @@ export const RegionSearch = () => {
     dispatch(regionActions.update(name, id))
     setCurrentLocation(name)
     setActive()
-    // location.reload();
   }
+
   return (
     <Col
       ref={dropdownRef}
-      xs={12}
-      md={2}
-      lg={3}
-      className={`header-bottom__region ${styles['header-region']} d-flex justify-content-end`}
+      {...columns}
+      // xs={12}
+      // md={2}
+      // lg={3}
+      className={`${className} ${styles['header-region']}`}
     >
       <button
-        className={styles['header-region__btn']}
+        className={`${styles['header-region__btn']} ${header['header-region__btn']}`}
         onClick={() => {
           setActive()
         }}
       >
-        <span className={styles['icon']}>
-          <Location color={styles['icon__item']} />
+        <span className={`${styles['icon']} ${header['icon']}`}>
+          <Location color={`${styles['icon__item']} ${header['icon__item']}`} />
         </span>
-        <span className={styles['header-region__btn-region']}>
+        <span
+          className={`${styles['header-region__btn-region']} ${header['header-region__btn-region']}`}
+        >
           {currentLocation}
         </span>
       </button>
@@ -140,7 +153,7 @@ export const RegionList: React.FC<IRegionDropdown> = ({
 
   const [value, setValue] = useState<string>('')
   const defferedValue = useDeferredValue(value)
-  const input = useRef()
+
   useEffect(() => {
     if (active) {
       getRegions()
@@ -169,15 +182,19 @@ export const RegionList: React.FC<IRegionDropdown> = ({
 
   if (!active)
     return (
-      <div className={`header-region__popup ${styles['region-popup']}`}></div>
+      <div
+        className={`header-region__popup ${styles['region-popup']} ${styles['region-popup']}`}
+      ></div>
     )
 
   return (
     <>
-      <div className={`header-region__popup ${styles['region-popup']}`}>
+      <div
+        className={`header-region__popup ${styles['region-popup']}  ${header['region-popup']}`}
+      >
         <form
           onSubmit={searchRegion}
-          className={styles['region-popup__form']}
+          className={`${styles['region-popup__form']} ${header['region-popup__form']}`}
           acceptCharset='UTF-8'
           id='region-search'
         >
@@ -216,7 +233,7 @@ export const RegionItem: React.FC<IChildRegion> = ({ region, onClick }) => {
   return (
     <li
       onClick={() => onClick(region.name, region.id)}
-      className={styles['region-popup__item']}
+      className={`${styles['region-popup__item']} ${header['region-popup__item']}`}
     >
       <div className={styles['region-popup__content']}>
         <div className={styles['region-popup__region']}>{region.name}</div>

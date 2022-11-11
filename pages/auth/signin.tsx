@@ -1,4 +1,4 @@
-import { login, getUserByToken } from 'api/AuthCrud'
+import { login, getUserByToken } from 'api/User'
 import { TITLE } from 'app/config'
 import { UserModel } from 'app/models'
 import * as auth from 'app/redux/reducers/authReducer'

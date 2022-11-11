@@ -36,3 +36,5 @@ export * from './selects/SearchSelect'
 export * from './titles/SearchTitles'
 // options
 export * from './options/SearchOption'
+// pagination
+export * from './pagination/Pagination'

@@ -139,9 +139,9 @@ export const ProfileParthners = ({
 }) => {
   return (
     <Col x={12} sm={6} md={3} className={main['profile__col']}>
-      <a
+      <Link
         className={`${main['profile__item']} ${main['profile__item_imp']}`}
-        href='#'
+        href='/partnership'
       >
         <div className={`${main['profile__body']} ${main['profile-body']}`}>
           <h3 className={main['profile-body__title']}>Партнерство</h3>
@@ -152,7 +152,7 @@ export const ProfileParthners = ({
           </div>
           <div className={main['profile-body__action']}>Просмотр</div>
         </div>
-      </a>
+      </Link>
     </Col>
   )
 }

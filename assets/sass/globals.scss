@@ -572,3 +572,64 @@ section {
     width: 100%;
   }
 }
+
+.pagination-wrapper {
+  margin: 22px 0 0 0;
+
+  --bs-pagination-font-size: 16px !important;
+  --bs-pagination-padding-x: 12px !important;
+  --bs-pagination-padding-y: 7px !important;
+
+  --bs-pagination-color: #2774ac;
+  --bs-pagination-bg: #fff;
+  --bs-pagination-border-width: 1px;
+  --bs-pagination-border-color: #dee2e6;
+  --bs-pagination-border-radius: 8px;
+  --bs-pagination-hover-color: #fff;
+  --bs-pagination-hover-bg: #2774ac;
+  --bs-pagination-hover-border-color: #2774ac;
+  --bs-pagination-focus-color: #fff;
+  --bs-pagination-focus-bg: #2e2f31;
+  --bs-pagination-focus-box-shadow: none;
+  --bs-pagination-active-color: #fff;
+  --bs-pagination-active-bg: #2774ac;
+  --bs-pagination-active-border-color: #2774ac;
+}
+
+.orders {
+  .cars-item__main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .cars-item__main-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+  .orders-btn {
+    background: transparent;
+    border: 2px solid #00ba29;
+    font-size: 20px;
+    font-weight: 400;
+    color: #00ba29;
+    padding: 12px;
+    margin: 0 0 16px 0;
+
+    &:hover {
+      background: transparent;
+      border: 2px solid #00ba29;
+      color: #00ba29;
+    }
+  }
+  .orders-btn-wait {
+    border: 2px solid #acacac;
+    color: #acacac;
+
+    &:hover {
+      background: transparent;
+      border: 2px solid #acacac;
+      color: #acacac;
+    }
+  }
+}

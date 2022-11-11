@@ -6,14 +6,14 @@ import reviewStyle from '/assets/sass/components/reviews/reviews.module.scss'
 import { ReviewCard } from 'modules/elements/Cards/ReviewCard'
 import { useFetch } from 'app/hooks'
 import { useState } from 'react'
-import { getAllReviews } from 'api/Review'
+import { getUserReviews } from 'api/Review'
 import { IReviewModel } from 'app/models'
 import { Load } from 'assets/icon/icons'
 
 export default function Reviews() {
   const [reviews, setReviews] = useState<IReviewModel[]>()
   const [isLoading, errors] = useFetch(() => {
-    getAllReviews().then(({ data }: { data: IReviewModel[] }) => {
+    getUserReviews().then(({ data }: { data: IReviewModel[] }) => {
       setReviews(data)
       console.log(data)
     })

@@ -1,4 +1,4 @@
-import { getUserByToken } from 'api/AuthCrud'
+import { getUserByToken } from 'api/User'
 import { TITLE } from 'app/config'
 import { UserModel } from 'app/models/user/UserModel'
 import {

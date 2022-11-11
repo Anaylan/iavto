@@ -19,7 +19,7 @@ export function getAllCarparks() {
   return axios.get<ICarparkModel>(GET_ALL_CARPARK)
 }
 
-export function getCarpark(id: number) {
+export function getCarpark(id: number | undefined) {
   return axios.get<ICarparkModel>(GET_CARPARK, {
     params: {
       cid: id

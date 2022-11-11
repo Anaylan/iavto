@@ -1,13 +1,22 @@
-
 .tables {
+  &__tab-nav {
+  }
 
-	&__tab-nav {
-	}
+  &__tabs {
+  }
 
-	&__tabs {
-	}
+  &__tab {
+    padding: 0 !important;
+  }
 
-	&__tab {
-		padding: 0 !important;
-	}
+  .tables__pagination {
+  }
+
+  &__pagination-value {
+    font-size: 14px;
+    color: #2e2f31;
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    padding: 8px 12px;
+  }
 }

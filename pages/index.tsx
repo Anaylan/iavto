@@ -23,6 +23,15 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 
+// Эконом
+// Комфорт
+// Комфорт +
+// Минивэн
+// Premier
+// Élite
+// Cruise
+// Business
+
 interface IMark {
   mark: string
 }
@@ -55,12 +64,21 @@ const Home: NextPage<IHome> = () => {
   })
 
   useEffect(() => {
-    getCarFilters({
-      getcell: 'model',
-      mark: formik.values.mark
-    }).then(({ data }: { data: IModel[] }) => {
-      setModel(data)
-    })
+    if (formik.values.mark) {
+      getCarFilters({
+        getcell: 'model',
+        wherecell: 'mark',
+        where: formik.values.mark
+      }).then(({ data }: { data: IModel[] }) => {
+        setModel(data)
+      })
+    } else {
+      getCarFilters({
+        getcell: 'model'
+      }).then(({ data }: { data: IModel[] }) => {
+        setModel(data)
+      })
+    }
   }, [formik.values.mark])
 
   useEffect(() => {
@@ -232,16 +250,16 @@ const Home: NextPage<IHome> = () => {
 }
 
 export default Home
-//         ____
-//        /    \
-//       /  |    \
-//      /   |     \
-//     |    |      |
-//     |  --+--    |
-//     |    |      |
-//     |    |      |
-//      \   |     /
-//       \       /
-//        \     /
-//         \   /
-//          \ /
+
+//         ___
+//        /   \
+//       /  |  \
+//      /   |   \
+//     |    |    |
+//     |  --+--  |
+//     |    |    |
+//     |    |    |
+//      \   |   /
+//       \     /
+//        \___/
+//

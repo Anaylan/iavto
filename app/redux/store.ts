@@ -10,6 +10,7 @@ import createSagaMiddleware from 'redux-saga'
 import { createWrapper, MakeStore } from 'next-redux-wrapper'
 import { persistStore, persistReducer, Persistor } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [
   ...getDefaultMiddleware({
@@ -34,15 +35,15 @@ const bindMiddleware = (middleware: any) => {
 // type Store = ReturnType<typeof makeStore>
 
 const makeStore: MakeStore<Store<IStoreProps, AnyAction>> = () => {
-  const persistConfig = {
-    key: 'root',
-    storage
-  }
+  // const persistConfig = {
+  //   key: 'root',
+  //   storage
+  // }
 
-  const persistedReducer = persistReducer(persistConfig, rootReducer)
+  // const persistedReducer = persistReducer(persistConfig, rootReducer)
 
   const store: IStoreProps = createStore(
-    persistedReducer,
+    rootReducer,
     bindMiddleware(middleware)
   )
 

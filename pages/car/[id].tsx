@@ -36,11 +36,9 @@ export default function Car({ car }: { car: ICarModel }) {
   const [carpark, setCarpark] = useState<ICarparkModel>()
 
   useEffect(() => {
-    if (typeof car.cid === 'number') {
-      getCarpark(car.cid).then(({ data }: { data: ICarparkModel }) => {
-        setCarpark(data)
-      })
-    }
+    getCarpark(car.cid).then(({ data }: { data: ICarparkModel }) => {
+      setCarpark(data)
+    })
   }, [car])
 
   const TabItems: ITabItems[] = [
@@ -66,7 +64,6 @@ export default function Car({ car }: { car: ICarModel }) {
     }
   ]
 
-  //   console.log(carpark)
   return (
     <>
       <Head>

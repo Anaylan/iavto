@@ -1,4 +1,4 @@
-import { register } from 'api/AuthCrud'
+import { register } from 'api/User'
 import { UserModel } from 'app/models'
 import auth_styles from 'assets/sass/components/auth.module.scss'
 import form from 'assets/sass/components/form.module.scss'

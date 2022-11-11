@@ -18,10 +18,19 @@ const DynamicContent = dynamic(() => import('../templates/Content'), {
 
 const MasterLayout: React.FC<Props> = ({ children }) => {
   const [showHeader, setShowHeader] = useState(true)
+  const [showFooter, setShowFooter] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
-    setShowHeader(!router.pathname.includes('/auth/'))
+    setShowHeader(
+      !router.pathname.includes('/auth/') &&
+        !router.pathname.includes('/invite')
+    )
+    setShowFooter(
+      !router.pathname.includes('/auth/') &&
+        !router.pathname.includes('/invite') &&
+        !router.pathname.includes('/chat')
+    )
   }, [router])
   return (
     <>
@@ -32,7 +41,7 @@ const MasterLayout: React.FC<Props> = ({ children }) => {
         </>
       ) : null}
       <DynamicContent>{children}</DynamicContent>
-      <Footer />
+      {showFooter ? <Footer /> : null}
     </>
   )
 }

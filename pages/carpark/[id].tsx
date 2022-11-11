@@ -82,9 +82,7 @@ export default function Carpark({ autopark }: { autopark: ICarparkModel }) {
                 />
               </div>
             </Container>
-            <Container>
-              <CarparkTabs tabs={TabItems}></CarparkTabs>
-            </Container>
+            <CarparkTabs tabs={TabItems}></CarparkTabs>
           </section>
         </>
       )}

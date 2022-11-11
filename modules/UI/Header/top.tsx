@@ -1,20 +1,8 @@
 import Link from 'next/link'
-import {
-  PropsWithoutRef,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-  useTransition,
-  ForwardRefExoticComponent,
-  RefObject,
-  RefAttributes,
-  MutableRefObject
-} from 'react'
+import { forwardRef, useEffect, useRef, useState, useTransition } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 
-import { getUserByToken } from 'api/AuthCrud'
-import { useScroll } from 'app/hooks'
+import { getUserByToken } from 'api/User'
 import { ILink, UserModel } from 'app/models'
 import * as auth from 'app/redux/reducers/authReducer'
 import { User } from 'assets/icon/icons'
@@ -65,15 +53,11 @@ export const HeaderTopLink: React.FC<Children> = ({
 }
 
 export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
-  const menu: React.RefObject<any> = useRef(null)
   const button: React.RefObject<any> = useRef()
 
   const dispatch = useDispatch()
 
-  const [show, setShow] = useState<boolean>(false)
   const [active, setActive] = useState<boolean>(false)
-
-  const [isPending, startTransition] = useTransition()
 
   const token = useSelector(
     ({ header }: { header: auth.IAuthState }) => header.title
@@ -124,7 +108,15 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                 'd-flex align-items-center justify-content-between justify-content-lg-start'
               }
             >
-              <Link className={styles['header-top__logo']} href={'/'}>
+              <Link
+                className={styles['header-top__logo']}
+                href={'/'}
+                onClick={() => {
+                  setActive(false)
+                  button.current.classList.remove(styles['open-nav'])
+                  document.body.classList.remove('lock')
+                }}
+              >
                 яавто.рф
               </Link>
               <button
@@ -182,11 +174,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
         </Container>
       </Col>
       {/*Рендерить на мобилке*/}
-      {active ? (
-        <>
-          <HeaderMenu />
-        </>
-      ) : null}
+      {active ? <HeaderMenu onClick={onClick} user={user.data} /> : null}
     </>
   )
 })
