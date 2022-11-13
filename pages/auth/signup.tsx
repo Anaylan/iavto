@@ -1,18 +1,16 @@
-import { register } from 'api/User'
-import { UserModel } from 'app/models'
-import auth_styles from 'assets/sass/components/auth.module.scss'
-import form from 'assets/sass/components/form.module.scss'
-import { useFormik } from 'formik'
-import { FormInputWithLabel, FormInputWithMask } from 'modules/UI'
-import Form from 'modules/UI/forms/Form'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import * as Yup from 'yup'
+import { register } from 'api/User';
+import { UserModel } from 'app/models';
+import { useFormik } from 'formik';
+import { FormInputWithLabel, FormInputWithMask } from 'modules/UI';
+import Form from 'modules/UI/forms/Form';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
 
-import { TITLE } from 'app/config'
-import * as header from 'app/redux/reducers/authReducer'
+import { TITLE } from 'app/config';
+import * as header from 'app/redux/reducers/authReducer';
 
 const phoneNumberMask = [
   '+',
@@ -30,10 +28,10 @@ const phoneNumberMask = [
   /\d/,
   /\d/,
   /\d/,
-  /\d/
-]
+  /\d/,
+];
 
-const registrationSchema = Yup.object().shape({
+export const registrationSchema = Yup.object().shape({
   firstname: Yup.string()
     .min(3, 'Имя: Минимум 3 символа')
     .max(50, 'Имя: Максимум 50 символов')
@@ -47,21 +45,21 @@ const registrationSchema = Yup.object().shape({
     .required('Last name is required'),
   password: Yup.string()
     .min(3, 'Пароль: Minimum 8 symbols')
-    .required('Пароль обязателен для заполнения')
-})
+    .required('Пароль обязателен для заполнения'),
+});
 
 export const Register: React.FC<UserModel> = () => {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string>()
-  const dispatch = useDispatch()
-  const router = useRouter()
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>();
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const user = useSelector(
-    ({ header }: { header: header.IAuthState }) => header.title
-  )
+    ({ header }: { header: header.IAuthState }) => header.title,
+  );
 
   if (user) {
-    router.push('/')
+    router.push('/');
   }
 
   const formik = useFormik({
@@ -70,35 +68,35 @@ export const Register: React.FC<UserModel> = () => {
       firstname: '',
       email: '',
       password: '',
-      phone: ''
+      phone: '',
     },
-
+    validationSchema: registrationSchema,
     onSubmit: (values) => {
-      setLoading(true)
+      setLoading(true);
       register(
         values.email,
         values.password,
         values.firstname,
         values.lastname,
-        values.phone
+        values.phone,
       )
         .then(({ data }) => {
-          setLoading(false)
-          console.log(data)
+          setLoading(false);
+          console.log(data);
           if (data.message) {
-            setError(data.message)
+            setError(data.message);
           }
-          data.token && dispatch(header.actions.register(data.token))
+          data.token && dispatch(header.actions.register(data.token));
           if (data.token) {
-            router.replace('/')
+            router.replace('/');
           }
         })
         .catch((err) => {
-          setLoading(false)
-          console.log(err)
-        })
-    }
-  })
+          setLoading(false);
+          console.log(err);
+        });
+    },
+  });
 
   return (
     <>
@@ -107,8 +105,8 @@ export const Register: React.FC<UserModel> = () => {
       </Head>
       <section className='auth'>
         <div className='container'>
-          <div className={auth_styles['auth__body']}>
-            <h1 className={auth_styles['auth__title']}>Регистрация</h1>
+          <div className={'auth__body'}>
+            <h1 className={'auth__title'}>Регистрация</h1>
 
             <Form onSubmit={formik.handleSubmit}>
               <div className={'mt-2'}>
@@ -116,27 +114,27 @@ export const Register: React.FC<UserModel> = () => {
                   <div>{formik.errors.email}</div>
                 ) : null}
                 {formik.touched.lastname && formik.errors.lastname ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.lastname}
                   </div>
                 ) : null}
                 {formik.touched.firstname && formik.errors.firstname ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.firstname}
                   </div>
                 ) : null}
                 {formik.touched.email && formik.errors.email ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.email}
                   </div>
                 ) : null}
                 {formik.touched.password && formik.errors.password ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.password}
                   </div>
                 ) : null}
                 {formik.touched.phone && formik.errors.phone ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.phone}
                   </div>
                 ) : null}
@@ -149,20 +147,7 @@ export const Register: React.FC<UserModel> = () => {
                 </div>
               )}
               {error ? <div>{error}</div> : null}
-              <div className={form['form__body']}>
-                <FormInputWithLabel
-                  title={'Пароль'}
-                  name={'password'}
-                  type={'password'}
-                  onChange={formik.handleChange}
-                  placeholder={formik.values.password}
-                  className={
-                    '' +
-                    (formik.touched.password && formik.errors.password
-                      ? 'form-control is-valid'
-                      : 'is-invalid form-control form-control-lg form-control-solid')
-                  }
-                />
+              <div className={'form__body'}>
                 <FormInputWithLabel
                   title={'E-Mail'}
                   name={'email'}
@@ -216,13 +201,26 @@ export const Register: React.FC<UserModel> = () => {
                       : 'is-invalid form-control form-control-lg form-control-solid')
                   }
                 />
+                <FormInputWithLabel
+                  title={'Пароль'}
+                  name={'password'}
+                  type={'password'}
+                  onChange={formik.handleChange}
+                  placeholder={formik.values.password}
+                  className={
+                    '' +
+                    (formik.touched.password && formik.errors.password
+                      ? 'form-control is-valid'
+                      : 'is-invalid form-control form-control-lg form-control-solid')
+                  }
+                />
               </div>
-              <div className={form['form__bottom']}>
-                <div className={form['form__btn-group']}>
-                  <div className={form['form__btn-wrap']}>
+              <div className={'form__bottom'}>
+                <div className={'form__btn-group'}>
+                  <div className={'form__btn-wrap'}>
                     <button
                       type={'submit'}
-                      className={`${form['btn-main']} ${form['btn-main-trp']}`}
+                      className={`btn-main btn-main-trp`}
                       style={{ background: 'transparent' }}
                     >
                       Зарегистрироваться
@@ -235,7 +233,7 @@ export const Register: React.FC<UserModel> = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

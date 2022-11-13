@@ -1,75 +1,70 @@
-import { ILink, UserDataModel } from 'app/models'
-import styles from 'assets/sass/components/header.module.scss'
-import { HeaderBottomLinks } from 'modules/templates'
+import { ILink, UserDataModel } from 'app/models';
+import { HeaderBottomLinks } from 'modules/templates';
 import {
   MenuList,
   MenuListBottom,
   MenuListBottomItem,
-  MenuListItem
-} from 'modules/UI'
-import { RegionSearch } from 'modules/UI/Header/bottom'
-import { SearchInput } from 'modules/UI/inputs/SearchInput'
-import Link from 'next/link'
+  MenuListItem,
+} from 'modules/UI';
+import { RegionSearch } from 'modules/UI/Header/bottom';
+import { SearchInput } from 'modules/UI/inputs/SearchInput';
+import Link from 'next/link';
 
 const Links = [
   {
     href: '/orders',
-    children: 'Заказы'
+    children: 'Заказы',
   },
   {
     href: '/',
-    children: 'Избранное'
+    children: 'Избранное',
   },
   {
     href: '/chat',
-    children: 'Сообщения'
+    children: 'Сообщения',
   },
   {
     href: '/carpark',
-    children: 'Автопарки'
+    children: 'Автопарки',
   },
   {
     href: '/car',
-    children: 'Автомобили'
+    children: 'Автомобили',
   },
   {
     href: '/rules',
-    children: 'Правила'
+    children: 'Правила',
   },
   {
     href: '/pay',
-    children: 'Оплата'
+    children: 'Оплата',
   },
   {
     href: '/parthners',
-    children: 'Партнеры'
+    children: 'Партнеры',
   },
   {
     href: '/feedback',
-    children: 'Обратная связь'
-  }
-]
+    children: 'Обратная связь',
+  },
+];
 
 export const HeaderMenu = ({
   user,
-  onClick
+  onClick,
 }: {
-  user: UserDataModel | null | undefined
-  onClick: ((e: any) => void) | undefined
+  user: UserDataModel | null | undefined;
+  onClick: ((e: any) => void) | undefined;
 }) => {
   return (
     <>
-      <div
-        className={`${styles['menu']} header__menu ${styles['header-fixed']}`}
-      >
+      <div className={`menu header__menu header-fixed`}>
         <div className='container'>
-          <div className={styles['menu__wrapper']}>
-            <div className={styles['menu__main']}>
-              <div className={styles['menu__body']}>
+          <div className={'menu__wrapper'}>
+            <div className={'menu__main'}>
+              <div className={'menu__body'}>
                 <SearchInput placeholder={'Поиск...'} />
-                <RegionSearch
-                  className={`${styles['header-region']} collapse show`}
-                />
+                <RegionSearch className={`header-region collapse show`} />
                 <MenuList>
                   {user ? (
                     <MenuListItem href={'/profile'}>
@@ -106,5 +101,5 @@ export const HeaderMenu = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};

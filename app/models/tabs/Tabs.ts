@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 export interface ITabItems {
-  title: string
-  eventKey: string
-  contentChild: React.ReactNode
+  title: string;
+  eventKey: string;
+  contentChild: React.ReactNode;
 }

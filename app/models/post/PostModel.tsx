@@ -1,7 +1,7 @@
 export interface IPostModel {
-  id: number
-  title: string
-  description: string
-  created: any
-  img: string
+  id: number;
+  title: string;
+  description: string;
+  created: any;
+  img: string;
 }

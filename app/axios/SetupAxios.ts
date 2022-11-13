@@ -3,17 +3,17 @@ export default function setupAxios(axios: any, store: any) {
     (config: any) => {
       try {
         const {
-          header: { title }
-        } = store.getState()
+          header: { title },
+        } = store.getState();
 
         if (title) {
-          config.headers.authorization = `${title}`
+          config.headers.authorization = `${title}`;
         }
-        return config
+        return config;
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     },
-    (err: any) => Promise.reject(err)
-  )
+    (err: any) => Promise.reject(err),
+  );
 }

@@ -1,20 +1,12 @@
-import React, { ReactNode, TextareaHTMLAttributes } from 'react'
-import form from 'assets/sass/components/form.module.scss'
+import { ITextArea } from 'app/models';
+import { FC } from 'react';
 
-export const Textarea = ({
-  children,
-  className,
-  ...props
-}: {
-  children?: ReactNode
-  className?: string | undefined
-  props?: TextareaHTMLAttributes<HTMLTextAreaElement>
-}) => {
+export const Textarea: FC<ITextArea> = ({ children, className, ...props }) => {
   return (
     <>
-      <textarea className={`${form['form__input']} ${className}`} {...props}>
+      <textarea className={`form__input ${className}`} {...props}>
         {children}
       </textarea>
     </>
-  )
-}
+  );
+};

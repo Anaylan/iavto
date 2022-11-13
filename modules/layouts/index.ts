@@ -1,2 +1,2 @@
 // export * from "./SvgElements"
-export * from './MainLayout'
+export * from './MainLayout';

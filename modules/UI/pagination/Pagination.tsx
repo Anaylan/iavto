@@ -1,9 +1,8 @@
-import { AriaAttributes, FC, HTMLAttributes, ReactNode } from 'react'
-import tables from 'assets/sass/components/tables/tables.module.scss'
+import { AriaAttributes, FC, HTMLAttributes, ReactNode } from 'react';
 
 interface IPagination {
-  children: ReactNode
-  props?: AriaAttributes
+  children: ReactNode;
+  props?: AriaAttributes;
 }
 
 export const Pagination: FC<IPagination> = ({ children, props }) => {
@@ -17,15 +16,15 @@ export const Pagination: FC<IPagination> = ({ children, props }) => {
         </ul>
       </nav>
     </>
-  )
-}
+  );
+};
 
 export const PaginationItem = ({
   children,
-  props
+  props,
 }: {
-  children: ReactNode
-  props?: HTMLAttributes<HTMLLIElement>
+  children: ReactNode;
+  props?: HTMLAttributes<HTMLLIElement>;
 }) => {
   return (
     <>
@@ -33,21 +32,21 @@ export const PaginationItem = ({
         {children}
       </li>
     </>
-  )
-}
+  );
+};
 
 const PaginationCurrent = ({
   currentPage,
-  totalPage
+  totalPage,
 }: {
-  currentPage: number
-  totalPage: number
+  currentPage: number;
+  totalPage: number;
 }) => {
   return (
     <>
-      <li className={`${tables['tables__pagination-value']}`}>
+      <li className={`tables__pagination-value`}>
         <span>{currentPage}</span> из <span>{totalPage}</span>
       </li>
     </>
-  )
-}
+  );
+};

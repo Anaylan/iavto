@@ -1,13 +1,13 @@
-import { getHotTender, getLastTender } from 'api/Company'
-import { TITLE } from 'app/config'
-import { IHome } from 'app/models'
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import { useState } from 'react'
-import { SearchBlock, SearchItem, PriceFromTo } from 'modules/templates'
-import CarParkBlock from 'modules/templates/CarParkBlock'
-import NewsBlock from 'modules/templates/NewsBlock'
-import { Container } from 'react-bootstrap'
+import { getHotTender, getLastTender } from 'api/Company';
+import { TITLE } from 'app/config';
+import { IHome } from 'app/models';
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { useState } from 'react';
+import { SearchBlock, SearchItem, PriceFromTo } from 'modules/templates';
+import CarParkBlock from 'modules/templates/CarParkBlock';
+import NewsBlock from 'modules/templates/NewsBlock';
+import { Container } from 'react-bootstrap';
 import {
   SearchMainRow,
   SearchAdditonalRow,
@@ -15,13 +15,13 @@ import {
   SearchSelectOption,
   SearchSelect,
   Button,
-  FilterInput
-} from 'modules/UI'
-import { useFormik } from 'formik'
-import { getCarFilters } from 'api/Filter'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import dynamic from 'next/dynamic'
+  FilterInput,
+} from 'modules/UI';
+import { useFormik } from 'formik';
+import { getCarFilters } from 'api/Filter';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 
 // Эконом
 // Комфорт
@@ -33,61 +33,61 @@ import dynamic from 'next/dynamic'
 // Business
 
 interface IMark {
-  mark: string
+  mark: string;
 }
 
 interface IModel {
-  model: string
+  model: string;
 }
 
 const DynamicCarParkBlock = dynamic(
-  () => import('modules/templates/CarParkBlock')
-)
+  () => import('modules/templates/CarParkBlock'),
+);
 
 const Home: NextPage<IHome> = () => {
-  const [marks, setMark] = useState<IMark[]>([])
-  const [models, setModel] = useState<IModel[]>([])
-  const router = useRouter()
+  const [marks, setMark] = useState<IMark[]>([]);
+  const [models, setModel] = useState<IModel[]>([]);
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       checked: [],
       mark: '',
       transmission: '',
-      model: ''
+      model: '',
     },
     onSubmit: (values) => {
       router.push({
         pathname: '/car',
-        query: values
-      })
-    }
-  })
+        query: values,
+      });
+    },
+  });
 
   useEffect(() => {
     if (formik.values.mark) {
       getCarFilters({
         getcell: 'model',
         wherecell: 'mark',
-        where: formik.values.mark
+        where: formik.values.mark,
       }).then(({ data }: { data: IModel[] }) => {
-        setModel(data)
-      })
+        setModel(data);
+      });
     } else {
       getCarFilters({
-        getcell: 'model'
+        getcell: 'model',
       }).then(({ data }: { data: IModel[] }) => {
-        setModel(data)
-      })
+        setModel(data);
+      });
     }
-  }, [formik.values.mark])
+  }, [formik.values.mark]);
 
   useEffect(() => {
     getCarFilters({
-      getcell: 'mark'
+      getcell: 'mark',
     }).then(({ data }: { data: IMark[] }) => {
-      setMark(data)
-    })
-  }, [])
+      setMark(data);
+    });
+  }, []);
 
   return (
     <>
@@ -100,7 +100,7 @@ const Home: NextPage<IHome> = () => {
         title={'Лучшие автопарки'}
         columns={{
           md: 3,
-          xs: 12
+          xs: 12,
         }}
         getData={getHotTender}
         large={true}
@@ -117,7 +117,7 @@ const Home: NextPage<IHome> = () => {
                 columns={{
                   xs: 12,
                   sm: 6,
-                  md: 4
+                  md: 4,
                 }}
               >
                 <SearchSelect
@@ -140,7 +140,7 @@ const Home: NextPage<IHome> = () => {
                 columns={{
                   xs: 12,
                   sm: 6,
-                  md: 4
+                  md: 4,
                 }}
               >
                 <SearchSelect
@@ -164,19 +164,19 @@ const Home: NextPage<IHome> = () => {
                 columns={{
                   xs: 12,
                   sm: 5,
-                  md: 4
+                  md: 4,
                 }}
               >
                 <PriceFromTo>
                   <FilterInput
-                    name='from'
+                    name='price_from'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='От'
                   />
                   <span></span>
                   <FilterInput
-                    name='to'
+                    name='price_to'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='До'
@@ -189,9 +189,9 @@ const Home: NextPage<IHome> = () => {
                 columns={{
                   xs: 12,
                   sm: 12,
-                  md: 12
+                  md: 12,
                 }}
-                className={'justify-content-between d-flex'}
+                className={'justify-content-between d-flex flex-row-reverse'}
               >
                 <Button type='submit'>Потвердить</Button>
                 <Button onClick={formik.handleReset}>Сбросить</Button>
@@ -206,7 +206,7 @@ const Home: NextPage<IHome> = () => {
           md: 3,
           xs: 12,
           sm: 6,
-          lg: '1-5'
+          lg: '1-5',
         }}
         getData={getLastTender}
         large={false}
@@ -217,7 +217,7 @@ const Home: NextPage<IHome> = () => {
           md: 3,
           xs: 12,
           sm: 6,
-          lg: '1-5'
+          lg: '1-5',
         }}
         getData={getLastTender}
         large={false}
@@ -246,10 +246,10 @@ const Home: NextPage<IHome> = () => {
       {/*         ++         */}
       {/* Куринное бёдрышко) */}
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 
 //         ___
 //        /   \

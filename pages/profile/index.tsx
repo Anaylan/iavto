@@ -1,8 +1,8 @@
-import { getUserByToken } from 'api/User'
-import { getHotTender } from 'api/Company'
-import { TITLE } from 'app/config'
-import { UserModel } from 'app/models'
-import { UserDataModel } from 'app/models'
+import { getUserByToken } from 'api/User';
+import { getHotTender } from 'api/Company';
+import { TITLE } from 'app/config';
+import { UserModel } from 'app/models';
+import { UserDataModel } from 'app/models';
 import {
   ProfileBalance,
   ProfileCard,
@@ -12,43 +12,46 @@ import {
   ProfileParthners,
   ProfileReviews,
   ProfileSettings,
-  ProfileSupport
-} from 'modules/elements/profile/profile'
-import CarParkBlock from 'modules/templates/CarParkBlock'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { Container, Row } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import * as auth from 'app/redux/reducers/authReducer'
+  ProfileSupport,
+} from 'modules/elements/profile/profile';
+import CarParkBlock from 'modules/templates/CarParkBlock';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import * as auth from 'app/redux/reducers/authReducer';
 
 const Profile = () => {
-  const [profile, setProfile] = useState<UserModel>({ data: null, status: 200 })
-  const dispatch = useDispatch()
-
-  const router = useRouter()
+  const [profile, setProfile] = useState<UserModel>({
+    data: null,
+    status: 200,
+  });
+  const dispatch = useDispatch();
+  const [copySuccess, setCopySuccess] = useState('');
+  const router = useRouter();
   const user = useSelector(
-    ({ header }: { header: UserDataModel }) => header.user
-  )
+    ({ header }: { header: UserDataModel }) => header.user,
+  );
   useEffect(() => {
     getUserByToken()
       .then(({ data }: { data: UserModel }) => {
         if (data.status === 403) {
-          router.push('/auth/signin')
+          router.push('/auth/signin');
         }
         if (user.id == data.data?.id) {
-          setProfile(data)
+          setProfile(data);
         } else {
-          dispatch(auth.actions.logout())
-          router.push('/')
+          dispatch(auth.actions.logout());
+          router.push('/');
         }
       })
       .catch((err) => {
-        dispatch(auth.actions.logout())
-        router.push('/')
-      })
-  }, [user, dispatch, router])
+        dispatch(auth.actions.logout());
+        router.push('/');
+      });
+  }, [user, dispatch, router]);
 
   return (
     <>
@@ -68,13 +71,13 @@ const Profile = () => {
                   <ProfileParthners
                     balance={profile.data.partners_balance.replace(
                       /(\d)(?=(\d{3})+(?!\d))/g,
-                      '$1 '
+                      '$1 ',
                     )}
                   />
                   <ProfileBalance
                     balance={profile.data.balance.replace(
                       /(\d)(?=(\d{3})+(?!\d))/g,
-                      '$1 '
+                      '$1 ',
                     )}
                   />
                   <ProfileFavorites type={1} />
@@ -97,13 +100,13 @@ const Profile = () => {
         title={'Лучшие автопарки'}
         columns={{
           md: 3,
-          xs: 12
+          xs: 12,
         }}
         getData={getHotTender}
         large={true}
       />
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

@@ -1,93 +1,93 @@
-import Link from 'next/link'
-import { forwardRef, useEffect, useRef, useState, useTransition } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
+import Link from 'next/link';
+import { forwardRef, useEffect, useRef, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 
-import { getUserByToken } from 'api/User'
-import { ILink, UserModel } from 'app/models'
-import * as auth from 'app/redux/reducers/authReducer'
-import { User } from 'assets/icon/icons'
-import styles from 'assets/sass/components/header/top.module.scss'
-import { HeaderMenu, SearchInput } from 'modules/UI'
-import { useDispatch, useSelector } from 'react-redux'
+import { getUserByToken } from 'api/User';
+import { ILink, UserModel } from 'app/models';
+import * as auth from 'app/redux/reducers/authReducer';
+import { User } from 'assets/icon/icons';
+
+import { HeaderMenu, SearchInput } from 'modules/UI';
+import { useDispatch, useSelector } from 'react-redux';
 
 // import {Button} from '../buttons/Button'
 
 interface SearchField {
-  placeholder: string
+  placeholder: string;
 }
 
 interface Children extends ILink {
-  children?: React.ReactNode
+  children?: React.ReactNode;
 }
 
 interface IChildProps {
-  desktop: boolean
-  links: ILink[]
+  desktop: boolean;
+  links: ILink[];
 }
 
 interface IHeaderTop {
-  links?: any
-  desktop?: any
+  links?: any;
+  desktop?: any;
   props?: {
-    desktop: boolean
-    links: ILink[]
-  }
-  ref: any
+    desktop: boolean;
+    links: ILink[];
+  };
+  ref: any;
 }
 
 export const HeaderTopLink: React.FC<Children> = ({
   href,
   children,
-  title
+  title,
 }) => {
   return (
     <>
-      <li className={`${styles['header-top__item']}`}>
-        <Link className={`${styles['header-top__link']}`} href={href}>
-          <div className={styles.icon}>{children}</div>
+      <li className={`header-top__item`}>
+        <Link className={`header-top__link`} href={href}>
+          <div className={'icon'}>{children}</div>
           <span>{title}</span>
         </Link>
       </li>
     </>
-  )
-}
+  );
+};
 
 export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
-  const button: React.RefObject<any> = useRef()
+  const button: React.RefObject<any> = useRef();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const [active, setActive] = useState<boolean>(false)
+  const [active, setActive] = useState<boolean>(false);
 
   const token = useSelector(
-    ({ header }: { header: auth.IAuthState }) => header.title
-  )
+    ({ header }: { header: auth.IAuthState }) => header.title,
+  );
 
-  const [user, setUser] = useState<UserModel>({ status: 403, data: null })
+  const [user, setUser] = useState<UserModel>({ status: 403, data: null });
 
   const onClick = () => {
-    setActive(!active)
+    setActive(!active);
 
     if (!active) {
-      button.current.classList.add(styles['open-nav'])
-      document.body.classList.add('lock')
+      button.current.classList.add('open-nav');
+      document.body.classList.add('lock');
     } else {
-      button.current.classList.remove(styles['open-nav'])
-      document.body.classList.remove('lock')
+      button.current.classList.remove('open-nav');
+      document.body.classList.remove('lock');
     }
-  }
+  };
 
   useEffect(() => {
     getUserByToken().then(({ data }: { data: UserModel }) => {
       if (data.status !== 403) {
-        setUser(data)
+        setUser(data);
       } else {
         if (token) {
-          dispatch(auth.actions.logout())
+          dispatch(auth.actions.logout());
         }
       }
-    })
-  }, [dispatch, token])
+    });
+  }, [dispatch, token]);
 
   // useChange(token, ()=>{
   //   getUserByToken().then(({ data }: { data: UserModel }) => {
@@ -98,7 +98,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
 
   return (
     <>
-      <Col ref={ref} className={`header__top ${styles['header-top']}`}>
+      <Col ref={ref} className={`header__top header-top`}>
         <Container>
           <Row className='align-items-center'>
             <Col
@@ -109,26 +109,26 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
               }
             >
               <Link
-                className={styles['header-top__logo']}
+                className={'header-top__logo'}
                 href={'/'}
                 onClick={() => {
-                  setActive(false)
-                  button.current.classList.remove(styles['open-nav'])
-                  document.body.classList.remove('lock')
+                  setActive(false);
+                  button.current.classList.remove('open-nav');
+                  document.body.classList.remove('lock');
                 }}
               >
                 яавто.рф
               </Link>
               <button
                 onClick={onClick}
-                className={`${styles['nav-button']} d-flex align-items-center d-lg-none`}
+                className={`nav-button d-flex align-items-center d-lg-none`}
                 type='button'
                 data-bs-toggle='collapse'
                 data-bs-target='#navToggle'
                 aria-expanded='false'
                 aria-controls='navToggle'
               >
-                <div ref={button} className={styles['nav-anim']}>
+                <div ref={button} className={'nav-anim'}>
                   <span></span>
                   <span></span>
                   <span></span>
@@ -144,7 +144,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                   <SearchInput placeholder={'Поиск...'} />
                 </Col>
                 <Col xs={12} lg={5}>
-                  <ul className={styles['header-top__list']}>
+                  <ul className={'header-top__list'}>
                     {props.links.map((link: any, key: number) => (
                       <HeaderTopLink
                         key={key}
@@ -159,11 +159,11 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                         href={'/profile'}
                         title={user.data?.firstname}
                       >
-                        <User color={styles['icon__item']} />
+                        <User />
                       </HeaderTopLink>
                     ) : (
                       <HeaderTopLink href={'/auth/signin'} title={'Войти'}>
-                        <User color={styles['icon__item']} />
+                        <User />
                       </HeaderTopLink>
                     )}
                   </ul>
@@ -176,7 +176,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
       {/*Рендерить на мобилке*/}
       {active ? <HeaderMenu onClick={onClick} user={user.data} /> : null}
     </>
-  )
-})
+  );
+});
 
-HeaderTop.displayName = 'HeaderTop'
+HeaderTop.displayName = 'HeaderTop';

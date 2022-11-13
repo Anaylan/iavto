@@ -1,32 +1,32 @@
-import { reset } from 'api/User'
-import { useFormik } from 'formik'
-import { FormInputWithoutLabel } from 'modules/UI'
-import React from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { reset } from 'api/User';
+import { useFormik } from 'formik';
+import { FormInputWithoutLabel } from 'modules/UI';
+import React from 'react';
+import { Form, Button } from 'react-bootstrap';
 
 export const PasswordStep = ({
   step,
-  setStep
+  setStep,
 }: {
-  step: number
-  setStep: CallableFunction
+  step: number;
+  setStep: CallableFunction;
 }) => {
   const formik = useFormik({
     initialValues: {
-      password: ''
+      password: '',
     },
     enableReinitialize: true,
     onSubmit: (values) => {
       reset(values.password)
         .then(({ data }) => {
-          console.log(data)
+          console.log(data);
         })
         .catch((err) => {
-          console.log(err)
-        })
-      setStep(step + 1)
-    }
-  })
+          console.log(err);
+        });
+      setStep(step + 1);
+    },
+  });
   return (
     <>
       <Form onSubmit={formik.handleSubmit}>
@@ -44,5 +44,5 @@ export const PasswordStep = ({
         <Button type='submit'>Завершить</Button>
       </Form>
     </>
-  )
-}
+  );
+};

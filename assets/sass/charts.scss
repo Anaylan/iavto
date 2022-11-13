@@ -1,0 +1,127 @@
+.charts {
+  .apexchart {
+    margin: 0 0 20px 0;
+  }
+}
+
+.card {
+  border: 1px solid #eff2f5;
+  box-shadow: none;
+  background-color: #fff;
+  border-radius: 10px;
+
+  .card-body {
+    padding: 28px 25px 14px 25px;
+  }
+
+  .apexcharts-toolbar {
+    text-align: left !important;
+  }
+
+  .apexcharts-menu {
+    background: #fff;
+    border: 0 !important;
+    box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.1) !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+    min-width: 10rem !important;
+    padding: 8px 0 !important;
+
+    .apexcharts-menu-item {
+      padding: 10px !important;
+      transition: all 0.2s ease !important;
+
+      &:hover {
+        background-color: rgba(rgb(161, 165, 183), 0.8) !important;
+      }
+    }
+  }
+
+  .apexcharts-tooltip {
+    border-radius: 10px !important;
+    box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15) !important;
+    border: 0 !important;
+    background: #fff !important;
+    color: #3f4254;
+
+    .apexcharts-tooltip-title {
+      background: #fff !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      color: #3f4254;
+      padding: 10px 10px 9px 10px;
+      border-bottom: 1px solid #eff2f5 !important;
+    }
+
+    .apexcharts-tooltip-marker {
+      width: 11px !important;
+      height: 11px !important;
+      margin-right: 8px !important;
+    }
+  }
+
+  .apexcharts-xaxistooltip {
+    border-radius: 10px !important;
+    box-shadow: 0px 0px 50px 0px rgba(82, 63, 105, 0.15) !important;
+    border: 0 !important;
+    background: #fff !important;
+    color: #3f4254;
+
+    &:before {
+      border-bottom: 0 !important;
+    }
+
+    &:after {
+      border-bottom-color: #fff !important;
+    }
+  }
+
+  .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-left,
+  .apexcharts-legend.apx-legend-position-top.apexcharts-align-left,
+  .apexcharts-legend.apx-legend-position-right,
+  .apexcharts-legend.apx-legend-position-left {
+    inset: auto 39px 1px !important;
+  }
+  .apexcharts-legend.apexcharts-align-right .apexcharts-legend-series,
+  .apexcharts-legend.apexcharts-align-left .apexcharts-legend-series {
+    margin: 10px 20px 0 0 !important;
+
+    &:last-child {
+      margin: 10px 0 0 0 !important;
+    }
+  }
+  .apexcharts-legend-marker {
+    margin-right: 6px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .card {
+    .card-body {
+      padding: 18px 15px 10px 15px;
+    }
+
+    .apexcharts-title-text {
+      font-size: 18px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .card {
+    .card-body {
+      padding: 10px 12px 8px 10px;
+    }
+
+    .apexcharts-title-text {
+      font-size: 14.5px;
+    }
+
+    .apexcharts-legend.apx-legend-position-bottom.apexcharts-align-left,
+    .apexcharts-legend.apx-legend-position-top.apexcharts-align-left,
+    .apexcharts-legend.apx-legend-position-right,
+    .apexcharts-legend.apx-legend-position-left {
+      inset: auto 14px 1px !important;
+    }
+  }
+}

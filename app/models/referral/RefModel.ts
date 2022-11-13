@@ -1,5 +1,6 @@
 export interface IRefModel {
-  firstname: string
-  lastname: string
-  created?: string | undefined
+  firstname?: string | undefined;
+  lastname?: string | undefined;
+  created?: string | undefined;
+  company_name?: string | undefined;
 }

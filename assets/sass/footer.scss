@@ -1,0 +1,250 @@
+.footer {
+  background: #f6f7fb;
+  padding: 50px 0 70px 0;
+
+  &__main {
+    flex: 1 1 auto;
+  }
+
+  &__logo {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 32px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 15px 0;
+    transition: color 0.1s linear;
+
+    &::first-letter {
+      color: #fc0321;
+    }
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 0 10px 0;
+
+    .icon {
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: background 0.1s linear;
+      margin: 0 12px 8px 0;
+
+      &:last-child {
+        margin: 0 0 8px 0;
+      }
+
+      &:hover {
+        .icon__item {
+          fill: #fff !important;
+        }
+      }
+
+      &__item {
+        width: 24px;
+        height: 24px;
+        fill: #2e2f31;
+      }
+    }
+
+    #vkIcon {
+      &:hover {
+        background: #4680c2;
+      }
+    }
+
+    #telegramIcon {
+      &:hover {
+        background: #2cb5f5;
+      }
+    }
+
+    #youtubeIcon {
+      &:hover {
+        background: #ff0000;
+      }
+    }
+
+    #rutubeIcon {
+      &:hover {
+        background: #000;
+      }
+      .icon__item {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    #okIcon {
+      &:hover {
+        background: #fa8409;
+      }
+    }
+
+    #yandexZenIcon {
+      &:hover {
+        background: #282c33;
+      }
+      .icon__item {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+
+  &__copyright {
+    color: #6a6a6a;
+    font-size: 14px;
+  }
+
+  &__list-title {
+    font-size: 18px;
+    font-weight: 500;
+    background: none;
+    text-align: left;
+    color: #4b4b4b;
+    margin: 0 0 12px 0;
+  }
+
+  &__list {
+    flex: 1 1 auto;
+
+    li {
+      margin: 0 0 7px 0;
+
+      &:last-child {
+        margin: 0;
+      }
+
+      a:not(.footer__link-app) {
+        display: inline-block;
+        font-size: 16px;
+        color: #6a6a6a;
+        line-height: 1.2;
+        transition: color 0.1s linear;
+
+        &:hover {
+          color: #2774ac;
+        }
+      }
+    }
+  }
+
+  &__link-app {
+    display: inline-block;
+    margin: 30px 0 0 0;
+
+    img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .footer {
+    &__socials {
+      .icon {
+        width: 35px;
+        height: 35px;
+
+        &__item {
+          width: 22px;
+          height: 22px;
+        }
+      }
+
+      #rutubeIcon {
+        .icon__item {
+          width: 26px;
+          height: 26px;
+        }
+      }
+
+      #yandexZenIcon {
+        .icon__item {
+          width: 35px;
+          height: 35px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .footer {
+    padding: 40px 0 50px 0;
+
+    &__logo {
+      font-size: 28px;
+    }
+
+    &__socials {
+      margin: 0 0 15px 0;
+    }
+
+    &__copyright {
+      font-size: 14px;
+    }
+
+    &__col {
+      position: relative;
+      border-top: 1px solid #cccccc;
+
+      &:last-child {
+        border-bottom: 1px solid #cccccc;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 20px;
+        right: 0;
+        z-index: 1;
+        width: 12px;
+        height: 12px;
+        border-right: 2px solid #a7a7a7;
+        border-bottom: 2px solid #a7a7a7;
+        box-sizing: border-box;
+        pointer-events: none;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+    }
+
+    &__list-title {
+      margin: 15px 0;
+    }
+
+    &__list {
+      margin: 0 0 15px 0;
+
+      li {
+        margin: 0 0 8px 0;
+      }
+    }
+
+    &__link-app {
+      margin: 30px 0 15px 0;
+
+      img {
+        width: auto;
+        height: 40px;
+      }
+    }
+  }
+}

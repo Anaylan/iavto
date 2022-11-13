@@ -1,259 +1,268 @@
-import { URL_IMG } from 'app/config'
-import { UserDataModel } from 'app/models'
-import * as auth from 'app/redux/reducers/authReducer'
-import { Notification, Settings, Support } from 'assets/icon/icons'
-import main from 'assets/sass/components/profile/profile.module.scss'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { FC } from 'react'
-import { Col } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { URL_IMG } from 'app/config';
+import { UserDataModel } from 'app/models';
+import * as auth from 'app/redux/reducers/authReducer';
+import { Notification, Settings, Support } from 'assets/icon/icons';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { FC, useState } from 'react';
+import { Col } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { Textarea, Button } from 'modules/UI';
+import { Modal } from 'react-bootstrap';
+// import Modal from '@restart/ui/Modal';
 enum TypeFavorites {
   car = 1,
-  carpark = 0
+  carpark = 0,
 }
 
 interface IProfile {
-  profile: UserDataModel
+  profile: UserDataModel;
 }
 
 interface IProfileFavorites {
-  data?: number
-  params?: string
-  type: TypeFavorites
+  data?: number;
+  params?: string;
+  type: TypeFavorites;
 }
 
 export const ProfileCard: FC<IProfile> = ({ profile }) => {
-  const dispatch = useDispatch()
-  const router = useRouter()
+  const dispatch = useDispatch();
+  const router = useRouter();
   const logout = () => {
-    dispatch(auth.actions.logout())
-    router.push('/')
-  }
+    dispatch(auth.actions.logout());
+    router.push('/');
+  };
   return (
     <>
-      <Col md={6} xs={12} className={main['profile__col']}>
-        <div className={main['profile__item']}>
-          <div className={`${main['profile__top']} ${main['profile-top']}`}>
-            <div className={main['profile-top__row']}>
-              <div className={main['profile-top__photo']}>
+      <Col md={6} xs={12} className={'profile__col'}>
+        <div className={'profile__item'}>
+          <div className={`profile__top profile-top`}>
+            <div className={'profile-top__row'}>
+              <div className={'profile-top__photo'}>
                 <Image
                   src={URL_IMG + 'users/' + profile.avatar}
-                  width={100}
-                  height={100}
+                  fill
                   alt={profile.firstname}
                 />
               </div>
-              <div className={main['profile-top__main']}>
-                <h1 className={main['profile-top__title']}>
+              <div className={'profile-top__main'}>
+                <h1 className={'profile-top__title'}>
                   {profile.firstname} {profile.lastname}
                 </h1>
                 <a
-                  className={main['profile-top__tel']}
-                  href={`tel:${profile.telephone}`}
-                >
+                  className={'profile-top__tel'}
+                  href={`tel:${profile.telephone}`}>
                   {profile.telephone}
                 </a>
               </div>
-              <a className={main['profile-top__btn']} href='#'>
-                <div className={main['icon']}>
-                  <span className={main['icon__item']}>
-                    <Notification color='' />
-                  </span>
+              <a className={'profile-top__btn'} href='#'>
+                <div className={'icon'}>
+                  <Notification />
                 </div>
-                <span className={main['profile-top__btn-bullet']}></span>
+                <span className={'profile-top__btn-bullet'}></span>
               </a>
             </div>
           </div>
-          <div className={main['profile-bottom']}>
-            <button
-              className={main['profile-body__action']}
-              type='button'
-            ></button>
-            <button onClick={logout} className={main['profile-body__action']}>
+          <div className={'profile-bottom'}>
+            <button className={'profile-body__action'} type='button'></button>
+            <button onClick={logout} className={'profile-body__action'}>
               Выйти
             </button>
           </div>
         </div>
       </Col>
     </>
-  )
-}
+  );
+};
 
 export const ProfileDescription = ({
-  description
+  description,
 }: {
-  description: string | undefined
+  description: string | undefined;
 }) => {
+  const [editActive, setEditActive] = useState<boolean>(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <>
-      <Col md={6} xs={12} className={main['profile__col']}>
-        <div className={main['profile__item']}>
-          <div className={`${main['profile__body']} ${main['profile-body']}`}>
-            <div className={main['profile-body__top']}>
-              <h3 className={main['profile-body__title']}>Информация о себе</h3>
-              <button className={main['profile-body__action']} type='button'>
+      <Col md={6} xs={12} className={'profile__col'}>
+        <div className={'profile__item'}>
+          <div className={`profile__body profile-body`}>
+            <div className={'profile-body__top'}>
+              <h3 className={'profile-body__title'}>Информация о себе</h3>
+              <button
+                className={'profile-body__action'}
+                type='button'
+                onClick={handleShow}>
                 Редактировать
               </button>
             </div>
-            <div className={main['profile-body__about']}>
+            <div className={'profile-body__about'}>
+              <Modal centered show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Изменение информации о себе</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Textarea
+                    defaultValue={description}
+                    className='mb-3 form-control'
+                    rows={4}
+                  />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button className={'btn-main-trp'} onClick={handleClose}>
+                    Закрыть
+                  </Button>
+                  <Button onClick={handleClose}>Сохранить</Button>
+                </Modal.Footer>
+              </Modal>
               <p>{description ? description : 'Заполните информацию о себе'}</p>
             </div>
           </div>
         </div>
       </Col>
     </>
-  )
-}
+  );
+};
 
 export const ProfileBalance = ({
-  balance
+  balance,
 }: {
-  balance: string | undefined
+  balance: string | undefined;
 }) => {
   return (
-    <Col sx={12} sm={6} md={3} className={main['profile__col']}>
-      <Link
-        className={`${main['profile__item']} ${main['profile__item_imp']}`}
-        href='#'
-      >
-        <div className={`${main['profile__body']} ${main['profile-body']}`}>
-          <h3 className={main['profile-body__title']}>Баланс</h3>
+    <Col sx={12} sm={6} md={3} className={'profile__col'}>
+      <Link className={`profile__item profile__item_imp`} href='#'>
+        <div className={`profile__body profile-body`}>
+          <h3 className={'profile-body__title'}>Баланс</h3>
         </div>
-        <div className={`${main['profile__bottom']} ${main['profile-bottom']}`}>
-          <div className={main['profile__subtitle']}>
+        <div className={`profile__bottom profile-bottom`}>
+          <div className={'profile__subtitle'}>
             <span>{balance ? balance : 0}</span>₽
           </div>
-          <div className={main['profile-body__action']}>Пополнить</div>
+          <div className={'profile-body__action'}>Пополнить</div>
         </div>
       </Link>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileParthners = ({
-  balance
+  balance,
 }: {
-  balance: string | undefined
+  balance: string | undefined;
 }) => {
   return (
-    <Col x={12} sm={6} md={3} className={main['profile__col']}>
-      <Link
-        className={`${main['profile__item']} ${main['profile__item_imp']}`}
-        href='/partnership'
-      >
-        <div className={`${main['profile__body']} ${main['profile-body']}`}>
-          <h3 className={main['profile-body__title']}>Партнерство</h3>
+    <Col x={12} sm={6} md={3} className={'profile__col'}>
+      <Link className={`profile__item profile__item_imp`} href='/partnership'>
+        <div className={`profile__body profile-body`}>
+          <h3 className={'profile-body__title'}>Партнерство</h3>
         </div>
-        <div className={`${main['profile__bottom']} ${main['profile-bottom']}`}>
-          <div className={main['profile__subtitle']}>
+        <div className={`profile__bottom profile-bottom`}>
+          <div className={'profile__subtitle'}>
             <span>{balance ? balance : 0}</span>₽
           </div>
-          <div className={main['profile-body__action']}>Просмотр</div>
+          <div className={'profile-body__action'}>Просмотр</div>
         </div>
       </Link>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileFavorites: FC<IProfileFavorites> = ({
   type,
   data,
-  params
+  params,
 }) => {
   return (
-    <Col xs={12} md={6} className={main['profile__col']}>
-      <Link className={main['profile__item']} href={'#'}>
-        <div className={`${main['profile__body']} ${main['profile-body']}`}>
-          <h3 className={main['profile-body__title']}>
+    <Col xs={12} md={6} className={'profile__col'}>
+      <Link className={'profile__item'} href={'#'}>
+        <div className={`profile__body'} profile-body`}>
+          <h3 className={'profile-body__title'}>
             Избранное: <span>{type ? 'Автомобили' : 'Автопарков'}</span>
           </h3>
         </div>
-        <div className={`${main['profile__bottom']} ${main['profile-bottom']}`}>
-          <div className={main['profile__subtitle']}>
+        <div className={`profile__bottom'} profile-bottom`}>
+          <div className={'profile__subtitle'}>
             <span>{data ? data : 0}</span>
             {type ? 'автомобилей' : 'автопарков'}
           </div>
         </div>
       </Link>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileOrders = () => {
   return (
-    <Col xs={12} sm={6} md={3} className={main['profile__col']}>
-      <a className={main['profile__item']} href='#'>
-        <div className={`${main['profile__body']} ${main['profile-body']}`}>
-          <h3 className={main['profile-body__title']}>Мои заказы</h3>
+    <Col xs={12} sm={6} md={3} className={'profile__col'}>
+      <Link className={'profile__item'} href='/orders'>
+        <div className={`profile__body profile-body`}>
+          <h3 className={'profile-body__title'}>Мои заказы</h3>
         </div>
-        <div className={`${main['profile__bottom']} ${main['profile-bottom']}`}>
-          <div className={main['profile__subtitle']}>
-            <span className={main['profile__value']}>150</span>завершенных
-            заказов
+        <div className={`profile__bottom profile-bottom`}>
+          <div className={'profile__subtitle'}>
+            <span className={'profile__value'}>150</span>завершенных заказов
           </div>
         </div>
-      </a>
+      </Link>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileReviews = () => {
   return (
     <>
-      <Col xs={12} sm={6} md={3} className={main['profile__col']}>
-        <Link className={main['profile__item']} href='/reviews'>
-          <div className={main['profile__body profile-body']}>
-            <h3 className={main['profile-body__title']}>Мои отзывы</h3>
+      <Col xs={12} sm={6} md={3} className={'profile__col'}>
+        <Link className={'profile__item'} href='/reviews'>
+          <div className={'profile__body profile-body'}>
+            <h3 className={'profile-body__title'}>Мои отзывы</h3>
           </div>
-          <div className={main['profile__bottom profile-bottom']}>
-            <div className={main['profile__subtitle']}>
-              <span className={main['profile__value']}>150</span>отзывов
+          <div className={'profile__bottom profile-bottom'}>
+            <div className={'profile__subtitle'}>
+              <span className={'profile__value'}>150</span>отзывов
             </div>
           </div>
         </Link>
       </Col>
     </>
-  )
-}
+  );
+};
 
 export const ProfileSettings = () => {
   return (
-    <Col xs={12} sm={6} md={6} className={main['profile__col']}>
-      <Link
-        className={` ${main['profile__item']} ${main['profile__item_dop']}`}
-        href='/profile/edit'
-      >
-        <div className={`${main['profile__body']} ${main['profile-body']}`}>
-          <h3 className={main['profile-body__title']}>
-            <div className={main['icon']}>
-              <Settings color={main['icon__item']} />
+    <Col xs={12} sm={6} md={6} className={'profile__col'}>
+      <Link className={` profile__item profile__item_dop`} href='/profile/edit'>
+        <div className={`profile__body profile-body`}>
+          <h3 className={'profile-body__title'}>
+            <div className={'icon'}>
+              <Settings />
             </div>
             Общие настройки
           </h3>
         </div>
       </Link>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileSupport = () => {
   return (
-    <Col xs={12} sm={6} md={6} className={main['profile__col']}>
-      <Link
-        className={` ${main['profile__item']} ${main['profile__item_dop']}`}
-        href='/chat'
-      >
-        <div className={`${main['profile__body']} ${main['profile-body']}`}>
-          <h3 className={main['profile-body__title']}>
-            <div className={main['icon']}>
-              <Support color={main['icon__item']} />
+    <Col xs={12} sm={6} md={6} className={'profile__col'}>
+      <Link className={` profile__item profile__item_dop`} href='/chat'>
+        <div className={`profile__body profile-body`}>
+          <h3 className={'profile-body__title'}>
+            <div className={'icon'}>
+              <Support />
             </div>
             Чат и поддержка
           </h3>
         </div>
       </Link>
     </Col>
-  )
-}
+  );
+};

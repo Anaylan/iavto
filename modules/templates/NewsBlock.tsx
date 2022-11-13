@@ -1,24 +1,24 @@
-import { getLastPosts } from 'api/Post'
-import { IPostModel } from 'app/models'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { URL_IMG } from 'app/config'
+import { getLastPosts } from 'api/Post';
+import { IPostModel } from 'app/models';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { URL_IMG } from 'app/config';
 interface NewsProps {
-  posts?: IPostModel[]
+  posts?: IPostModel[];
 }
 interface PostProps {
-  postInfo: IPostModel
+  postInfo: IPostModel;
 }
 
 const NewsBlock: React.FC<NewsProps> = () => {
-  const [posts, setPosts] = useState<IPostModel[]>([])
+  const [posts, setPosts] = useState<IPostModel[]>([]);
 
   useEffect(() => {
     getLastPosts().then(({ data }: { data: IPostModel[] }) => {
-      setPosts(data.slice(0, 3))
-    })
-  }, [])
+      setPosts(data.slice(0, 3));
+    });
+  }, []);
 
   return (
     <React.Fragment>
@@ -40,8 +40,7 @@ const NewsBlock: React.FC<NewsProps> = () => {
               <Image
                 src={`/media/sber-banner.png`}
                 priority={false}
-                width={100}
-                height={100}
+                fill
                 alt=''
               />
             </Link>
@@ -54,10 +53,10 @@ const NewsBlock: React.FC<NewsProps> = () => {
         </Link>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default NewsBlock
+export default NewsBlock;
 
 export const PostPreview: React.FC<PostProps> = ({ postInfo }) => {
   return (
@@ -78,5 +77,5 @@ export const PostPreview: React.FC<PostProps> = ({ postInfo }) => {
         </div>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};

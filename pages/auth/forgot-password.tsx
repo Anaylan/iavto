@@ -1,20 +1,20 @@
-import { EmailStep } from 'modules/elements/formStep/EmailStep'
-import { KeyStep } from 'modules/elements/formStep/KeyStep'
-import { PasswordStep } from 'modules/elements/formStep/PasswordStep'
-import { useRouter } from 'next/router'
-import { Fragment, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { EmailStep } from 'modules/elements/formStep/EmailStep';
+import { KeyStep } from 'modules/elements/formStep/KeyStep';
+import { PasswordStep } from 'modules/elements/formStep/PasswordStep';
+import { useRouter } from 'next/router';
+import { Fragment, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export const ForgotPassword: React.FC = () => {
   // const [loading, setLoading] = useState(false)
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(1);
   // const dispatch = useDispatch()
-  const router = useRouter()
+  const router = useRouter();
 
-  const user = useSelector(({ header }: { header: any }) => header.title)
+  const user = useSelector(({ header }: { header: any }) => header.title);
 
   if (user) {
-    router.push('/')
+    router.push('/');
   }
 
   return (
@@ -36,7 +36,7 @@ export const ForgotPassword: React.FC = () => {
         </>
       ) : null}
     </Fragment>
-  )
-}
+  );
+};
 
-export default ForgotPassword
+export default ForgotPassword;

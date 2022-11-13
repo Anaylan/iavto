@@ -1,18 +1,19 @@
 ﻿import {
   FormInputWithMaskNotLabel,
   FormInputWithoutLabel,
-  FormLabel
-} from 'modules/UI'
-import { Col } from 'react-bootstrap'
+  FormLabel,
+} from 'modules/UI';
+import { ChangeEvent, ChangeEventHandler } from 'react';
+import { Col } from 'react-bootstrap';
 
 interface IUserPrivateData {
-  lastname?: string | undefined
-  firstname: string
-  secondname?: string | undefined
-  telephone?: string | undefined
+  lastname?: string | undefined;
+  firstname: string;
+  secondname?: string | undefined;
+  telephone?: string | undefined;
 }
 
-const phoneNumberMask = [
+export const phoneNumberMask = [
   '+',
   '7',
   '(',
@@ -29,10 +30,16 @@ const phoneNumberMask = [
   /\d/,
   '-',
   /\d/,
-  /\d/
-]
+  /\d/,
+];
 
-export const PrivateDataInputs = ({ user }: { user: IUserPrivateData }) => {
+export const PrivateDataInputs = ({
+  user,
+  onChange,
+}: {
+  user: IUserPrivateData;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+}) => {
   return (
     <>
       <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
@@ -42,9 +49,10 @@ export const PrivateDataInputs = ({ user }: { user: IUserPrivateData }) => {
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
+            id='firstname'
             placeholder='Иван'
             defaultValue={user.firstname}
-            required
+            onChange={onChange}
           />
         </div>
       </Col>
@@ -55,9 +63,10 @@ export const PrivateDataInputs = ({ user }: { user: IUserPrivateData }) => {
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
+            id='lastname'
             placeholder='Иванов'
             defaultValue={user.lastname || ''}
-            required
+            onChange={onChange}
           />
         </div>
       </Col>
@@ -68,6 +77,7 @@ export const PrivateDataInputs = ({ user }: { user: IUserPrivateData }) => {
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
+            id='secondname'
             placeholder='Иванович'
             defaultValue={user.secondname || ''}
             required
@@ -81,6 +91,7 @@ export const PrivateDataInputs = ({ user }: { user: IUserPrivateData }) => {
         <div className='form__wrap'>
           <FormInputWithMaskNotLabel
             type={'phone'}
+            id={'phone'}
             mask={phoneNumberMask}
             placeholder='+7 (999) 000-00-00'
             defaultValue={user.telephone}
@@ -94,6 +105,7 @@ export const PrivateDataInputs = ({ user }: { user: IUserPrivateData }) => {
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='date'
+            id={'birthday'}
             defaultValue='1990-12-27'
             required
           />
@@ -106,6 +118,7 @@ export const PrivateDataInputs = ({ user }: { user: IUserPrivateData }) => {
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
+            id={'place'}
             placeholder='г. Москва, Московская обл.'
             required
           />
@@ -120,11 +133,12 @@ export const PrivateDataInputs = ({ user }: { user: IUserPrivateData }) => {
         <div className='form__wrap'>
           <FormInputWithoutLabel
             type='text'
+            id={'links'}
             placeholder='vk.com/... , ok.com/...'
             required
           />
         </div>
       </Col>
     </>
-  )
-}
+  );
+};

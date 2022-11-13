@@ -1,40 +1,40 @@
-import { reset } from 'api/User'
-import { useFormik } from 'formik'
-import { FormInputWithoutLabel } from 'modules/UI'
-import React from 'react'
-import { Form, Button } from 'react-bootstrap'
-import * as Yup from 'yup'
+import { reset } from 'api/User';
+import { useFormik } from 'formik';
+import { FormInputWithoutLabel } from 'modules/UI';
+import React from 'react';
+import { Form, Button } from 'react-bootstrap';
+import * as Yup from 'yup';
 
 const EmailStepSchema = Yup.object().shape({
   email: Yup.string()
     .email('Неправильный формат email')
-    .required('Email обязателен для заполнения')
-})
+    .required('Email обязателен для заполнения'),
+});
 
 export const EmailStep = ({
   step,
-  setStep
+  setStep,
 }: {
-  step: number
-  setStep: CallableFunction
+  step: number;
+  setStep: CallableFunction;
 }) => {
   const formik = useFormik({
     initialValues: {
-      email: ''
+      email: '',
     },
     enableReinitialize: true,
     validationSchema: EmailStepSchema,
     onSubmit: (values) => {
       reset(values.email)
         .then(({ data }) => {
-          console.log(data)
+          console.log(data);
         })
         .catch((err) => {
-          console.log(err)
-        })
-      setStep(step + 1)
-    }
-  })
+          console.log(err);
+        });
+      setStep(step + 1);
+    },
+  });
   return (
     <>
       <Form onSubmit={formik.handleSubmit}>
@@ -54,5 +54,5 @@ export const EmailStep = ({
         <Button type='submit'>Далее</Button>
       </Form>
     </>
-  )
-}
+  );
+};

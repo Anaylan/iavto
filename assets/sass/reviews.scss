@@ -1,0 +1,130 @@
+.reviews {
+  &__col {
+    margin: 0 0 20px 0;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  &__rate {
+    min-width: 260px;
+  }
+
+  .carpark-reviews {
+    &__item {
+      max-width: 100% !important;
+      margin: 0;
+    }
+
+    &__top {
+      padding: 4px 10px 0 10px;
+    }
+
+    &__date {
+      padding: 12px 0 0 0;
+    }
+
+    &__rate {
+      padding: 11px 0 0 0;
+    }
+
+    &__comment {
+      padding: 0 10px 4px 10px;
+    }
+  }
+  .cars-item {
+    margin: 0;
+
+    &__subtitle {
+      margin: 0 0 20px 0;
+    }
+
+    &__price {
+      color: #2e2f31;
+      margin: 0 0 22px 0;
+    }
+
+    &__btn-param {
+      margin: 0 0 0 30px;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .reviews {
+    &__rate {
+      min-width: 210px;
+    }
+
+    .carpark-reviews {
+      &__top {
+        padding: 4px 0 0 0;
+      }
+
+      &__date {
+        padding: 4px 0 0 0;
+      }
+
+      &__rate {
+        padding: 4px 0 0 0;
+      }
+
+      &__comment {
+        padding: 0 0 4px 0;
+      }
+    }
+
+    .cars-item {
+      margin: 0;
+
+      &__subtitle {
+        margin: 0 0 12px 0;
+      }
+
+      &__price {
+        margin: 0 0 15px 0;
+      }
+
+      &__btn-param {
+        margin: -6px 0 0 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .reviews {
+    &__rate {
+      min-width: 100%;
+    }
+
+    .carpark-reviews {
+      &__top {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      &__date {
+        padding: 0 !important;
+        margin: 8px 10px 12px 0;
+      }
+
+      &__rate {
+        order: 2 !important;
+        padding: 0 !important;
+        margin: 8px 0 12px 0;
+      }
+
+      &__comment {
+        padding: 0 0 4px 0;
+      }
+    }
+
+    .cars-item {
+      &__btn-param {
+        margin: -4px 0 0 15px;
+      }
+    }
+  }
+}

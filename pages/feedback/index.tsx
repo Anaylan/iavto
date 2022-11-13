@@ -1,6 +1,6 @@
-import React from 'react'
-import Head from 'next/head'
-import { TITLE } from 'app/config'
+import React from 'react';
+import Head from 'next/head';
+import { TITLE } from 'app/config';
 
 export default function Feedback() {
   return (
@@ -10,5 +10,5 @@ export default function Feedback() {
       </Head>
       <div>Обратная связь</div>
     </>
-  )
+  );
 }

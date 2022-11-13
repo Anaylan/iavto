@@ -1,68 +1,64 @@
-import banner from 'assets/sass/components/banners/banners.module.scss'
-import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import Head from 'next/head';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 
-import { getCar } from 'api/Car'
-import { getCarpark } from 'api/Company'
+import { getCar } from 'api/Car';
+import { getCarpark } from 'api/Company';
 
-import { TITLE, URL_IMG } from 'app/config'
+import { TITLE, URL_IMG } from 'app/config';
 
-import { ICarModel, ICarparkModel, ITabItems } from 'app/models'
-import { CarparkCard, CarparkInfo } from 'modules/elements'
+import { ICarModel, ICarparkModel, ITabItems } from 'app/models';
+import { CarInfo, CarparkCard, CarparkInfo } from 'modules/elements';
 import {
   ActionFollow,
   CarparkTabs,
-  TabCar,
   TabFeedback,
   TabProfile,
-  TabReviews
-} from 'modules/UI'
-
-import styles from 'assets/sass/components/carpark/carpark.module.scss'
+  TabReviews,
+} from 'modules/UI';
 
 export async function getServerSideProps({ params }: any) {
-  const { data } = await getCar(params.id)
+  const { data } = await getCar(params.id);
   return {
     props: {
-      car: data
-    }
-  }
+      car: data,
+    },
+  };
 }
 
 export default function Car({ car }: { car: ICarModel }) {
-  console.log(car)
-  const [carpark, setCarpark] = useState<ICarparkModel>()
+  console.log(car);
+  const [carpark, setCarpark] = useState<ICarparkModel>();
 
   useEffect(() => {
     getCarpark(car.cid).then(({ data }: { data: ICarparkModel }) => {
-      setCarpark(data)
-    })
-  }, [car])
+      setCarpark(data);
+    });
+  }, [car]);
 
   const TabItems: ITabItems[] = [
     {
       title: 'Автомобиль',
       eventKey: 'car',
-      contentChild: <TabCar car={car} />
+      contentChild: <CarInfo car={car} />,
     },
     {
       title: 'Профиль',
       eventKey: 'profile',
-      contentChild: <TabProfile />
+      contentChild: <TabProfile carpark={carpark} />,
     },
     {
       title: 'Отзывы',
       eventKey: 'reviews',
-      contentChild: <TabReviews />
+      contentChild: <TabReviews />,
     },
     {
       title: 'СВЯЗАТЬСЯ С АВТОПАРКОМ',
       eventKey: 'contact',
-      contentChild: <TabFeedback />
-    }
-  ]
+      contentChild: <TabFeedback />,
+    },
+  ];
 
   return (
     <>
@@ -74,9 +70,9 @@ export default function Car({ car }: { car: ICarModel }) {
       <section className='carpark'>
         <Container>
           {carpark ? (
-            <div className={`${styles['carpark__intro']} carpark-intro`}>
+            <div className={`carpark__intro carpark-intro`}>
               <Image
-                className={banner['carpark-intro__banner']}
+                className={'carpark-intro__banner'}
                 src={URL_IMG + carpark.cid + '/' + carpark.banner}
                 fill
                 alt={carpark.company_name ? carpark.company_name : ''}
@@ -99,5 +95,5 @@ export default function Car({ car }: { car: ICarModel }) {
         {car && <CarparkTabs tabs={TabItems}></CarparkTabs>}
       </section>
     </>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { IButton } from 'app/models'
-import { FC } from 'react'
+import { IButton } from 'app/models';
+import { FC } from 'react';
 
 export const Button: FC<IButton> = ({ className, children, ...props }) => {
   return (
@@ -8,5 +8,5 @@ export const Button: FC<IButton> = ({ className, children, ...props }) => {
         {children}
       </button>
     </>
-  )
-}
+  );
+};

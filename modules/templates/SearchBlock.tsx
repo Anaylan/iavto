@@ -1,12 +1,11 @@
-import React, { FC, FormHTMLAttributes, ReactNode } from 'react'
-import styles from 'assets/sass/components/blocks/search.module.scss'
-import { Col, ColProps } from 'react-bootstrap'
+import React, { FC, FormHTMLAttributes, ReactNode } from 'react';
+import { Col, ColProps } from 'react-bootstrap';
 
 interface ISearchBlock extends FormHTMLAttributes<HTMLFormElement> {
-  title: string
-  subtitle: string
-  children: ReactNode
-  props?: FormHTMLAttributes<HTMLFormElement>
+  title: string;
+  subtitle: string;
+  children: ReactNode;
+  props?: FormHTMLAttributes<HTMLFormElement>;
 }
 
 export const SearchBlock: FC<ISearchBlock> = ({
@@ -17,9 +16,9 @@ export const SearchBlock: FC<ISearchBlock> = ({
 }) => {
   return (
     <>
-      <div className={styles['search__body']}>
-        <h2 className={`${styles['search__title']} title`}>{title}</h2>
-        <h3 className={`${styles['search__subtitle']} subtitle`}>{subtitle}</h3>
+      <div className={'search__body'}>
+        <h2 className={`search__title title`}>{title}</h2>
+        <h3 className={`search__subtitle subtitle`}>{subtitle}</h3>
         <form {...props}>
           {children}
           {/* <Row className='d-none'>
@@ -71,37 +70,35 @@ export const SearchBlock: FC<ISearchBlock> = ({
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
 export const SearchItem = ({
   children,
-  columns
+  columns,
 }: {
-  children: React.ReactNode
-  columns?: ColProps
+  children: React.ReactNode;
+  columns?: ColProps;
 }) => {
   return (
     <>
       <Col
         {...columns}
-        className={`${styles['search-additional__item']} d-flex ${styles['select-wrap']}`}
+        className={`search-additional__item d-flex select-wrap`}
       >
         {children}
       </Col>
     </>
-  )
-}
+  );
+};
 
 export const PriceFromTo = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <div
-        className={`${styles['search-additional__price']} d-flex align-items-center`}
-      >
+      <div className={`search-additional__price d-flex align-items-center`}>
         <p>Цена:</p>
         {children}
       </div>
     </>
-  )
-}
+  );
+};
