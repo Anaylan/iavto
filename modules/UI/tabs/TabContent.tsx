@@ -48,14 +48,12 @@ export const TabProfile = ({
 
       {carpark && (
         <>
-          <div className={'carpark-profile__about'}>
-            <p
-              dangerouslySetInnerHTML={
-                carpark.description
-                  ? sanitize(carpark.description)
-                  : sanitize('')
-              }></p>
-          </div>
+          <div
+            className={'carpark-profile__about'}
+            dangerouslySetInnerHTML={
+              carpark.description ? sanitize(carpark.description) : sanitize('')
+            }
+          />
 
           <Row>
             <Col xs={12} sm={4}>
@@ -73,7 +71,7 @@ export const TabProfile = ({
                   Количество оценок
                 </div>
                 <div className={'carpark-profile__value'}>
-                  <span>1 237</span>
+                  <span>Привязать оценку</span>
                 </div>
               </div>
             </Col>
@@ -86,7 +84,7 @@ export const TabProfile = ({
                   Количество заказов
                 </div>
                 <div className={'carpark-profile__value'}>
-                  <span>1 699</span>
+                  <span>Привязать количество</span>
                 </div>
               </div>
             </Col>
@@ -113,7 +111,6 @@ export const TabReviews = () => {
           {reviews &&
             reviews.map((review, key) => <Review review={review} key={key} />)}
         </Col>
-
         <Col xs={12} md={4} className='order-1 order-md-2'>
           <div className={'carpark-reviews__aside reviews-aside'}>
             <div className={'reviews-aside__content'}>

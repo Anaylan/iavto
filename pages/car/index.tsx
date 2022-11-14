@@ -59,8 +59,8 @@ export default function Cars() {
       model: '',
       tarif: '',
       fuel: 'Бензин',
-      price_from: '',
-      price_to: '',
+      from: '',
+      to: '',
     },
     onSubmit: (values) => {
       // console.log(values)
@@ -110,21 +110,18 @@ export default function Cars() {
           <SearchBlock
             title='Поиск автомобилей'
             subtitle='Более 10 800 проверенных автомобилей'
-            onSubmit={formik.handleSubmit}
-          >
+            onSubmit={formik.handleSubmit}>
             <SearchMainRow>
               <SearchItem
                 columns={{
                   xs: 12,
                   sm: 6,
                   md: 4,
-                }}
-              >
+                }}>
                 <SearchSelect
                   name='tarif'
                   defaultValue={''}
-                  onChange={formik.handleChange}
-                >
+                  onChange={formik.handleChange}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите тариф
                   </SearchSelectOption>
@@ -141,13 +138,11 @@ export default function Cars() {
                   xs: 12,
                   sm: 6,
                   md: 4,
-                }}
-              >
+                }}>
                 <SearchSelect
                   name='mark'
                   defaultValue={''}
-                  onChange={formik.handleChange}
-                >
+                  onChange={formik.handleChange}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите марку
                   </SearchSelectOption>
@@ -164,14 +159,12 @@ export default function Cars() {
                   xs: 12,
                   sm: 6,
                   md: 4,
-                }}
-              >
+                }}>
                 <SearchSelect
                   name='model'
                   defaultValue={''}
                   onChange={formik.handleChange}
-                  disabled={false}
-                >
+                  disabled={false}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите модель
                   </SearchSelectOption>
@@ -188,18 +181,17 @@ export default function Cars() {
                   xs: 12,
                   sm: 6,
                   md: 5,
-                }}
-              >
+                }}>
                 <PriceFromTo>
                   <FilterInput
-                    name='price_from'
+                    name='from'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='От'
                   />
                   <span></span>
                   <FilterInput
-                    name='price_to'
+                    name='to'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='До'
@@ -211,16 +203,14 @@ export default function Cars() {
                   xs: 12,
                   sm: 6,
                   md: 3,
-                }}
-              >
+                }}>
                 <FilterRadioGroup>
                   <FilterRadioItem
                     onChange={formik.handleChange}
                     value={'auto'}
                     id='automatic'
                     name='transmission'
-                    defaultChecked={true}
-                  >
+                    defaultChecked={true}>
                     Автомат
                   </FilterRadioItem>
                   <FilterRadioItem
@@ -228,8 +218,7 @@ export default function Cars() {
                     id='mechanics'
                     value={'mechanics'}
                     name='transmission'
-                    defaultChecked={false}
-                  >
+                    defaultChecked={false}>
                     Механическая
                   </FilterRadioItem>
                 </FilterRadioGroup>
@@ -239,16 +228,14 @@ export default function Cars() {
                   xs: 12,
                   sm: 6,
                   md: 4,
-                }}
-              >
+                }}>
                 <FilterRadioGroup>
                   <FilterRadioItem
                     name={'fuel'}
                     onChange={formik.handleChange}
                     id='petrol'
                     value='petrol'
-                    defaultChecked={true}
-                  >
+                    defaultChecked={true}>
                     Бензин
                   </FilterRadioItem>
                   <FilterRadioItem
@@ -256,8 +243,7 @@ export default function Cars() {
                     onChange={formik.handleChange}
                     id='disel'
                     value='disel'
-                    defaultChecked={false}
-                  >
+                    defaultChecked={false}>
                     Дизель
                   </FilterRadioItem>
                   <FilterRadioItem
@@ -265,8 +251,7 @@ export default function Cars() {
                     onChange={formik.handleChange}
                     id='gas'
                     value='gas'
-                    defaultChecked={false}
-                  >
+                    defaultChecked={false}>
                     Газ
                   </FilterRadioItem>
                 </FilterRadioGroup>
@@ -279,8 +264,7 @@ export default function Cars() {
                   sm: 12,
                   md: 12,
                 }}
-                className={'justify-content-between d-flex flex-row-reverse'}
-              >
+                className={'justify-content-between d-flex flex-row-reverse'}>
                 <Button type='submit'>Потвердить</Button>
               </SearchAdditionalCol>
             </SearchAdditonalRow>

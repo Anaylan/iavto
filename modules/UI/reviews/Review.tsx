@@ -11,7 +11,13 @@ export const Review = ({ review }: { review: IReviewModel }) => {
         <div className={'carpark-reviews__top'}>
           <div className={'carpark-reviews__info'}>
             <div className={'carpark-reviews__photo'}>
-              <Image src='/media/user.png' width={100} height={100} alt='' />
+              <Image
+                src='/media/user.png'
+                width={100}
+                height={100}
+                sizes='100%'
+                alt=''
+              />
             </div>
             <div className={'carpark-reviews__user-data'}>
               <div className={'carpark-reviews__username'}>

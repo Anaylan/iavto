@@ -110,21 +110,18 @@ const Home: NextPage<IHome> = () => {
           <SearchBlock
             title='Поиск автомобилей'
             subtitle='Более 10 800 проверенных автомобилей'
-            onSubmit={formik.handleSubmit}
-          >
+            onSubmit={formik.handleSubmit}>
             <SearchMainRow>
               <SearchItem
                 columns={{
                   xs: 12,
                   sm: 6,
                   md: 4,
-                }}
-              >
+                }}>
                 <SearchSelect
                   name='mark'
                   defaultValue={''}
-                  onChange={formik.handleChange}
-                >
+                  onChange={formik.handleChange}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите марку
                   </SearchSelectOption>
@@ -141,14 +138,12 @@ const Home: NextPage<IHome> = () => {
                   xs: 12,
                   sm: 6,
                   md: 4,
-                }}
-              >
+                }}>
                 <SearchSelect
                   name='model'
                   defaultValue={''}
                   onChange={formik.handleChange}
-                  disabled={false}
-                >
+                  disabled={false}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите модель
                   </SearchSelectOption>
@@ -165,18 +160,17 @@ const Home: NextPage<IHome> = () => {
                   xs: 12,
                   sm: 5,
                   md: 4,
-                }}
-              >
+                }}>
                 <PriceFromTo>
                   <FilterInput
-                    name='price_from'
+                    name='from'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='От'
                   />
                   <span></span>
                   <FilterInput
-                    name='price_to'
+                    name='to'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='До'
@@ -191,8 +185,7 @@ const Home: NextPage<IHome> = () => {
                   sm: 12,
                   md: 12,
                 }}
-                className={'justify-content-between d-flex flex-row-reverse'}
-              >
+                className={'justify-content-between d-flex flex-row-reverse'}>
                 <Button type='submit'>Потвердить</Button>
                 <Button onClick={formik.handleReset}>Сбросить</Button>
               </SearchAdditionalCol>

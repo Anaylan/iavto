@@ -192,3 +192,35 @@ export const useFetch = (callback: CallableFunction) => {
   }, []);
   return [isLoading, error];
 };
+
+export const useFetching = (callback: CallableFunction) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+  // async function fetching(...args: any) {
+  //   try {
+  //     setIsLoading(true)
+  //     //console.log(isLoading)
+  //     await callback(...args)
+  //   } catch (e: any | unknown) {
+  //     //console.log(isLoading)
+  //     setError(e.message)
+  //   } finally {
+  //     setIsLoading(false)
+  //   }
+  // }
+  async function asyncCall() {
+    await callback();
+  }
+
+  useEffect(() => {
+    try {
+      asyncCall();
+      setIsLoading(true);
+    } catch (e: any | unknown) {
+      setError(e.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+  return [isLoading, error];
+};

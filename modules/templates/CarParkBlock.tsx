@@ -40,8 +40,7 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
               large
                 ? `carparks__body gx-0 gy-0 carparks__large`
                 : `carparks__body gx-0 gy-0 carparks`
-            }
-          >
+            }>
             {Carparks.length ? (
               Carparks.map((tender: ICarparkModel, key: number) => (
                 <Col key={key} {...columns}>
@@ -94,8 +93,7 @@ export function TenderPark({
               onClick={() => {
                 console.log('Добавить избранное');
               }}
-              className={'carparks-hover__item'}
-            >
+              className={'carparks-hover__item'}>
               <div>Добавить в</div>
               <span className={'icon'}>
                 <Heart />
@@ -105,8 +103,7 @@ export function TenderPark({
         </Link>
         <Link
           className={'carparks__item-title'}
-          href={`/carpark/${carPark.cid}`}
-        >
+          href={`/carpark/${carPark.cid}`}>
           <span>{carPark.company_name}</span>
         </Link>
         <div className={'carparks__content'}>

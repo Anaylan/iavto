@@ -5,7 +5,7 @@ import { IRegionState } from 'app/redux/reducers/regionReducer';
 import { Load, Location } from 'assets/icon/icons';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -54,7 +54,23 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
         <Row>
           {cars && cars.length ? (
             cars.map((car: ICarModel, key: number) => (
-              <GenerateCar key={key} car={car} />
+              <GenerateCar key={key} car={car}>
+                <div className={'cars-item__label'}>Характеристики</div>
+                <ul className={'cars-item__charact'}>
+                  <li>
+                    <div>Топливо</div>
+                    <div>
+                      <span>{car.fuel_type}</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div>Мощность</div>
+                    <div>
+                      <span>{car.horse_power}</span> л.с.
+                    </div>
+                  </li>
+                </ul>
+              </GenerateCar>
             ))
           ) : (
             <EmptyComponent />
@@ -79,7 +95,13 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
 };
 export default CarBlock;
 
-export function GenerateCar({ car }: { car: ICarModel }) {
+export function GenerateCar({
+  car,
+  children,
+}: {
+  car: ICarModel;
+  children: ReactNode;
+}) {
   return (
     <>
       <Col xs={12} sm={6} lg={12} className={`cars__col`}>
@@ -113,21 +135,7 @@ export function GenerateCar({ car }: { car: ICarModel }) {
                     </div>
                     <span>{car.city?.name}</span>
                   </div>
-                  <div className={'cars-item__label'}>Характеристики</div>
-                  <ul className={'cars-item__charact'}>
-                    <li>
-                      <div>Топливо</div>
-                      <div>
-                        <span>{car.fuel_type}</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div>Мощность</div>
-                      <div>
-                        <span>{car.horse_power}</span> л.с.
-                      </div>
-                    </li>
-                  </ul>
+                  {children}
                 </div>
               </Col>
             </Col>

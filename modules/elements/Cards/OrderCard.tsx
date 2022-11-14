@@ -15,6 +15,7 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
               <Image
                 priority={false}
                 fill
+                sizes='100%'
                 src={URL_IMG + `/` + order.cid + `/` + order.img![0]}
                 alt={`${order.mark} ${order.model}`}
               />
@@ -44,8 +45,7 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
                 className={
                   'cars-item__btn orders-btn btn-main d-none d-lg-block ' +
                   (order.status == 1 ? '' : 'orders-btn-wait')
-                }
-              >
+                }>
                 Статус заказа:{' '}
                 <span>{order.status == 1 ? 'Одобренно' : 'Ожидается'}</span>
               </div>
@@ -67,16 +67,14 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
                 </div>
                 <a
                   className={`cars-item__btn btn-main d-none d-lg-block`}
-                  href='#'
-                >
+                  href='#'>
                   Подробнее
                 </a>
                 <div
                   className={
                     `'cars-item__btn orders-btn btn-main d-lg-none ` +
                     (order.status == 1 ? '' : 'orders-btn-wait')
-                  }
-                >
+                  }>
                   Статус заказа:{' '}
                   <span>{order.status == 1 ? 'Одобренно' : 'Ожидается'}</span>
                 </div>

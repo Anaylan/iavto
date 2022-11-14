@@ -15,6 +15,7 @@ export const ReviewCard = ({ review }: { review: IReviewModel }) => {
               <Image
                 src={URL_IMG + `/` + review.cid + `/` + review.img![0]}
                 fill
+                sizes='100%'
                 alt={`${review.mark} ${review.model}`}
               />
             </Link>

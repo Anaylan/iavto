@@ -74,7 +74,6 @@ export const RegionSearch = ({
   };
 
   useEffect(() => {
-    console.log(name);
     if (!name) {
       getLocation().then(({ data }) => {
         dispatch(regionActions.update(data.name, data.id));
@@ -109,14 +108,12 @@ export const RegionSearch = ({
       // xs={12}
       // md={2}
       // lg={3}
-      className={`${className} header-region`}
-    >
+      className={`${className} header-region`}>
       <button
         className={`header-region__btn header-region__btn`}
         onClick={() => {
           setActive();
-        }}
-      >
+        }}>
         <span className={`icon `}>
           <Location />
         </span>
@@ -185,15 +182,13 @@ export const RegionList: React.FC<IRegionDropdown> = ({
           onSubmit={searchRegion}
           className={`region-popup__form region-popup__form`}
           acceptCharset='UTF-8'
-          id='region-search'
-        >
+          id='region-search'>
           <div
             className={
               pTop
                 ? `region-popup__form-wrap placeholder-top`
                 : `region-popup__form-wrap`
-            }
-          >
+            }>
             <input
               onChange={(event) => {
                 placeholderSearch(event.target.value);
@@ -222,8 +217,7 @@ export const RegionItem: React.FC<IChildRegion> = ({ region, onClick }) => {
   return (
     <li
       onClick={() => onClick(region.name, region.id)}
-      className={`region-popup__item region-popup__item`}
-    >
+      className={`region-popup__item region-popup__item`}>
       <div className={'region-popup__content'}>
         <div className={'region-popup__region'}>{region.name}</div>
         <div className={'region-popup__parent-region'}>

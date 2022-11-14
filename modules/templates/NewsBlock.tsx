@@ -41,6 +41,7 @@ const NewsBlock: React.FC<NewsProps> = () => {
                 src={`/media/sber-banner.png`}
                 priority={false}
                 fill
+                sizes='100%'
                 alt=''
               />
             </Link>

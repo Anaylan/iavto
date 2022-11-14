@@ -3,7 +3,7 @@ import { Col, ColProps } from 'react-bootstrap';
 
 interface ISearchBlock extends FormHTMLAttributes<HTMLFormElement> {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   children: ReactNode;
   props?: FormHTMLAttributes<HTMLFormElement>;
 }
@@ -84,8 +84,7 @@ export const SearchItem = ({
     <>
       <Col
         {...columns}
-        className={`search-additional__item d-flex select-wrap`}
-      >
+        className={`search-additional__item d-flex select-wrap`}>
         {children}
       </Col>
     </>

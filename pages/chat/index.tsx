@@ -11,9 +11,9 @@ const socket = io('wss://localhost:6001', {
 });
 
 export default function Chat() {
-  // socket.on('connect', () => {
-  //   console.log(socket.id) // x8WIv7-mJelg7on_ALbx
-  // })
+  socket.on('connect', () => {
+    console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+  });
   return (
     <>
       <Head>
