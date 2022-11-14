@@ -29,7 +29,7 @@ export const PartnershipTable = ({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(5);
 
-  const [fake, setFake] = useState(null);
+  const [fake, setFake] = useState<any>([]);
 
   useEffect(() => {
     // getUserReviews().then((res) => console.log(res));
@@ -40,7 +40,9 @@ export const PartnershipTable = ({
       .then((res) => {
         console.log(res.headers['x-total-count']);
         setFake(res.data);
-        setTotalPage(Math.ceil(res.headers['x-total-count'] / pageLimit));
+        setTotalPage(
+          Math.ceil(Number(res.headers['x-total-count']) / pageLimit),
+        );
       });
   }, [currentPage, totalPage]);
 
@@ -53,7 +55,7 @@ export const PartnershipTable = ({
               <THead row={THeadRow} />
               <tbody>
                 {fake &&
-                  fake.map((referral, key) => (
+                  fake.map((referral: any, key: number) => (
                     <tr key={key}>
                       <TCell>
                         <Link href='#'>{referral.title}</Link>
