@@ -55,8 +55,6 @@ export default function Partners() {
   const dispatch = useDispatch();
   const [referrals, setReferrals] = useState<IRefModel[]>([]);
   const [refCompanies, setRefCompanies] = useState<IRefModel[]>([]);
-  let [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPage, setTotalPage] = useState<number>(10);
   const router = useRouter();
   const user = useSelector(
     ({ header }: { header: UserDataModel }) => header.user,
