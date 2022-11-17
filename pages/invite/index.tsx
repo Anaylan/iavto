@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 import * as ref from 'app/redux/reducers/referralReducer';
 import Head from 'next/head';
 import { TITLE } from 'app/config';
+import { requestAddToStats } from 'api/Refferal';
+import { useEffect } from 'react';
+
 export default function Invite() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -12,6 +15,11 @@ export default function Invite() {
     dispatch(ref.actions.addToReferral(router.query.ref_code));
     router.push('/');
   };
+
+  useEffect(() => {
+    requestAddToStats(router.query.ref_code);
+  }, []);
+
   return (
     <>
       <Head>
@@ -35,8 +43,7 @@ export default function Invite() {
               <a
                 className={`referal__btn referal__btn_carpark`}
                 href={`http://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/main?ref_code=${router.query.ref_code}`}
-                rel='noreferrer'
-              >
+                rel='noreferrer'>
                 <span className='d-flex align-items-center justify-content-center'>
                   <div className={'icon'}>
                     <Carpark />

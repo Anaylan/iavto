@@ -9,7 +9,7 @@ import { Container } from 'react-bootstrap';
 
 export const HeaderTopLinks: LinkType[] = [
   {
-    href: '/',
+    href: '/favorites',
     children: <Heart />,
     title: 'Избранное',
   },
@@ -41,7 +41,7 @@ export const HeaderBottomLinks: LinkType[] = [
     title: 'Открыть автопарк',
   },
   // { href: '/', children: <></>, title: 'Для автопарков' },
-  { href: '/', children: <></>, title: 'Для реферальных партнеров' },
+  { href: '/referrals', children: <></>, title: 'Для реферальных партнеров' },
   { href: '/', children: <></>, title: 'Для партнеров' },
   { href: '/about', children: <></>, title: 'О нас' },
 ];

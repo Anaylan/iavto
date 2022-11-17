@@ -9,8 +9,9 @@ import { Col, ProgressBar, Row } from 'react-bootstrap';
 import { Button } from '../buttons/Button';
 import Form from '../forms/Form';
 import { Textarea } from '../textarea/textarea';
-import { getCarReviews } from 'api/Review';
+import { getCompanyReviews } from 'api/Review';
 import { Review } from '../reviews/Review';
+import { useFormik } from 'formik';
 
 export const TabCars = () => {
   const [cars, setCars] = useState<ICarModel[]>([]);
@@ -95,11 +96,11 @@ export const TabProfile = ({
   );
 };
 
-export const TabReviews = () => {
+export const TabReviews = ({ id }: { id: string }) => {
   const [reviews, setReviews] = useState<IReviewModel[] | null>(null);
   const router = useRouter();
   useEffect(() => {
-    getCarReviews(router.query.id).then(({ data }) => {
+    getCompanyReviews(id).then(({ data }) => {
       setReviews(data);
       console.log(data);
     });
@@ -156,18 +157,29 @@ export const TabReviews = () => {
   );
 };
 
-export const TabFeedback = () => {
+export const TabFeedback = ({ id }: { id: string }) => {
+  const formik = useFormik({
+    initialValues: {
+      text: '',
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
     <div className={`carpark-contact carpark-tab__body auth`}>
       <h1 className={`cars__title title`}>Задайте ваш вопрос автопарку</h1>
-      <Form className={'form'}>
+      <Form onSubmit={formik.handleSubmit} className={'form'}>
         <div className={'form__item'}>
           <div className={`form__label form__label`}>Ваш вопрос</div>
           <div className={'form__wrap'}>
-            <Textarea className={`form__input form__input`} />
+            <Textarea
+              onChange={formik.handleChange}
+              id={'text'}
+              className={`form__input form__input`}
+            />
           </div>
         </div>
-
         <div className={'form__bottom'}>
           <div className={'form__btn-group'}>
             <div className={'form__btn-wrap'}>

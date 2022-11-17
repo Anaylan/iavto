@@ -17,11 +17,18 @@ import {
 import CarParkBlock from 'modules/templates/CarParkBlock';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import * as auth from 'app/redux/reducers/authReducer';
+import { wrapper } from 'app';
+
+// export async function getServerSideProps() {
+//   // auth.dispatch(auth.authReducer.requestUser());
+//   const { data } = await getUserByToken();
+//   return { props: { user1: data } };
+// }
 
 const Profile = () => {
   const [profile, setProfile] = useState<UserModel>({
@@ -34,7 +41,19 @@ const Profile = () => {
   const user = useSelector(
     ({ header }: { header: UserDataModel }) => header.user,
   );
+
+  // const dispatch = useDispatch();
+  // const [copySuccess, setCopySuccess] = useState('');
+  // const router = useRouter();
+  // useEffect(() => {
+  //   // setProfile(user);
+  //   if (profile.status == 403) {
+  //     router.push('auth/signin');
+  //   }
+  // }, [profile, dispatch, router]);
+
   useEffect(() => {
+    // setProfile(user);
     getUserByToken()
       .then(({ data }: { data: UserModel }) => {
         if (data.status === 403) {
@@ -45,11 +64,13 @@ const Profile = () => {
         } else {
           dispatch(auth.actions.logout());
           router.push('/');
+          console.log(data);
         }
       })
       .catch((err) => {
         dispatch(auth.actions.logout());
         router.push('/');
+        console.log('oh no!' + err);
       });
   }, [user, dispatch, router]);
 

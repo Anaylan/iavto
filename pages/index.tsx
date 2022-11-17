@@ -158,7 +158,7 @@ const Home: NextPage<IHome> = () => {
               <SearchAdditionalCol
                 columns={{
                   xs: 12,
-                  sm: 5,
+                  sm: 6,
                   md: 4,
                 }}>
                 <PriceFromTo>

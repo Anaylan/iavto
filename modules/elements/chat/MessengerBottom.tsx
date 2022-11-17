@@ -1,18 +1,18 @@
 import { PaperClip, Send } from 'assets/icon/icons';
+import { ButtonHTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 
-export const MessengerBottom = () => {
-  const Submit = (e: any) => {
-    e.preventDefault();
-    console.log('САБМИТ!!!!!!!!!!! СМОТРЕТЬ В MESSENGERBOOTOM');
-  };
+interface IChildProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  props?: ButtonHTMLAttributes<HTMLButtonElement>;
+}
+
+export const MessengerBottom = forwardRef<any, IChildProps>((props, ref) => {
   return (
     <div className={`messenger__bottom messenger-bottom`}>
       <form
-        onSubmit={Submit}
         className={`messenger-bottom__form`}
         acceptCharset='UTF-8'
-        id='formMessenger'
-      >
+        id='formMessenger'>
         <div className={`messenger-bottom__row`}>
           <div className={`messenger-bottom__attach-file`}>
             <input type='file' name='' id='chatAttachFile' />
@@ -22,13 +22,18 @@ export const MessengerBottom = () => {
           </div>
           <div className={`messenger-bottom__message`}>
             <div
-              className={`messenger-bottom__input`}
+              id='message'
+              ref={ref}
+              className={`messenger-bottom__input text-break`}
               contentEditable='true'
               placeholder='Напишите сообщение...'
             />
           </div>
           <div className={`messenger-bottom__send`}>
-            <button className={`messenger-bottom__btn`} type='submit'>
+            <button
+              className={`messenger-bottom__btn`}
+              type='submit'
+              {...props}>
               <span className={'icon'}>
                 <Send />
               </span>
@@ -38,4 +43,6 @@ export const MessengerBottom = () => {
       </form>
     </div>
   );
-};
+});
+
+MessengerBottom.displayName = 'MessengerBottom';

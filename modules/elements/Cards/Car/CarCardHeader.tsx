@@ -1,4 +1,5 @@
-﻿import { ICarModel } from 'app/models';
+﻿import { requestAddToFavor } from 'api/User';
+import { ICarModel } from 'app/models';
 import { Eye, Heart, Prohibit } from 'assets/icon/icons';
 import { Button } from 'modules/UI/buttons/Button';
 import React from 'react';
@@ -6,7 +7,15 @@ import { Col, Row } from 'react-bootstrap';
 
 interface ICarCardHeader {}
 
-export const CarCardHeader: React.FC<ICarModel> = ({ mark, model, year }) => {
+export const CarCardHeader: React.FC<ICarModel> = ({
+  mark,
+  model,
+  year,
+  id,
+}) => {
+  const toFavor = (id: number) => {
+    requestAddToFavor(id);
+  };
   return (
     <>
       <div className='car__top'>
@@ -14,8 +23,7 @@ export const CarCardHeader: React.FC<ICarModel> = ({ mark, model, year }) => {
           <Col
             xs={12}
             md={5}
-            className='car__col d-flex align-items-center justify-content-between'
-          >
+            className='car__col d-flex align-items-center justify-content-between'>
             <h2 className='car__title title'>
               {mark} {model} <span>{year}</span>
             </h2>
@@ -29,7 +37,12 @@ export const CarCardHeader: React.FC<ICarModel> = ({ mark, model, year }) => {
           <Col xs={12} md={7} className='car__col'>
             <div className='d-flex flex-wrap align-items-center justify-content-between'>
               <div className='car__top-actions'>
-                <Button className='btn-main' type={'button'}>
+                <Button
+                  onClick={() => {
+                    toFavor(Number(id));
+                  }}
+                  className='btn-main'
+                  type={'button'}>
                   <div className='d-flex align-items-center'>
                     <div className={'icon'}>
                       <Heart />

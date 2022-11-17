@@ -18,6 +18,47 @@ const nextConfig = {
   },
   optimizeFonts: true,
   productionBrowserSourceMaps: false,
+  async rewrites() {
+    return [
+      {
+        source: '/referrals',
+        destination: '/referrals/index.html',
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: '/favorites',
+        destination: '/in_dev',
+        permanent: false,
+      },
+      {
+        source: '/feedback',
+        destination: '/in_dev',
+        permanent: false,
+      },
+      {
+        source: '/partners',
+        destination: '/in_dev',
+        permanent: false,
+      },
+      {
+        source: '/pay',
+        destination: '/in_dev',
+        permanent: false,
+      },
+      {
+        source: '/rules',
+        destination: '/in_dev',
+        permanent: false,
+      },
+    ];
+  },
 };
 
-module.exports = nextConfig;
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+module.exports = withBundleAnalyzer(nextConfig);

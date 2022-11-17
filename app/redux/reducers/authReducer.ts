@@ -102,7 +102,7 @@ export function* saga() {
   });
 
   yield takeLatest(actionTypes.UserRequested, function* userRequested() {
-    const { data } = yield getUserByToken();
-    yield put(actions.fulfillUser(data.data));
+    const { data: user } = yield getUserByToken();
+    yield put(actions.fulfillUser(user.data));
   });
 }

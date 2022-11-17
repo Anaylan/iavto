@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 
 import { TITLE } from 'app/config';
 import * as header from 'app/redux/reducers/authReducer';
+import * as ref from 'app/redux/reducers/referralReducer';
 
 const phoneNumberMask = [
   '+',
@@ -58,6 +59,10 @@ export const Register: React.FC<UserModel> = () => {
     ({ header }: { header: header.IAuthState }) => header.title,
   );
 
+  const ref_code = useSelector(
+    ({ referral }: { referral: ref.IReferralState }) => referral.ref_code,
+  );
+
   if (user) {
     router.push('/');
   }
@@ -79,6 +84,7 @@ export const Register: React.FC<UserModel> = () => {
         values.firstname,
         values.lastname,
         values.phone,
+        ref_code,
       )
         .then(({ data }) => {
           setLoading(false);
@@ -221,8 +227,7 @@ export const Register: React.FC<UserModel> = () => {
                     <button
                       type={'submit'}
                       className={`btn-main btn-main-trp`}
-                      style={{ background: 'transparent' }}
-                    >
+                      style={{ background: 'transparent' }}>
                       Зарегистрироваться
                     </button>
                   </div>

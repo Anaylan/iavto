@@ -36,7 +36,7 @@ const NewsBlock: React.FC<NewsProps> = () => {
               ))}
           </div>
           <div className='col-12 col-sm-6 col-md-5'>
-            <Link className='news__banner' href='#'>
+            {/* <Link className='news__banner' href='#'>
               <Image
                 src={`/media/sber-banner.png`}
                 priority={false}
@@ -44,15 +44,18 @@ const NewsBlock: React.FC<NewsProps> = () => {
                 sizes='100%'
                 alt=''
               />
-            </Link>
+            </Link> */}
+            <p className='news__banner d-flex justify-content-center'>
+              Здесь могла быть ваша реклама
+            </p>
           </div>
         </div>
       </div>
-      <div className='d-flex align-items-center justify-content-center'>
+      {/* <div className='d-flex align-items-center justify-content-center'>
         <Link className='btn-main' href='/post'>
           Смотреть все новости
         </Link>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 };
@@ -74,7 +77,7 @@ export const PostPreview: React.FC<PostProps> = ({ postInfo }) => {
         <div className='news-item__content'>
           <h4 className='news-item__title'>{postInfo.title}</h4>
           <p>{postInfo.description}</p>
-          <Link href={`/post/${postInfo.id}`}>Подробнеe</Link>
+          {/* <Link href={`/post/${postInfo.id}`}>Подробнеe</Link> */}
         </div>
       </div>
     </React.Fragment>

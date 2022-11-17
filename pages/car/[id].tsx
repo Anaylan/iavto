@@ -51,12 +51,12 @@ export default function Car({ car }: { car: ICarModel }) {
     {
       title: 'Отзывы',
       eventKey: 'reviews',
-      contentChild: <TabReviews />,
+      contentChild: <TabReviews id={`${car.cid}`} />,
     },
     {
       title: 'СВЯЗАТЬСЯ С АВТОПАРКОМ',
       eventKey: 'contact',
-      contentChild: <TabFeedback />,
+      contentChild: <TabFeedback id={`${car.cid}`} />,
     },
   ];
 
@@ -77,7 +77,7 @@ export default function Car({ car }: { car: ICarModel }) {
                 fill
                 alt={carpark.company_name ? carpark.company_name : ''}
               />
-              <ActionFollow />
+              <ActionFollow id={Number(carpark.cid)} />
               <CarparkCard
                 alt={carpark.company_name}
                 tarif={carpark.tarif}

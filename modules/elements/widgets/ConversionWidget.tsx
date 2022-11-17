@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ApexCharts, { ApexOptions } from 'apexcharts';
+import { requestGoToStats } from 'api/Refferal';
 
 type Props = {
   className: string;
@@ -14,6 +15,14 @@ const RentWidget: React.FC<Props> = ({
   chartHeight,
 }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
+  const [transit, setTransit] = useState<number[]>([]);
+  const [register, setRegister] = useState<number[]>([]);
+  useEffect(() => {
+    requestGoToStats().then(({ data }) => {
+      setTransit(data.links);
+      setRegister(data.reg);
+    });
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -23,7 +32,7 @@ const RentWidget: React.FC<Props> = ({
 
       const chart = new ApexCharts(
         chartRef.current,
-        chartOptions(chartColor, chartHeight),
+        chartOptions(transit, register),
       );
       if (chart) {
         chart.render();
@@ -35,8 +44,9 @@ const RentWidget: React.FC<Props> = ({
         }
       };
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartRef]);
+  }, [chartRef, transit, register]);
 
   return (
     <>
@@ -122,7 +132,10 @@ const dataRent3 = {
 };
 // end
 
-const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
+const chartOptions = (
+  transition: number[],
+  register: number[],
+): ApexOptions => {
   return {
     chart: {
       locales: [{ name: 'ru' }],
@@ -144,11 +157,11 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
     series: [
       {
         name: 'Переход',
-        data: dataRent.money,
+        data: transition,
       },
       {
         name: 'Регистрация',
-        data: dataRent2.money,
+        data: register,
       },
     ],
     responsive: [

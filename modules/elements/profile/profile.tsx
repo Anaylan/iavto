@@ -8,8 +8,10 @@ import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import { Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { Textarea, Button } from 'modules/UI';
+import { Textarea, Button, FormInputWithoutLabel } from 'modules/UI';
 import { Modal } from 'react-bootstrap';
+import { requestTransaction, requestURLTransaction } from 'api/Transaction';
+import { requestEdit } from 'api/User';
 // import Modal from '@restart/ui/Modal';
 enum TypeFavorites {
   car = 1,
@@ -83,8 +85,14 @@ export const ProfileDescription = ({
 }) => {
   const [editActive, setEditActive] = useState<boolean>(false);
   const [show, setShow] = useState(false);
+  const [prevDescr, setPrevDescr] = useState('');
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    requestEdit({ prevDescr }).then(({ data }) => {
+      console.log(data);
+    });
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
 
   return (
@@ -106,11 +114,13 @@ export const ProfileDescription = ({
                 <Modal.Header closeButton>
                   <Modal.Title>Изменение информации о себе</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className='form'>
                   <Textarea
                     defaultValue={description}
-                    className='mb-3 form-control'
-                    rows={4}
+                    className='mb-3 form__input'
+                    onChange={(e) => {
+                      setPrevDescr(e.target.value);
+                    }}
                   />
                 </Modal.Body>
                 <Modal.Footer>
@@ -134,9 +144,38 @@ export const ProfileBalance = ({
 }: {
   balance: string | undefined;
 }) => {
+  const [value, setValue] = useState<string>('');
+  const [token, setToken] = useState<string>('');
+  const [showPay, setShowPay] = useState(false);
+  const [showCheck, setShowCheck] = useState(false);
+
+  const handleClosePay = () => setShowPay(false);
+  const handleShowPay = () => setShowPay(true);
+
+  const handleCloseCheck = () => setShowCheck(false);
+  const handleShowCheck = () => setShowCheck(true);
+
+  const addMoney = () => {
+    requestURLTransaction(value).then(({ data }) => {
+      window.open(data.src);
+      setToken(data.token);
+      handleClosePay();
+      handleShowCheck();
+    });
+  };
+
+  const checkPayment = () => {
+    requestTransaction(value, token).then(({ data }) => {
+      handleCloseCheck();
+      setToken('');
+      setValue('');
+      console.log(data);
+    });
+  };
+
   return (
     <Col sx={12} sm={6} md={3} className={'profile__col'}>
-      <Link className={`profile__item profile__item_imp`} href='#'>
+      <Link href='#' className={`profile__item profile__item_imp`}>
         <div className={`profile__body profile-body`}>
           <h3 className={'profile-body__title'}>Баланс</h3>
         </div>
@@ -144,9 +183,42 @@ export const ProfileBalance = ({
           <div className={'profile__subtitle'}>
             <span>{balance ? balance : 0}</span>₽
           </div>
-          <div className={'profile-body__action'}>Пополнить</div>
+          <div onClick={handleShowPay} className={'profile-body__action'}>
+            Пополнить
+          </div>
         </div>
       </Link>
+      <Modal centered show={showPay} onHide={handleClosePay}>
+        <Modal.Header closeButton>
+          <Modal.Title>Пополнение счёта</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <FormInputWithoutLabel
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+            value={value}
+            placeholder='Введите сумму пополнения'
+            className='mb-3 form-control'
+            type={'number'}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className={'btn-main-trp'} onClick={handleClosePay}>
+            Закрыть
+          </Button>
+          <Button onClick={addMoney}>Пополнить</Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal centered show={showCheck}>
+        <Modal.Header>
+          <Modal.Title>Пополнение счёта</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Оплатите счет и нажмите кнопку проверить</Modal.Body>
+        <Modal.Footer>
+          <Button onClick={checkPayment}>Проверить</Button>
+        </Modal.Footer>
+      </Modal>
     </Col>
   );
 };

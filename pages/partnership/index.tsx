@@ -2,10 +2,9 @@ import { TITLE } from 'app/config';
 import Head from 'next/head';
 import Image from 'next/image';
 import { Col, Container, Nav, Row, Tab } from 'react-bootstrap';
-import { Button, Pagination, PaginationItem } from 'modules/UI';
 
 // import verif from 'assets/sass/'
-import { Download } from 'assets/icon/icons';
+import { Download, Copy } from 'assets/icon/icons';
 // import { RentWidget } from 'modules/elements/widgets/RentWidget'
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
@@ -13,11 +12,10 @@ import { IRefModel, UserDataModel, UserModel } from 'app/models';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserByToken } from 'api/User';
 import { useRouter } from 'next/router';
-import * as auth from 'app/redux/reducers/authReducer';
-import { TCell, THead } from 'modules/UI/tables/table';
 import { getAllReferer, getAllRefCompany } from 'api/Refferal';
-import { dbFormatDate, month, RefCodeToClipboard } from 'libs/functions';
+import { RefCodeToClipboard } from 'libs/functions';
 import { PartnershipTable } from 'modules/elements/partnership/PartnershipTable';
+import * as auth from 'app/redux/reducers/authReducer';
 
 const THeadReferrals = [
   'Водитель',
@@ -55,6 +53,7 @@ export default function Partners() {
   const dispatch = useDispatch();
   const [referrals, setReferrals] = useState<IRefModel[]>([]);
   const [refCompanies, setRefCompanies] = useState<IRefModel[]>([]);
+  const [test, setTest] = useState([]);
   const router = useRouter();
   const user = useSelector(
     ({ header }: { header: UserDataModel }) => header.user,
@@ -82,10 +81,8 @@ export default function Partners() {
     });
     getAllRefCompany().then(({ data }: { data: IRefModel[] }) => {
       setRefCompanies(data);
-      console.log(data);
     });
   }, []);
-  console.log(referrals);
 
   return (
     <>
@@ -94,16 +91,22 @@ export default function Partners() {
       </Head>
       <section className='charts'>
         <Container>
-          <span className={'d-flex mb-4 align-items-end'}>
-            <h1 className='title mb-0'>Информация о партнерстве</h1>
-            <p
+          <div className={'charts__header'}>
+            <h1 className='title'>Информация о партнерстве</h1>
+            <button
               onClick={() => {
                 RefCodeToClipboard(user.id);
               }}
-              className='text-indigo ms-1 pb-2 user-select-none'>
-              (реферальная ссылка) нажмите чтобы скопировать
-            </p>
-          </span>
+              className='btn-main btn-ref'
+              type='button'>
+              <div className='d-flex align-items-center'>
+                <div className={`icon`}>
+                  <Copy />
+                </div>
+                <span>Реферальная ссылка (нажмите, чтобы скопировать)</span>
+              </div>
+            </button>
+          </div>
 
           <Row>
             <Col xs={12} lg={6}>
@@ -129,14 +132,14 @@ export default function Partners() {
                 <Nav.Link
                   className='tables-nav__link btn-main nav-link'
                   eventKey='first'>
-                  Люди
+                  Водители
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link
                   className='tables-nav__link btn-main nav-link'
                   eventKey='second'>
-                  Не люди
+                  Автопарки
                 </Nav.Link>
               </Nav.Item>
             </Nav>

@@ -51,14 +51,16 @@ const tarifs = [
 export default function Cars() {
   const [marks, setMark] = useState<IMark[]>([]);
   const [models, setModel] = useState<IModel[]>([]);
+  const [fuelChange, setFuelChange] = useState<number>(0);
+  const [transChange, setTransChange] = useState<number>(0);
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
       mark: '',
-      transmission: 'Автомат',
+      transmission: '',
       model: '',
       tarif: '',
-      fuel: 'Бензин',
+      fuel: '',
       from: '',
       to: '',
     },
@@ -125,6 +127,7 @@ export default function Cars() {
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите тариф
                   </SearchSelectOption>
+                  <SearchSelectOption value={''}>Все тарифы</SearchSelectOption>
                   {tarifs &&
                     tarifs.map((tarif, key) => (
                       <SearchSelectOption key={key} value={tarif.name}>
@@ -146,6 +149,7 @@ export default function Cars() {
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите марку
                   </SearchSelectOption>
+                  <SearchSelectOption value={''}>Все марки</SearchSelectOption>
                   {marks &&
                     marks.map((mark, key) => (
                       <SearchSelectOption key={key} value={mark.mark}>
@@ -168,6 +172,7 @@ export default function Cars() {
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите модель
                   </SearchSelectOption>
+                  <SearchSelectOption value={''}>Все модели</SearchSelectOption>
                   {models &&
                     models.map((model, key) => (
                       <SearchSelectOption key={key} value={model.model}>
@@ -180,7 +185,7 @@ export default function Cars() {
                 columns={{
                   xs: 12,
                   sm: 6,
-                  md: 5,
+                  md: 4,
                 }}>
                 <PriceFromTo>
                   <FilterInput
@@ -202,23 +207,35 @@ export default function Cars() {
                 columns={{
                   xs: 12,
                   sm: 6,
-                  md: 3,
+                  md: 4,
                 }}>
                 <FilterRadioGroup>
                   <FilterRadioItem
                     onChange={formik.handleChange}
+                    onClick={() => {
+                      if (transChange === 1) {
+                        setTransChange(0);
+                        formik.values.transmission = '';
+                      } else setTransChange(1);
+                    }}
                     value={'auto'}
                     id='automatic'
                     name='transmission'
-                    defaultChecked={true}>
+                    checked={transChange === 1}>
                     Автомат
                   </FilterRadioItem>
                   <FilterRadioItem
                     onChange={formik.handleChange}
+                    onClick={() => {
+                      if (transChange === 2) {
+                        setTransChange(0);
+                        formik.values.transmission = '';
+                      } else setTransChange(2);
+                    }}
                     id='mechanics'
                     value={'mechanics'}
                     name='transmission'
-                    defaultChecked={false}>
+                    checked={transChange === 2}>
                     Механическая
                   </FilterRadioItem>
                 </FilterRadioGroup>
@@ -233,25 +250,43 @@ export default function Cars() {
                   <FilterRadioItem
                     name={'fuel'}
                     onChange={formik.handleChange}
+                    onClick={() => {
+                      if (fuelChange === 1) {
+                        setFuelChange(0);
+                        formik.values.fuel = '';
+                      } else setFuelChange(1);
+                    }}
                     id='petrol'
                     value='petrol'
-                    defaultChecked={true}>
+                    checked={fuelChange === 1}>
                     Бензин
                   </FilterRadioItem>
                   <FilterRadioItem
                     name={'fuel'}
                     onChange={formik.handleChange}
+                    onClick={() => {
+                      if (fuelChange === 2) {
+                        setFuelChange(0);
+                        formik.values.fuel = '';
+                      } else setFuelChange(2);
+                    }}
                     id='disel'
                     value='disel'
-                    defaultChecked={false}>
+                    checked={fuelChange === 2}>
                     Дизель
                   </FilterRadioItem>
                   <FilterRadioItem
                     name={'fuel'}
                     onChange={formik.handleChange}
+                    onClick={() => {
+                      if (fuelChange === 3) {
+                        setFuelChange(0);
+                        formik.values.fuel = '';
+                      } else setFuelChange(3);
+                    }}
                     id='gas'
                     value='gas'
-                    defaultChecked={false}>
+                    checked={fuelChange === 3}>
                     Газ
                   </FilterRadioItem>
                 </FilterRadioGroup>

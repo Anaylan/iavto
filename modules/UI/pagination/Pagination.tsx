@@ -10,8 +10,7 @@ export const Pagination: FC<IPagination> = ({ children, props }) => {
     <>
       <nav {...props}>
         <ul
-          className={`pagination-wrapper pagination justify-content-center align-items-center`}
-        >
+          className={`pagination-wrapper pagination justify-content-center align-items-center`}>
           {children}
         </ul>
       </nav>
@@ -44,7 +43,7 @@ const PaginationCurrent = ({
 }) => {
   return (
     <>
-      <li className={`tables__pagination-value`}>
+      <li className={`pagination-value`}>
         <span>{currentPage}</span> из <span>{totalPage}</span>
       </li>
     </>

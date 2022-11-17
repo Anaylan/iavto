@@ -8,6 +8,8 @@ export const REGISTER_URL = `${API_URL}/auth/new`;
 export const REQUEST_PASSWORD_URL = `${API_URL}/auth/forgot-password`;
 export const REQUEST_VERIFICATION_URL = `${API_URL}/user/verification`;
 export const REQUEST_EDIT_URL = `${API_URL}/user/edit`;
+export const REQUEST_TO_FAVOR = `${API_URL}/user/addfavorites`;
+export const GET_FAVOR = `${API_URL}/user/getfavorites`;
 
 // Server should return AuthModel
 export async function login(email: string, password: string) {
@@ -21,6 +23,7 @@ export function register(
   firstname: string,
   lastname: string,
   phone: string,
+  ref_code: string | string[] | undefined,
 ) {
   return axiosAuth.post<UserModel>(REGISTER_URL, {
     email,
@@ -28,6 +31,7 @@ export function register(
     firstname,
     lastname,
     phone,
+    ref_code,
   });
 }
 
@@ -52,4 +56,16 @@ export async function requestVerification(options: any) {
 
 export async function requestEdit(options: any) {
   return axiosAuth.post<UserModel>(REQUEST_EDIT_URL, options);
+}
+
+export function requestAddToFavor(id: number) {
+  return axiosAuth.get(REQUEST_TO_FAVOR, {
+    params: {
+      id_content: id,
+    },
+  });
+}
+
+export function getUserFavor() {
+  return axiosAuth.get(GET_FAVOR);
 }

@@ -67,11 +67,13 @@ export const HeaderMenu = ({
                 <RegionSearch className={`header-region collapse show`} />
                 <MenuList>
                   {user ? (
-                    <MenuListItem href={'/profile'}>
+                    <MenuListItem onClick={onClick} href={'/profile'}>
                       {user.firstname}
                     </MenuListItem>
                   ) : (
-                    <MenuListItem href={'/auth/signin'}>Войти</MenuListItem>
+                    <MenuListItem onClick={onClick} href={'/auth/signin'}>
+                      Войти
+                    </MenuListItem>
                   )}
                   {Links.map((link, key) => (
                     <MenuListItem onClick={onClick} key={key} href={link.href}>
@@ -80,17 +82,17 @@ export const HeaderMenu = ({
                   ))}
                 </MenuList>
               </div>
+              <MenuListBottom>
+                <MenuListBottomItem onClick={onClick}>
+                  {HeaderBottomLinks.map((link, key) => (
+                    <Link href={link.href} key={key}>
+                      {link.title}
+                    </Link>
+                  ))}
+                </MenuListBottomItem>
+              </MenuListBottom>
             </div>
-            <MenuListBottom>
-              <MenuListBottomItem onClick={onClick}>
-                {HeaderBottomLinks.map((link, key) => (
-                  <Link href={link.href} key={key}>
-                    {link.title}
-                  </Link>
-                ))}
-              </MenuListBottomItem>
-            </MenuListBottom>
-            <div className='footer'>
+            <div className='menu__footer'>
               <div className='text-dark'>
                 <span className='text-muted fw-bold'>
                   2022© ЯАВТО.РФ Все права защищены

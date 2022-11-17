@@ -31,20 +31,19 @@ export const PartnershipTable = ({
 
   const [fake, setFake] = useState<any>([]);
 
-  useEffect(() => {
-    // getUserReviews().then((res) => console.log(res));
-    axios
-      .get(
-        `https://jsonplaceholder.typicode.com/todos?_page=${currentPage}&_limit=${pageLimit}`,
-      )
-      .then((res) => {
-        console.log(res.headers['x-total-count']);
-        setFake(res.data);
-        setTotalPage(
-          Math.ceil(Number(res.headers['x-total-count']) / pageLimit),
-        );
-      });
-  }, [currentPage, totalPage]);
+  // useEffect(() => {
+  //   // getUserReviews().then((res) => console.log(res));
+  //   axios
+  //     .get(
+  //       `https://jsonplaceholder.typicode.com/todos?_page=${currentPage}&_limit=${pageLimit}`,
+  //     )
+  //     .then((res) => {
+  //       setFake(res.data);
+  //       setTotalPage(
+  //         Math.ceil(Number(res.headers['x-total-count']) / pageLimit),
+  //       );
+  //     });
+  // }, [currentPage, totalPage]);
 
   return (
     <>
@@ -54,11 +53,15 @@ export const PartnershipTable = ({
             <table className={`table`}>
               <THead row={THeadRow} />
               <tbody>
-                {fake &&
-                  fake.map((referral: any, key: number) => (
+                {referrals &&
+                  referrals.map((referral: any, key: number) => (
                     <tr key={key}>
                       <TCell>
-                        <Link href='#'>{referral.title}</Link>
+                        <Link href='#'>
+                          {referral.firstname
+                            ? referral.firstname
+                            : referral.company_name}
+                        </Link>
                       </TCell>
                       <TCell>{dbFormatDate(referral.created, month)}</TCell>
                       <TCell>10%</TCell>
@@ -105,7 +108,7 @@ export const PartnershipTable = ({
             <span aria-hidden='true'>&laquo;</span>
           </button>
         </PaginationItem>
-        <li className={`tables__pagination-value`}>
+        <li className={`pagination-value`}>
           <span>{currentPage}</span> из <span>{totalPage}</span>
         </li>
         <PaginationItem>

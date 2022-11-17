@@ -11,6 +11,7 @@ import { IRegionState } from 'app/redux/reducers/regionReducer';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { EmptyComponent } from 'modules/elements';
+import { requestAddToFavor } from 'api/User';
 
 const CarParkBlock: React.FC<ICarparkBlock> = ({
   getData,
@@ -65,10 +66,16 @@ export function TenderPark({
   carPark: ICarparkModel;
   lazy: boolean;
 }) {
+  const toFavor = (id: number) => {
+    requestAddToFavor(id).then(({ data }) => {
+      console.log(data);
+    });
+  };
+
   return (
     <>
       <div className={'carparks__item'}>
-        <Link className={'carparks__img'} href={`/carpark/${carPark.cid}`}>
+        <div className={'carparks__img'}>
           {carPark.img ? (
             <Image
               priority={lazy}
@@ -89,9 +96,31 @@ export function TenderPark({
           )}
 
           <div className={`carparks__hover carparks-hover`}>
+            {/* {carPark.favor ? (
+              <div
+                onClick={() => {
+                  toFavor(Number(carPark.cid));
+                }}
+                className={'carparks-hover__item'}>
+                <div>Добавить в</div>
+                <span className={'icon'}>
+                  <Heart />
+                </span>
+              </div>
+            ) : (
+              <>
+                <div class='carparks-hover__item carparks-hover-act'>
+                  <span class='icon'>
+                    <svg class='icon__item'>
+                      <Heart />
+                    </svg>
+                  </span>
+                </div>
+              </>
+            )} */}
             <div
               onClick={() => {
-                console.log('Добавить избранное');
+                toFavor(Number(carPark.cid));
               }}
               className={'carparks-hover__item'}>
               <div>Добавить в</div>
@@ -100,7 +129,7 @@ export function TenderPark({
               </span>
             </div>
           </div>
-        </Link>
+        </div>
         <Link
           className={'carparks__item-title'}
           href={`/carpark/${carPark.cid}`}>

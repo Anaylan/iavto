@@ -7,8 +7,9 @@ export default function setupAxios(axios: any, store: any) {
         } = store.getState();
 
         if (title) {
-          config.headers.authorization = `${title}`;
+          config.headers.Authorization = `${title}`;
         }
+
         return config;
       } catch (e) {
         console.log(e);

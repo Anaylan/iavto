@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ApexCharts, { ApexOptions } from 'apexcharts';
+import { getJoinedRefs } from 'api/Refferal';
 
 type Props = {
-  className: string;
-  chartColor: string;
-  chartHeight: string;
+  className?: string;
+  chartColor?: string;
+  chartHeight?: string;
 };
 
 const RentWidget: React.FC<Props> = ({
@@ -14,7 +15,16 @@ const RentWidget: React.FC<Props> = ({
   chartHeight,
 }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
-
+  let [userStat, setUserStats] = useState<number[]>([]);
+  let [companyStat, setCompanyStats] = useState<number[]>([]);
+  let [allStats, setAllStats] = useState<number[]>([]);
+  useEffect(() => {
+    getJoinedRefs().then(({ data }) => {
+      setUserStats(data.user);
+      setCompanyStats(data.company);
+      setAllStats(data.all);
+    });
+  }, []);
   useEffect(() => {
     if (typeof window !== 'undefined') {
       if (!chartRef.current) {
@@ -23,7 +33,7 @@ const RentWidget: React.FC<Props> = ({
 
       const chart = new ApexCharts(
         chartRef.current,
-        chartOptions(chartColor, chartHeight),
+        chartOptions(userStat, companyStat, allStats),
       );
       if (chart) {
         chart.render();
@@ -35,8 +45,7 @@ const RentWidget: React.FC<Props> = ({
         }
       };
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartRef]);
+  }, [chartRef, companyStat, userStat, allStats]);
 
   return (
     <>
@@ -106,24 +115,13 @@ function getDate() {
   }
   return arr2;
 }
-
-const dataRent = {
-  money: [30, 40, 150, 90, 90, 70, 160],
-  days: getDate().slice().reverse(),
-};
-
-const dataRent2 = {
-  money: [140, 60, 120, 140, 190, 170, 90],
-  days: getDate().slice().reverse(),
-};
-
-const dataRent3 = {
-  money: [70, 90, 70, 160, 120, 40, 60],
-  days: getDate().slice().reverse(),
-};
 // end
 
-const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
+const chartOptions = (
+  users: number[],
+  company: number[],
+  all: number[],
+): ApexOptions => {
   return {
     chart: {
       locales: [{ name: 'ru' }],
@@ -131,29 +129,23 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
       fontFamily: 'inherit',
       height: 350,
       type: 'area',
-      // dropShadow: {
-      //   enabled: true,
-      //   top: 0,
-      //   left: 0,
-      //   blur: 3,
-      //   opacity: 0.5
-      // },
+
       toolbar: {
         show: false,
       },
     },
     series: [
       {
+        name: 'Водители',
+        data: users,
+      },
+      {
+        name: 'Автопарки',
+        data: company,
+      },
+      {
         name: 'Всего',
-        data: dataRent.money,
-      },
-      {
-        name: 'С действующих рефералов',
-        data: dataRent2.money,
-      },
-      {
-        name: 'С новых рефералов',
-        data: dataRent3.money,
+        data: all,
       },
     ],
     responsive: [
@@ -208,12 +200,6 @@ const chartOptions = (chartColor: string, chartHeight: string): ApexOptions => {
       labels: {
         minHeight: 1,
         show: true,
-
-        // datetimeFormatter: {
-        //   year: 'yyyy',
-        //   month: 'Mmm',
-        //   day: 'dd'
-        // },
         style: {
           colors: '#a1a5b7',
           fontSize: '12px',

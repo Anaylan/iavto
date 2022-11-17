@@ -19,7 +19,12 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
     <>
       {car && (
         <>
-          <CarCardHeader mark={car.mark} model={car.model} year={car.year} />
+          <CarCardHeader
+            id={car.id}
+            mark={car.mark}
+            model={car.model}
+            year={car.year}
+          />
           <div className='car__body'>
             <Row className='car__row'>
               <Col md={7} xs={12} className='car__col order-1 order-md-2'>

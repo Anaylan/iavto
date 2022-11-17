@@ -106,7 +106,7 @@ const Footer: React.FC = () => {
                   <li>
                     <Link href='#'>Ссылка</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <a className='footer__link-app' href='#'>
                       <Image
                         width={100}
@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
                         alt=''
                       />
                     </a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -179,7 +179,7 @@ const Footer: React.FC = () => {
                 </div>
               </div>
             </div>
-            <a className='footer__link-app' href='#'>
+            {/* <a className='footer__link-app' href='#'>
               <Image
                 sizes='100%'
                 width={100}
@@ -187,8 +187,8 @@ const Footer: React.FC = () => {
                 src='/media/google-play.png'
                 alt=''
               />
-            </a>
-            <div className='footer__copyright d-block d-lg-none'>
+            </a> */}
+            <div className='footer__copyright d-block d-lg-none mt-3'>
               2022 © ЯАВТО.РФ Все права защищены
             </div>
           </div>

@@ -7,7 +7,7 @@ export const MessageAside = ({ message }: { message: IMessageModel }) => {
   return (
     <>
       <li className={`chat-aside__item`}>
-        <Link className={`chat-aside__item-wrap`} href='#'>
+        <Link className={`chat-aside__item-wrap`} href={`/chat?dialog=${1}`}>
           <span className={`chat-aside__photo`}>
             <Image src={'/media/user.png'} width={100} height={100} alt='' />
           </span>
