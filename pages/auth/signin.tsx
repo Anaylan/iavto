@@ -96,8 +96,7 @@ export const Login: FC<UserModel> = () => {
                   <div className={'form__btn-wrap'}>
                     <Link
                       className={`btn-main btn-main-trp`}
-                      href={'/auth/signup'}
-                    >
+                      href={'/auth/signup'}>
                       Зарегистрироваться
                     </Link>
                   </div>

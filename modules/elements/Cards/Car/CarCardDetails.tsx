@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { ICarModel } from 'app/models';
 
 export const CarCardDetails: React.FC<ICarModel> = ({

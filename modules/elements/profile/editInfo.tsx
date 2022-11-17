@@ -1,4 +1,4 @@
-﻿import { UserDataModel } from 'app/models';
+import { UserDataModel } from 'app/models';
 import { useFormik } from 'formik';
 import {
   Textarea,
@@ -77,8 +77,7 @@ export const EditInfo = ({ user }: { user: UserDataModel }) => {
             <div className={'info-profile__body'}>
               <Form
                 onSubmit={formik.handleSubmit}
-                className={`verification__form form`}
-              >
+                className={`verification__form form`}>
                 {formik.status && (
                   <div className='mb-lg-15 alert alert-danger'>
                     <div className='alert-text font-weight-bold'>
@@ -91,8 +90,7 @@ export const EditInfo = ({ user }: { user: UserDataModel }) => {
                     <Col xs={12} md={3}></Col>
                     <Col xs={12} md={9}>
                       <h1
-                        className={`info-profile__title title d-none d-sm-block`}
-                      >
+                        className={`info-profile__title title d-none d-sm-block`}>
                         Информация профиля
                       </h1>
                     </Col>

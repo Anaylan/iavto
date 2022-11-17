@@ -118,7 +118,7 @@ export const ProfileDescription = ({
                   <Textarea
                     defaultValue={description}
                     className='mb-3 form__input'
-                    onChange={(e) => {
+                    onChange={(e: any) => {
                       setPrevDescr(e.target.value);
                     }}
                   />

@@ -106,8 +106,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
               lg={2}
               className={
                 'd-flex align-items-center justify-content-between justify-content-lg-start'
-              }
-            >
+              }>
               <Link
                 className={'header-top__logo'}
                 href={'/'}
@@ -115,8 +114,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                   setActive(false);
                   button.current.classList.remove('open-nav');
                   document.body.classList.remove('lock');
-                }}
-              >
+                }}>
                 яавто.рф
               </Link>
               <button
@@ -126,8 +124,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                 data-bs-toggle='collapse'
                 data-bs-target='#navToggle'
                 aria-expanded='false'
-                aria-controls='navToggle'
-              >
+                aria-controls='navToggle'>
                 <div ref={button} className={'nav-anim'}>
                   <span></span>
                   <span></span>
@@ -149,16 +146,14 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                       <HeaderTopLink
                         key={key}
                         href={link.href}
-                        title={link.title}
-                      >
+                        title={link.title}>
                         {link.children}
                       </HeaderTopLink>
                     ))}
                     {user.status === 201 ? (
                       <HeaderTopLink
                         href={'/profile'}
-                        title={user.data?.firstname}
-                      >
+                        title={user.data?.firstname}>
                         <User />
                       </HeaderTopLink>
                     ) : (

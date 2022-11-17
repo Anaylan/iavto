@@ -26,8 +26,7 @@ export const HeaderBody: React.FC<IHeaderBody> = ({ links }) => {
           <Row>
             <Col
               as={'ul'}
-              className={`header-body__list d-flex align-items-center`}
-            >
+              className={`header-body__list d-flex align-items-center`}>
               {links.map((link, key) => (
                 <HeaderBodyLink key={key} href={link.href} title={link.title} />
               ))}

@@ -1,4 +1,4 @@
-﻿import { ICarModel } from 'app/models';
+import { ICarModel } from 'app/models';
 import { Location } from 'assets/icon/icons';
 import React from 'react';
 

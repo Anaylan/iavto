@@ -1,4 +1,4 @@
-﻿import { requestAddToFavor } from 'api/User';
+import { requestAddToFavor } from 'api/User';
 import { ICarModel } from 'app/models';
 import { Eye, Heart, Prohibit } from 'assets/icon/icons';
 import { Button } from 'modules/UI/buttons/Button';

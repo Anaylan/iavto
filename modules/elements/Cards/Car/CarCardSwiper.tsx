@@ -1,4 +1,4 @@
-﻿import { URL_IMG } from 'app/config';
+import { URL_IMG } from 'app/config';
 import Image from 'next/image';
 import React, { useState } from 'react';
 

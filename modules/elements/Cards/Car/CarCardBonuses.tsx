@@ -1,4 +1,4 @@
-﻿import { Check } from 'assets/icon/icons';
+import { Check } from 'assets/icon/icons';
 
 export const CarCardBonuses = () => {
   return (
