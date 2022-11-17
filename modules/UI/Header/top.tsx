@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { forwardRef, useEffect, useRef, useState, useTransition } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 
 import { getUserByToken } from 'api/User'
 import { ILink, UserModel } from 'app/models'
 import * as auth from 'app/redux/reducers/authReducer'
 import { User } from 'assets/icon/icons'
-import styles from 'assets/sass/components/header/top.module.scss'
+
 import { HeaderMenu, SearchInput } from 'modules/UI'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -42,9 +42,9 @@ export const HeaderTopLink: React.FC<Children> = ({
 }) => {
   return (
     <>
-      <li className={`${styles['header-top__item']}`}>
-        <Link className={`${styles['header-top__link']}`} href={href}>
-          <div className={styles.icon}>{children}</div>
+      <li className={`header-top__item`}>
+        <Link className={`header-top__link`} href={href}>
+          <div className={'icon'}>{children}</div>
           <span>{title}</span>
         </Link>
       </li>
@@ -69,10 +69,10 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
     setActive(!active)
 
     if (!active) {
-      button.current.classList.add(styles['open-nav'])
+      button.current.classList.add('open-nav')
       document.body.classList.add('lock')
     } else {
-      button.current.classList.remove(styles['open-nav'])
+      button.current.classList.remove('open-nav')
       document.body.classList.remove('lock')
     }
   }
@@ -98,7 +98,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
 
   return (
     <>
-      <Col ref={ref} className={`header__top ${styles['header-top']}`}>
+      <Col ref={ref} className={`header__top header-top`}>
         <Container>
           <Row className='align-items-center'>
             <Col
@@ -109,11 +109,11 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
               }
             >
               <Link
-                className={styles['header-top__logo']}
+                className={'header-top__logo'}
                 href={'/'}
                 onClick={() => {
                   setActive(false)
-                  button.current.classList.remove(styles['open-nav'])
+                  button.current.classList.remove('open-nav')
                   document.body.classList.remove('lock')
                 }}
               >
@@ -121,14 +121,14 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
               </Link>
               <button
                 onClick={onClick}
-                className={`${styles['nav-button']} d-flex align-items-center d-lg-none`}
+                className={`nav-button d-flex align-items-center d-lg-none`}
                 type='button'
                 data-bs-toggle='collapse'
                 data-bs-target='#navToggle'
                 aria-expanded='false'
                 aria-controls='navToggle'
               >
-                <div ref={button} className={styles['nav-anim']}>
+                <div ref={button} className={'nav-anim'}>
                   <span></span>
                   <span></span>
                   <span></span>
@@ -144,7 +144,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                   <SearchInput placeholder={'Поиск...'} />
                 </Col>
                 <Col xs={12} lg={5}>
-                  <ul className={styles['header-top__list']}>
+                  <ul className={'header-top__list'}>
                     {props.links.map((link: any, key: number) => (
                       <HeaderTopLink
                         key={key}
@@ -159,11 +159,11 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                         href={'/profile'}
                         title={user.data?.firstname}
                       >
-                        <User color={styles['icon__item']} />
+                        <User color={'icon__item'} />
                       </HeaderTopLink>
                     ) : (
                       <HeaderTopLink href={'/auth/signin'} title={'Войти'}>
-                        <User color={styles['icon__item']} />
+                        <User color={'icon__item'} />
                       </HeaderTopLink>
                     )}
                   </ul>

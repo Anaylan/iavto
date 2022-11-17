@@ -1,6 +1,4 @@
 ﻿import { URL_IMG } from 'app/config'
-import slider from 'assets/sass/components/car/car-slider.module.scss'
-import car from 'assets/sass/components/car/car.module.scss'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
@@ -23,22 +21,22 @@ export const CarCardSwiper: React.FC<ICarCardSwiper> = ({ images, cid }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null)
 
   return (
-    <div className={car['car__slider-body']}>
+    <div className={'car__slider-body'}>
       <Swiper
         modules={[EffectFade, Thumbs]}
         // spaceBetween={10}
-        wrapperClass={slider['car-slider__wrapper']}
+        wrapperClass={'car-slider__wrapper'}
         // containerModifierClass={`${slider['car-slider']}`}
         // slideClass={slider['car-slider__slide']}
         effect='fade'
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null
         }}
-        className={slider['car-slider']}
+        className={'car-slider'}
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index} className={slider['car-slider__slide']}>
-            <div className={slider['car-slider__img']}>
+          <SwiperSlide key={index} className={'car-slider__slide'}>
+            <div className={'car-slider__img'}>
               <Image
                 sizes={'100%'}
                 src={URL_IMG + '/' + cid + '/' + image}
@@ -53,8 +51,8 @@ export const CarCardSwiper: React.FC<ICarCardSwiper> = ({ images, cid }) => {
         modules={[Thumbs]}
         slidesPerView={4}
         onSwiper={setThumbsSwiper}
-        wrapperClass={slider['car-mini-slider__wrapper']}
-        className={slider['car-mini-slider']}
+        wrapperClass={'car-mini-slider__wrapper'}
+        className={'car-mini-slider'}
         spaceBetween={12}
         breakpoints={{
           1024: {
@@ -65,8 +63,8 @@ export const CarCardSwiper: React.FC<ICarCardSwiper> = ({ images, cid }) => {
         // slideVisibleClass={slider['car-mini-slider-visible']}
       >
         {images.map((image, index) => (
-          <SwiperSlide key={index} className={slider['car-mini-slider__slide']}>
-            <div className={slider['car-mini-slider__img']}>
+          <SwiperSlide key={index} className={'car-mini-slider__slide'}>
+            <div className={'car-mini-slider__img'}>
               <Image
                 sizes={'100%'}
                 src={URL_IMG + '/' + cid + '/' + image}

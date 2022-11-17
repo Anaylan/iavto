@@ -1,12 +1,10 @@
 import { TITLE } from 'app/config'
-import table from 'assets/sass/components/tables/table.module.scss'
+
 import Head from 'next/head'
 import Image from 'next/image'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Pagination, PaginationItem } from 'modules/UI'
-import bannersHover from 'assets/sass/components/banners/banners-hover.module.scss'
-import banners from 'assets/sass/components/banners/banners.module.scss'
-import tables from 'assets/sass/components/tables/tables.module.scss'
+
 // import verif from 'assets/sass/'
 import { Download } from 'assets/icon/icons'
 // import { RentWidget } from 'modules/elements/widgets/RentWidget'
@@ -91,12 +89,12 @@ export default function Partners() {
         </Container>
       </section>
 
-      <section className={`${tables['tables']}`}>
+      <section className={`tables`}>
         <Container>
-          <Row className={`${tables['tables__tabs']}`}>
-            <section className={`${tables['tables__tab']}`}>
-              <div className={`${table['table-responsive']}`}>
-                <table className={`${table['table']}`}>
+          <Row className={`tables__tabs`}>
+            <section className={`tables__tab`}>
+              <div className={`table-responsive`}>
+                <table className={`table`}>
                   <THead row={THeadRow} />
                   <tbody>
                     {referrals.map((referral, key) => (
@@ -110,9 +108,7 @@ export default function Partners() {
                         <TCell>DanilTech228</TCell>
                         <TCell>DanilTech228</TCell>
                         <TCell>DanilTech228</TCell>
-                        <TCell className={table['table__wait']}>
-                          DanilTech228
-                        </TCell>
+                        <TCell className={'table__wait'}>DanilTech228</TCell>
                       </tr>
                     ))}
                   </tbody>
@@ -126,7 +122,7 @@ export default function Partners() {
                 <span aria-hidden='true'>&laquo;</span>
               </Link>
             </PaginationItem>
-            <li className={`${tables['tables__pagination-value']}`}>
+            <li className={`tables__pagination-value`}>
               <span>{currentPage}</span> из <span>{totalPage}</span>
             </li>
             <PaginationItem>
@@ -138,16 +134,14 @@ export default function Partners() {
         </Container>
       </section>
 
-      <section className={`${banners['banners']}`}>
+      <section className={`banners`}>
         <Container>
           <h2 className='title'>Баннеры</h2>
-          <Row className={`${banners['banners__body']}`}>
-            <Col className={`${banners['banners__col']}`} xs={12} sm={6} md={3}>
-              <a className={`${banners['banners__item']}`} href='#'>
-                <span className={`${banners['banners__img-wrap']}`}>
-                  <span
-                    className={`${banners['banners__img']} ${banners['banners__img_long']}`}
-                  >
+          <Row className={`banners__body`}>
+            <Col className={`banners__col`} xs={12} sm={6} md={3}>
+              <a className={`banners__item`} href='#'>
+                <span className={`banners__img-wrap`}>
+                  <span className={`banners__img banners__img_long`}>
                     <Image
                       width={100}
                       height={100}
@@ -155,17 +149,13 @@ export default function Partners() {
                       alt=''
                     />
                   </span>
-                  <span
-                    className={`${banners['banners__hover']} ${bannersHover['banners-hover']}`}
-                  >
-                    <span className={`${bannersHover['banners-hover__body']}`}>
-                      <span
-                        className={`${bannersHover['banners-hover__title']}`}
-                      >
+                  <span className={`banners__hover banners-hover`}>
+                    <span className={`banners-hover__body`}>
+                      <span className={`banners-hover__title`}>
                         Скачать баннер
                       </span>
-                      <span className={`${bannersHover['icon']}`}>
-                        <Download color={bannersHover['icon__item']} />
+                      <span className={`icon`}>
+                        <Download />
                       </span>
                     </span>
                   </span>
@@ -176,16 +166,14 @@ export default function Partners() {
         </Container>
       </section>
 
-      <section className={`${banners['banners']} ${banners['presentations']}`}>
+      <section className={`banners presentations`}>
         <Container>
           <h2 className='title'>Презентации</h2>
-          <Row className={`${banners['banners__body']}`}>
-            <Col className={`${banners['banners__col']}`} xs={12} sm={6} md={4}>
-              <a className={`${banners['banners__item']}`} href='#'>
-                <span
-                  className={`${banners['banners__img-wrap']} ${banners['banners__img-wrap_shadow']}`}
-                >
-                  <span className={`${banners['banners__img']}`}>
+          <Row className={`banners__body`}>
+            <Col className={`banners__col`} xs={12} sm={6} md={4}>
+              <a className={`banners__item`} href='#'>
+                <span className={`banners__img-wrap banners__img-wrap_shadow`}>
+                  <span className={`banners__img`}>
                     <Image
                       width={100}
                       height={100}
@@ -193,23 +181,19 @@ export default function Partners() {
                       alt=''
                     />
                   </span>
-                  <span
-                    className={`${banners['banners__hover']} ${bannersHover['banners-hover']}`}
-                  >
-                    <span className={`${bannersHover['banners-hover__body']}`}>
-                      <span
-                        className={`${bannersHover['banners-hover__title']}`}
-                      >
+                  <span className={`banners__hover banners-hover`}>
+                    <span className={`banners-hover__body`}>
+                      <span className={`banners-hover__title`}>
                         Скачать презентацию
                       </span>
-                      <span className={`${bannersHover['icon']}`}>
-                        <Download color={bannersHover['icon__item']} />
+                      <span className={`icon`}>
+                        <Download />
                       </span>
                     </span>
                   </span>
                 </span>
-                <span className={`${banners['banners__link-wrap']}`}>
-                  <span className={`${banners['profile-body__action']}`}>
+                <span className={`banners__link-wrap`}>
+                  <span className={`profile-body__action`}>
                     Скачать презентацию для автопарков
                   </span>
                 </span>

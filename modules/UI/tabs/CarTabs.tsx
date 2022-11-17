@@ -1,6 +1,5 @@
 import { ITabItems } from 'app/models'
 import { Container, Nav, Tab } from 'react-bootstrap'
-import styles from './CarTabs.module.scss'
 
 export const CarparkTabs = ({ tabs }: { tabs: ITabItems[] }) => {
   return (
@@ -15,7 +14,7 @@ export const CarparkTabs = ({ tabs }: { tabs: ITabItems[] }) => {
               variant={'pills'}
               fill
               as={'ul'}
-              className={`${styles['tab-nav']} carpark__tab-nav`}
+              className={`tab-nav carpark__tab-nav`}
             >
               {tabs.map((item, key) => (
                 <TabLink
@@ -26,7 +25,7 @@ export const CarparkTabs = ({ tabs }: { tabs: ITabItems[] }) => {
               ))}
             </Nav>
           </Container>
-          <Tab.Content className={`${styles['carpark__tabs']} row`}>
+          <Tab.Content className={`carpark__tabs row`}>
             {tabs.map((item, key) => (
               <Tab.Pane key={key} eventKey={item.eventKey}>
                 <div className={`carpark-tab__body `}>
@@ -49,8 +48,8 @@ export const TabLink = ({
   eventKey: string
 }) => {
   return (
-    <Nav.Item bsPrefix={`${styles['tab-nav__item']} nav-item`} as={'li'}>
-      <Nav.Link className={`${styles['tab-nav__link']}`} eventKey={eventKey}>
+    <Nav.Item bsPrefix={`tab-nav__item nav-item`} as={'li'}>
+      <Nav.Link className={`tab-nav__link`} eventKey={eventKey}>
         {title}
       </Nav.Link>
     </Nav.Item>

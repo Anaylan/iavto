@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import main from 'assets/sass/components/carpark/carpark-main.module.scss'
 import Image from 'next/image'
 import { Crown } from 'assets/icon/icons'
 
@@ -14,9 +13,9 @@ interface ICard {
 export const CarparkCard: FC<ICard> = ({ title, sold, src, tarif, alt }) => {
   return (
     <>
-      <div className={`${main['carpark-main']} carpark-intro__main`}>
+      <div className={`carpark-main carpark-intro__main`}>
         <div className={'d-flex'}>
-          <div className={main['carpark-main__img']}>
+          <div className={'carpark-main__img'}>
             <Image
               src={src ? src : ''}
               width={50}
@@ -27,16 +26,16 @@ export const CarparkCard: FC<ICard> = ({ title, sold, src, tarif, alt }) => {
           </div>
           <div className={'carpark-main__info'}>
             {tarif && tarif > 0 ? (
-              <div className={main['carpark-main__status']}>
-                <div className={main['icon']}>
-                  <Crown color={main['icon__item']} />
+              <div className={'carpark-main__status'}>
+                <div className={'icon'}>
+                  <Crown />
                 </div>
                 <span>Премиум автопарк</span>
               </div>
             ) : null}
 
-            <h1 className={main['carpark-main__title']}>{title}</h1>
-            <div className={main['carpark-main__subtitle']}>
+            <h1 className={'carpark-main__title'}>{title}</h1>
+            <div className={'carpark-main__subtitle'}>
               <span>{sold}</span> автомобиля
             </div>
           </div>

@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react'
-import table from 'assets/sass/components/tables/table.module.scss'
 
 export const THead = ({ row }: { row: string[] }) => {
   return (
@@ -8,7 +7,7 @@ export const THead = ({ row }: { row: string[] }) => {
         <tr>
           {row.map((item, key) => (
             <th key={key}>
-              <div className={`${table['table__head']}`}>{item}</div>
+              <div className={`table__head`}>{item}</div>
             </th>
           ))}
         </tr>
@@ -27,7 +26,7 @@ export const TCell = ({
   return (
     <>
       <td className={className ? className : ''}>
-        <div className={`${table['table__item']}`}>{children}</div>
+        <div className={`table__item`}>{children}</div>
       </td>
     </>
   )

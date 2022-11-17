@@ -1,5 +1,4 @@
-﻿import details from 'assets/sass/components/car/car__details.module.scss'
-import React from 'react'
+﻿import React from 'react'
 import { ICarModel } from 'app/models'
 
 export const CarCardDetails: React.FC<ICarModel> = ({
@@ -7,11 +6,9 @@ export const CarCardDetails: React.FC<ICarModel> = ({
   horse_power
 }) => {
   return (
-    <div className={details['car__details']}>
-      <div className={details['cars-item__label']}>
-        Технические характеристики
-      </div>
-      <ul className={details['cars-item__charact']}>
+    <div className='car__details'>
+      <div className='cars-item__label'>Технические характеристики</div>
+      <ul className='cars-item__charact'>
         <li>
           <div>КПП</div>
           <div>

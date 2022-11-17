@@ -1,4 +1,4 @@
-import { login, getUserByToken } from 'api/User'
+import { login } from 'api/User'
 import { TITLE } from 'app/config'
 import { UserModel } from 'app/models'
 import * as auth from 'app/redux/reducers/authReducer'
@@ -66,12 +66,10 @@ export const Login: FC<UserModel> = () => {
           )}
         </div>
         <Container>
-          <div className={auth_styles['auth__body']}>
-            <h1 className={auth_styles['auth__title']}>
-              Вход в существующий аккаунт
-            </h1>
+          <div className={'auth__body'}>
+            <h1 className={'auth__title'}>Вход в существующий аккаунт</h1>
             <Form onSubmit={formik.handleSubmit}>
-              <div className={form['form__body']}>
+              <div className={'form__body'}>
                 <FormInputWithLabel
                   title={'Email'}
                   name={'email'}
@@ -88,18 +86,18 @@ export const Login: FC<UserModel> = () => {
                   onChange={formik.handleChange}
                   value={formik.values.password}
                 />
-                <div className={form['form__help']}>
+                <div className={'form__help'}>
                   <Link href='/auth/forgot-password'>Забыли пароль?</Link>
                 </div>
               </div>
-              <div className={form['form_' + '_bottom']}>
-                <div className={form['form__btn-group']}>
-                  <div className={form['form__btn-wrap']}>
+              <div className={'form_' + '_bottom'}>
+                <div className={'form__btn-group'}>
+                  <div className={'form__btn-wrap'}>
                     <Button type={'submit'}>Войти</Button>
                   </div>
-                  <div className={form['form__btn-wrap']}>
+                  <div className={'form__btn-wrap'}>
                     <Link
-                      className={`${form['btn-main']} ${form['btn-main-trp']}`}
+                      className={`btn-main btn-main-trp`}
                       href={'/auth/signup'}
                     >
                       Зарегистрироваться

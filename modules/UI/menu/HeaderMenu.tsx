@@ -1,5 +1,4 @@
 import { ILink, UserDataModel } from 'app/models'
-import styles from 'assets/sass/components/header.module.scss'
 import { HeaderBottomLinks } from 'modules/templates'
 import {
   MenuList,
@@ -59,17 +58,13 @@ export const HeaderMenu = ({
 }) => {
   return (
     <>
-      <div
-        className={`${styles['menu']} header__menu ${styles['header-fixed']}`}
-      >
+      <div className={`menu header__menu header-fixed`}>
         <div className='container'>
-          <div className={styles['menu__wrapper']}>
-            <div className={styles['menu__main']}>
-              <div className={styles['menu__body']}>
+          <div className={'menu__wrapper'}>
+            <div className={'menu__main'}>
+              <div className={'menu__body'}>
                 <SearchInput placeholder={'Поиск...'} />
-                <RegionSearch
-                  className={`${styles['header-region']} collapse show`}
-                />
+                <RegionSearch className={`header-region collapse show`} />
                 <MenuList>
                   {user ? (
                     <MenuListItem href={'/profile'}>

@@ -1,0 +1,44 @@
+.carpark-contact {
+}
+.carpark-contact .form__item {
+  flex-direction: column;
+  margin: 0;
+}
+.carpark-contact .form__label {
+  min-width: auto;
+  margin: 0 0 8px 0;
+}
+.carpark-contact .form__input {
+  max-width: 600px;
+}
+.carpark-contact textarea {
+  height: 140px;
+  resize: none;
+}
+.carpark-contact .form__btn-group {
+  justify-content: flex-start;
+}
+.carpark-contact .btn-main {
+}
+
+@media (max-width: 991px) {
+  .carpark-contact .form__input {
+    max-width: 500px;
+  }
+  .carpark-contact .form__wrap {
+    margin: 0 0 12px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .carpark-contact .form__input {
+    max-width: 100%;
+  }
+  .carpark-contact .form__btn-wrap {
+    width: 100%;
+  }
+  .carpark-contact .btn-main {
+    display: block;
+    width: 100%;
+  }
+}

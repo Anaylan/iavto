@@ -10,8 +10,8 @@ export const SearchSelect: FC<ISelectProps> = ({ children, ...props }) => {
   return (
     <>
       <select
-        className={` ${styles['search-additional__select']} 
-          ${styles['search-form__input']} align-items-center`}
+        className={`search-additional__select 
+          search-form__input align-items-center`}
         {...props}
       >
         {children}

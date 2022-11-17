@@ -1,0 +1,21 @@
+.auth {
+  &__body {
+    max-width: 372px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: 25px;
+    font-weight: 700;
+    color: #2e2f31;
+    margin: 0 0 20px 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .auth {
+    &__title {
+      font-size: 22px;
+    }
+  }
+}

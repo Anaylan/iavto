@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react'
-import styles from './MenuListBottom.module.scss'
+
 interface IMenuListBottom {
   children: ReactNode
 }
@@ -12,8 +12,8 @@ interface IMenuListBottomItem {
 export const MenuListBottom: FC<IMenuListBottom> = ({ children }) => {
   return (
     <>
-      <div className={styles['menu-bottom']}>
-        <ul className={styles['menu-bottom__list']}>{children}</ul>
+      <div className={'menu-bottom'}>
+        <ul className={'menu-bottom__list'}>{children}</ul>
       </div>
     </>
   )

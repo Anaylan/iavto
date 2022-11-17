@@ -1,8 +1,6 @@
 import { TITLE } from 'app/config'
 import Head from 'next/head'
 import { Container, Row } from 'react-bootstrap'
-import carparkReviews from '/assets/sass/components/carpark/carpark-reviews.module.scss'
-import reviewStyle from '/assets/sass/components/reviews/reviews.module.scss'
 import { ReviewCard } from 'modules/elements/Cards/ReviewCard'
 import { useFetch } from 'app/hooks'
 import { useState } from 'react'
@@ -23,15 +21,11 @@ export default function Reviews() {
       <Head>
         <title>Отзывы | {TITLE}</title>
       </Head>
-      <section className={reviewStyle['reviews']}>
-        <div className={carparkReviews['carpark-reviews']}>
+      <section className={'reviews'}>
+        <div className={'carpark-reviews'}>
           <Container>
-            <div className={carparkReviews['carpark-reviews__body']}>
-              <h2
-                className={`${carparkReviews['carpark-reviews__title']} title`}
-              >
-                Мои отзывы
-              </h2>
+            <div className={'carpark-reviews__body'}>
+              <h2 className={`carpark-reviews__title title`}>Мои отзывы</h2>
               <Row>
                 {reviews &&
                   reviews.map((review, index) => (

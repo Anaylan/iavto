@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { Col, Container, Row } from 'react-bootstrap'
 
 import { IRegionState } from 'app/redux/reducers/regionReducer'
-import main from 'assets/sass/components/card/carparks.module.scss'
+
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
 import { EmptyComponent } from 'modules/elements'
@@ -30,21 +30,15 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
 
   return (
     <>
-      <section
-        className={
-          large
-            ? `${main['carparks']} ${main['carparks-large']}`
-            : `${main['carparks']}`
-        }
-      >
+      <section className={large ? `carparks carparks-large` : `carparks`}>
         <Container>
           <h1 className={`carparks__title title`}>{title}</h1>
 
           <Row
             className={
               large
-                ? `${main['carparks__body']} gx-0 gy-0 carparks__large`
-                : `${main['carparks__body']} gx-0 gy-0 carparks`
+                ? `carparks__body gx-0 gy-0 carparks__large`
+                : `carparks__body gx-0 gy-0 carparks`
             }
           >
             {Carparks.length ? (
@@ -73,11 +67,8 @@ export function TenderPark({
 }) {
   return (
     <>
-      <div className={main['carparks__item']}>
-        <Link
-          className={main['carparks__img']}
-          href={`/carpark/${carPark.cid}`}
-        >
+      <div className={'carparks__item'}>
+        <Link className={'carparks__img'} href={`/carpark/${carPark.cid}`}>
           {carPark.img ? (
             <Image
               priority={lazy}
@@ -97,34 +88,34 @@ export function TenderPark({
             />
           )}
 
-          <div className={`carparks__hover ${main['carparks-hover']}`}>
+          <div className={`carparks__hover carparks-hover`}>
             <div
               onClick={() => {
                 console.log('Добавить избранное')
               }}
-              className={main['carparks-hover__item']}
+              className={'carparks-hover__item'}
             >
               <div>Добавить в</div>
-              <span className={main['icon']}>
-                <Heart color={main['icon__item']} />
+              <span className={'icon'}>
+                <Heart />
               </span>
             </div>
           </div>
         </Link>
         <Link
-          className={main['carparks__item-title']}
+          className={'carparks__item-title'}
           href={`/carpark/${carPark.cid}`}
         >
           <span>{carPark.company_name}</span>
         </Link>
-        <div className={main['carparks__content']}>
-          <Link className={main['carparks__value']} href='#'>
+        <div className={'carparks__content'}>
+          <Link className={'carparks__value'} href='#'>
             <span>{carPark.count_product}</span>автомобилей
           </Link>
-          <Link className={main['carparks__rating']} href='#'>
+          <Link className={'carparks__rating'} href='#'>
             <span>{carPark.rait ? carPark.rait : '5.0'}</span>
-            <div className={main['icon']}>
-              <Star color={main['icon__item']} />
+            <div className={'icon'}>
+              <Star />
             </div>
           </Link>
         </div>

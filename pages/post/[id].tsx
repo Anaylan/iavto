@@ -1,5 +1,4 @@
 import React from 'react'
-import axios, { AxiosResponse } from 'axios'
 import Head from 'next/head'
 import { TITLE } from 'app/config'
 import { IPostModel } from 'app/models'

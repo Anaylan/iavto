@@ -1,8 +1,6 @@
 import { getCarpark } from 'api/Company'
 import { TITLE, URL_IMG } from 'app/config'
 import { ICarparkModel, ITabItems } from 'app/models'
-import banner from 'assets/sass/components/carpark/carpark-banner.module.scss'
-import styles from 'assets/sass/components/carpark/carpark.module.scss'
 import { CarparkCard, CarparkInfo } from 'modules/elements'
 import {
   ActionFollow,
@@ -61,9 +59,9 @@ export default function Carpark({ autopark }: { autopark: ICarparkModel }) {
           </Head>
           <section className={`carpark`}>
             <Container>
-              <div className={`${styles['carpark__intro']} carpark-intro`}>
+              <div className={`carpark__intro carpark-intro`}>
                 <Image
-                  className={banner['carpark-intro__banner']}
+                  className={'carpark-intro__banner'}
                   src={URL_IMG + autopark.cid + '/' + autopark.banner}
                   fill
                   alt={autopark.company_name ? autopark.company_name : ''}

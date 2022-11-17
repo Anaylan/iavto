@@ -1,0 +1,101 @@
+
+.carpark-intro {
+
+	&__info {
+		position: relative;
+		z-index: 5;
+		display: flex;
+		margin: 0 -15px;
+	}
+
+	&__info-item {
+		display: flex;
+		width: 188px;
+		padding: 0 15px;
+	}
+
+	&__info-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: 100%;
+		background-color: #fff;
+		border-radius: 10px;
+		font-size: 15px;
+		font-weight: 500;
+		color: #2E2F31;
+		padding: 18px 24px;
+	}
+
+	&__info-value {
+		display: flex;
+		font-weight: 700;
+		color: #2774AC;
+		margin: 0 0 4px 0;
+
+		span {
+			display: inline-block;
+			margin: 0 0 0 2px;
+		}
+	}
+
+	&__info-subtitle {
+	}
+}
+
+@media (max-width: 1023px) {
+
+	.carpark-intro {
+
+		&__info {
+			margin: 0 -10px;
+		}
+
+		&__info-item {
+			width: 160px;
+			padding: 0 10px;
+		}
+
+		&__info-body {
+			font-size: 14px;
+			padding: 12px 16px;
+		}
+	}
+}
+
+@media (max-width: 991px) {
+
+	.carpark-intro {
+
+		&__info {
+			position: absolute;
+			bottom: 0;
+			margin: 0 -4px;
+		}
+
+		&__info-item {
+			position: relative;
+			top: -50%;
+			left: 0;
+			transform: translateY(50%);
+			width: 166px;
+			padding: 0 4px;
+		}
+
+		&__info-body {
+			box-shadow: 4px 4px 20px rgb(117 115 111 / 18%);
+			font-size: 13px;
+			padding: 10px 14px;
+		}
+	}
+}
+
+@media (max-width: 374px) {
+
+	.carpark-intro {
+
+		&__info-item {
+			width: 144px;
+		}
+	}
+}

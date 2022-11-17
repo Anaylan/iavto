@@ -1,5 +1,4 @@
-import { DetailedHTMLProps, OptionHTMLAttributes } from 'react'
-import styles from 'assets/sass/components/blocks/search.module.scss'
+import { OptionHTMLAttributes } from 'react'
 
 interface SelectOption extends OptionHTMLAttributes<HTMLOptionElement> {
   children: React.ReactNode
@@ -13,10 +12,7 @@ export const SearchSelectOption: React.FC<SelectOption> = ({
   ...props
 }) => {
   return (
-    <option
-      className={`${styles['search-form__input']} ${className}`}
-      {...props}
-    >
+    <option className={`search-form__input ${className}`} {...props}>
       {children}
     </option>
   )

@@ -2,8 +2,6 @@ import { useRef, useState } from 'react'
 
 import { LinkType } from 'app/models'
 import { Chat, Heart, Package } from 'assets/icon/icons'
-import styles from 'assets/sass/components/header.module.scss'
-import header from 'assets/sass/components/header/top.module.scss'
 import { HeaderBody, HeaderBottom, HeaderTop } from 'modules/UI'
 
 import { useDesktop, useScroll } from 'app/hooks'
@@ -12,17 +10,17 @@ import { Container } from 'react-bootstrap'
 export const HeaderTopLinks: LinkType[] = [
   {
     href: '/',
-    children: <Heart color={header['icon__item']} />,
+    children: <Heart />,
     title: 'Избранное'
   },
   {
     href: '/orders',
-    children: <Package color={header['icon__item']} />,
+    children: <Package />,
     title: 'Заказы'
   },
   {
     href: '/chat',
-    children: <Chat color={header['icon__item']} />,
+    children: <Chat />,
     title: 'Сообщения'
   }
 ]
@@ -67,19 +65,19 @@ const Header: React.FC = () => {
     if (header && header.current) {
       if (window.innerWidth > 992) {
         if (window.pageYOffset > 700) {
-          if (!header.current.classList.contains(styles['header-fixed'])) {
-            header.current.classList.add(styles['header-fixed'])
+          if (!header.current.classList.contains('header-fixed')) {
+            header.current.classList.add('header-fixed')
           }
         } else {
-          header.current.classList.remove(styles['header-fixed'])
+          header.current.classList.remove('header-fixed')
         }
       } else {
         if (window.pageYOffset > 65) {
-          if (!header.current.classList.contains(styles['header-fixed'])) {
-            header.current.classList.add(styles['header-fixed'])
+          if (!header.current.classList.contains('header-fixed')) {
+            header.current.classList.add('header-fixed')
           }
         } else {
-          header.current.classList.remove(styles['header-fixed'])
+          header.current.classList.remove('header-fixed')
         }
       }
     }
@@ -87,7 +85,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className={`${styles.header}`} id='header'>
+      <header className={`header`} id='header'>
         <Container fluid>
           <HeaderTop ref={header} desktop={desktop} links={HeaderTopLinks} />
           {desktop ? (

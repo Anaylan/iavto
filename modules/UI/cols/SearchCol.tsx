@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import { Col, ColProps } from 'react-bootstrap'
-import styles from 'assets/sass/components/blocks/search.module.scss'
 
 export const SearchAdditionalCol = ({
   children,
@@ -13,10 +12,7 @@ export const SearchAdditionalCol = ({
 }) => {
   return (
     <>
-      <Col
-        {...columns}
-        className={`${styles['search-additional__item']} ${className}`}
-      >
+      <Col {...columns} className={`search-additional__item ${className}`}>
         {children}
       </Col>
     </>

@@ -1,0 +1,128 @@
+
+.reviews-aside {
+	padding: 0 0 0 22px;
+
+	&__content {
+	}
+
+	&__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin: 0 0 24px 0;
+	}
+
+	&__rate {
+		display: flex;
+		align-items: center;
+
+		.icon {
+			width: 26px;
+			height: 26px;
+			margin: 0 7px 0 0;
+
+			&__item {
+				fill: #FFE600;
+			}
+		}
+	}
+
+	&__overall-rate {
+		display: flex;
+		align-items: center;
+		font-size: 18px;
+		font-weight: 600;
+		color: #000;
+
+		span {
+			display: inline-block;
+			margin: 0 3px 0 0;
+		}
+	}
+
+	&__body {
+	}
+
+	&__progress-item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin: 0 0 12px 0;
+
+		&:last-child {
+			margin: 0;
+		}
+
+		.progress {
+			height: 4px;
+			width: 100%;
+			background: #D9D9D9;
+			border-radius: 10px;
+		}
+
+		.progress-bar {
+			background: #FFE600;
+		}
+	}
+
+	&__progress-label {
+		font-size: 15px;
+		font-weight: 600;
+		color: #ACACAC;
+		min-width: 65px;
+		margin: 0 20px 0 0;
+	}
+
+	&__progress-value {
+		font-size: 15px;
+		color: #2E2F31;
+		min-width: 35px;
+		margin: 0 0 0 20px;
+	}
+}
+
+@media (max-width: 1023px) {
+
+	.reviews-aside {
+		padding: 0;
+
+		&__top {
+			margin: 0 0 18px 0;
+		}
+
+		&__rate {
+			.icon {
+				width: 20px;
+				height: 20px;
+				margin: 0 4px 0 0;
+			}
+		}
+
+		&__overall-rate {
+			font-size: 16px;
+		}
+
+		&__progress-item {
+			margin: 0 0 12px 0;
+		}
+
+		&__progress-label {
+			font-size: 14px;
+			min-width: 60px;
+			margin: 0 12px 0 0;
+		}
+
+		&__progress-value {
+			font-size: 14px;
+			min-width: 33px;
+			margin: 0 0 0 12px;
+		}
+	}
+}
+
+@media (max-width: 767px) {
+
+	.reviews-aside {
+		margin: 0 0 30px 0;
+	}
+}

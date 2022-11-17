@@ -1,7 +1,5 @@
 import { register } from 'api/User'
 import { UserModel } from 'app/models'
-import auth_styles from 'assets/sass/components/auth.module.scss'
-import form from 'assets/sass/components/form.module.scss'
 import { useFormik } from 'formik'
 import { FormInputWithLabel, FormInputWithMask } from 'modules/UI'
 import Form from 'modules/UI/forms/Form'
@@ -107,8 +105,8 @@ export const Register: React.FC<UserModel> = () => {
       </Head>
       <section className='auth'>
         <div className='container'>
-          <div className={auth_styles['auth__body']}>
-            <h1 className={auth_styles['auth__title']}>Регистрация</h1>
+          <div className={'auth__body'}>
+            <h1 className={'auth__title'}>Регистрация</h1>
 
             <Form onSubmit={formik.handleSubmit}>
               <div className={'mt-2'}>
@@ -116,27 +114,27 @@ export const Register: React.FC<UserModel> = () => {
                   <div>{formik.errors.email}</div>
                 ) : null}
                 {formik.touched.lastname && formik.errors.lastname ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.lastname}
                   </div>
                 ) : null}
                 {formik.touched.firstname && formik.errors.firstname ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.firstname}
                   </div>
                 ) : null}
                 {formik.touched.email && formik.errors.email ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.email}
                   </div>
                 ) : null}
                 {formik.touched.password && formik.errors.password ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.password}
                   </div>
                 ) : null}
                 {formik.touched.phone && formik.errors.phone ? (
-                  <div className={form['form__notification']}>
+                  <div className={'form__notification'}>
                     {formik.errors.phone}
                   </div>
                 ) : null}
@@ -149,7 +147,7 @@ export const Register: React.FC<UserModel> = () => {
                 </div>
               )}
               {error ? <div>{error}</div> : null}
-              <div className={form['form__body']}>
+              <div className={'form__body'}>
                 <FormInputWithLabel
                   title={'Пароль'}
                   name={'password'}
@@ -217,12 +215,12 @@ export const Register: React.FC<UserModel> = () => {
                   }
                 />
               </div>
-              <div className={form['form__bottom']}>
-                <div className={form['form__btn-group']}>
-                  <div className={form['form__btn-wrap']}>
+              <div className={'form__bottom'}>
+                <div className={'form__btn-group'}>
+                  <div className={'form__btn-wrap'}>
                     <button
                       type={'submit'}
-                      className={`${form['btn-main']} ${form['btn-main-trp']}`}
+                      className={`btn-main btn-main-trp`}
                       style={{ background: 'transparent' }}
                     >
                       Зарегистрироваться

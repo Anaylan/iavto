@@ -10,8 +10,9 @@ import axiosAuth from 'app/axiosAuth'
 import axios from 'axios'
 import 'bootstrap/scss/bootstrap.scss'
 
-import 'assets/sass/globals.scss'
 import 'assets/sass/reset.scss'
+import 'assets/sass/fonts.scss'
+import 'assets/sass/globals.scss'
 
 import { PersistGate } from 'redux-persist/integration/react'
 

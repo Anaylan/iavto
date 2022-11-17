@@ -1,4 +1,3 @@
-import banner from 'assets/sass/components/banners/banners.module.scss'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -19,8 +18,6 @@ import {
   TabProfile,
   TabReviews
 } from 'modules/UI'
-
-import styles from 'assets/sass/components/carpark/carpark.module.scss'
 
 export async function getServerSideProps({ params }: any) {
   const { data } = await getCar(params.id)
@@ -74,9 +71,9 @@ export default function Car({ car }: { car: ICarModel }) {
       <section className='carpark'>
         <Container>
           {carpark ? (
-            <div className={`${styles['carpark__intro']} carpark-intro`}>
+            <div className={`carpark__intro carpark-intro`}>
               <Image
-                className={banner['carpark-intro__banner']}
+                className={'carpark-intro__banner'}
                 src={URL_IMG + carpark.cid + '/' + carpark.banner}
                 fill
                 alt={carpark.company_name ? carpark.company_name : ''}

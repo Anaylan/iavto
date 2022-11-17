@@ -1,0 +1,35 @@
+
+.carpark-intro {
+	position: relative;
+
+	&::before {
+		content: '';
+		background: linear-gradient(180deg, rgba(17, 17, 17, .1) 0,rgba(17, 17, 17, 0.7) 65%, #1b1b1b 90%);
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 0;
+		z-index: 1;
+	}
+
+	&__banner {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		top: 0;
+		left: 0;
+	}
+}
+
+@media (max-width: 991px) {
+
+	.carpark-intro {
+
+		&::before {
+			opacity: 1;
+		}
+	}
+}
