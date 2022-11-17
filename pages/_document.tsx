@@ -8,7 +8,7 @@ export default function Document() {
   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-  ym(90739630, "init", {
+  ym(89821857, "init", {
        clickmap:true,
        trackLinks:true,
        accurateTrackBounce:true,
@@ -29,7 +29,8 @@ export default function Document() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src='https://mc.yandex.ru/watch/90739630'
+              src='
+              '
               style={{
                 position: 'absolute',
                 left: '-9999px',
