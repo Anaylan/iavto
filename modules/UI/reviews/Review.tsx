@@ -1,10 +1,10 @@
 import { Star } from 'assets/icon/icons';
 import React from 'react';
 import Image from 'next/image';
-import { IReviewModel } from 'app/models';
+import { IReviewDataModel } from 'app/models';
 import { dbFormatDate, month, getStars } from 'libs/functions';
 
-export const Review = ({ review }: { review: IReviewModel }) => {
+export const Review = ({ review }: { review: IReviewDataModel }) => {
   return (
     <>
       <div className={'carpark-reviews__item'}>

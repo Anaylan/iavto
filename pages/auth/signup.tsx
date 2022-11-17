@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { FormInputWithLabel, FormInputWithMask } from 'modules/UI';
 import Form from 'modules/UI/forms/Form';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,12 +42,16 @@ export const registrationSchema = Yup.object().shape({
     .email('Неправильный формат email')
     .required('Email обязателен для заполнения'),
   lastname: Yup.string()
-    .min(3, 'Фамилия: Minimum 3 symbols')
-    .max(50, 'Фамилия: Maximum 50 symbols')
-    .required('Last name is required'),
+    .min(3, 'Фамилия: Минимум 3 символа')
+    .max(50, 'Фамилия: Максимум 50 символов')
+    .required('LФамилия обязательна для заполнения'),
   password: Yup.string()
-    .min(3, 'Пароль: Minimum 8 symbols')
+    .min(3, 'Пароль: Минимум 8 символов')
     .required('Пароль обязателен для заполнения'),
+  terms: Yup.bool().oneOf(
+    [true],
+    'Для регистрации вы должны принять пользовательское соглашение',
+  ),
 });
 
 export const Register: React.FC<UserModel> = () => {
@@ -74,6 +79,7 @@ export const Register: React.FC<UserModel> = () => {
       email: '',
       password: '',
       phone: '',
+      terms: false,
     },
     validationSchema: registrationSchema,
     onSubmit: (values) => {
@@ -142,6 +148,11 @@ export const Register: React.FC<UserModel> = () => {
                 {formik.touched.phone && formik.errors.phone ? (
                   <div className={'form__notification'}>
                     {formik.errors.phone}
+                  </div>
+                ) : null}
+                {formik.touched.terms && formik.errors.terms ? (
+                  <div className={'form__notification'}>
+                    {formik.errors.terms}
                   </div>
                 ) : null}
               </div>
@@ -224,9 +235,18 @@ export const Register: React.FC<UserModel> = () => {
               <div className={'form__bottom'}>
                 <div className={'form__btn-group'}>
                   <div className={'form__btn-wrap'}>
+                    <input
+                      type='checkbox'
+                      name='terms'
+                      onChange={formik.handleChange}
+                    />{' '}
+                    Я принимаю{' '}
+                    <Link href='/documents/terms'>
+                      Пользовательское соглашение
+                    </Link>
                     <button
                       type={'submit'}
-                      className={`btn-main btn-main-trp`}
+                      className={`btn-main btn-main-trp mt-2`}
                       style={{ background: 'transparent' }}>
                       Зарегистрироваться
                     </button>

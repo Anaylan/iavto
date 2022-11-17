@@ -260,7 +260,7 @@ export const ProfileFavorites: FC<IProfileFavorites> = ({
         </div>
         <div className={`profile__bottom'} profile-bottom`}>
           <div className={'profile__subtitle'}>
-            <span>{data ? data : 0}</span>
+            <span>{data}</span>
             {type ? 'автомобилей' : 'автопарков'}
           </div>
         </div>
@@ -269,7 +269,7 @@ export const ProfileFavorites: FC<IProfileFavorites> = ({
   );
 };
 
-export const ProfileOrders = () => {
+export const ProfileOrders = ({ data }: { data: number }) => {
   return (
     <Col xs={12} sm={6} md={3} className={'profile__col'}>
       <Link className={'profile__item'} href='/orders'>
@@ -278,7 +278,7 @@ export const ProfileOrders = () => {
         </div>
         <div className={`profile__bottom profile-bottom`}>
           <div className={'profile__subtitle'}>
-            <span className={'profile__value'}>150</span>завершенных заказов
+            <span className={'profile__value'}>{data}</span>завершенных заказов
           </div>
         </div>
       </Link>
@@ -286,7 +286,7 @@ export const ProfileOrders = () => {
   );
 };
 
-export const ProfileReviews = () => {
+export const ProfileReviews = ({ data }: { data: number }) => {
   return (
     <>
       <Col xs={12} sm={6} md={3} className={'profile__col'}>
@@ -296,7 +296,7 @@ export const ProfileReviews = () => {
           </div>
           <div className={'profile__bottom profile-bottom'}>
             <div className={'profile__subtitle'}>
-              <span className={'profile__value'}>150</span>отзывов
+              <span className={'profile__value'}>{data}</span>отзывов
             </div>
           </div>
         </Link>

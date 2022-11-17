@@ -1,5 +1,5 @@
 import { getCars, getCarsForCarpark } from 'api/Car';
-import { sanitize } from 'libs/functions';
+import { getStars, sanitize } from 'libs/functions';
 import { ICarModel, ICarparkModel, IReviewModel } from 'app/models';
 import { Star } from 'assets/icon/icons';
 import CarBlock from 'modules/templates/CarBlock';
@@ -97,26 +97,29 @@ export const TabProfile = ({
 };
 
 export const TabReviews = ({ id }: { id: string }) => {
-  const [reviews, setReviews] = useState<IReviewModel[] | null>(null);
+  const [reviews, setReviews] = useState<IReviewModel | null>(null);
   const router = useRouter();
   useEffect(() => {
     getCompanyReviews(id).then(({ data }) => {
       setReviews(data);
       console.log(data);
     });
-  }, []);
+  }, [id]);
   return (
     <>
       <Row>
         <Col xs={12} md={8} className='order-2 order-md-1'>
           {reviews &&
-            reviews.map((review, key) => <Review review={review} key={key} />)}
+            reviews.reviews.map((review, key) => (
+              <Review review={review} key={key} />
+            ))}
         </Col>
         <Col xs={12} md={4} className='order-1 order-md-2'>
           <div className={'carpark-reviews__aside reviews-aside'}>
             <div className={'reviews-aside__content'}>
               <div className={'reviews-aside__top'}>
                 <div className={'reviews-aside__rate'}>
+                  {reviews && getStars(Math.floor(reviews.aveRating))}
                   {Array(5)
                     .fill(1, 0, 4)
                     .map((star, key) => (
@@ -126,25 +129,24 @@ export const TabReviews = ({ id }: { id: string }) => {
                     ))}
                 </div>
                 <div className={'reviews-aside__overall-rate'}>
-                  <span>4.95</span> / 5
+                  <span>{reviews && reviews.aveRating}</span> / 5
                 </div>
               </div>
               <div className={'reviews-aside__body'}>
-                {Array(5)
-                  .fill(1, 0, 4)
-                  .map((star, key) => (
+                {reviews &&
+                  reviews.count.map((star, key) => (
                     <div key={key} className={'reviews-aside__progress-item'}>
                       <div className={'reviews-aside__progress-label'}>
-                        5 звезд
+                        {star.id} звезд
                       </div>
                       <ProgressBar
                         className={'progress'}
                         min={0}
                         max={100}
-                        now={80}
+                        now={star.percent}
                       />
                       <div className={'reviews-aside__progress-value'}>
-                        2657
+                        {star.count}
                       </div>
                     </div>
                   ))}

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 
 import { getCar } from 'api/Car';
-import { getCarpark } from 'api/Company';
+import { getCarpark, requestVisit } from 'api/Company';
 
 import { TITLE, URL_IMG } from 'app/config';
 
@@ -34,6 +34,10 @@ export default function Car({ car }: { car: ICarModel }) {
   useEffect(() => {
     getCarpark(car.cid).then(({ data }: { data: ICarparkModel }) => {
       setCarpark(data);
+    });
+
+    requestVisit(car.id).then(({ data }) => {
+      console.log(data);
     });
   }, [car]);
 
@@ -75,6 +79,7 @@ export default function Car({ car }: { car: ICarModel }) {
                 className={'carpark-intro__banner'}
                 src={URL_IMG + carpark.cid + '/' + carpark.banner}
                 fill
+                priority={false}
                 alt={carpark.company_name ? carpark.company_name : ''}
               />
               <ActionFollow id={Number(carpark.cid)} />

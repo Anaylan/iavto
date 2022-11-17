@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node --trace-warnings server.js",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^13.0.0",
+    "@next/font": "^13.0.3",
     "@reduxjs/toolkit": "^1.8.6",
     "apexcharts": "^3.36.1",
     "axios": "^1.1.3",

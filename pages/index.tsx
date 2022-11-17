@@ -93,8 +93,16 @@ const Home: NextPage<IHome> = () => {
     <>
       <Head>
         <title>{TITLE}</title>
-        <meta name='description' content='Поменять' />
         <link rel='icon' href='/favicon.ico' />
+        <meta
+          name='description'
+          content='ЯАВТО.РФ - Первая в мире площадка по аренде автомобилей в такси'
+        />
+        <meta
+          name='keywords'
+          content='аренда авто под такси,аренда машины,машина для такси'
+        />
+        <meta name='title' content='ЯАВТО.РФ - Площадка Аренды Автомобилей' />
       </Head>
       <CarParkBlock
         title={'Лучшие автопарки'}

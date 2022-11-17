@@ -24,6 +24,7 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
             mark={car.mark}
             model={car.model}
             year={car.year}
+            viewed={car.viewed}
           />
           <div className='car__body'>
             <Row className='car__row'>
@@ -45,13 +46,12 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
 
                 <div className='car__details'>
                   <div className='cars-item__label'>Описание автомобиля</div>
-                  <div className='car__details-about'>
-                    <p
-                      dangerouslySetInnerHTML={sanitize(
-                        car.description ? car.description : '',
-                      )}
-                    />
-                  </div>
+                  <div
+                    className='car__details-about'
+                    dangerouslySetInnerHTML={sanitize(
+                      car.description ? car.description : '',
+                    )}
+                  />
                 </div>
               </Col>
             </Row>

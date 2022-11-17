@@ -5,13 +5,12 @@ import { Button } from 'modules/UI/buttons/Button';
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-interface ICarCardHeader {}
-
 export const CarCardHeader: React.FC<ICarModel> = ({
   mark,
   model,
   year,
   id,
+  viewed,
 }) => {
   const toFavor = (id: number) => {
     requestAddToFavor(id);
@@ -31,7 +30,7 @@ export const CarCardHeader: React.FC<ICarModel> = ({
               <div className={'icon'}>
                 <Eye />
               </div>
-              <span>1589</span>
+              <span>{viewed}</span>
             </div>
           </Col>
           <Col xs={12} md={7} className='car__col'>
@@ -63,7 +62,7 @@ export const CarCardHeader: React.FC<ICarModel> = ({
                 <div className={'icon'}>
                   <Eye />
                 </div>
-                <span>1589</span>
+                <span>{viewed}</span>
               </div>
             </div>
           </Col>

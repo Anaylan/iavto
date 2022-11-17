@@ -24,4 +24,5 @@ export interface ICarModel {
   fuel_type?: string;
   img?: string[];
   city?: ICityItem;
+  viewed?: number;
 }

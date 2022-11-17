@@ -1,4 +1,10 @@
 ﻿export interface IReviewModel {
+  reviews: IReviewDataModel[];
+  count: any[];
+  aveRating: number;
+}
+
+export interface IReviewDataModel {
   id?: number;
   cid?: number;
   uid?: number;

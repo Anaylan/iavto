@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Col, Container, Nav, Row, Tab } from 'react-bootstrap';
 
 // import verif from 'assets/sass/'
-import { Download, Copy } from 'assets/icon/icons';
+import { Download, Copy, FolderDownload } from 'assets/icon/icons';
 // import { RentWidget } from 'modules/elements/widgets/RentWidget'
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
@@ -163,7 +163,7 @@ export default function Partners() {
         </Tab.Container>
       </section>
 
-      <section className={`banners`}>
+      {/* <section className={`banners`}>
         <Container>
           <h2 className='title'>Баннеры</h2>
           <Row className={`banners__body`}>
@@ -194,8 +194,8 @@ export default function Partners() {
             </Col>
           </Row>
         </Container>
-      </section>
-
+      </section> */}
+      {/* 
       <section className={`banners presentations`}>
         <Container>
           <h2 className='title'>Презентации</h2>
@@ -231,6 +231,53 @@ export default function Partners() {
               </a>
             </Col>
           </Row>
+        </Container>
+      </section> */}
+
+      <section className={`referal-media`}>
+        <Container>
+          <h2 className='title'>Материалы для рекламы</h2>
+          <div className={`referal-media__body`}>
+            <div className={`referal-media__col`}>
+              <a
+                className={`referal-media__item`}
+                href='https://disk.yandex.ru/d/SSKiNnbAcvqpPw/%D0%91%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D1%8B'
+                target='blank'>
+                <span className={`icon`}>
+                  <FolderDownload />
+                </span>
+                <span className={`referal-media__link-wrap`}>
+                  <span className={`referal-media__link`}>Баннеры</span>
+                </span>
+              </a>
+            </div>
+            <div className={`referal-media__col`}>
+              <a
+                className={`referal-media__item`}
+                href='https://disk.yandex.ru/d/SSKiNnbAcvqpPw/%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%AF%D0%90%D0%92%D0%A2%D0%9E.%D0%A0%D0%A4'
+                target='blank'>
+                <span className={`icon`}>
+                  <FolderDownload />
+                </span>
+                <span className={`referal-media__link-wrap`}>
+                  <span className={`referal-media__link`}>Видео ЯАВТО.РФ</span>
+                </span>
+              </a>
+            </div>
+            <div className={`referal-media__col`}>
+              <a
+                className={`referal-media__item`}
+                href='https://disk.yandex.ru/d/SSKiNnbAcvqpPw/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8%20'
+                target='blank'>
+                <span className={`icon`}>
+                  <FolderDownload />
+                </span>
+                <span className={`referal-media__link-wrap`}>
+                  <span className={`referal-media__link`}>Презентации</span>
+                </span>
+              </a>
+            </div>
+          </div>
         </Container>
       </section>
     </>

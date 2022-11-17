@@ -6,6 +6,7 @@ export const GET_HOTTENDER_PARK = `${API_URL}/carpark/getHotTender`;
 export const GET_LASTENDER_PARK = `${API_URL}/carpark/getLastTender`;
 export const GET_ALL_CARPARK = `${API_URL}/carpark/all`;
 export const GET_CARPARK = `${API_URL}/carpark/one`;
+export const REQUEST_VISIT = `${API_URL}/car/view`;
 
 export function getHotTender() {
   return axios.get<ICarparkModel>(GET_HOTTENDER_PARK);
@@ -23,6 +24,14 @@ export function getCarpark(id: number | undefined) {
   return axios.get<ICarparkModel>(GET_CARPARK, {
     params: {
       cid: id,
+    },
+  });
+}
+
+export function requestVisit(id: number | undefined) {
+  return axios.get<ICarparkModel>(REQUEST_VISIT, {
+    params: {
+      id: id,
     },
   });
 }

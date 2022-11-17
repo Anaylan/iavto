@@ -35,7 +35,6 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
       <section className={large ? `carparks carparks-large` : `carparks`}>
         <Container>
           <h1 className={`carparks__title title`}>{title}</h1>
-
           <Row
             className={
               large
@@ -45,7 +44,7 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
             {Carparks.length ? (
               Carparks.map((tender: ICarparkModel, key: number) => (
                 <Col key={key} {...columns}>
-                  <TenderPark carPark={tender} lazy={large} />
+                  <CarparkItem carPark={tender} lazy={large} />
                 </Col>
               ))
             ) : (
@@ -59,7 +58,7 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
 };
 export default CarParkBlock;
 
-export function TenderPark({
+export function CarparkItem({
   carPark,
   lazy,
 }: {

@@ -12,7 +12,7 @@ export function getUserReviews() {
 }
 
 export function getCompanyReviews(id: string | string[] | undefined) {
-  return axiosAuth.get<IReviewModel[]>(GET_COMPANY_REVIEWS, {
+  return axiosAuth.get<IReviewModel>(GET_COMPANY_REVIEWS, {
     params: {
       cid: id,
     },

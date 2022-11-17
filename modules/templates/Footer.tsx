@@ -11,9 +11,15 @@ import {
 } from 'assets/icon/icons';
 import { useAccordionButton } from 'react-bootstrap';
 import { totalmem } from 'os';
+import Collapse from 'react-bootstrap/Collapse';
 
 const Footer: React.FC = () => {
   const [eventKey, setEventKey] = useState('1');
+  const [collapse, setCollapse] = useState({
+    driver: false,
+    carpark: false,
+    parthner: false,
+  });
   const accordion = useAccordionButton(eventKey, () => {
     console.log(totalmem);
   });
@@ -88,7 +94,38 @@ const Footer: React.FC = () => {
                 <div className='footer__list-title'>Водителям</div>
                 <ul className='footer__list'>
                   <li>
-                    <Link href='#'>Ссылка</Link>
+                    <Link href='/auth/signin'>Авторизация</Link>
+                  </li>
+                  <li>
+                    <Link href='/carpark'>Автопарки</Link>
+                  </li>
+                  <li>
+                    <Link href='/car'>Автомобили</Link>
+                  </li>
+                  <li>
+                    <Link href='/rules'>Правила</Link>
+                  </li>
+                  <li>
+                    <Link href='/pay'>Оплата</Link>
+                  </li>
+                  <li>
+                    <Link href='/feedback'>Обратная связь</Link>
+                  </li>
+                  <li>
+                    <Link href='/about'>О нас</Link>
+                  </li>
+                  <li>
+                    <Link href='/post'>Новости</Link>
+                  </li>
+                  <li>
+                    <Link href='/documents/terms'>
+                      Пользовательское соглашение
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href='/documents/privacy_policy'>
+                      Политика конфиденциальности
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -96,7 +133,9 @@ const Footer: React.FC = () => {
                 <div className='footer__list-title'>Автопаркам</div>
                 <ul className='footer__list'>
                   <li>
-                    <Link href='#'>Ссылка</Link>
+                    <Link href='https://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/main/'>
+                      Открыть автопарк
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -104,7 +143,10 @@ const Footer: React.FC = () => {
                 <div className='footer__list-title'>Партнерам</div>
                 <ul className='footer__list'>
                   <li>
-                    <Link href='#'>Ссылка</Link>
+                    <Link href='partners'>Для партнеров</Link>
+                  </li>
+                  <li>
+                    <Link href='referrals'>Для реферальных партнеров</Link>
                   </li>
                   {/* <li>
                     <a className='footer__link-app' href='#'>
@@ -128,55 +170,102 @@ const Footer: React.FC = () => {
                 <button
                   className='footer__list-title'
                   type='button'
-                  data-bs-toggle='collapse'
-                  data-bs-target='#collapseLink1'
-                  aria-expanded='false'
-                  aria-controls='collapseLink1'>
+                  aria-expanded={collapse.driver}
+                  aria-controls='collapseLink1'
+                  onClick={() => {
+                    setCollapse({ ...collapse, driver: !collapse.driver });
+                  }}>
                   Водителям
                 </button>
-                <div className='collapse' id='collapseLink1'>
-                  <ul className='footer__list'>
-                    <li>
-                      <Link href='#'>Ссылка</Link>
-                    </li>
-                  </ul>
-                </div>
+                <Collapse in={collapse.driver}>
+                  <div id='collapseLink1'>
+                    {' '}
+                    {/* На такой див стили не навешивать (и не создавать родительский и дочерний див со стилями!) */}
+                    <ul className='footer__list'>
+                      <li>
+                        <Link href='/auth/signin'>Авторизация</Link>
+                      </li>
+                      <li>
+                        <Link href='/carpark'>Автопарки</Link>
+                      </li>
+                      <li>
+                        <Link href='/car'>Автомобили</Link>
+                      </li>
+                      <li>
+                        <Link href='/rules'>Правила</Link>
+                      </li>
+                      <li>
+                        <Link href='/pay'>Оплата</Link>
+                      </li>
+                      <li>
+                        <Link href='/feedback'>Обратная связь</Link>
+                      </li>
+                      <li>
+                        <Link href='/about'>О нас</Link>
+                      </li>
+                      <li>
+                        <Link href='/post'>Новости</Link>
+                      </li>
+                      <li>
+                        <Link href='/documents/terms'>
+                          Пользовательское соглашение
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href='/documents/privacy_policy'>
+                          Политика конфиденциальности
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </Collapse>
               </div>
               <div className='footer__col col-12 col-lg-4 d-flex flex-column'>
                 <button
                   className='footer__list-title'
                   type='button'
-                  data-bs-toggle='collapse'
-                  data-bs-target='#collapseLink2'
-                  aria-expanded='false'
+                  onClick={() =>
+                    setCollapse({ ...collapse, carpark: !collapse.carpark })
+                  }
+                  aria-expanded={collapse.carpark}
                   aria-controls='collapseLink2'>
                   Автопаркам
                 </button>
-                <div className='collapse' id='collapseLink2'>
-                  <ul className='footer__list'>
-                    <li>
-                      <Link href='#'>Ссылка</Link>
-                    </li>
-                  </ul>
-                </div>
+                <Collapse in={collapse.carpark}>
+                  <div id='collapseLink2'>
+                    <ul className='footer__list'>
+                      <li>
+                        <Link href='https://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/main/'>
+                          Открыть автопарк
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </Collapse>
               </div>
               <div className='footer__col col-12 col-lg-4 d-flex flex-column'>
                 <button
                   className='footer__list-title'
                   type='button'
-                  data-bs-toggle='collapse'
-                  data-bs-target='#collapseLink3'
-                  aria-expanded='false'
+                  onClick={() =>
+                    setCollapse({ ...collapse, parthner: !collapse.parthner })
+                  }
+                  aria-expanded={collapse.parthner}
                   aria-controls='collapseLink3'>
                   Партнерам
                 </button>
-                <div className='collapse' id='collapseLink3'>
-                  <ul className='footer__list'>
-                    <li>
-                      <Link href='#'>Ссылка</Link>
-                    </li>
-                  </ul>
-                </div>
+                <Collapse in={collapse.parthner}>
+                  <div id='collapseLink3'>
+                    <ul className='footer__list'>
+                      <li>
+                        <Link href='partners'>Для партнеров</Link>
+                      </li>
+                      <li>
+                        <Link href='referrals'>Для реферальных партнеров</Link>
+                      </li>
+                    </ul>
+                  </div>
+                </Collapse>
               </div>
             </div>
             {/* <a className='footer__link-app' href='#'>

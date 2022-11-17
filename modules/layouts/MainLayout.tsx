@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as ref from 'app/redux/reducers/referralReducer';
-import { getUserFavor } from 'api/User';
 
 type Props = {
   children?: React.ReactNode;
@@ -30,12 +29,6 @@ const MasterLayout: React.FC<Props> = ({ children }) => {
     ({ referral }: { referral: ref.IReferralState }) => referral.expired,
   );
   const router = useRouter();
-
-  useEffect(() => {
-    getUserFavor().then(({ data }) => {
-      console.log(data);
-    });
-  }, []);
 
   useEffect(() => {
     if (expired) {

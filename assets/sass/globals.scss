@@ -18,6 +18,18 @@ section {
   }
 }
 
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type='number'],
+input[type='number']:hover,
+input[type='number']:focus {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
 .title {
   font-size: 34px;
   font-weight: 700;
@@ -54,7 +66,7 @@ section {
     -ms-flex-align: center;
     align-items: center;
     fill: #2774ac;
-    transition: fill 0.1s linear, stroke 0.1s linear;
+    transition: fill 0.25s ease, stroke 0.25s ease;
   }
 }
 
@@ -699,8 +711,8 @@ section {
   --bs-pagination-focus-bg: #2e2f31;
   --bs-pagination-focus-box-shadow: none;
   --bs-pagination-active-color: #fff;
-  --bs-pagination-active-bg: #0d6efd;
-  --bs-pagination-active-border-color: #0d6efd;
+  --bs-pagination-active-bg: #2e2f31;
+  --bs-pagination-active-border-color: #2e2f31;
   --bs-pagination-disabled-color: #6c757d;
   --bs-pagination-disabled-bg: #fff;
   --bs-pagination-disabled-border-color: #dee2e6;
@@ -748,10 +760,6 @@ section {
     margin: 0 0 18px 0;
 
     &:hover {
-      img {
-        transform: scale(1.08);
-      }
-
       & .carparks-hover__item {
         opacity: 1;
         visibility: visible;
@@ -765,7 +773,6 @@ section {
       object-fit: cover;
       top: 0;
       left: 0;
-      transition: transform 0.5s ease;
     }
   }
 
@@ -844,6 +851,14 @@ section {
   top: 0;
   right: 0;
   padding: 6px;
+  cursor: pointer;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   &__item {
     display: flex;
@@ -1599,7 +1614,7 @@ section {
 @import 'carpark/carpark-reviews.scss';
 @import 'carpark/reviews-aside.scss';
 @import 'carpark/carpark-contact.scss';
-
+@import 'loading.scss';
 /* Profile
 ===================*/
 @import 'profile.scss';
@@ -1643,6 +1658,7 @@ section {
 /* Referal
 ===================*/
 @import 'referal.scss';
+@import 'referal-media.scss';
 
 /* Footer
 ===================*/
@@ -1651,6 +1667,10 @@ section {
 /* About
 ===================*/
 @import 'about.scss';
+
+/* Privacy policy
+===================*/
+@import 'privacy_policy.scss';
 
 @media (max-width: 1434px) {
   /* Header

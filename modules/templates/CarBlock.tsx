@@ -54,7 +54,7 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
         <Row>
           {cars && cars.length ? (
             cars.map((car: ICarModel, key: number) => (
-              <GenerateCar key={key} car={car}>
+              <CarItem key={key} car={car}>
                 <div className={'cars-item__label'}>Характеристики</div>
                 <ul className={'cars-item__charact'}>
                   <li>
@@ -70,7 +70,7 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
                     </div>
                   </li>
                 </ul>
-              </GenerateCar>
+              </CarItem>
             ))
           ) : (
             <EmptyComponent />
@@ -95,12 +95,12 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
 };
 export default CarBlock;
 
-export function GenerateCar({
+export function CarItem({
   car,
   children,
 }: {
   car: ICarModel;
-  children: ReactNode;
+  children?: ReactNode;
 }) {
   return (
     <>

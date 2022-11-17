@@ -51,8 +51,10 @@ const tarifs = [
 export default function Cars() {
   const [marks, setMark] = useState<IMark[]>([]);
   const [models, setModel] = useState<IModel[]>([]);
+
   const [fuelChange, setFuelChange] = useState<number>(0);
   const [transChange, setTransChange] = useState<number>(0);
+
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -60,9 +62,9 @@ export default function Cars() {
       transmission: '',
       model: '',
       tarif: '',
-      fuel: '',
-      from: '',
-      to: '',
+      fuel_type: '',
+      price_min: '',
+      price_max: '',
     },
     onSubmit: (values) => {
       // console.log(values)
@@ -189,14 +191,14 @@ export default function Cars() {
                 }}>
                 <PriceFromTo>
                   <FilterInput
-                    name='from'
+                    name='price_min'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='От'
                   />
                   <span></span>
                   <FilterInput
-                    name='to'
+                    name='price_max'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='До'
@@ -248,12 +250,12 @@ export default function Cars() {
                 }}>
                 <FilterRadioGroup>
                   <FilterRadioItem
-                    name={'fuel'}
+                    name={'fuel_type'}
                     onChange={formik.handleChange}
                     onClick={() => {
                       if (fuelChange === 1) {
                         setFuelChange(0);
-                        formik.values.fuel = '';
+                        formik.values.fuel_type = '';
                       } else setFuelChange(1);
                     }}
                     id='petrol'
@@ -267,7 +269,7 @@ export default function Cars() {
                     onClick={() => {
                       if (fuelChange === 2) {
                         setFuelChange(0);
-                        formik.values.fuel = '';
+                        formik.values.fuel_type = '';
                       } else setFuelChange(2);
                     }}
                     id='disel'
@@ -281,7 +283,7 @@ export default function Cars() {
                     onClick={() => {
                       if (fuelChange === 3) {
                         setFuelChange(0);
-                        formik.values.fuel = '';
+                        formik.values.fuel_type = '';
                       } else setFuelChange(3);
                     }}
                     id='gas'

@@ -1,4 +1,10 @@
-import { getUserByToken } from 'api/User';
+import {
+  getCarsCount,
+  getCompaniesCount,
+  getOrdersCount,
+  getReviewsCount,
+  getUserByToken,
+} from 'api/User';
 import { getHotTender } from 'api/Company';
 import { TITLE } from 'app/config';
 import { UserModel } from 'app/models';
@@ -36,7 +42,10 @@ const Profile = () => {
     status: 200,
   });
   const dispatch = useDispatch();
-  const [copySuccess, setCopySuccess] = useState('');
+  const [orderCount, setOrderCount] = useState<number>(0);
+  const [reviewCount, setReviewCount] = useState<number>(0);
+  const [companyCount, setCompanyCount] = useState<number>(0);
+  const [carCount, setCarCount] = useState<number>(0);
   const router = useRouter();
   const user = useSelector(
     ({ header }: { header: UserDataModel }) => header.user,
@@ -72,6 +81,20 @@ const Profile = () => {
         router.push('/');
         console.log('oh no!' + err);
       });
+
+    getOrdersCount().then(({ data }) => {
+      setOrderCount(data);
+    });
+    getReviewsCount().then(({ data }) => {
+      setReviewCount(data);
+    });
+
+    getCarsCount().then(({ data }) => {
+      setCarCount(data);
+    });
+    getCompaniesCount().then(({ data }) => {
+      setCompanyCount(data);
+    });
   }, [user, dispatch, router]);
 
   return (
@@ -101,12 +124,12 @@ const Profile = () => {
                       '$1 ',
                     )}
                   />
-                  <ProfileFavorites type={1} />
+                  <ProfileFavorites data={carCount} type={1} />
                 </Row>
                 <Row className='profile__row'>
-                  <ProfileOrders />
-                  <ProfileReviews />
-                  <ProfileFavorites type={0} />
+                  <ProfileOrders data={orderCount} />
+                  <ProfileReviews data={reviewCount} />
+                  <ProfileFavorites data={companyCount} type={0} />
                 </Row>
                 <Row className='profile__row'>
                   <ProfileSettings />

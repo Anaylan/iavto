@@ -51,11 +51,11 @@ const NewsBlock: React.FC<NewsProps> = () => {
           </div>
         </div>
       </div>
-      {/* <div className='d-flex align-items-center justify-content-center'>
+      <div className='d-flex align-items-center justify-content-center'>
         <Link className='btn-main' href='/post'>
           Смотреть все новости
         </Link>
-      </div> */}
+      </div>
     </React.Fragment>
   );
 };
@@ -77,7 +77,7 @@ export const PostPreview: React.FC<PostProps> = ({ postInfo }) => {
         <div className='news-item__content'>
           <h4 className='news-item__title'>{postInfo.title}</h4>
           <p>{postInfo.description}</p>
-          {/* <Link href={`/post/${postInfo.id}`}>Подробнеe</Link> */}
+          <Link href={`/post/${postInfo.id}`}>Подробнеe</Link>
         </div>
       </div>
     </React.Fragment>

@@ -1,0 +1,24 @@
+﻿.privacy_policy {
+  li h3 {
+    display: inline;
+  }
+
+  .agree-link {
+    color: rgb(255, 0, 149);
+  }
+
+  ol {
+    counter-reset: item;
+    list-style-type: none;
+  }
+  ol > li {
+    counter-increment: item;
+  }
+  ol > li::before {
+    content: counters(item, '.') '. ';
+  }
+
+  ol ol {
+    padding: 0;
+  }
+}
