@@ -1,6 +1,6 @@
-import { Search } from 'assets/icon/icons'
+import { Search } from 'assets/icon/icons';
 interface SearchField {
-  placeholder: string
+  placeholder: string;
 }
 
 export const SearchInput: React.FC<SearchField> = ({ placeholder }) => {
@@ -11,8 +11,7 @@ export const SearchInput: React.FC<SearchField> = ({ placeholder }) => {
         method='GET'
         action='/search'
         acceptCharset='UTF-8'
-        id='t-search'
-      >
+        id='t-search'>
         <div className={'header-top__form-wrap'}>
           <input placeholder={placeholder} type='text' name='s' />
           <button className={'header-top__form-btn'} type='submit'>
@@ -23,5 +22,5 @@ export const SearchInput: React.FC<SearchField> = ({ placeholder }) => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};

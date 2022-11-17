@@ -1,5 +1,35 @@
-import { SearchInput } from 'modules/UI'
-import Image from 'next/image'
+import { IMessageModel } from 'app/models';
+import { SearchInput } from 'modules/UI';
+import { MessageAside } from 'modules/UI/message/MessageAside';
+import Image from 'next/image';
+
+export const messages: IMessageModel[] = [
+  {
+    sender: 'Я',
+    companion: 'Витёк',
+    full_message: 'Полное сообщение',
+    mini_message: 'Сообщение слева',
+    date: '12.10.2022',
+    time: '10:11',
+  },
+  {
+    sender: 'Поддержка ЯАВТО.РФ',
+    companion: 'Поддержка ЯАВТО.РФ',
+    full_message: 'Спасибо, что обратились к нам',
+    mini_message: 'ЯАВТО.РФ слева',
+    date: '15.10.2022',
+    time: '12:00',
+  },
+  {
+    sender: 'Я',
+    companion: 'Быстрее ветра',
+    full_message: 'Полное сообщение',
+    mini_message: 'Сообщение слева',
+    date: '01.11.2022',
+    time: '01:00',
+  },
+];
+
 export const ChatAside = () => {
   return (
     <div className={`chat-aside`}>
@@ -9,99 +39,12 @@ export const ChatAside = () => {
         </div>
         <div className={`chat-aside__body`}>
           <ul className={`chat-aside__list`}>
-            <li className={`chat-aside__item_edit`}>
-              <a className={`chat-aside__item-wrap`} href='#'>
-                <span className={`chat-aside__photo`}>
-                  <Image
-                    src='/media/carpark.png'
-                    width={100}
-                    height={100}
-                    alt=''
-                  />
-                </span>
-                <span className={`chat-aside__main`}>
-                  <span className={`chat-aside__main-top`}>
-                    <span className={`chat-aside__username`}>
-                      Поддержка ЯАВТО.РФ
-                    </span>
-                    <time className={`chat-aside__date`} dateTime='2022-10-15'>
-                      15.10.2022
-                    </time>
-                  </span>
-                  <span className={`chat-aside__message-wrap`}>
-                    <span className={`chat-aside__sender`}>
-                      Поддержка ЯАВТО.РФ
-                    </span>
-                    <span className={`chat-aside__message`}>
-                      Спасибо, что обратились к нам
-                    </span>
-                  </span>
-                </span>
-              </a>
-            </li>
-
-            <li className={`chat-aside__item`}>
-              <a className={`chat-aside__item-wrap`} href='#'>
-                <span className={`chat-aside__photo`}>
-                  <Image
-                    src='/media/user.png'
-                    width={100}
-                    height={100}
-                    alt=''
-                  />
-                </span>
-                <span className={`chat-aside__main`}>
-                  <span className={`chat-aside__main-top`}>
-                    <span className={`chat-aside__username`}>
-                      Сергей Улыбка
-                    </span>
-                    <time className={`chat-aside__dat`} dateTime='2022-10-15'>
-                      15.10.2022
-                    </time>
-                  </span>
-                  <span className={`chat-aside__message-wrap`}>
-                    <span className={`chat-aside__sender`}>Сергей Улыбка</span>
-                    <span
-                      className={`$chat-aside__message chat-aside__message_file`}
-                    >
-                      Фотография
-                    </span>
-                  </span>
-                </span>
-              </a>
-            </li>
-
-            <li className={`chat-aside__item`}>
-              <a className={`chat-aside__item-wrap`} href='#'>
-                <span className={`chat-aside__photo`}>
-                  <Image
-                    src='/media/user.png'
-                    width={100}
-                    height={100}
-                    alt=''
-                  />
-                </span>
-                <span className={`chat-aside__main`}>
-                  <span className={`chat-aside__main-top`}>
-                    <span className={`chat-aside__username`}>
-                      Сергей Улыбка Улыбаааааака
-                    </span>
-                    <time className={`chat-aside__date`} dateTime='2022-10-15'>
-                      15.10.2022
-                    </time>
-                  </span>
-                  <span className={`chat-aside__message-wrap`}>
-                    <span className={`chat-aside__sender`}>Вы</span>
-                    <span className={`chat-aside__message`}>
-                      Как я радуюсь своей работе, братик, ты бы знал
-                    </span>
-                  </span>
-                </span>
-              </a>
-            </li>
+            {messages.map((message, index) => (
+              <MessageAside key={index} message={message} />
+            ))}
           </ul>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

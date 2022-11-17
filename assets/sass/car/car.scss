@@ -1,214 +1,203 @@
-
 .car {
+  &__top {
+    margin: 0 0 32px 0;
+  }
 
-	&__top {
-		margin: 0 0 32px 0;
-	}
+  &__row {
+    margin: 0 -20px;
+  }
 
-	&__row {
-		margin: 0 -20px;
-	}
+  &__col {
+    padding: 0 20px;
+  }
 
-	&__col {
-		padding: 0 20px;
-	}
+  &__title {
+    font-size: 28px;
+    color: #2774ac;
+    margin: 0;
 
-	&__title {
-		font-size: 28px;
-		color: #2774AC;
-		margin: 0;
+    span {
+      display: inline-block;
+      font-weight: 300;
+      margin: 0 0 0 14px;
+    }
+  }
 
-		span {
-			display: inline-block;
-			font-weight: 300;
-			margin: 0 0 0 14px;
-		}
-	}
+  &__top-actions {
+    display: flex;
+    align-items: center;
 
-	&__top-actions {
-		display: flex;
-		align-items: center;
+    .btn-main {
+      font-size: 15px;
+      font-weight: 500;
+      padding: 6px 18px;
 
-		.btn-main {
-			font-size: 15px;
-			font-weight: 500;
-			padding: 6px 18px;
+      &:nth-child(odd) {
+        margin: 0 36px 0 0;
+      }
+    }
+  }
 
-			&:nth-child(odd) {
-				margin: 0 36px 0 0;
-			}
-		}
-	}
+  &__top-views {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 300;
+    color: #acacac;
 
-	&__top-views {
-		display: flex;
-		align-items: center;
-		font-size: 15px;
-		font-weight: 300;
-		color: #ACACAC;
+    .icon {
+      width: 21px;
+      height: 21px;
+      margin: 0 10px 0 0;
 
-		.icon {
-			width: 21px;
-			height: 21px;
-			margin: 0 10px 0 0;
+      &__item {
+        fill: #acacac !important;
+      }
+    }
+  }
 
-			&__item {
-				fill: #ACACAC;
-			}
-		}
-	}
+  &__body {
+  }
 
-	&__body {
-	}
-
-	&__slider-body {
-		margin: 0 0 50px 0;
-	}
+  &__slider-body {
+    margin: 0 0 50px 0;
+  }
 }
 
 @media (max-width: 1023px) {
+  .car {
+    &__top {
+      margin: 0 0 25px 0;
+    }
 
-	.car {
+    &__row {
+      margin: 0 -15px;
+    }
 
-		&__top {
-			margin: 0 0 25px 0;
-		}
+    &__col {
+      padding: 0 15px;
+    }
 
-		&__row {
-			margin: 0 -15px;
-		}
+    &__title {
+      font-size: 22px !important;
+      margin: 0 !important;
 
-		&__col {
-			padding: 0 15px;
-		}
+      span {
+        margin: 0 0 0 10px;
+      }
+    }
 
-		&__title {
-			font-size: 22px !important;
-			margin: 0 !important;
+    &__top-actions {
+      .btn-main {
+        font-size: 14px;
+        padding: 6px 14px;
 
-			span {
-				margin: 0 0 0 10px;
-			}
-		}
+        &:nth-child(odd) {
+          margin: 0 15px 0 0;
+        }
 
-		&__top-actions {
-			.btn-main {
-				font-size: 14px;
-				padding: 6px 14px;
+        .d-flex {
+          .icon {
+            width: 16px;
+            height: 16px;
+            margin: 0 10px 0 0;
+          }
+        }
+      }
+    }
 
-				&:nth-child(odd) {
-					margin: 0 15px 0 0;
-				}
+    &__top-views {
+      font-size: 14px;
 
-				.d-flex {
+      .icon {
+        width: 20px;
+        height: 20px;
+        margin: 0 8px 0 0;
+      }
+    }
 
-					.icon {
-						width: 16px;
-						height: 16px;
-						margin: 0 10px 0 0;
-					}
-				}
-			}
-		}
+    &__body {
+    }
 
-		&__top-views {
-			font-size: 14px;
-
-			.icon {
-				width: 20px;
-				height: 20px;
-				margin: 0 8px 0 0;
-			}
-		}
-
-		&__body {
-		}
-
-		&__slider-body {
-			margin: 0 0 35px 0;
-		}
-	}
+    &__slider-body {
+      margin: 0 0 35px 0;
+    }
+  }
 }
 
 @media (max-width: 767px) {
+  .car {
+    &__top {
+      margin: 0 0 20px 0;
+    }
 
-	.car {
+    &__row {
+      margin: 0 -10.5px;
+    }
 
-		&__top {
-			margin: 0 0 20px 0;
-		}
+    &__col {
+      padding: 0 10.5px;
+    }
 
-		&__row {
-			margin: 0 -10.5px;
-		}
+    &__title {
+      font-size: 20px !important;
+      margin: 0 0 12px 0 !important;
+    }
 
-		&__col {
-			padding: 0 10.5px;
-		}
+    &__top-actions {
+      justify-content: space-between;
+      margin: 0 0 12px 0;
+    }
 
-		&__title {
-			font-size: 20px !important;
-			margin: 0 0 12px 0 !important;
-		}
+    &__top-views {
+      font-size: 13px;
+      margin: 0 0 12px 10px;
 
-		&__top-actions {
-			justify-content: space-between;
-			margin: 0 0 12px 0;
-		}
+      .icon {
+        width: 17px;
+        height: 17px;
+        margin: 0 6px 0 0;
+      }
+    }
 
-		&__top-views {
-			font-size: 13px;
-			margin: 0 0 12px 10px;
+    &__body {
+    }
 
-			.icon {
-				width: 17px;
-				height: 17px;
-				margin: 0 6px 0 0;
-			}
-		}
-
-		&__body {
-		}
-
-		&__slider-body {
-			margin: 0 0 35px 0;
-		}
-	}
+    &__slider-body {
+      margin: 0 0 35px 0;
+    }
+  }
 }
 
 @media (max-width: 575px) {
+  .car {
+    &__top-actions {
+      width: 100%;
 
-	.car {
-
-		&__top-actions {
-			width: 100%;
-	
-			.btn-main {
-				display: block;
-				width: 100%;
-			}
-		}
-	}
+      .btn-main {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
 }
 
 @media (max-width: 374px) {
+  .car {
+    &__top-actions {
+      flex-wrap: wrap;
 
-	.car {
+      .btn-main {
+        margin: 0 0 10px 0;
 
-		&__top-actions {
-			flex-wrap: wrap;
-	
-			.btn-main {
-				margin: 0 0 10px 0;
+        &:nth-child(odd) {
+          margin: 0 0 10px 0;
+        }
 
-				&:nth-child(odd) {
-					margin: 0 0 10px 0;
-				}
-
-				&:last-child {
-					margin: 0;
-				}
-			}
-		}
-	}
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+  }
 }

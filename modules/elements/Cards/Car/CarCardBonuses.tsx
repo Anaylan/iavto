@@ -1,4 +1,4 @@
-﻿import { Check } from 'assets/icon/icons'
+import { Check } from 'assets/icon/icons';
 
 export const CarCardBonuses = () => {
   return (
@@ -7,7 +7,7 @@ export const CarCardBonuses = () => {
       <ul className='car__bonuses-list'>
         <li>
           <div className='icon'>
-            <Check color='icon__item' />
+            <Check />
           </div>
           <div className='car__bonuses-item'>
             <div className='car__bonuses-title'>Ремонт</div>
@@ -19,7 +19,7 @@ export const CarCardBonuses = () => {
         </li>
         <li>
           <div className='icon'>
-            <Check color='icon__item' />
+            <Check />
           </div>
           <div className='car__bonuses-item'>
             <div className='car__bonuses-title'>Техобслуживание</div>
@@ -31,7 +31,7 @@ export const CarCardBonuses = () => {
         </li>
         <li>
           <div className='icon'>
-            <Check color='icon__item' />
+            <Check />
           </div>
           <div className='car__bonuses-item'>
             <div className='car__bonuses-title'>Сезонная замена шин</div>
@@ -43,7 +43,7 @@ export const CarCardBonuses = () => {
         </li>
         <li>
           <div className='icon'>
-            <Check color='icon__item' />
+            <Check />
           </div>
           <div className='car__bonuses-item'>
             <div className='car__bonuses-title'>Служба поддержки</div>
@@ -55,5 +55,5 @@ export const CarCardBonuses = () => {
         </li>
       </ul>
     </div>
-  )
-}
+  );
+};

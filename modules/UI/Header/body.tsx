@@ -1,11 +1,11 @@
-import React from 'react'
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
 
-import { Col, Container, Row } from 'react-bootstrap'
-import { ILink } from 'app/models'
+import { Col, Container, Row } from 'react-bootstrap';
+import { ILink } from 'app/models';
 
 interface IHeaderBody {
-  links: ILink[]
+  links: ILink[];
 }
 
 export const HeaderBodyLink: React.FC<ILink> = ({ href, title }) => {
@@ -15,8 +15,8 @@ export const HeaderBodyLink: React.FC<ILink> = ({ href, title }) => {
         <Link href={href}>{title}</Link>
       </li>
     </>
-  )
-}
+  );
+};
 
 export const HeaderBody: React.FC<IHeaderBody> = ({ links }) => {
   return (
@@ -26,8 +26,7 @@ export const HeaderBody: React.FC<IHeaderBody> = ({ links }) => {
           <Row>
             <Col
               as={'ul'}
-              className={`header-body__list d-flex align-items-center`}
-            >
+              className={`header-body__list d-flex align-items-center`}>
               {links.map((link, key) => (
                 <HeaderBodyLink key={key} href={link.href} title={link.title} />
               ))}
@@ -36,5 +35,5 @@ export const HeaderBody: React.FC<IHeaderBody> = ({ links }) => {
         </Container>
       </div>
     </>
-  )
-}
+  );
+};

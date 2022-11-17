@@ -1,21 +1,21 @@
-import { TITLE } from 'app/config'
-import Head from 'next/head'
-import { Container, Row } from 'react-bootstrap'
-import { ReviewCard } from 'modules/elements/Cards/ReviewCard'
-import { useFetch } from 'app/hooks'
-import { useState } from 'react'
-import { getUserReviews } from 'api/Review'
-import { IReviewModel } from 'app/models'
-import { Load } from 'assets/icon/icons'
+import { TITLE } from 'app/config';
+import Head from 'next/head';
+import { Container, Row } from 'react-bootstrap';
+import { ReviewCard } from 'modules/elements/Cards/ReviewCard';
+import { useFetch } from 'app/hooks';
+import { useState } from 'react';
+import { getUserReviews } from 'api/Review';
+import { IReviewModel } from 'app/models';
+import { Load } from 'assets/icon/icons';
 
 export default function Reviews() {
-  const [reviews, setReviews] = useState<IReviewModel[]>()
+  const [reviews, setReviews] = useState<IReviewModel[]>();
   const [isLoading, errors] = useFetch(() => {
     getUserReviews().then(({ data }: { data: IReviewModel[] }) => {
-      setReviews(data)
-      console.log(data)
-    })
-  })
+      setReviews(data);
+      console.log(data);
+    });
+  });
   return (
     <>
       <Head>
@@ -38,5 +38,5 @@ export default function Reviews() {
         </div>
       </section>
     </>
-  )
+  );
 }

@@ -1,17 +1,40 @@
-﻿import { FormInputWithMaskNotLabel, FormInputWithoutLabel, FormLabel } from 'modules/UI'
-import { Col } from 'react-bootstrap'
+﻿import {
+  FormInputWithMaskNotLabel,
+  FormInputWithoutLabel,
+  FormLabel,
+} from 'modules/UI';
+import { Col } from 'react-bootstrap';
 
 const passportNumberMask = [
-  /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/
-]
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+];
 
-const departmentNumberMask = [
-  /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/
-]
+const departmentNumberMask = [/\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/];
 
 const driverLicenceMask = [
-  /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/
-]
+  /\d/,
+  /\d/,
+  ' ',
+  /\d/,
+  /\d/,
+  ' ',
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+];
 
 export const DocumentsDataInputs = () => {
   return (
@@ -80,7 +103,9 @@ export const DocumentsDataInputs = () => {
         </div>
       </Col>
       <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
-        <FormLabel type='text'>Дата получения водительского удостоверения</FormLabel>
+        <FormLabel type='text'>
+          Дата получения водительского удостоверения
+        </FormLabel>
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
@@ -92,5 +117,5 @@ export const DocumentsDataInputs = () => {
         </div>
       </Col>
     </>
-  )
-}
+  );
+};

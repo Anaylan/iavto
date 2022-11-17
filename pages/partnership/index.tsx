@@ -1,73 +1,89 @@
-import { TITLE } from 'app/config'
-
-import Head from 'next/head'
-import Image from 'next/image'
-import { Col, Container, Row } from 'react-bootstrap'
-import { Pagination, PaginationItem } from 'modules/UI'
+import { TITLE } from 'app/config';
+import Head from 'next/head';
+import Image from 'next/image';
+import { Col, Container, Nav, Row, Tab } from 'react-bootstrap';
 
 // import verif from 'assets/sass/'
-import { Download } from 'assets/icon/icons'
+import { Download, Copy } from 'assets/icon/icons';
 // import { RentWidget } from 'modules/elements/widgets/RentWidget'
-import dynamic from 'next/dynamic'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { IRefModel, UserDataModel, UserModel } from 'app/models'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUserByToken } from 'api/User'
-import { useRouter } from 'next/router'
-import * as auth from 'app/redux/reducers/authReducer'
-import { TCell, THead } from 'modules/UI/tables/table'
-import { getAllReferer } from 'api/Refferal'
-import { dbFormatDate, month } from 'libs/functions'
+import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
+import { IRefModel, UserDataModel, UserModel } from 'app/models';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserByToken } from 'api/User';
+import { useRouter } from 'next/router';
+import { getAllReferer, getAllRefCompany } from 'api/Refferal';
+import { RefCodeToClipboard } from 'libs/functions';
+import { PartnershipTable } from 'modules/elements/partnership/PartnershipTable';
+import * as auth from 'app/redux/reducers/authReducer';
 
-const THeadRow = [
-  'Логин',
+const THeadReferrals = [
+  'Водитель',
   'Дата регистрации',
   'Процент',
   'Платежи',
   'Прибыль',
-  'Статус'
-]
+  'Статус',
+];
+
+const THeadCompanies = [
+  'Автопарк',
+  'Дата регистрации',
+  'Процент',
+  'Платежи',
+  'Прибыль',
+  'Статус',
+];
 
 const RentWidget = dynamic(
   () => {
-    return import('modules/elements/widgets/RentWidget')
+    return import('modules/elements/widgets/RentWidget');
   },
-  { ssr: false }
-)
+  { ssr: false },
+);
+
+const ConversionWidget = dynamic(
+  () => {
+    return import('modules/elements/widgets/ConversionWidget');
+  },
+  { ssr: false },
+);
 
 export default function Partners() {
-  const dispatch = useDispatch()
-  const [referrals, setReferrals] = useState<IRefModel[]>([])
-  let [currentPage, setCurrentPage] = useState<number>(1)
-  const [totalPage, setTotalPage] = useState<number>(10)
-  const router = useRouter()
+  const dispatch = useDispatch();
+  const [referrals, setReferrals] = useState<IRefModel[]>([]);
+  const [refCompanies, setRefCompanies] = useState<IRefModel[]>([]);
+  const [test, setTest] = useState([]);
+  const router = useRouter();
   const user = useSelector(
-    ({ header }: { header: UserDataModel }) => header.user
-  )
+    ({ header }: { header: UserDataModel }) => header.user,
+  );
   useEffect(() => {
     getUserByToken()
       .then(({ data }: { data: UserModel }) => {
         if (data.status === 403) {
-          router.push('/auth/signin')
+          router.push('/auth/signin');
         }
         if (user.id !== data.data?.id) {
-          dispatch(auth.actions.logout())
+          dispatch(auth.actions.logout());
         }
       })
       .catch((err) => {
-        dispatch(auth.actions.logout())
+        dispatch(auth.actions.logout());
 
-        router.push('/auth/signin')
-      })
-  }, [user, dispatch, router])
+        router.push('/auth/signin');
+      });
+  }, [user, dispatch, router]);
 
   useEffect(() => {
     getAllReferer().then(({ data }: { data: IRefModel[] }) => {
-      setReferrals(data)
-    })
-  }, [])
-  console.log(referrals)
+      setReferrals(data);
+    });
+    getAllRefCompany().then(({ data }: { data: IRefModel[] }) => {
+      setRefCompanies(data);
+    });
+  }, []);
+
   return (
     <>
       <Head>
@@ -75,63 +91,76 @@ export default function Partners() {
       </Head>
       <section className='charts'>
         <Container>
-          <h1 className='title'>Информация о партнерстве</h1>
+          <div className={'charts__header'}>
+            <h1 className='title'>Информация о партнерстве</h1>
+            <button
+              onClick={() => {
+                RefCodeToClipboard(user.id);
+              }}
+              className='btn-main btn-ref'
+              type='button'>
+              <div className='d-flex align-items-center'>
+                <div className={`icon`}>
+                  <Copy />
+                </div>
+                <span>Реферальная ссылка (нажмите, чтобы скопировать)</span>
+              </div>
+            </button>
+          </div>
+
           <Row>
             <Col xs={12} lg={6}>
-              Заработок
               <RentWidget className='' chartColor='black' chartHeight='30px' />
             </Col>
             <Col xs={12} lg={6}>
-              Переходы по ссылке
-              <RentWidget className='' chartColor='black' chartHeight='30px' />
+              <ConversionWidget
+                className=''
+                chartColor='black'
+                chartHeight='30px'
+              />
             </Col>
           </Row>
         </Container>
       </section>
 
       <section className={`tables`}>
-        <Container>
-          <Row className={`tables__tabs`}>
-            <section className={`tables__tab`}>
-              <div className={`table-responsive`}>
-                <table className={`table`}>
-                  <THead row={THeadRow} />
-                  <tbody>
-                    {referrals.map((referral, key) => (
-                      <tr key={key}>
-                        <TCell>
-                          <Link href='#'>
-                            {referral.firstname} {referral.lastname}
-                          </Link>
-                        </TCell>
-                        <TCell>{dbFormatDate(referral.created, month)}</TCell>
-                        <TCell>DanilTech228</TCell>
-                        <TCell>DanilTech228</TCell>
-                        <TCell>DanilTech228</TCell>
-                        <TCell className={'table__wait'}>DanilTech228</TCell>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          </Row>
-          <Pagination>
-            <PaginationItem>
-              <Link href={'#'} className={'page-link'} aria-label='Previous'>
-                <span aria-hidden='true'>&laquo;</span>
-              </Link>
-            </PaginationItem>
-            <li className={`tables__pagination-value`}>
-              <span>{currentPage}</span> из <span>{totalPage}</span>
-            </li>
-            <PaginationItem>
-              <Link href={'#'} className={'page-link'} aria-label='Next'>
-                <span aria-hidden='true'>&raquo;</span>
-              </Link>
-            </PaginationItem>
-          </Pagination>
-        </Container>
+        {/* Вёстку не меняй здесь, разбирайся со своими стилями!!!!!!!! */}
+        <Tab.Container id='left-tabs-example' defaultActiveKey='first'>
+          <Container>
+            <Nav variant='pills' className='gap-3 mb-4'>
+              <Nav.Item>
+                <Nav.Link
+                  className='tables-nav__link btn-main nav-link'
+                  eventKey='first'>
+                  Водители
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  className='tables-nav__link btn-main nav-link'
+                  eventKey='second'>
+                  Автопарки
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Container>
+          <Container>
+            <Tab.Content>
+              <Tab.Pane eventKey='first'>
+                <PartnershipTable
+                  referrals={referrals}
+                  THeadRow={THeadReferrals}
+                />
+              </Tab.Pane>
+              <Tab.Pane eventKey='second'>
+                <PartnershipTable
+                  referrals={refCompanies}
+                  THeadRow={THeadCompanies}
+                />
+              </Tab.Pane>
+            </Tab.Content>
+          </Container>
+        </Tab.Container>
       </section>
 
       <section className={`banners`}>
@@ -145,6 +174,7 @@ export default function Partners() {
                     <Image
                       width={100}
                       height={100}
+                      sizes='100%'
                       src='/media/banners/long/01.png'
                       alt=''
                     />
@@ -177,6 +207,7 @@ export default function Partners() {
                     <Image
                       width={100}
                       height={100}
+                      sizes='100%'
                       src='/media/presentations/01.png'
                       alt=''
                     />
@@ -203,5 +234,5 @@ export default function Partners() {
         </Container>
       </section>
     </>
-  )
+  );
 }

@@ -175,7 +175,7 @@
     &:hover {
       .icon {
         &__item {
-          fill: #fc0321;
+          fill: #fc0321 !important;
         }
       }
     }
@@ -185,7 +185,7 @@
       height: 21px;
 
       &__item {
-        fill: #2e2f31;
+        fill: #2e2f31 !important;
       }
     }
   }
@@ -272,7 +272,7 @@
       margin: 0 10px 0 0;
 
       &__item {
-        fill: #fff;
+        fill: #fff !important;
       }
     }
   }

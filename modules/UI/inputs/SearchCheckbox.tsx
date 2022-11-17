@@ -1,9 +1,9 @@
-import { Col } from 'react-bootstrap'
-import { FC, InputHTMLAttributes, useState } from 'react'
+import { Col } from 'react-bootstrap';
+import { FC, InputHTMLAttributes, useState } from 'react';
 
 interface ICheckbox extends InputHTMLAttributes<HTMLInputElement> {
-  title: string
-  props?: InputHTMLAttributes<HTMLInputElement>
+  title: string;
+  props?: InputHTMLAttributes<HTMLInputElement>;
 }
 
 export const SearchCheckbox: FC<ICheckbox> = ({ title, ...props }) => {
@@ -21,5 +21,5 @@ export const SearchCheckbox: FC<ICheckbox> = ({ title, ...props }) => {
         </div>
       </Col>
     </>
-  )
-}
+  );
+};

@@ -1,35 +1,40 @@
-import { URL_IMG } from 'app/config'
-import { UserDataModel } from 'app/models'
-import * as auth from 'app/redux/reducers/authReducer'
-import { Notification, Settings, Support } from 'assets/icon/icons'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { FC } from 'react'
-import { Col } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { URL_IMG } from 'app/config';
+import { UserDataModel } from 'app/models';
+import * as auth from 'app/redux/reducers/authReducer';
+import { Notification, Settings, Support } from 'assets/icon/icons';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { FC, useState } from 'react';
+import { Col } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { Textarea, Button, FormInputWithoutLabel } from 'modules/UI';
+import { Modal } from 'react-bootstrap';
+import { requestTransaction, requestURLTransaction } from 'api/Transaction';
+import { requestEdit } from 'api/User';
+// import Modal from '@restart/ui/Modal';
 enum TypeFavorites {
   car = 1,
-  carpark = 0
+  carpark = 0,
 }
 
 interface IProfile {
-  profile: UserDataModel
+  profile: UserDataModel;
 }
 
 interface IProfileFavorites {
-  data?: number
-  params?: string
-  type: TypeFavorites
+  data?: number;
+  params?: string;
+  type: TypeFavorites;
 }
 
 export const ProfileCard: FC<IProfile> = ({ profile }) => {
-  const dispatch = useDispatch()
-  const router = useRouter()
+  const dispatch = useDispatch();
+  const router = useRouter();
   const logout = () => {
-    dispatch(auth.actions.logout())
-    router.push('/')
-  }
+    dispatch(auth.actions.logout());
+    router.push('/');
+  };
   return (
     <>
       <Col md={6} xs={12} className={'profile__col'}>
@@ -39,8 +44,7 @@ export const ProfileCard: FC<IProfile> = ({ profile }) => {
               <div className={'profile-top__photo'}>
                 <Image
                   src={URL_IMG + 'users/' + profile.avatar}
-                  width={100}
-                  height={100}
+                  fill
                   alt={profile.firstname}
                 />
               </div>
@@ -50,16 +54,13 @@ export const ProfileCard: FC<IProfile> = ({ profile }) => {
                 </h1>
                 <a
                   className={'profile-top__tel'}
-                  href={`tel:${profile.telephone}`}
-                >
+                  href={`tel:${profile.telephone}`}>
                   {profile.telephone}
                 </a>
               </div>
               <a className={'profile-top__btn'} href='#'>
                 <div className={'icon'}>
-                  <span className={'icon__item'}>
-                    <Notification color='' />
-                  </span>
+                  <Notification />
                 </div>
                 <span className={'profile-top__btn-bullet'}></span>
               </a>
@@ -74,14 +75,26 @@ export const ProfileCard: FC<IProfile> = ({ profile }) => {
         </div>
       </Col>
     </>
-  )
-}
+  );
+};
 
 export const ProfileDescription = ({
-  description
+  description,
 }: {
-  description: string | undefined
+  description: string | undefined;
 }) => {
+  const [editActive, setEditActive] = useState<boolean>(false);
+  const [show, setShow] = useState(false);
+  const [prevDescr, setPrevDescr] = useState('');
+
+  const handleClose = () => {
+    requestEdit({ prevDescr }).then(({ data }) => {
+      console.log(data);
+    });
+    setShow(false);
+  };
+  const handleShow = () => setShow(true);
+
   return (
     <>
       <Col md={6} xs={12} className={'profile__col'}>
@@ -89,28 +102,80 @@ export const ProfileDescription = ({
           <div className={`profile__body profile-body`}>
             <div className={'profile-body__top'}>
               <h3 className={'profile-body__title'}>Информация о себе</h3>
-              <button className={'profile-body__action'} type='button'>
+              <button
+                className={'profile-body__action'}
+                type='button'
+                onClick={handleShow}>
                 Редактировать
               </button>
             </div>
             <div className={'profile-body__about'}>
+              <Modal centered show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Изменение информации о себе</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className='form'>
+                  <Textarea
+                    defaultValue={description}
+                    className='mb-3 form__input'
+                    onChange={(e: any) => {
+                      setPrevDescr(e.target.value);
+                    }}
+                  />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button className={'btn-main-trp'} onClick={handleClose}>
+                    Закрыть
+                  </Button>
+                  <Button onClick={handleClose}>Сохранить</Button>
+                </Modal.Footer>
+              </Modal>
               <p>{description ? description : 'Заполните информацию о себе'}</p>
             </div>
           </div>
         </div>
       </Col>
     </>
-  )
-}
+  );
+};
 
 export const ProfileBalance = ({
-  balance
+  balance,
 }: {
-  balance: string | undefined
+  balance: string | undefined;
 }) => {
+  const [value, setValue] = useState<string>('');
+  const [token, setToken] = useState<string>('');
+  const [showPay, setShowPay] = useState(false);
+  const [showCheck, setShowCheck] = useState(false);
+
+  const handleClosePay = () => setShowPay(false);
+  const handleShowPay = () => setShowPay(true);
+
+  const handleCloseCheck = () => setShowCheck(false);
+  const handleShowCheck = () => setShowCheck(true);
+
+  const addMoney = () => {
+    requestURLTransaction(value).then(({ data }) => {
+      window.open(data.src);
+      setToken(data.token);
+      handleClosePay();
+      handleShowCheck();
+    });
+  };
+
+  const checkPayment = () => {
+    requestTransaction(value, token).then(({ data }) => {
+      handleCloseCheck();
+      setToken('');
+      setValue('');
+      console.log(data);
+    });
+  };
+
   return (
     <Col sx={12} sm={6} md={3} className={'profile__col'}>
-      <Link className={`profile__item profile__item_imp`} href='#'>
+      <Link href='#' className={`profile__item profile__item_imp`}>
         <div className={`profile__body profile-body`}>
           <h3 className={'profile-body__title'}>Баланс</h3>
         </div>
@@ -118,17 +183,50 @@ export const ProfileBalance = ({
           <div className={'profile__subtitle'}>
             <span>{balance ? balance : 0}</span>₽
           </div>
-          <div className={'profile-body__action'}>Пополнить</div>
+          <div onClick={handleShowPay} className={'profile-body__action'}>
+            Пополнить
+          </div>
         </div>
       </Link>
+      <Modal centered show={showPay} onHide={handleClosePay}>
+        <Modal.Header closeButton>
+          <Modal.Title>Пополнение счёта</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <FormInputWithoutLabel
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+            value={value}
+            placeholder='Введите сумму пополнения'
+            className='mb-3 form-control'
+            type={'number'}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button className={'btn-main-trp'} onClick={handleClosePay}>
+            Закрыть
+          </Button>
+          <Button onClick={addMoney}>Пополнить</Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal centered show={showCheck}>
+        <Modal.Header>
+          <Modal.Title>Пополнение счёта</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Оплатите счет и нажмите кнопку проверить</Modal.Body>
+        <Modal.Footer>
+          <Button onClick={checkPayment}>Проверить</Button>
+        </Modal.Footer>
+      </Modal>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileParthners = ({
-  balance
+  balance,
 }: {
-  balance: string | undefined
+  balance: string | undefined;
 }) => {
   return (
     <Col x={12} sm={6} md={3} className={'profile__col'}>
@@ -144,13 +242,13 @@ export const ProfileParthners = ({
         </div>
       </Link>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileFavorites: FC<IProfileFavorites> = ({
   type,
   data,
-  params
+  params,
 }) => {
   return (
     <Col xs={12} md={6} className={'profile__col'}>
@@ -168,13 +266,13 @@ export const ProfileFavorites: FC<IProfileFavorites> = ({
         </div>
       </Link>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileOrders = () => {
   return (
     <Col xs={12} sm={6} md={3} className={'profile__col'}>
-      <a className={'profile__item'} href='#'>
+      <Link className={'profile__item'} href='/orders'>
         <div className={`profile__body profile-body`}>
           <h3 className={'profile-body__title'}>Мои заказы</h3>
         </div>
@@ -183,10 +281,10 @@ export const ProfileOrders = () => {
             <span className={'profile__value'}>150</span>завершенных заказов
           </div>
         </div>
-      </a>
+      </Link>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileReviews = () => {
   return (
@@ -204,8 +302,8 @@ export const ProfileReviews = () => {
         </Link>
       </Col>
     </>
-  )
-}
+  );
+};
 
 export const ProfileSettings = () => {
   return (
@@ -214,15 +312,15 @@ export const ProfileSettings = () => {
         <div className={`profile__body profile-body`}>
           <h3 className={'profile-body__title'}>
             <div className={'icon'}>
-              <Settings color={'icon__item'} />
+              <Settings />
             </div>
             Общие настройки
           </h3>
         </div>
       </Link>
     </Col>
-  )
-}
+  );
+};
 
 export const ProfileSupport = () => {
   return (
@@ -231,12 +329,12 @@ export const ProfileSupport = () => {
         <div className={`profile__body profile-body`}>
           <h3 className={'profile-body__title'}>
             <div className={'icon'}>
-              <Support color={'icon__item'} />
+              <Support />
             </div>
             Чат и поддержка
           </h3>
         </div>
       </Link>
     </Col>
-  )
-}
+  );
+};

@@ -5,14 +5,14 @@
 
 export function dbFormatDate(dbDate: string | undefined, month: object) {
   if (dbDate) {
-    dbDate = dbDate.slice(0, 10)
-    let date: string[] = dbDate.split('-')
-    date[2][0] === '0' && (date[2] = date[2][1])
-    date[1] = month[date[1] as keyof object]
-    date = date.reverse()
-    return date.join(' ')
+    dbDate = dbDate.slice(0, 10);
+    let date: string[] = dbDate.split('-');
+    date[2][0] === '0' && (date[2] = date[2][1]);
+    date[1] = month[date[1] as keyof object];
+    date = date.reverse();
+    return date.join(' ');
   } else {
-    return ''
+    return '';
   }
 }
 
@@ -28,5 +28,5 @@ export const month = {
   '09': 'Сентября',
   '10': 'Октября',
   '11': 'Ноября',
-  '12': 'Декабря'
-}
+  '12': 'Декабря',
+};

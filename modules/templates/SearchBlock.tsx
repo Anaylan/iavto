@@ -1,11 +1,11 @@
-import React, { FC, FormHTMLAttributes, ReactNode } from 'react'
-import { Col, ColProps } from 'react-bootstrap'
+import React, { FC, FormHTMLAttributes, ReactNode } from 'react';
+import { Col, ColProps } from 'react-bootstrap';
 
 interface ISearchBlock extends FormHTMLAttributes<HTMLFormElement> {
-  title: string
-  subtitle: string
-  children: ReactNode
-  props?: FormHTMLAttributes<HTMLFormElement>
+  title: string;
+  subtitle?: string;
+  children: ReactNode;
+  props?: FormHTMLAttributes<HTMLFormElement>;
 }
 
 export const SearchBlock: FC<ISearchBlock> = ({
@@ -70,27 +70,26 @@ export const SearchBlock: FC<ISearchBlock> = ({
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
 export const SearchItem = ({
   children,
-  columns
+  columns,
 }: {
-  children: React.ReactNode
-  columns?: ColProps
+  children: React.ReactNode;
+  columns?: ColProps;
 }) => {
   return (
     <>
       <Col
         {...columns}
-        className={`search-additional__item d-flex select-wrap`}
-      >
+        className={`search-additional__item d-flex select-wrap`}>
         {children}
       </Col>
     </>
-  )
-}
+  );
+};
 
 export const PriceFromTo = ({ children }: { children: ReactNode }) => {
   return (
@@ -100,5 +99,5 @@ export const PriceFromTo = ({ children }: { children: ReactNode }) => {
         {children}
       </div>
     </>
-  )
-}
+  );
+};

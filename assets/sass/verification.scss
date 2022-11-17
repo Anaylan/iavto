@@ -1,109 +1,100 @@
-
 .verification {
+  &__body {
+  }
 
-	&__body {
-	}
+  .title {
+    margin: 0 0 20px 0;
+  }
 
-	.title {
-		margin: 0 0 20px 0;
-	}
+  .subtitle {
+    font-size: 17px;
+    margin: 0 0 50px 0;
+  }
 
-	.subtitle {
-		font-size: 17px;
-		margin: 0 0 50px 0;
-	}
+  &__form {
+  }
 
-	&__form {
-	}
+  .form {
+    &__body {
+      border: 1px solid #c0c0c0;
+      border-radius: 10px;
+      padding: 40px 30px;
+    }
 
-	.form {
+    &__row {
+      max-width: 910px;
+      margin: 0 auto;
+    }
 
-		&__body {
-			border: 1px solid #C0C0C0;
-			border-radius: 10px;
-			padding: 40px 30px;
-		}
+    &__label {
+      min-width: auto;
+      text-align: right;
+    }
 
-		&__row {
-			max-width: 910px;
-			margin: 0 auto;
-		}
-
-		&__label {
-			min-width: auto;
-			text-align: right;
-		}
-
-		.btn-main {
-			display: block;
-			width: 100%;
-			max-width: 430px;
-			font-size: 20px;
-			font-weight: 700;
-			padding: 15px;
-			margin: 20px 0 0 0;
-		}
-	}
+    .btn-main {
+      display: block;
+      width: 100%;
+      max-width: 430px;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 15px;
+      margin: 20px 0 0 0;
+    }
+  }
 }
 
 @media (max-width: 1023px) {
+  .verification {
+    .title {
+      margin: 0 0 18px 0 !important;
+    }
 
-	.verification {
+    .subtitle {
+      font-size: 16px;
+      margin: 0 0 30px 0;
+    }
 
-		.title {
-			margin: 0 0 18px 0 !important;
-		}
+    .form {
+      &__body {
+        padding: 25px 5px;
+      }
 
-		.subtitle {
-			font-size: 16px;
-			margin: 0 0 30px 0;
-		}
-
-		.form {
-
-			&__body {
-				padding: 25px 5px;
-			}
-
-			.btn-main {
-				max-width: 330px;
-				font-size: 18px;
-				padding: 12px;
-				margin: 10px 0 0 0;
-			}
-		}
-	}
+      .btn-main {
+        max-width: 330px;
+        font-size: 18px;
+        padding: 12px;
+        margin: 10px 0 0 0;
+      }
+    }
+  }
 }
 
 @media (max-width: 767px) {
+  .verification {
+    .title {
+      margin: 0 0 18px 0 !important;
+    }
 
-	.verification {
+    .subtitle {
+      font-size: 16px;
+      margin: 0 0 30px 0;
+    }
 
-		.title {
-			margin: 0 0 18px 0 !important;
-		}
+    .form {
+      &__body {
+        padding: 25px 5px;
+      }
 
-		.subtitle {
-			font-size: 16px;
-			margin: 0 0 30px 0;
-		}
+      &__label {
+        text-align: left;
+      }
 
-		.form {
-
-			&__body {
-				padding: 25px 5px;
-			}
-
-			&__label {
-				text-align: left;
-			}
-
-			.btn-main {
-				max-width: 100%;
-				font-size: 16px;
-				padding: 11px;
-				margin: 10px 10.5px 0 10.5px;
-			}
-		}
-	}
+      .btn-main {
+        max-width: 100%;
+        font-size: 16px;
+        padding: 11px;
+        margin: 10px 10.5px 0 10.5px;
+      }
+    }
+  }
 }

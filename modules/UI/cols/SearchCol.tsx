@@ -1,14 +1,14 @@
-import { ReactNode } from 'react'
-import { Col, ColProps } from 'react-bootstrap'
+import { ReactNode } from 'react';
+import { Col, ColProps } from 'react-bootstrap';
 
 export const SearchAdditionalCol = ({
   children,
   className,
-  columns
+  columns,
 }: {
-  children: ReactNode
-  className?: string | null
-  columns?: ColProps
+  children: ReactNode;
+  className?: string | null;
+  columns?: ColProps;
 }) => {
   return (
     <>
@@ -16,5 +16,5 @@ export const SearchAdditionalCol = ({
         {children}
       </Col>
     </>
-  )
-}
+  );
+};

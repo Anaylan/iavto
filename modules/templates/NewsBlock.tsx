@@ -1,24 +1,24 @@
-import { getLastPosts } from 'api/Post'
-import { IPostModel } from 'app/models'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { URL_IMG } from 'app/config'
+import { getLastPosts } from 'api/Post';
+import { IPostModel } from 'app/models';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { URL_IMG } from 'app/config';
 interface NewsProps {
-  posts?: IPostModel[]
+  posts?: IPostModel[];
 }
 interface PostProps {
-  postInfo: IPostModel
+  postInfo: IPostModel;
 }
 
 const NewsBlock: React.FC<NewsProps> = () => {
-  const [posts, setPosts] = useState<IPostModel[]>([])
+  const [posts, setPosts] = useState<IPostModel[]>([]);
 
   useEffect(() => {
     getLastPosts().then(({ data }: { data: IPostModel[] }) => {
-      setPosts(data.slice(0, 3))
-    })
-  }, [])
+      setPosts(data.slice(0, 3));
+    });
+  }, []);
 
   return (
     <React.Fragment>
@@ -36,28 +36,31 @@ const NewsBlock: React.FC<NewsProps> = () => {
               ))}
           </div>
           <div className='col-12 col-sm-6 col-md-5'>
-            <Link className='news__banner' href='#'>
+            {/* <Link className='news__banner' href='#'>
               <Image
                 src={`/media/sber-banner.png`}
                 priority={false}
-                width={100}
-                height={100}
+                fill
+                sizes='100%'
                 alt=''
               />
-            </Link>
+            </Link> */}
+            <p className='news__banner d-flex justify-content-center'>
+              Здесь могла быть ваша реклама
+            </p>
           </div>
         </div>
       </div>
-      <div className='d-flex align-items-center justify-content-center'>
+      {/* <div className='d-flex align-items-center justify-content-center'>
         <Link className='btn-main' href='/post'>
           Смотреть все новости
         </Link>
-      </div>
+      </div> */}
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default NewsBlock
+export default NewsBlock;
 
 export const PostPreview: React.FC<PostProps> = ({ postInfo }) => {
   return (
@@ -74,9 +77,9 @@ export const PostPreview: React.FC<PostProps> = ({ postInfo }) => {
         <div className='news-item__content'>
           <h4 className='news-item__title'>{postInfo.title}</h4>
           <p>{postInfo.description}</p>
-          <Link href={`/post/${postInfo.id}`}>Подробнеe</Link>
+          {/* <Link href={`/post/${postInfo.id}`}>Подробнеe</Link> */}
         </div>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};

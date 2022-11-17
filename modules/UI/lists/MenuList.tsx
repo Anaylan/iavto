@@ -1,14 +1,14 @@
-import { ReactNode, FC } from 'react'
-import Link from 'next/link'
+import { ReactNode, FC } from 'react';
+import Link from 'next/link';
 
 interface IMenuList {
-  children: ReactNode
+  children: ReactNode;
 }
 
 interface IMenuListItem {
-  href: string
-  children: ReactNode
-  onClick?: ((e: any) => void) | undefined
+  href: string;
+  children: ReactNode;
+  onClick?: ((e: any) => void) | undefined;
 }
 
 export const MenuList: FC<IMenuList> = ({ children }) => {
@@ -16,13 +16,13 @@ export const MenuList: FC<IMenuList> = ({ children }) => {
     <>
       <ul className={'menu__list'}>{children}</ul>
     </>
-  )
-}
+  );
+};
 
 export const MenuListItem: FC<IMenuListItem> = ({
   href,
   children,
-  onClick
+  onClick,
 }) => {
   return (
     <>
@@ -32,5 +32,5 @@ export const MenuListItem: FC<IMenuListItem> = ({
         </Link>
       </li>
     </>
-  )
-}
+  );
+};

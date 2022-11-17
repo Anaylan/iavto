@@ -1,65 +1,64 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import Head from 'next/head';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 
-import { getCar } from 'api/Car'
-import { getCarpark } from 'api/Company'
+import { getCar } from 'api/Car';
+import { getCarpark } from 'api/Company';
 
-import { TITLE, URL_IMG } from 'app/config'
+import { TITLE, URL_IMG } from 'app/config';
 
-import { ICarModel, ICarparkModel, ITabItems } from 'app/models'
-import { CarparkCard, CarparkInfo } from 'modules/elements'
+import { ICarModel, ICarparkModel, ITabItems } from 'app/models';
+import { CarInfo, CarparkCard, CarparkInfo } from 'modules/elements';
 import {
   ActionFollow,
   CarparkTabs,
-  TabCar,
   TabFeedback,
   TabProfile,
-  TabReviews
-} from 'modules/UI'
+  TabReviews,
+} from 'modules/UI';
 
 export async function getServerSideProps({ params }: any) {
-  const { data } = await getCar(params.id)
+  const { data } = await getCar(params.id);
   return {
     props: {
-      car: data
-    }
-  }
+      car: data,
+    },
+  };
 }
 
 export default function Car({ car }: { car: ICarModel }) {
-  console.log(car)
-  const [carpark, setCarpark] = useState<ICarparkModel>()
+  console.log(car);
+  const [carpark, setCarpark] = useState<ICarparkModel>();
 
   useEffect(() => {
     getCarpark(car.cid).then(({ data }: { data: ICarparkModel }) => {
-      setCarpark(data)
-    })
-  }, [car])
+      setCarpark(data);
+    });
+  }, [car]);
 
   const TabItems: ITabItems[] = [
     {
       title: 'Автомобиль',
       eventKey: 'car',
-      contentChild: <TabCar car={car} />
+      contentChild: <CarInfo car={car} />,
     },
     {
       title: 'Профиль',
       eventKey: 'profile',
-      contentChild: <TabProfile />
+      contentChild: <TabProfile carpark={carpark} />,
     },
     {
       title: 'Отзывы',
       eventKey: 'reviews',
-      contentChild: <TabReviews />
+      contentChild: <TabReviews id={`${car.cid}`} />,
     },
     {
       title: 'СВЯЗАТЬСЯ С АВТОПАРКОМ',
       eventKey: 'contact',
-      contentChild: <TabFeedback />
-    }
-  ]
+      contentChild: <TabFeedback id={`${car.cid}`} />,
+    },
+  ];
 
   return (
     <>
@@ -78,7 +77,7 @@ export default function Car({ car }: { car: ICarModel }) {
                 fill
                 alt={carpark.company_name ? carpark.company_name : ''}
               />
-              <ActionFollow />
+              <ActionFollow id={Number(carpark.cid)} />
               <CarparkCard
                 alt={carpark.company_name}
                 tarif={carpark.tarif}
@@ -96,5 +95,5 @@ export default function Car({ car }: { car: ICarModel }) {
         {car && <CarparkTabs tabs={TabItems}></CarparkTabs>}
       </section>
     </>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-﻿import { FormInputWithoutLabel, FormLabel } from 'modules/UI'
-import { Col } from 'react-bootstrap'
+﻿import { FormInputWithoutLabel, FormLabel } from 'modules/UI';
+import { Col } from 'react-bootstrap';
 
 export const RelativeDataInputs = () => {
   return (
@@ -21,11 +21,7 @@ export const RelativeDataInputs = () => {
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
-          <FormInputWithoutLabel
-            type='text'
-            placeholder='Папа'
-            required
-          />
+          <FormInputWithoutLabel type='text' placeholder='Папа' required />
         </div>
       </Col>
       <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
@@ -45,11 +41,7 @@ export const RelativeDataInputs = () => {
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
-          <FormInputWithoutLabel
-            type='text'
-            placeholder='Мама'
-            required
-          />
+          <FormInputWithoutLabel type='text' placeholder='Мама' required />
         </div>
       </Col>
       <Col xs={12} md={5} lg={4} className='d-flex justify-content-md-end'>
@@ -69,13 +61,9 @@ export const RelativeDataInputs = () => {
       </Col>
       <Col xs={12} md={7} lg={8}>
         <div className='form__wrap'>
-          <FormInputWithoutLabel
-            type='text'
-            placeholder='Бабушка'
-            required
-          />
+          <FormInputWithoutLabel type='text' placeholder='Бабушка' required />
         </div>
       </Col>
     </>
-  )
-}
+  );
+};

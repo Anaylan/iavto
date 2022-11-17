@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 interface ICarparkInfo {
-  rating: number
-  orders: number | null
+  rating: number;
+  orders: number | null;
 }
 
 export const CarparkInfo: React.FC<ICarparkInfo> = ({ rating, orders }) => {
@@ -33,5 +33,5 @@ export const CarparkInfo: React.FC<ICarparkInfo> = ({ rating, orders }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

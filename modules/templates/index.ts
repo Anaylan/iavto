@@ -1,4 +1,4 @@
-export * from './Header'
-export * from './Footer'
+export * from './Header';
+export * from './Footer';
 
-export * from './SearchBlock'
+export * from './SearchBlock';

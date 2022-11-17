@@ -1,6 +1,6 @@
-import { IFormInput } from 'app/models'
-import { FC } from 'react'
-import MaskedInput from 'react-text-mask'
+import { IFormInput } from 'app/models';
+import { FC } from 'react';
+import MaskedInput from 'react-text-mask';
 
 export const FormInputWithLabel: FC<IFormInput> = ({
   title,
@@ -16,8 +16,8 @@ export const FormInputWithLabel: FC<IFormInput> = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export const FormInputWithMask: FC<IFormInput> = ({
   title,
@@ -46,8 +46,8 @@ export const FormInputWithMask: FC<IFormInput> = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export const FormInputWithoutLabel: FC<IFormInput> = ({
   title,
@@ -57,11 +57,11 @@ export const FormInputWithoutLabel: FC<IFormInput> = ({
   return (
     <>
       <div className={'form__wrap'}>
-        <input className={`form__input' ${className}`} {...props} />
+        <input className={`form__input ${className}`} {...props} />
       </div>
     </>
-  )
-}
+  );
+};
 
 export const FormInputWithMaskNotLabel: FC<IFormInput> = ({
   title,
@@ -83,5 +83,5 @@ export const FormInputWithMaskNotLabel: FC<IFormInput> = ({
         )}
       </div>
     </>
-  )
-}
+  );
+};

@@ -1,13 +1,13 @@
-import { FC } from 'react'
-import Image from 'next/image'
-import { Crown } from 'assets/icon/icons'
+import { FC } from 'react';
+import Image from 'next/image';
+import { Crown } from 'assets/icon/icons';
 
 interface ICard {
-  title: string | null
-  sold: number | null
-  src: string | null
-  tarif: number | null
-  alt: string | null
+  title: string | null;
+  sold: number | null;
+  src: string | null;
+  tarif: number | null;
+  alt: string | null;
 }
 
 export const CarparkCard: FC<ICard> = ({ title, sold, src, tarif, alt }) => {
@@ -42,5 +42,5 @@ export const CarparkCard: FC<ICard> = ({ title, sold, src, tarif, alt }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};

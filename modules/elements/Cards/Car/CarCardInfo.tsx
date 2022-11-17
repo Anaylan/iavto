@@ -1,9 +1,9 @@
-﻿import { ICarModel } from 'app/models'
-import { Location } from 'assets/icon/icons'
-import React from 'react'
+import { ICarModel } from 'app/models';
+import { Location } from 'assets/icon/icons';
+import React from 'react';
 
 //Swiper styles
-import Link from 'next/link'
+import Link from 'next/link';
 
 export const CarCardInfo: React.FC<ICarModel> = ({ price, company_name }) => {
   return (
@@ -17,7 +17,7 @@ export const CarCardInfo: React.FC<ICarModel> = ({ price, company_name }) => {
             </div>
             <div className={'cars-item__region'}>
               <div className={'icon'}>
-                <Location color={'icon__item'} />
+                <Location />
               </div>
               <span>Москва</span>
             </div>
@@ -36,5 +36,5 @@ export const CarCardInfo: React.FC<ICarModel> = ({ price, company_name }) => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};

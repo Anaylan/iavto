@@ -1,57 +1,53 @@
-
 .carpark-intro {
+  &__action {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+  }
 
-	&__action {
-		position: absolute;
-		top: 15px;
-		right: 15px;
-		z-index: 10;
-	}
+  &__action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background-color: #fff;
+    border-radius: 50%;
+    overflow: hidden;
 
-	&__action-btn {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 35px;
-		height: 35px;
-		background-color: #fff;
-		border-radius: 50%;
-		overflow: hidden;
+    &:hover {
+      .icon {
+        &__item {
+          fill: #ffe600 !important;
+        }
+      }
+    }
 
-		&:hover {
-			.icon {
-				&__item {
-					fill: #FFE600;
-				}
-			}
-		}
+    .icon {
+      position: relative;
+      top: 1px;
+      width: 21px;
+      height: 21px;
 
-		.icon {
-			position: relative;
-			top: 1px;
-			width: 21px;
-			height: 21px;
-
-			&__item {
-				fill: #2E2F31;
-				transition: fill 0.1s linear;
-			}
-		}
-	}
+      &__item {
+        fill: #2e2f31 !important;
+        transition: fill 0.1s linear;
+      }
+    }
+  }
 }
 
 @media (max-width: 1023px) {
+  .carpark-intro {
+    &__action-btn {
+      width: 32px;
+      height: 32px;
 
-	.carpark-intro {
-
-		&__action-btn {
-			width: 32px;
-			height: 32px;
-	
-			.icon {
-				width: 18px;
-				height: 18px;
-			}
-		}
-	}
+      .icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
 }

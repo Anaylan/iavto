@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+import { Html, Head, Main, NextScript } from 'next/document';
 // import { useSanitize } from 'app/hooks'
 
 // document.body.addEventListener('contextmenu', (e) => {
@@ -16,5 +16,5 @@ export default function Document() {
         <NextScript />
       </body>
     </Html>
-  )
+  );
 }

@@ -1,32 +1,34 @@
-import { ICarparkBlock, ICarparkModel } from 'app/models'
-import { Heart, Star } from 'assets/icon/icons'
-import React, { useEffect, useState } from 'react'
+import { ICarparkBlock, ICarparkModel } from 'app/models';
+import { Heart, Star } from 'assets/icon/icons';
+import React, { useEffect, useState } from 'react';
 
-import { URL_IMG } from 'app/config'
-import Link from 'next/link'
-import { Col, Container, Row } from 'react-bootstrap'
+import { URL_IMG } from 'app/config';
+import Link from 'next/link';
+import { Col, Container, Row } from 'react-bootstrap';
+import { useRouter } from 'next/router';
+import { IRegionState } from 'app/redux/reducers/regionReducer';
 
-import { IRegionState } from 'app/redux/reducers/regionReducer'
-
-import Image from 'next/image'
-import { useSelector } from 'react-redux'
-import { EmptyComponent } from 'modules/elements'
+import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { EmptyComponent } from 'modules/elements';
+import { requestAddToFavor } from 'api/User';
 
 const CarParkBlock: React.FC<ICarparkBlock> = ({
   getData,
   columns,
   title,
-  large = false
+  large = false,
 }) => {
   const location: string | undefined = useSelector(
-    ({ region }: { region: IRegionState }) => region.name
-  )
-  const [Carparks, setCarparks] = useState<ICarparkModel[]>([])
+    ({ region }: { region: IRegionState }) => region.name,
+  );
+
+  const [Carparks, setCarparks] = useState<ICarparkModel[]>([]);
   useEffect(() => {
     getData().then(({ data }: { data: ICarparkModel[] }) => {
-      setCarparks(data)
-    })
-  }, [setCarparks, getData, location])
+      setCarparks(data);
+    });
+  }, [setCarparks, getData, location]);
 
   return (
     <>
@@ -39,8 +41,7 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
               large
                 ? `carparks__body gx-0 gy-0 carparks__large`
                 : `carparks__body gx-0 gy-0 carparks`
-            }
-          >
+            }>
             {Carparks.length ? (
               Carparks.map((tender: ICarparkModel, key: number) => (
                 <Col key={key} {...columns}>
@@ -54,21 +55,27 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
         </Container>
       </section>
     </>
-  )
-}
-export default CarParkBlock
+  );
+};
+export default CarParkBlock;
 
 export function TenderPark({
   carPark,
-  lazy
+  lazy,
 }: {
-  carPark: ICarparkModel
-  lazy: boolean
+  carPark: ICarparkModel;
+  lazy: boolean;
 }) {
+  const toFavor = (id: number) => {
+    requestAddToFavor(id).then(({ data }) => {
+      console.log(data);
+    });
+  };
+
   return (
     <>
       <div className={'carparks__item'}>
-        <Link className={'carparks__img'} href={`/carpark/${carPark.cid}`}>
+        <div className={'carparks__img'}>
           {carPark.img ? (
             <Image
               priority={lazy}
@@ -89,23 +96,43 @@ export function TenderPark({
           )}
 
           <div className={`carparks__hover carparks-hover`}>
+            {/* {carPark.favor ? (
+              <div
+                onClick={() => {
+                  toFavor(Number(carPark.cid));
+                }}
+                className={'carparks-hover__item'}>
+                <div>Добавить в</div>
+                <span className={'icon'}>
+                  <Heart />
+                </span>
+              </div>
+            ) : (
+              <>
+                <div class='carparks-hover__item carparks-hover-act'>
+                  <span class='icon'>
+                    <svg class='icon__item'>
+                      <Heart />
+                    </svg>
+                  </span>
+                </div>
+              </>
+            )} */}
             <div
               onClick={() => {
-                console.log('Добавить избранное')
+                toFavor(Number(carPark.cid));
               }}
-              className={'carparks-hover__item'}
-            >
+              className={'carparks-hover__item'}>
               <div>Добавить в</div>
               <span className={'icon'}>
                 <Heart />
               </span>
             </div>
           </div>
-        </Link>
+        </div>
         <Link
           className={'carparks__item-title'}
-          href={`/carpark/${carPark.cid}`}
-        >
+          href={`/carpark/${carPark.cid}`}>
           <span>{carPark.company_name}</span>
         </Link>
         <div className={'carparks__content'}>
@@ -121,5 +148,5 @@ export function TenderPark({
         </div>
       </div>
     </>
-  )
+  );
 }

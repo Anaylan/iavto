@@ -1,13 +1,11 @@
-
 .tables {
+  &__tab-nav {
+  }
 
-	&__tab-nav {
-	}
+  &__tabs {
+  }
 
-	&__tabs {
-	}
-
-	&__tab {
-		padding: 0 !important;
-	}
+  &__tab {
+    padding: 0 !important;
+  }
 }

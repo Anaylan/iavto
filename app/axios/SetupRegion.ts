@@ -3,17 +3,17 @@ export default function setupRegion(axios: any, store: any) {
     (config: any) => {
       try {
         const {
-          region: { id }
-        } = store.getState()
+          region: { id },
+        } = store.getState();
 
         if (id) {
-          config.headers.region = `${id}`
+          config.headers.region = `${id}`;
         }
-        return config
+        return config;
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     },
-    (err: any) => Promise.reject(err)
-  )
+    (err: any) => Promise.reject(err),
+  );
 }

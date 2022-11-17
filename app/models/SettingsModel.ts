@@ -1,73 +1,73 @@
 export interface IProfileDetails {
-  avatar: string
-  fName: string
-  lName: string
-  company: string
-  contactPhone: string
-  companySite: string
-  country: string
-  language: string
-  timeZone: string
-  currency: string
+  avatar: string;
+  fName: string;
+  lName: string;
+  company: string;
+  contactPhone: string;
+  companySite: string;
+  country: string;
+  language: string;
+  timeZone: string;
+  currency: string;
   communications: {
-    email: boolean
-    phone: boolean
-  }
-  allowMarketing: boolean
+    email: boolean;
+    phone: boolean;
+  };
+  allowMarketing: boolean;
 }
 
 export interface IUpdateEmail {
-  newEmail: string
-  confirmPassword: string
+  newEmail: string;
+  confirmPassword: string;
 }
 
 export interface IUpdatePassword {
-  currentPassword: string
-  newPassword: string
-  passwordConfirmation: string
+  currentPassword: string;
+  newPassword: string;
+  passwordConfirmation: string;
 }
 
 export interface IConnectedAccounts {
-  google: boolean
-  github: boolean
-  stack: boolean
+  google: boolean;
+  github: boolean;
+  stack: boolean;
 }
 
 export interface IEmailPreferences {
-  successfulPayments: boolean
-  payouts: boolean
-  freeCollections: boolean
-  customerPaymentDispute: boolean
-  refundAlert: boolean
-  invoicePayments: boolean
-  webhookAPIEndpoints: boolean
+  successfulPayments: boolean;
+  payouts: boolean;
+  freeCollections: boolean;
+  customerPaymentDispute: boolean;
+  refundAlert: boolean;
+  invoicePayments: boolean;
+  webhookAPIEndpoints: boolean;
 }
 
 export interface INotifications {
   notifications: {
-    email: boolean
-    phone: boolean
-  }
+    email: boolean;
+    phone: boolean;
+  };
   billingUpdates: {
-    email: boolean
-    phone: boolean
-  }
+    email: boolean;
+    phone: boolean;
+  };
   newTeamMembers: {
-    email: boolean
-    phone: boolean
-  }
+    email: boolean;
+    phone: boolean;
+  };
   completeProjects: {
-    email: boolean
-    phone: boolean
-  }
+    email: boolean;
+    phone: boolean;
+  };
   newsletters: {
-    email: boolean
-    phone: boolean
-  }
+    email: boolean;
+    phone: boolean;
+  };
 }
 
 export interface IDeactivateAccount {
-  confirm: boolean
+  confirm: boolean;
 }
 
 export const profileDetailsInitValues: IProfileDetails = {
@@ -83,27 +83,27 @@ export const profileDetailsInitValues: IProfileDetails = {
   currency: '',
   communications: {
     email: false,
-    phone: false
+    phone: false,
   },
-  allowMarketing: false
-}
+  allowMarketing: false,
+};
 
 export const updateEmail: IUpdateEmail = {
   newEmail: 'support@keenthemes.com',
-  confirmPassword: ''
-}
+  confirmPassword: '',
+};
 
 export const updatePassword: IUpdatePassword = {
   currentPassword: '',
   newPassword: '',
-  passwordConfirmation: ''
-}
+  passwordConfirmation: '',
+};
 
 export const connectedAccounts: IConnectedAccounts = {
   google: true,
   github: true,
-  stack: false
-}
+  stack: false,
+};
 
 export const emailPreferences: IEmailPreferences = {
   successfulPayments: false,
@@ -112,32 +112,32 @@ export const emailPreferences: IEmailPreferences = {
   customerPaymentDispute: true,
   refundAlert: false,
   invoicePayments: true,
-  webhookAPIEndpoints: false
-}
+  webhookAPIEndpoints: false,
+};
 
 export const notifications: INotifications = {
   notifications: {
     email: true,
-    phone: true
+    phone: true,
   },
   billingUpdates: {
     email: true,
-    phone: true
+    phone: true,
   },
   newTeamMembers: {
     email: true,
-    phone: false
+    phone: false,
   },
   completeProjects: {
     email: false,
-    phone: true
+    phone: true,
   },
   newsletters: {
     email: false,
-    phone: false
-  }
-}
+    phone: false,
+  },
+};
 
 export const deactivateAccount: IDeactivateAccount = {
-  confirm: false
-}
+  confirm: false,
+};

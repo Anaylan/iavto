@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode } from 'react';
 
 export const THead = ({ row }: { row: string[] }) => {
   return (
@@ -13,15 +13,15 @@ export const THead = ({ row }: { row: string[] }) => {
         </tr>
       </thead>
     </>
-  )
-}
+  );
+};
 
 export const TCell = ({
   children,
-  className
+  className,
 }: {
-  children: ReactNode
-  className?: string | undefined
+  children: ReactNode;
+  className?: string | undefined;
 }) => {
   return (
     <>
@@ -29,5 +29,5 @@ export const TCell = ({
         <div className={`table__item`}>{children}</div>
       </td>
     </>
-  )
-}
+  );
+};

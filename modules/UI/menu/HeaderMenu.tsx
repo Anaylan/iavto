@@ -1,60 +1,60 @@
-import { ILink, UserDataModel } from 'app/models'
-import { HeaderBottomLinks } from 'modules/templates'
+import { ILink, UserDataModel } from 'app/models';
+import { HeaderBottomLinks } from 'modules/templates';
 import {
   MenuList,
   MenuListBottom,
   MenuListBottomItem,
-  MenuListItem
-} from 'modules/UI'
-import { RegionSearch } from 'modules/UI/Header/bottom'
-import { SearchInput } from 'modules/UI/inputs/SearchInput'
-import Link from 'next/link'
+  MenuListItem,
+} from 'modules/UI';
+import { RegionSearch } from 'modules/UI/Header/bottom';
+import { SearchInput } from 'modules/UI/inputs/SearchInput';
+import Link from 'next/link';
 
 const Links = [
   {
     href: '/orders',
-    children: 'Заказы'
+    children: 'Заказы',
   },
   {
     href: '/',
-    children: 'Избранное'
+    children: 'Избранное',
   },
   {
     href: '/chat',
-    children: 'Сообщения'
+    children: 'Сообщения',
   },
   {
     href: '/carpark',
-    children: 'Автопарки'
+    children: 'Автопарки',
   },
   {
     href: '/car',
-    children: 'Автомобили'
+    children: 'Автомобили',
   },
   {
     href: '/rules',
-    children: 'Правила'
+    children: 'Правила',
   },
   {
     href: '/pay',
-    children: 'Оплата'
+    children: 'Оплата',
   },
   {
     href: '/parthners',
-    children: 'Партнеры'
+    children: 'Партнеры',
   },
   {
     href: '/feedback',
-    children: 'Обратная связь'
-  }
-]
+    children: 'Обратная связь',
+  },
+];
 
 export const HeaderMenu = ({
   user,
-  onClick
+  onClick,
 }: {
-  user: UserDataModel | null | undefined
-  onClick: ((e: any) => void) | undefined
+  user: UserDataModel | null | undefined;
+  onClick: ((e: any) => void) | undefined;
 }) => {
   return (
     <>
@@ -67,11 +67,13 @@ export const HeaderMenu = ({
                 <RegionSearch className={`header-region collapse show`} />
                 <MenuList>
                   {user ? (
-                    <MenuListItem href={'/profile'}>
+                    <MenuListItem onClick={onClick} href={'/profile'}>
                       {user.firstname}
                     </MenuListItem>
                   ) : (
-                    <MenuListItem href={'/auth/signin'}>Войти</MenuListItem>
+                    <MenuListItem onClick={onClick} href={'/auth/signin'}>
+                      Войти
+                    </MenuListItem>
                   )}
                   {Links.map((link, key) => (
                     <MenuListItem onClick={onClick} key={key} href={link.href}>
@@ -80,17 +82,17 @@ export const HeaderMenu = ({
                   ))}
                 </MenuList>
               </div>
+              <MenuListBottom>
+                <MenuListBottomItem onClick={onClick}>
+                  {HeaderBottomLinks.map((link, key) => (
+                    <Link href={link.href} key={key}>
+                      {link.title}
+                    </Link>
+                  ))}
+                </MenuListBottomItem>
+              </MenuListBottom>
             </div>
-            <MenuListBottom>
-              <MenuListBottomItem onClick={onClick}>
-                {HeaderBottomLinks.map((link, key) => (
-                  <Link href={link.href} key={key}>
-                    {link.title}
-                  </Link>
-                ))}
-              </MenuListBottomItem>
-            </MenuListBottom>
-            <div className='footer'>
+            <div className='menu__footer'>
               <div className='text-dark'>
                 <span className='text-muted fw-bold'>
                   2022© ЯАВТО.РФ Все права защищены
@@ -101,5 +103,5 @@ export const HeaderMenu = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};

@@ -1,5 +1,5 @@
-import { IForm } from 'app/models'
-import { FC } from 'react'
+import { IForm } from 'app/models';
+import { FC } from 'react';
 
 const Form: FC<IForm> = ({ children, ...props }) => {
   return (
@@ -8,7 +8,7 @@ const Form: FC<IForm> = ({ children, ...props }) => {
         <div className={'form__body'}>{children}</div>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;

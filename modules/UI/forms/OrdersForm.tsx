@@ -1,5 +1,5 @@
-import form from 'assets/sass/components/form.module.scss'
-import { Row } from 'react-bootstrap'
+import form from 'assets/sass/components/form.module.scss';
+import { Row } from 'react-bootstrap';
 // import { form } from 'modules/UI'
 
 // Уже есть в modules/template/SearchBlock
@@ -129,5 +129,5 @@ const SearchBodyOrders = () => {
         </Row>
       </form>
     </>
-  )
-}
+  );
+};

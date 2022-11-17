@@ -69,8 +69,8 @@ section {
   color: #fff;
   text-align: center;
   padding: 10px 25px;
-  transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease,
-    opacity 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, border 0.25s ease,
+    opacity 0.25s ease, box-shadow 0.25s ease;
 
   .d-flex {
     .icon {
@@ -80,14 +80,14 @@ section {
 
       &__item {
         fill: #fff;
-        transition: color 0.2s ease;
+        transition: color 0.25s ease;
       }
     }
   }
 
   &:hover {
     background-color: #2e2f31;
-    border: 2px solid #2e2f31;
+    border-color: #2e2f31;
     color: #fff;
   }
 
@@ -123,6 +123,26 @@ section {
         &__item {
           fill: #fff;
         }
+      }
+    }
+  }
+}
+.btn-ref {
+  background: transparent;
+  color: #2e2f31;
+  border: 1px solid rgb(161, 165, 183);
+  font-weight: 500;
+
+  &:hover {
+    background-color: transparent;
+    border-color: #2e2f31;
+    color: #2e2f31;
+  }
+
+  .d-flex {
+    .icon {
+      &__item {
+        fill: #2e2f31;
       }
     }
   }
@@ -224,9 +244,17 @@ section {
   }
 }
 
+.text-indigo {
+  color: #6d69b6;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 /* Main
 ===================*/
-.wrapper {
+#__next {
   min-height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -238,7 +266,7 @@ section {
   overflow: hidden;
 }
 
-#__next {
+.main {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -653,6 +681,43 @@ section {
   padding: 0 0 5px 0;
 }
 
+/* Pagination
+===================*/
+.pagination {
+  --bs-pagination-padding-x: 12px;
+  --bs-pagination-padding-y: 8px;
+  --bs-pagination-font-size: 16px;
+  --bs-pagination-color: #fff;
+  --bs-pagination-bg: #2774ac;
+  --bs-pagination-border-width: 1px;
+  --bs-pagination-border-color: #2774ac;
+  --bs-pagination-border-radius: 8px;
+  --bs-pagination-hover-color: #fff;
+  --bs-pagination-hover-bg: #2e2f31;
+  --bs-pagination-hover-border-color: #2e2f31;
+  --bs-pagination-focus-color: #fff;
+  --bs-pagination-focus-bg: #2e2f31;
+  --bs-pagination-focus-box-shadow: none;
+  --bs-pagination-active-color: #fff;
+  --bs-pagination-active-bg: #0d6efd;
+  --bs-pagination-active-border-color: #0d6efd;
+  --bs-pagination-disabled-color: #6c757d;
+  --bs-pagination-disabled-bg: #fff;
+  --bs-pagination-disabled-border-color: #dee2e6;
+
+  margin: 15px 0 0 0;
+
+  .pagination-value {
+    display: inline-block;
+    min-width: 84px;
+    border-top: 1px solid #f6f7fb;
+    border-bottom: 1px solid #f6f7fb;
+    background: #f6f7fb;
+    text-align: center;
+    padding: 8.5px 14px;
+  }
+}
+
 /* Carparks
 ===================*/
 .carparks {
@@ -721,7 +786,7 @@ section {
       margin: 0 6px 0 0;
 
       &__item {
-        fill: #2774ac;
+        fill: #ffe600 !important;
       }
     }
 
@@ -1582,6 +1647,10 @@ section {
 ===================*/
 @import 'footer.scss';
 
+/* About
+===================*/
+@import 'about.scss';
+
 @media (max-width: 1434px) {
   /* Header
 	===================*/
@@ -1968,7 +2037,7 @@ section {
 
     &__select {
       padding: 13px 16px;
-      margin: 0 0 25px 0;
+      margin: 0 0 18px 0;
     }
 
     &__price {
@@ -1984,8 +2053,11 @@ section {
 
       input {
         display: inline-block;
-        max-width: 100px;
       }
+    }
+
+    .search-additional__radio-group {
+      margin: 0 0 18px 0;
     }
 
     .search-additional__radio {
@@ -2526,14 +2598,15 @@ section {
     }
 
     &__price {
-      margin: 0 0 25px 0;
+      margin: 0 0 15px 0;
 
       input {
         display: inline-block;
         max-width: 50%;
 
         &:nth-child(2) {
-          max-width: calc(50% - 58px);
+          // max-width: calc(50% - 58px);
+          max-width: 50%;
         }
       }
 
@@ -2541,6 +2614,10 @@ section {
         min-width: 8px;
         margin: 0 6px;
       }
+    }
+
+    &__radio-group {
+      margin: 0 0 10px 0 !important;
     }
   }
   .search-tariffs {
@@ -2645,6 +2722,16 @@ section {
   .search-additional {
     &__item {
       flex-wrap: wrap;
+
+      .btn-main {
+        display: block;
+        width: 100%;
+        margin: 10px 0 10px 0;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
     }
 
     &__price {
@@ -2723,6 +2810,15 @@ section {
   .search-tariffs {
     &__item {
       width: 100% !important;
+    }
+  }
+
+  /* Cars
+	===================*/
+  .cars-item {
+    &__btn {
+      display: inline-block;
+      width: auto;
     }
   }
 }

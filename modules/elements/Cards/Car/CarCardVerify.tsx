@@ -1,4 +1,4 @@
-﻿import details from 'assets/sass/components/car/car__details.module.scss'
+﻿import details from 'assets/sass/components/car/car__details.module.scss';
 
 export const CarCardVerify = () => {
   return (
@@ -17,5 +17,5 @@ export const CarCardVerify = () => {
         <li>Данные о ДТП не найдены</li>
       </ul>
     </div>
-  )
-}
+  );
+};

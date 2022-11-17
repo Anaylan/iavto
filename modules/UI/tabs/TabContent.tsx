@@ -1,26 +1,27 @@
-import { getCars, getCarsForCarpark } from 'api/Car'
-import { sanitize } from 'libs/functions'
-import { ICarModel, ICarparkModel } from 'app/models'
-import { Star } from 'assets/icon/icons'
-import { CarInfo } from 'modules/elements/Cards/Car/CarCard'
-import CarBlock from 'modules/templates/CarBlock'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { Col, ProgressBar, Row } from 'react-bootstrap'
-import { Button } from '../buttons/Button'
-import Form from '../forms/Form'
-import { Textarea } from '../textarea/textarea'
+import { getCars, getCarsForCarpark } from 'api/Car';
+import { sanitize } from 'libs/functions';
+import { ICarModel, ICarparkModel, IReviewModel } from 'app/models';
+import { Star } from 'assets/icon/icons';
+import CarBlock from 'modules/templates/CarBlock';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { Col, ProgressBar, Row } from 'react-bootstrap';
+import { Button } from '../buttons/Button';
+import Form from '../forms/Form';
+import { Textarea } from '../textarea/textarea';
+import { getCompanyReviews } from 'api/Review';
+import { Review } from '../reviews/Review';
+import { useFormik } from 'formik';
 
 export const TabCars = () => {
-  const [cars, setCars] = useState<ICarModel[]>([])
-  const { query } = useRouter()
+  const [cars, setCars] = useState<ICarModel[]>([]);
+  const { query } = useRouter();
 
   useEffect(() => {
     getCarsForCarpark(query.id).then((res: any) => {
-      setCars(res.data)
-    })
-  }, [query.id])
+      setCars(res.data);
+    });
+  }, [query.id]);
 
   // console.log(cars)
 
@@ -32,19 +33,14 @@ export const TabCars = () => {
         <>ПУСТО</>
       )}
     </>
-  )
-}
+  );
+};
 
-export const TabProfile = () => {
-  const [carpark, setCarpark] = useState<ICarparkModel | null>(null)
-
-  // const [carpark, setCarpark] = useState<ICarparkModel>()
-  // const router = useSearchParams()
-  // const { id } = router.query
-  // useEffect(() => {
-  //   getCarpark(id).then((res) => setCarpark(res.data))
-  // }, [])
-
+export const TabProfile = ({
+  carpark,
+}: {
+  carpark: ICarparkModel | undefined;
+}) => {
   return (
     <>
       <h2 className='carpark-profile__title title'>Профиль автопарка</h2>
@@ -53,15 +49,12 @@ export const TabProfile = () => {
 
       {carpark && (
         <>
-          <div className={'carpark-profile__about'}>
-            <p
-              dangerouslySetInnerHTML={
-                carpark.description
-                  ? sanitize(carpark.description)
-                  : sanitize('')
-              }
-            ></p>
-          </div>
+          <div
+            className={'carpark-profile__about'}
+            dangerouslySetInnerHTML={
+              carpark.description ? sanitize(carpark.description) : sanitize('')
+            }
+          />
 
           <Row>
             <Col xs={12} sm={4}>
@@ -79,7 +72,7 @@ export const TabProfile = () => {
                   Количество оценок
                 </div>
                 <div className={'carpark-profile__value'}>
-                  <span>1 237</span>
+                  <span>Привязать оценку</span>
                 </div>
               </div>
             </Col>
@@ -92,7 +85,7 @@ export const TabProfile = () => {
                   Количество заказов
                 </div>
                 <div className={'carpark-profile__value'}>
-                  <span>1 699</span>
+                  <span>Привязать количество</span>
                 </div>
               </div>
             </Col>
@@ -100,66 +93,25 @@ export const TabProfile = () => {
         </>
       )}
     </>
-  )
-}
+  );
+};
 
-export const TabReviews = () => {
+export const TabReviews = ({ id }: { id: string }) => {
+  const [reviews, setReviews] = useState<IReviewModel[] | null>(null);
+  const router = useRouter();
+  useEffect(() => {
+    getCompanyReviews(id).then(({ data }) => {
+      setReviews(data);
+      console.log(data);
+    });
+  }, []);
   return (
     <>
       <Row>
         <Col xs={12} md={8} className='order-2 order-md-1'>
-          <div className={'carpark-reviews__item'}>
-            <div className={'carpark-reviews__top'}>
-              <div className={'carpark-reviews__info'}>
-                <div className={'carpark-reviews__photo'}>
-                  <Image
-                    src='/media/user.png'
-                    width={100}
-                    height={100}
-                    alt=''
-                  />
-                </div>
-                <div className={'carpark-reviews__user-data'}>
-                  <div className={'carpark-reviews__username'}>Курам Барам</div>
-                  <div className={'carpark-reviews__position'}>Водитель</div>
-                </div>
-              </div>
-              <div className={'carpark-reviews__review-info'}>
-                <time className={'carpark-reviews__date'} dateTime='2022-04-22'>
-                  22 Апреля 2022
-                </time>
-                <div className={'carpark-reviews__rate'}>
-                  {Array(5)
-                    .fill(1, 0, 4)
-                    .map((star, key) => (
-                      <div key={key} className={'icon'}>
-                        <Star />
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </div>
-            <div className={'carpark-reviews__comment'}>
-              <div className={'carpark-reviews__text'}>
-                <span>Автомобиль:</span>
-                <p>Lada Granta AMG V8</p>
-              </div>
-              <div className={'carpark-reviews__text'}>
-                <span>Комментарий:</span>
-                <p>
-                  Я брать машина на сутки. Все класс. Парк хороший. Авто
-                  хороший. Звонил хорошо. Машина не ломаться, руль крутиться,
-                  коляса поворачиваться. Потом яма была, в яму упала, я жив.
-                  Права теперь нет, автопарк сказал, что машина должен вернуть,
-                  я машина вернуть в состоянии плохой. Но парк сказал, что
-                  машина не плохой. Надо кредит брать, помогите кто нибудь лада
-                  купить
-                </p>
-              </div>
-            </div>
-          </div>
+          {reviews &&
+            reviews.map((review, key) => <Review review={review} key={key} />)}
         </Col>
-
         <Col xs={12} md={4} className='order-1 order-md-2'>
           <div className={'carpark-reviews__aside reviews-aside'}>
             <div className={'reviews-aside__content'}>
@@ -169,7 +121,7 @@ export const TabReviews = () => {
                     .fill(1, 0, 4)
                     .map((star, key) => (
                       <div key={key} className={'icon'}>
-                        <Star color={'icon__item'} />
+                        <Star />
                       </div>
                     ))}
                 </div>
@@ -202,21 +154,32 @@ export const TabReviews = () => {
         </Col>
       </Row>
     </>
-  )
-}
+  );
+};
 
-export const TabFeedback = () => {
+export const TabFeedback = ({ id }: { id: string }) => {
+  const formik = useFormik({
+    initialValues: {
+      text: '',
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
     <div className={`carpark-contact carpark-tab__body auth`}>
       <h1 className={`cars__title title`}>Задайте ваш вопрос автопарку</h1>
-      <Form className={'form'}>
+      <Form onSubmit={formik.handleSubmit} className={'form'}>
         <div className={'form__item'}>
           <div className={`form__label form__label`}>Ваш вопрос</div>
           <div className={'form__wrap'}>
-            <Textarea className={`form__input form__input`} />
+            <Textarea
+              onChange={formik.handleChange}
+              id={'text'}
+              className={`form__input form__input`}
+            />
           </div>
         </div>
-
         <div className={'form__bottom'}>
           <div className={'form__btn-group'}>
             <div className={'form__btn-wrap'}>
@@ -228,13 +191,11 @@ export const TabFeedback = () => {
         </div>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export const TabCar = ({ car }: { car: ICarModel }) => {
-  return (
-    <>
-      <CarInfo Car={car} />
-    </>
-  )
-}
+// Не нужно использовать ошибка связанная с декларацией, вместо него сразу обращаемся к CarInfo
+// export const TabCar = ({ car }: { car: ICarModel }) => {
+//   // console.log(ca);
+//   return <>{/* <CarInfo car={car} /> */}</>;
+// };

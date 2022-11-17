@@ -1,9 +1,9 @@
-﻿import React from 'react'
-import { ICarModel } from 'app/models'
+import React from 'react';
+import { ICarModel } from 'app/models';
 
 export const CarCardDetails: React.FC<ICarModel> = ({
   fuel_type,
-  horse_power
+  horse_power,
 }) => {
   return (
     <div className='car__details'>
@@ -47,5 +47,5 @@ export const CarCardDetails: React.FC<ICarModel> = ({
         </li>
       </ul>
     </div>
-  )
-}
+  );
+};

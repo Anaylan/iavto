@@ -1,11 +1,11 @@
-﻿import Image from 'next/image'
-import { Location } from 'assets/icon/icons'
-import { IOrderModel } from 'app/models'
-import { Col, Row } from 'react-bootstrap'
-import Link from 'next/link'
-import { URL_IMG } from 'app/config'
+﻿import Image from 'next/image';
+import { Location } from 'assets/icon/icons';
+import { IOrderModel } from 'app/models';
+import { Col, Row } from 'react-bootstrap';
+import Link from 'next/link';
+import { URL_IMG } from 'app/config';
 export const OrderCard = ({ order }: { order: IOrderModel }) => {
-  console.log(order.status)
+  console.log(order);
   return (
     <Col xs={12} sm={6} lg={12} className={'cars__col'}>
       <div className={`cars-item`}>
@@ -14,8 +14,8 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
             <Link className={`cars-item__img`} href='#'>
               <Image
                 priority={false}
-                width={100}
-                height={100}
+                fill
+                sizes='100%'
                 src={URL_IMG + `/` + order.cid + `/` + order.img![0]}
                 alt={`${order.mark} ${order.model}`}
               />
@@ -24,12 +24,15 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
           <Col xs={12} lg={4}>
             <div className={`cars-item__main`}>
               <div className={`cars-item__main-body`}>
-                <Link className={`cars-item__title`} href='#'>
+                <Link className={`cars-item__title`} href={`/car/${order.pid}`}>
                   {order.mark} {order.model}
                   <span>{order.year}</span>
                 </Link>
                 <div className={'cars-item__subtitle'}>
-                  Автопарк:<Link href='#'>{order.company_name}</Link>
+                  Автопарк:
+                  <Link href={`/carpark/${order.cid}`}>
+                    {order.company_name}
+                  </Link>
                 </div>
                 <div className={'cars-item__region'}>
                   <div className={'icon'}>
@@ -40,10 +43,9 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
               </div>
               <div
                 className={
-                  'cars-item__btn orders-btn btn-main d-none d-lg-block' +
-                  (order.status ? '' : 'orders-btn-wait')
-                }
-              >
+                  'cars-item__btn orders-btn btn-main d-none d-lg-block ' +
+                  (order.status == 1 ? '' : 'orders-btn-wait')
+                }>
                 Статус заказа:{' '}
                 <span>{order.status == 1 ? 'Одобренно' : 'Ожидается'}</span>
               </div>
@@ -65,16 +67,14 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
                 </div>
                 <a
                   className={`cars-item__btn btn-main d-none d-lg-block`}
-                  href='#'
-                >
+                  href='#'>
                   Подробнее
                 </a>
                 <div
                   className={
-                    `'cars-item__btn orders-btn btn-main d-lg-none` +
-                    (order.status ? '' : 'orders-btn-wait')
-                  }
-                >
+                    `'cars-item__btn orders-btn btn-main d-lg-none ` +
+                    (order.status == 1 ? '' : 'orders-btn-wait')
+                  }>
                   Статус заказа:{' '}
                   <span>{order.status == 1 ? 'Одобренно' : 'Ожидается'}</span>
                 </div>
@@ -93,5 +93,5 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
         </Row>
       </div>
     </Col>
-  )
-}
+  );
+};
