@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { Col, Row } from 'react-bootstrap';
-import { IReviewModel } from 'app/models';
+import { IReviewDataModel } from 'app/models';
 import { month, dbFormatDate, getStars } from 'libs/functions';
 import { URL_IMG } from 'app/config';
 import Image from 'next/image';
 
-export const ReviewCard = ({ review }: { review: IReviewModel }) => {
+export const ReviewCard = ({ review }: { review: IReviewDataModel }) => {
   return (
     <Col xs={12} className={'reviews__col'}>
       <div className={`carpark-reviews__item cars-item`}>
@@ -54,7 +54,6 @@ export const ReviewCard = ({ review }: { review: IReviewModel }) => {
                     {getStars(review.rating)}
                     {/* {review.raiting} */}
                     {/* {review.rating.map((item, key) => (
- 
                     ))} */}
                   </div>
                 </div>

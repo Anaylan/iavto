@@ -64,7 +64,10 @@ export const TabProfile = ({
                   Средняя оценка автопарка
                 </div>
                 <div className={'carpark-profile__value'}>
-                  <span>{carpark.rait || 5}</span> из 5
+                  <span>
+                    {carpark.rait ? Math.round(carpark.rait * 10) / 10 : 5}
+                  </span>{' '}
+                  из 5
                 </div>
               </div>
               <div className={'carpark-profile__info'}>
@@ -120,16 +123,19 @@ export const TabReviews = ({ id }: { id: string }) => {
               <div className={'reviews-aside__top'}>
                 <div className={'reviews-aside__rate'}>
                   {reviews && getStars(Math.floor(reviews.aveRating))}
-                  {Array(5)
+                  {/* {Array(5)
                     .fill(1, 0, 4)
                     .map((star, key) => (
                       <div key={key} className={'icon'}>
                         <Star />
                       </div>
-                    ))}
+                    ))} */}
                 </div>
                 <div className={'reviews-aside__overall-rate'}>
-                  <span>{reviews && reviews.aveRating}</span> / 5
+                  <span>
+                    {reviews && Math.round(reviews.aveRating * 10) / 10}
+                  </span>{' '}
+                  / 5
                 </div>
               </div>
               <div className={'reviews-aside__body'}>

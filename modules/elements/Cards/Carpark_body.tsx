@@ -13,7 +13,7 @@ export const CarparkInfo: React.FC<ICarparkInfo> = ({ rating, orders }) => {
           <div className={'carpark-intro__info-body'}>
             <div className={'carpark-intro__info-value'}>
               <div>
-                <span>{rating}</span>/ 5
+                <span>{Math.round(rating * 10) / 10}</span>/ 5
               </div>
             </div>
             <div className={'carpark-intro__info-subtitle'}>

@@ -53,6 +53,11 @@ const nextConfig = {
         destination: '/in_dev',
         permanent: false,
       },
+      {
+        source: '/chat',
+        destination: '/in_dev',
+        permanent: false,
+      },
     ];
   },
 };

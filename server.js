@@ -2,10 +2,14 @@
 const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
-
+const fs = require('fs');
 const dev = process.env.NODE_ENV !== 'production';
-const hostname = '193.38.235.89';
-const port = 80;
+const hostname = 'lockpixel.ru';
+const port = 3001;
+var options = {
+  key: fs.readFileSync('lockpixel.ru-key.pem'),
+  cert: fs.readFileSync('lockpixel.ru.pem'),
+};
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
@@ -32,6 +36,6 @@ app.prepare().then(() => {
     }
   }).listen(port, (err) => {
     if (err) throw err;
-    console.log(`> Ready on http://${hostname}:${port}`);
+    console.log(`> Ready on https://${hostname}:${port}`);
   });
 });

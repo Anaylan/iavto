@@ -139,7 +139,7 @@ export function CarparkItem({
             <span>{carPark.count_product}</span>автомобилей
           </Link>
           <Link className={'carparks__rating'} href='#'>
-            <span>{carPark.rait ? carPark.rait : '5.0'}</span>
+            <span>{carPark.rait ? Math.round(carPark.rait * 10) / 10 : 5}</span>
             <div className={'icon'}>
               <Star />
             </div>

@@ -3,6 +3,7 @@ export function RefCodeToClipboard(ref_code: number) {
   if (navigator.clipboard && window.isSecureContext) {
     // navigator clipboard api method'
     alert('Ссылка скопирована');
+
     return navigator.clipboard.writeText(
       `${window.location.protocol}//${window.location.host}/invite?ref_code=${ref_code}`,
     );
