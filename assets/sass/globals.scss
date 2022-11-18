@@ -773,6 +773,7 @@ input[type='number']:focus {
       object-fit: cover;
       top: 0;
       left: 0;
+      will-change: transform;
     }
   }
 
@@ -1238,20 +1239,37 @@ input[type='number']:focus {
     margin: 0 0 0 auto;
 
     img {
-      position: absolute;
+      position: relative;
       width: 100%;
-      max-width: 388px;
       height: 100%;
       object-fit: cover;
       top: 0;
-      right: 0;
-      border-radius: 20px;
-      overflow: hidden;
+      left: 0;
+      will-change: transform;
       transition: transform 0.5s ease;
 
       &:hover {
-        transform: scale(1.08);
+        transform: scale(1.05);
       }
+    }
+  }
+
+  &__banner-none {
+    position: relative;
+    display: block;
+    min-height: 100%;
+    max-width: 388px;
+    background: #f6f7fb;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 35px;
+    margin: 0 0 0 auto;
+
+    p {
+      font-size: 25px;
+      font-weight: 600;
+      color: #2e2f31;
+      line-height: 1.2;
     }
   }
 }
@@ -1371,6 +1389,7 @@ input[type='number']:focus {
       object-fit: cover;
       top: 0;
       left: 0;
+      will-change: transform;
       transition: transform 0.5s ease;
     }
   }
@@ -1659,10 +1678,6 @@ input[type='number']:focus {
 @import 'referal.scss';
 @import 'referal-media.scss';
 
-/* Footer
-===================*/
-@import 'footer.scss';
-
 /* About
 ===================*/
 @import 'about.scss';
@@ -1670,6 +1685,15 @@ input[type='number']:focus {
 /* Privacy policy
 ===================*/
 @import 'privacy_policy.scss';
+
+/* News
+===================*/
+@import 'news/news-page.scss';
+@import 'news/post.scss';
+
+/* Footer
+===================*/
+@import 'footer.scss';
 
 @media (max-width: 1434px) {
   /* Header
@@ -2484,6 +2508,19 @@ input[type='number']:focus {
     padding: 0 !important;
   }
 
+  /* News
+	===================*/
+  .news {
+    &__banner-none {
+      padding: 25px;
+      margin: 0;
+
+      p {
+        font-size: 22px;
+      }
+    }
+  }
+
   /* Cars
 	===================*/
   .cars-item {
@@ -2774,19 +2811,21 @@ input[type='number']:focus {
   /* News
 	===================*/
   .news {
+    .col-12:first-child {
+      margin: 0 0 30px 0;
+    }
+
     &__banner {
       height: 230px;
       max-width: 100%;
       border-radius: 20px;
       overflow: hidden;
       margin: 0;
+    }
 
-      img {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        margin: 30px 0 0 0;
-      }
+    &__banner-none {
+      min-height: 230px;
+      max-width: 100%;
     }
   }
 

@@ -38,6 +38,7 @@
       top: 0;
       left: 0;
       display: block !important;
+      will-change: transform;
       transition: transform 0.5s ease;
     }
   }
@@ -85,6 +86,7 @@
       object-fit: cover;
       top: 0;
       left: 0;
+      will-change: transform;
       transition: transform 0.3s ease;
     }
   }

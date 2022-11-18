@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "next dev | local-ssl-proxy --key lockpixel.ru-key.pem --cert lockpixel.ru.pem --source 4001 --target 3000",
     "dev": "node --trace-warnings serv.js",
     "build": "next build",
     "start": "next start",
@@ -22,7 +21,6 @@
     "handy-svg": "^1.0.8",
     "next": "13.0.0",
     "next-redux-wrapper": "^8.0.0",
-    "nextjs-websocket": "^1.0.7",
     "react": "18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-bootstrap": "^2.5.0",

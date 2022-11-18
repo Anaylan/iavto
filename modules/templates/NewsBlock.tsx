@@ -45,9 +45,9 @@ const NewsBlock: React.FC<NewsProps> = () => {
                 alt=''
               />
             </Link> */}
-            <p className='news__banner d-flex justify-content-center'>
-              Здесь могла быть ваша реклама
-            </p>
+            <div className='news__banner-none'>
+              <p>Здесь могла быть ваша реклама</p>
+            </div>
           </div>
         </div>
       </div>
