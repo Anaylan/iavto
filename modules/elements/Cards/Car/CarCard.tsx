@@ -37,6 +37,7 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
                 <CarCardInfo
                   price={car.price}
                   company_name={car.company_name}
+                  id={car.id}
                 />
                 <CarCardDetails
                   fuel_type={car.fuel_type}

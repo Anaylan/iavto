@@ -6,7 +6,7 @@ const { parse } = require('url');
 const next = require('next');
 const port = 443;
 const dev = process.env.NODE_ENV !== 'production';
-const hostname = 'lockpixel.ru';
+const hostname = 'iavto.team';
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 

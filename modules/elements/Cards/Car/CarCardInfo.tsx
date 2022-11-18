@@ -1,11 +1,16 @@
 import { ICarModel } from 'app/models';
 import { Location } from 'assets/icon/icons';
 import React from 'react';
+import { setCarRent } from 'api/Rent';
 
 //Swiper styles
 import Link from 'next/link';
 
-export const CarCardInfo: React.FC<ICarModel> = ({ price, company_name }) => {
+export const CarCardInfo: React.FC<ICarModel> = ({
+  price,
+  company_name,
+  id,
+}) => {
   return (
     <div className={`car__item-info`}>
       <div className={'cars-item__info-content'}>
@@ -31,9 +36,13 @@ export const CarCardInfo: React.FC<ICarModel> = ({ price, company_name }) => {
             <li>Есть возможность долгой аренды</li>
           </ul>
         </div>
-        <Link className={`cars-item__btn btn-main`} href='#'>
+        <button
+          className={`cars-item__btn btn-main`}
+          onClick={async () => {
+            await setCarRent(id!);
+          }}>
           Арендовать
-        </Link>
+        </button>
       </div>
     </div>
   );
