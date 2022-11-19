@@ -1,4 +1,6 @@
 export interface ICarparkModel {
+  orders_count?: number | null;
+  rating_count?: number | null;
   cid: number | null;
   company_name: string | null;
   description: string | null;
@@ -10,6 +12,7 @@ export interface ICarparkModel {
   tarif: number | null;
   place: number | null;
   count_product: number | null;
+  created: string;
 }
 
 export interface ICarparkBlock {

@@ -74,26 +74,27 @@ export function CarparkItem({
   return (
     <>
       <div className={'carparks__item'}>
-        <div className={'carparks__img'}>
-          {carPark.img ? (
-            <Image
-              priority={lazy}
-              loading={lazy ? 'eager' : 'lazy'}
-              fill
-              sizes={'100%'}
-              src={URL_IMG + carPark.cid + '/' + carPark.img}
-              alt=''
-            />
-          ) : (
-            <Image
-              priority={true}
-              fill
-              sizes={'100%'}
-              src={URL_IMG + 'images.png'}
-              alt=''
-            />
-          )}
-
+        <div className='carparks__main'>
+          <Link href={`/carpark/${carPark.cid}`} className={'carparks__img'}>
+            {carPark.img ? (
+              <Image
+                priority={lazy}
+                loading={lazy ? 'eager' : 'lazy'}
+                fill
+                sizes={'100%'}
+                src={URL_IMG + carPark.cid + '/' + carPark.img}
+                alt=''
+              />
+            ) : (
+              <Image
+                priority={true}
+                fill
+                sizes={'100%'}
+                src={URL_IMG + 'images.png'}
+                alt=''
+              />
+            )}
+          </Link>
           <div className={`carparks__hover carparks-hover`}>
             {/* {carPark.favor ? (
               <div
@@ -135,10 +136,10 @@ export function CarparkItem({
           <span>{carPark.company_name}</span>
         </Link>
         <div className={'carparks__content'}>
-          <Link className={'carparks__value'} href='#'>
+          <Link className={'carparks__value'} href={`/carpark/${carPark.cid}`}>
             <span>{carPark.count_product}</span>автомобилей
           </Link>
-          <Link className={'carparks__rating'} href='#'>
+          <Link className={'carparks__rating'} href={`/carpark/${carPark.cid}`}>
             <span>{carPark.rait ? Math.round(carPark.rait * 10) / 10 : 5}</span>
             <div className={'icon'}>
               <Star />

@@ -11,6 +11,8 @@ export * from './Cards/Car/CarCardInfo';
 export * from './Cards/Car/CarCardSwiper';
 export * from './Cards/Car/CarCardVerify';
 export * from './Cards/Car/CarCardBonuses';
+// cards/car/modules
+export * from './Cards/Car/modal/CarRentModals';
 // chat
 export * from './chat/ChatAside';
 export * from './chat/ChatMessenger';

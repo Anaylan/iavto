@@ -16,7 +16,9 @@ export const ProfileImg: FC<IImg> = ({ avatar }) => {
             <div className={'info-profile__img'}>
               <Image
                 fill
-                src={avatar ? URL_IMG + 'users/' + avatar : '/media/user.png'}
+                src={
+                  avatar ? URL_IMG + 'users/' + avatar : '/media/user-bg.png'
+                }
                 alt='Аватар пользователя'
               />
             </div>

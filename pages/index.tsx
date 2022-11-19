@@ -16,6 +16,8 @@ import {
   SearchSelect,
   Button,
   FilterInput,
+  FilterRadioGroup,
+  FilterRadioItem,
 } from 'modules/UI';
 import { useFormik } from 'formik';
 import { getCarFilters } from 'api/Filter';
@@ -40,6 +42,17 @@ interface IModel {
   model: string;
 }
 
+const tarifs = [
+  { name: 'Эконом' },
+  { name: 'Комфорт' },
+  { name: 'Комфорт +' },
+  { name: 'Минивэн' },
+  { name: 'Business' },
+  { name: 'Premier' },
+  { name: 'Élite' },
+  { name: 'Cruise' },
+];
+
 const DynamicCarParkBlock = dynamic(
   () => import('modules/templates/CarParkBlock'),
 );
@@ -47,15 +60,23 @@ const DynamicCarParkBlock = dynamic(
 const Home: NextPage<IHome> = () => {
   const [marks, setMark] = useState<IMark[]>([]);
   const [models, setModel] = useState<IModel[]>([]);
+
+  const [fuelChange, setFuelChange] = useState<number>(0);
+  const [transChange, setTransChange] = useState<number>(0);
+
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      checked: [],
       mark: '',
       transmission: '',
       model: '',
+      tarif: '',
+      fuel_type: '',
+      price_min: '',
+      price_max: '',
     },
     onSubmit: (values) => {
+      // console.log(values)
       router.push({
         pathname: '/car',
         query: values,
@@ -109,6 +130,7 @@ const Home: NextPage<IHome> = () => {
         columns={{
           md: 3,
           xs: 12,
+          sm: 6,
         }}
         getData={getHotTender}
         large={true}
@@ -127,12 +149,35 @@ const Home: NextPage<IHome> = () => {
                   md: 4,
                 }}>
                 <SearchSelect
+                  name='tarif'
+                  defaultValue={''}
+                  onChange={formik.handleChange}>
+                  <SearchSelectOption value={''} disabled={true}>
+                    Выберите тариф
+                  </SearchSelectOption>
+                  <SearchSelectOption value={''}>Все тарифы</SearchSelectOption>
+                  {tarifs &&
+                    tarifs.map((tarif, key) => (
+                      <SearchSelectOption key={key} value={tarif.name}>
+                        {tarif.name}
+                      </SearchSelectOption>
+                    ))}
+                </SearchSelect>
+              </SearchItem>
+              <SearchItem
+                columns={{
+                  xs: 12,
+                  sm: 6,
+                  md: 4,
+                }}>
+                <SearchSelect
                   name='mark'
                   defaultValue={''}
                   onChange={formik.handleChange}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите марку
                   </SearchSelectOption>
+                  <SearchSelectOption value={''}>Все марки</SearchSelectOption>
                   {marks &&
                     marks.map((mark, key) => (
                       <SearchSelectOption key={key} value={mark.mark}>
@@ -155,6 +200,7 @@ const Home: NextPage<IHome> = () => {
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите модель
                   </SearchSelectOption>
+                  <SearchSelectOption value={''}>Все модели</SearchSelectOption>
                   {models &&
                     models.map((model, key) => (
                       <SearchSelectOption key={key} value={model.model}>
@@ -171,19 +217,107 @@ const Home: NextPage<IHome> = () => {
                 }}>
                 <PriceFromTo>
                   <FilterInput
-                    name='from'
+                    name='price_min'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='От'
                   />
                   <span></span>
                   <FilterInput
-                    name='to'
+                    name='price_max'
                     onChange={formik.handleChange}
                     type='number'
                     placeholder='До'
                   />
                 </PriceFromTo>
+              </SearchAdditionalCol>
+              <SearchAdditionalCol
+                columns={{
+                  xs: 12,
+                  sm: 6,
+                  md: 4,
+                }}>
+                <FilterRadioGroup>
+                  <FilterRadioItem
+                    onChange={formik.handleChange}
+                    onClick={() => {
+                      if (transChange === 1) {
+                        setTransChange(0);
+                        formik.values.transmission = '';
+                      } else setTransChange(1);
+                    }}
+                    value={'auto'}
+                    id='automatic'
+                    name='transmission'
+                    checked={transChange === 1}>
+                    Автомат
+                  </FilterRadioItem>
+                  <FilterRadioItem
+                    onChange={formik.handleChange}
+                    onClick={() => {
+                      if (transChange === 2) {
+                        setTransChange(0);
+                        formik.values.transmission = '';
+                      } else setTransChange(2);
+                    }}
+                    id='mechanics'
+                    value={'mechanics'}
+                    name='transmission'
+                    checked={transChange === 2}>
+                    Механическая
+                  </FilterRadioItem>
+                </FilterRadioGroup>
+              </SearchAdditionalCol>
+              <SearchAdditionalCol
+                columns={{
+                  xs: 12,
+                  sm: 6,
+                  md: 4,
+                }}>
+                <FilterRadioGroup>
+                  <FilterRadioItem
+                    name={'fuel_type'}
+                    onChange={formik.handleChange}
+                    onClick={() => {
+                      if (fuelChange === 1) {
+                        setFuelChange(0);
+                        formik.values.fuel_type = '';
+                      } else setFuelChange(1);
+                    }}
+                    id='petrol'
+                    value='petrol'
+                    checked={fuelChange === 1}>
+                    Бензин
+                  </FilterRadioItem>
+                  <FilterRadioItem
+                    name={'fuel'}
+                    onChange={formik.handleChange}
+                    onClick={() => {
+                      if (fuelChange === 2) {
+                        setFuelChange(0);
+                        formik.values.fuel_type = '';
+                      } else setFuelChange(2);
+                    }}
+                    id='disel'
+                    value='disel'
+                    checked={fuelChange === 2}>
+                    Дизель
+                  </FilterRadioItem>
+                  <FilterRadioItem
+                    name={'fuel'}
+                    onChange={formik.handleChange}
+                    onClick={() => {
+                      if (fuelChange === 3) {
+                        setFuelChange(0);
+                        formik.values.fuel_type = '';
+                      } else setFuelChange(3);
+                    }}
+                    id='gas'
+                    value='gas'
+                    checked={fuelChange === 3}>
+                    Газ
+                  </FilterRadioItem>
+                </FilterRadioGroup>
               </SearchAdditionalCol>
             </SearchMainRow>
             <SearchAdditonalRow>
@@ -195,7 +329,6 @@ const Home: NextPage<IHome> = () => {
                 }}
                 className={'justify-content-between d-flex flex-row-reverse'}>
                 <Button type='submit'>Потвердить</Button>
-                <Button onClick={formik.handleReset}>Сбросить</Button>
               </SearchAdditionalCol>
             </SearchAdditonalRow>
           </SearchBlock>

@@ -3,10 +3,9 @@
   }
 
   &__notification {
-    // display: none;
-    font-size: 17px;
     color: #fc0321;
-    margin: 0 0 20px 0;
+    line-height: 1.2;
+    margin: 0 0 8px 0;
   }
 
   &__item {
@@ -20,6 +19,12 @@
     color: #686f6d;
     line-height: 1.2;
     margin: 10px 10px 0 0;
+  }
+
+  &__label-auth {
+    font-size: 16px;
+    line-height: 1.2;
+    margin: 0 0 8px 0;
   }
 
   &__wrap {
@@ -41,6 +46,7 @@
 
     &:focus {
       outline: none !important;
+      box-shadow: none !important;
       border: 1px solid #2774ac !important;
     }
 
@@ -50,6 +56,12 @@
 
     &:disabled {
       color: #acacac;
+    }
+
+    &_tel {
+      &::placeholder {
+        color: #2e2f31;
+      }
     }
   }
 
@@ -106,7 +118,7 @@
       font-size: 15px;
       color: #2774ac;
       margin: 8px 0 0 0;
-      transition: color 0.1s linear;
+      transition: color 0.25s ease;
 
       &:hover {
         color: #fc0321;
@@ -114,36 +126,81 @@
     }
   }
 
+  &__link-wrap {
+    margin: 0 0 14px 0;
+
+    a,
+    span {
+      display: inline-block;
+      margin: 0 0 4px 0;
+    }
+
+    span {
+      display: inline-block;
+      margin: 0 4px 4px 0;
+    }
+  }
+
+  a {
+    display: inline-block;
+    color: #2774ac;
+    transition: color 0.25s ease;
+
+    &:hover {
+      color: #fc0321;
+    }
+  }
+
   &__bottom {
   }
 
-  &__btn-group {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 -10px;
+  &__terms-wrap {
+    display: inline-block;
+    margin: 0 0 16px 0;
   }
 
-  &__btn-wrap {
-    padding: 0 10px;
-    margin: 5px 0 0 0;
+  &__terms {
+    position: relative;
+    display: inline-block !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-size: inherit !important;
+    color: #2e2f31 !important;
+    padding: 0 !important;
+    margin: 0 5px 8px 0 !important;
 
-    .btn-main {
-      font-weight: 400;
-      border-radius: 10px;
-      padding: 8px 25px;
+    span {
+      display: inline-block;
+      margin: 0 0 0 25px !important;
     }
 
-    .btn-main-trp {
-      border: 2px solid #2774ac;
-      font-weight: 500;
-      color: #2774ac;
+    &::before {
+      top: -2px;
+      left: 0;
+      width: 17px;
+      height: 17px;
+      border: 1px solid #2e2f31;
+      border-radius: 4px !important;
+    }
 
-      &:hover {
-        background-color: #000;
-        border: 2px solid #000;
-        color: #fff;
-      }
+    &::after {
+      top: 6px;
+      left: 9px;
+      width: 5px;
+      height: 9px;
+      border-right: 2px solid #4d4d4d;
+      border-bottom: 2px solid #4d4d4d;
+    }
+
+    &.checkbox-active::before {
+      border: 1px solid #2774ac;
+      background-color: #2774ac;
+    }
+
+    &.checkbox-active::after {
+      display: block;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
     }
   }
 }
@@ -157,19 +214,52 @@
 
 @media (max-width: 1023px) {
   .form {
-    &__notification {
-      font-size: 16px;
-      margin: 0 0 18px 0;
-    }
+    &__terms {
+      border-radius: 0 !important;
+      font-size: inherit !important;
+      padding: 0 !important;
 
-    &__item {
-      margin: 0 0 20px 0;
+      &__checkbox {
+        &::after {
+          top: 22px;
+          left: 26px;
+        }
+      }
+
+      span {
+        margin: 0 0 0 25px !important;
+      }
+
+      &::before {
+        top: -2px !important;
+        left: 0 !important;
+        width: 17px !important;
+        height: 17px !important;
+      }
+
+      &::after {
+        top: 6px !important;
+        left: 9px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .form {
+    &__wrap {
+      margin: 0 0 14px 0;
     }
 
     &__label {
       min-width: 70px;
       font-size: 16px;
       margin: 11px 6px 0 0;
+    }
+
+    &__label-auth {
+      font-size: 15px;
+      margin: 0 0 7px 0;
     }
 
     &__input {

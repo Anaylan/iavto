@@ -1,7 +1,6 @@
 import { getCars, getCarsForCarpark } from 'api/Car';
 import { getStars, sanitize } from 'libs/functions';
 import { ICarModel, ICarparkModel, IReviewModel } from 'app/models';
-import { Star } from 'assets/icon/icons';
 import CarBlock from 'modules/templates/CarBlock';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -12,6 +11,8 @@ import { Textarea } from '../textarea/textarea';
 import { getCompanyReviews } from 'api/Review';
 import { Review } from '../reviews/Review';
 import { useFormik } from 'formik';
+import { countAndFormatMonth } from 'libs/functions';
+import { EmptyComponent } from 'modules/elements';
 
 export const TabCars = () => {
   const [cars, setCars] = useState<ICarModel[]>([]);
@@ -23,14 +24,12 @@ export const TabCars = () => {
     });
   }, [query.id]);
 
-  // console.log(cars)
-
   return (
     <>
       {cars.length ? (
         <CarBlock title={'Автомобили автопарка'} getData={getCars} />
       ) : (
-        <>ПУСТО</>
+        <EmptyComponent />
       )}
     </>
   );
@@ -41,6 +40,7 @@ export const TabProfile = ({
 }: {
   carpark: ICarparkModel | undefined;
 }) => {
+  console.log(carpark);
   return (
     <>
       <h2 className='carpark-profile__title title'>Профиль автопарка</h2>
@@ -50,15 +50,16 @@ export const TabProfile = ({
       {carpark && (
         <>
           <div
-            className={'carpark-profile__about'}
+            className={'carpark-profile__about '}
             dangerouslySetInnerHTML={
               carpark.description ? sanitize(carpark.description) : sanitize('')
             }
           />
-
+          <h3 className={'carpark-profile__subtitle'}>
+            Информация об автопарке
+          </h3>
           <Row>
             <Col xs={12} sm={4}>
-              <h3 className={'carpark-profile__subtitle'}>Оценка товаров</h3>
               <div className={'carpark-profile__info'}>
                 <div className={'carpark-profile__label'}>
                   Средняя оценка автопарка
@@ -75,21 +76,27 @@ export const TabProfile = ({
                   Количество оценок
                 </div>
                 <div className={'carpark-profile__value'}>
-                  <span>Привязать оценку</span>
+                  <span>{carpark.rating_count}</span>
                 </div>
               </div>
             </Col>
             <Col xs={12} sm={4}>
-              <h3 className={'carpark-profile__subtitle'}>
-                Количество заказов
-              </h3>
               <div className={'carpark-profile__info'}>
                 <div className={'carpark-profile__label'}>
                   Количество заказов
                 </div>
                 <div className={'carpark-profile__value'}>
-                  <span>Привязать количество</span>
+                  <span>{carpark.orders_count}</span>
                 </div>
+              </div>
+              <div className={'carpark-profile__info'}>
+                <div className={'carpark-profile__label'}>
+                  Время вместе с ЯАВТОРФ
+                </div>
+                <div className={'carpark-profile__value'}>
+                  <span>{countAndFormatMonth(carpark.created)}</span>
+                </div>
+                {/* Бох */}
               </div>
             </Col>
           </Row>
@@ -101,13 +108,13 @@ export const TabProfile = ({
 
 export const TabReviews = ({ id }: { id: string }) => {
   const [reviews, setReviews] = useState<IReviewModel | null>(null);
-  const router = useRouter();
+
   useEffect(() => {
     getCompanyReviews(id).then(({ data }) => {
       setReviews(data);
-      console.log(data);
     });
   }, [id]);
+
   return (
     <>
       <Row>
@@ -175,7 +182,7 @@ export const TabFeedback = ({ id }: { id: string }) => {
     },
   });
   return (
-    <div className={`carpark-contact carpark-tab__body auth`}>
+    <div className={`carpark-contact carpark-tab__body`}>
       <h1 className={`cars__title title`}>Задайте ваш вопрос автопарку</h1>
       <Form onSubmit={formik.handleSubmit} className={'form'}>
         <div className={'form__item'}>

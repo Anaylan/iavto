@@ -26,7 +26,7 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
             year={car.year}
             viewed={car.viewed}
           />
-          <div className='car__body'>
+          <div className='car__body car'>
             <Row className='car__row'>
               <Col md={7} xs={12} className='car__col order-1 order-md-2'>
                 <CarCardSwiper cid={car.cid} images={car.img!} />
@@ -37,6 +37,7 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
                 <CarCardInfo
                   price={car.price}
                   company_name={car.company_name}
+                  cid={car.cid}
                   id={car.id}
                 />
                 <CarCardDetails

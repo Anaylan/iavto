@@ -7,9 +7,11 @@ import {
 } from 'react';
 import { Mask } from 'react-text-mask';
 
+// children не является обязательным, используется в случае когда он нужен??
 export interface IFormInput extends InputHTMLAttributes<HTMLInputElement> {
   className?: string | undefined;
   mask?: Mask | ((value: string) => Mask);
+  children?: ReactNode;
   props?: InputHTMLAttributes<HTMLInputElement>;
 }
 

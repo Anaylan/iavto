@@ -43,6 +43,7 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
         console.log(data);
         setCars([...cars, ...data]);
         totalCars += 10;
+        console.log(isLoading);
       })
       .catch((err: string) => {});
   });
@@ -79,14 +80,7 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
         <div ref={triggerElement} />
         {isLoading && (
           <>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: 50,
-              }}>
-              <Load />
-            </div>
+            <Load />
           </>
         )}
       </section>

@@ -88,12 +88,12 @@ const Header: React.FC = () => {
       <header className={`header`} id='header'>
         <Container fluid>
           <HeaderTop ref={header} desktop={desktop} links={HeaderTopLinks} />
-          {desktop ? (
+          {desktop && (
             <>
               <HeaderBody links={HeaderBodyLinks} />
               <HeaderBottom links={HeaderBottomLinks} />
             </>
-          ) : null}
+          )}
         </Container>
       </header>
     </>

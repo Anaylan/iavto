@@ -18,11 +18,13 @@ const Content: React.FC<IChild> = ({ children }) => {
         ref.current.classList.add('d-flex');
         ref.current.classList.add('align-items-center');
         ref.current.classList.add('justify-content-center');
+        ref.current.classList.add('main-auth');
       }
     } else {
       ref.current.classList.remove('d-flex');
       ref.current.classList.remove('align-items-center');
       ref.current.classList.remove('justify-content-center');
+      ref.current.classList.remove('main-auth');
     }
   }, [router]);
   return (

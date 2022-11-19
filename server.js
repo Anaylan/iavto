@@ -5,11 +5,8 @@ const next = require('next');
 const fs = require('fs');
 const dev = process.env.NODE_ENV !== 'production';
 const hostname = 'lockpixel.ru';
-const port = 3001;
-var options = {
-  key: fs.readFileSync('lockpixel.ru-key.pem'),
-  cert: fs.readFileSync('lockpixel.ru.pem'),
-};
+const port = 80;
+
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();

@@ -1,7 +1,8 @@
 import { ICarModel } from 'app/models';
 import { Location } from 'assets/icon/icons';
-import React from 'react';
+import React, { useState } from 'react';
 import { setCarRent } from 'api/Rent';
+import { CarRentModal } from 'modules/elements';
 
 //Swiper styles
 import Link from 'next/link';
@@ -10,7 +11,11 @@ export const CarCardInfo: React.FC<ICarModel> = ({
   price,
   company_name,
   id,
+  cid,
 }) => {
+  const [show, setShow] = useState<boolean>(false);
+  const [status, setStatus] = useState<number>(0);
+
   return (
     <div className={`car__item-info`}>
       <div className={'cars-item__info-content'}>
@@ -28,7 +33,7 @@ export const CarCardInfo: React.FC<ICarModel> = ({
             </div>
           </div>
           <div className={'cars-item__subtitle'}>
-            Автопарк:<Link href='#'>{company_name}</Link>
+            Автопарк:<Link href={`/carpark/${cid}`}>{company_name}</Link>
           </div>
           <ul className={'cars-item__list'}>
             <li>Без залога</li>
@@ -36,10 +41,13 @@ export const CarCardInfo: React.FC<ICarModel> = ({
             <li>Есть возможность долгой аренды</li>
           </ul>
         </div>
+        <CarRentModal show={show} setShow={setShow} status={status} />
         <button
           className={`cars-item__btn btn-main`}
           onClick={async () => {
-            await setCarRent(id!);
+            const response = await setCarRent(id!);
+            setStatus(response);
+            setShow(true);
           }}>
           Арендовать
         </button>

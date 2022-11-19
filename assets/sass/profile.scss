@@ -119,7 +119,6 @@
 
   &__row {
     display: flex;
-    align-items: center;
   }
 
   &__photo {
@@ -165,12 +164,10 @@
   }
 
   &__btn {
-    position: absolute;
-    top: 28px;
-    right: 25px;
-    z-index: 5;
+    position: relative;
     display: inline-block;
     background: none;
+    margin: 0 0 0 14px;
 
     &:hover {
       .icon {
@@ -360,8 +357,6 @@
     }
 
     &__btn {
-      top: 23px;
-      right: 20px;
     }
   }
   .profile-body {

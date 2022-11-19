@@ -1,9 +1,12 @@
-import React from 'react';
+import { useEffect } from 'react';
 import Head from 'next/head';
 import { TITLE } from 'app/config';
 import { IPostModel } from 'app/models';
-import { getPost } from 'api/Post';
+import { getPost, requestViewPost } from 'api/Post';
 import { Container, Row, Col } from 'react-bootstrap';
+import Link from 'next/link';
+import Image from 'next/image';
+import { URL_IMG } from 'app/config';
 
 export async function getServerSideProps({ params }: any) {
   const res = await getPost(params.id);
@@ -16,7 +19,12 @@ export async function getServerSideProps({ params }: any) {
 }
 
 export default function Post({ post }: { post: IPostModel }) {
-  console.log(post);
+  // console.log(post);
+  useEffect(() => {
+    requestViewPost(post.id).then(({ data }) => {
+      console.log(data);
+    });
+  }, [post]);
   return (
     <>
       <Head>
@@ -39,66 +47,17 @@ export default function Post({ post }: { post: IPostModel }) {
               <h1 className='post__title title'>Мы открылись!</h1>
             </div>
             <div className='post__img'>
-              <img
-                src='https://iavto.team/_next/image?url=https%3A%2F%2Fxn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai%2Fimg%2F100000%2FScreenshot_44.jpg&w=1920&q=75'
-                alt=''
+              <Image
+                src={URL_IMG + post.img}
+                alt={post.title}
+                width={100}
+                height={100}
+                sizes={'100%'}
               />
             </div>
             <div className='post__text'>
-              <h2>Заголовок h2</h2>
-              <p>
-                <strong>Я брать машина на сутки.</strong>&nbsp;Все класс. Парк
-                хороший. Авто хороший. Звонил им, взял машина, ездил на машина
-                10 часов все было хорошо. Машина не ломаться, руль крутиться,
-                коляса поворачиваться. Потом яма была, в яму упала, я жив.
-              </p>
-              <h3>Заголовок h3</h3>
-              <p>
-                <span style={{ textDecoration: 'underline' }}>Права</span>&nbsp;
-                теперь нет, автопарк сказал, что машина должен вернуть, я машина
-                вернуть в состоянии плохой. Но парк сказал, что машина не&nbsp;
-                <em>годится</em>.&nbsp;Надо кредит брать, помогите кто нибудь
-                лада&nbsp;<a href='#'>купить</a>
-              </p>
-              <h4>Заголовок h4</h4>
-              <ul>
-                <li>Пункт</li>
-                <li>Пункт</li>
-                <li>Пункт</li>
-              </ul>
-              <h2>Заголовок h2</h2>
-              <ol>
-                <li>Пункт</li>
-                <li>
-                  <span style={{ textDecoration: 'underline' }}>Права</span>
-                  &nbsp; теперь нет, автопарк сказал, что машина должен вернуть,
-                  я машина вернуть в состоянии плохой. Но парк сказал, что
-                  машина не&nbsp;
-                  <em>годится</em>.&nbsp;Надо кредит брать, помогите кто нибудь
-                  лада&nbsp;<a href='#'>купить</a>
-                  <ol>
-                    <li>Пункт</li>
-                    <li>Пункт</li>
-                    <li>
-                      Пункт
-                      <ol>
-                        <li>Пункт</li>
-                        <li>Пункт</li>
-                        <li>Пункт</li>
-                      </ol>
-                    </li>
-                  </ol>
-                </li>
-                <li>
-                  Пункт
-                  <ul>
-                    <li>Пункт</li>
-                    <li>Пункт</li>
-                    <li>Пункт</li>
-                  </ul>
-                </li>
-              </ol>
-              <h4>Заголовок h4</h4>
+              {post.description}
+              {/* 
               <div className='table-responsive'>
                 <table className='table'>
                   <thead>
@@ -266,8 +225,17 @@ export default function Post({ post }: { post: IPostModel }) {
                     </tr>
                   </tbody>
                 </table>
-              </div>
+              </div> */}
             </div>
+            {/* <Link className='post__banner' href='#'>
+              <img
+                src='https://iavto.team/_next/image?url=https%3A%2F%2Fxn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai%2Fimg%2F100000%2FScreenshot_44.jpg&w=1920&q=75'
+                alt=''
+              />
+            </Link> */}
+            <Link className='post__banner-none' href='#'>
+              <p>Здесь могла быть ваша реклама</p>
+            </Link>
           </div>
         </Container>
       </section>

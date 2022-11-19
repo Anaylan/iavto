@@ -15,6 +15,7 @@ export default function Document() {
        webvisor:true
   });
   `;
+
   return (
     <Html lang='ru'>
       <Head></Head>

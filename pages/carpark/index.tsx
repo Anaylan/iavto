@@ -14,6 +14,7 @@ export default function Carparks() {
         columns={{
           md: 3,
           xs: 12,
+          sm: 6,
         }}
         getData={getHotTender}
         large={true}

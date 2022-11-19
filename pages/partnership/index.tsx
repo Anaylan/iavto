@@ -87,7 +87,7 @@ export default function Partners() {
   return (
     <>
       <Head>
-        <title>Партнёры | {TITLE}</title>
+        <title>Партнёрство | {TITLE}</title>
       </Head>
       <section className='charts'>
         <Container>
@@ -163,77 +163,6 @@ export default function Partners() {
         </Tab.Container>
       </section>
 
-      {/* <section className={`banners`}>
-        <Container>
-          <h2 className='title'>Баннеры</h2>
-          <Row className={`banners__body`}>
-            <Col className={`banners__col`} xs={12} sm={6} md={3}>
-              <a className={`banners__item`} href='#'>
-                <span className={`banners__img-wrap`}>
-                  <span className={`banners__img banners__img_long`}>
-                    <Image
-                      width={100}
-                      height={100}
-                      sizes='100%'
-                      src='/media/banners/long/01.png'
-                      alt=''
-                    />
-                  </span>
-                  <span className={`banners__hover banners-hover`}>
-                    <span className={`banners-hover__body`}>
-                      <span className={`banners-hover__title`}>
-                        Скачать баннер
-                      </span>
-                      <span className={`icon`}>
-                        <Download />
-                      </span>
-                    </span>
-                  </span>
-                </span>
-              </a>
-            </Col>
-          </Row>
-        </Container>
-      </section> */}
-      {/* 
-      <section className={`banners presentations`}>
-        <Container>
-          <h2 className='title'>Презентации</h2>
-          <Row className={`banners__body`}>
-            <Col className={`banners__col`} xs={12} sm={6} md={4}>
-              <a className={`banners__item`} href='#'>
-                <span className={`banners__img-wrap banners__img-wrap_shadow`}>
-                  <span className={`banners__img`}>
-                    <Image
-                      width={100}
-                      height={100}
-                      sizes='100%'
-                      src='/media/presentations/01.png'
-                      alt=''
-                    />
-                  </span>
-                  <span className={`banners__hover banners-hover`}>
-                    <span className={`banners-hover__body`}>
-                      <span className={`banners-hover__title`}>
-                        Скачать презентацию
-                      </span>
-                      <span className={`icon`}>
-                        <Download />
-                      </span>
-                    </span>
-                  </span>
-                </span>
-                <span className={`banners__link-wrap`}>
-                  <span className={`profile-body__action`}>
-                    Скачать презентацию для автопарков
-                  </span>
-                </span>
-              </a>
-            </Col>
-          </Row>
-        </Container>
-      </section> */}
-
       <section className={`referal-media`}>
         <Container>
           <h2 className='title'>Материалы для рекламы</h2>
@@ -242,7 +171,8 @@ export default function Partners() {
               <a
                 className={`referal-media__item`}
                 href='https://disk.yandex.ru/d/SSKiNnbAcvqpPw/%D0%91%D0%B0%D0%BD%D0%BD%D0%B5%D1%80%D1%8B'
-                target='blank'>
+                target='_blank'
+                rel='noreferrer'>
                 <span className={`icon`}>
                   <FolderDownload />
                 </span>
@@ -255,7 +185,8 @@ export default function Partners() {
               <a
                 className={`referal-media__item`}
                 href='https://disk.yandex.ru/d/SSKiNnbAcvqpPw/%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%AF%D0%90%D0%92%D0%A2%D0%9E.%D0%A0%D0%A4'
-                target='blank'>
+                target='_blank'
+                rel='noreferrer'>
                 <span className={`icon`}>
                   <FolderDownload />
                 </span>
@@ -268,7 +199,8 @@ export default function Partners() {
               <a
                 className={`referal-media__item`}
                 href='https://disk.yandex.ru/d/SSKiNnbAcvqpPw/%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D0%B8%20'
-                target='blank'>
+                target='_blank'
+                rel='noreferrer'>
                 <span className={`icon`}>
                   <FolderDownload />
                 </span>

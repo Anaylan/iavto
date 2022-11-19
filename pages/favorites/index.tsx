@@ -1,45 +1,125 @@
 import { getUserFavor } from 'api/User';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
-import Head from 'next/head';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, A11y, Autoplay } from 'swiper';
 import { TITLE } from 'app/config';
 import { IFavoritesModel } from 'app/models/favorite/Favorites';
 import { CarItem } from 'modules/templates/CarBlock';
 import { CarparkItem } from 'modules/templates/CarParkBlock';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import * as auth from 'app/redux/reducers/authReducer';
+import Image from 'next/link';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState<IFavoritesModel | null>(null);
+  const router = useRouter();
+  const token = useSelector(
+    ({ header }: { header: auth.IAuthState }) => header.title,
+  );
+
+  useEffect(() => {
+    if (!token) {
+      console.log(token);
+      router.push('/auth/signin');
+    }
+  }, [token, router]);
 
   useEffect(() => {
     getUserFavor().then(({ data }) => {
       setFavorites(data);
     });
   }, []);
+  console.log(favorites);
+
+  // TODO: Обновление получаемых данных
+  // const [isLoading, Errors] = useFetch(() => {
+  //   getData(0, totalCars, { ...router.query })
+  //     .then(({ data }: { data: ICarModel[] }) => {
+  //       setCars([...cars, ...data]);
+  //       console.log(data);
+  //       // window.location.reload()
+  //     })
+  //     .catch((err: string) => {});
+  // });
+
+  // useObserver(triggerElement, true, isLoading, () => {
+  //   getData(0, totalCars, { ...router.query })
+  //     .then(({ data }: { data: ICarModel[] }) => {
+  //       console.log(data);
+  //       setCars([...cars, ...data]);
+  //       totalCars += 10;
+  //     })
+  //     .catch((err: string) => {});
+  // });
+
   return (
     <>
       <Head>
         <title>Избранное | {TITLE}</title>
       </Head>
-      <Container>
-        <div className={'mb-5'}>
+      <section className={'carparks carparks-slider'}>
+        <Container>
           <h1 className='title'>Автопарки</h1>
-          <Row>
-            {favorites &&
-              favorites.company.map((company, key: number) => (
-                <Col key={key} md={3} xs={12}>
-                  <CarparkItem lazy={false} carPark={company} />
-                </Col>
-              ))}
-          </Row>
-        </div>
-        <div className={'mb-5'}>
-          <h1 className='title'>Автомобили</h1>
+          <div className='carparks__body'>
+            <Swiper
+              modules={[Pagination, A11y, Autoplay]}
+              spaceBetween={24}
+              grabCursor={true}
+              slidesPerView={1}
+              loop={favorites ? favorites?.company.length > 5 : false}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              className={'carparks-slider__container'}
+              pagination={{ clickable: true, dynamicBullets: true }}
+              breakpoints={{
+                576: {
+                  slidesPerView: 2,
+                  spaceBetween: 24,
+                },
+                768: {
+                  slidesPerView: 4,
+                  spaceBetween: 24,
+                },
+                992: {
+                  slidesPerView: 5,
+                  spaceBetween: 22,
+                },
+              }}>
+              {/* {Array(10)
+                .fill(1, 1, 20)
+                .map((item, key) => (
+                  <SwiperSlide key={key}>
+                    <Image
+                      alt=''
+                      src={'/media/carpark.png'}
+                      sizes={'100%'}
+                      fill
+                    />
+                  </SwiperSlide>
+                ))} */}
+              {favorites &&
+                favorites.company.map((company, key: number) => (
+                  <SwiperSlide key={key}>
+                    <CarparkItem lazy={true} carPark={company} />
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          </div>
+        </Container>
+      </section>
+      <section className={'cars'}>
+        <Container>
+          <h2 className='title'>Автомобили</h2>
           {favorites &&
             favorites.car.map((car, key: number) => (
               <CarItem car={car} key={key} />
             ))}
-        </div>
-      </Container>
+        </Container>
+      </section>
     </>
   );
 }

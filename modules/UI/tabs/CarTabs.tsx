@@ -26,7 +26,7 @@ export const CarparkTabs = ({ tabs }: { tabs: ITabItems[] }) => {
           <Tab.Content className={`carpark__tabs row`}>
             {tabs.map((item, key) => (
               <Tab.Pane key={key} eventKey={item.eventKey}>
-                <div className={`carpark-tab__body cars`}>
+                <div className={`carpark-tab__body`}>
                   <Container>{item.contentChild}</Container>
                 </div>
               </Tab.Pane>

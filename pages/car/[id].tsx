@@ -28,7 +28,6 @@ export async function getServerSideProps({ params }: any) {
 }
 
 export default function Car({ car }: { car: ICarModel }) {
-  console.log(car);
   const [carpark, setCarpark] = useState<ICarparkModel>();
 
   useEffect(() => {
@@ -36,9 +35,7 @@ export default function Car({ car }: { car: ICarModel }) {
       setCarpark(data);
     });
 
-    requestVisit(car.id).then(({ data }) => {
-      console.log(data);
-    });
+    requestVisit(car.id).then(({ data }) => {});
   }, [car]);
 
   const TabItems: ITabItems[] = [

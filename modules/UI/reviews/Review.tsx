@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { IReviewDataModel } from 'app/models';
 import { dbFormatDate, month, getStars } from 'libs/functions';
-
+import { URL_IMG } from 'app/config';
 export const Review = ({ review }: { review: IReviewDataModel }) => {
   return (
     <>
@@ -12,7 +12,11 @@ export const Review = ({ review }: { review: IReviewDataModel }) => {
           <div className={'carpark-reviews__info'}>
             <div className={'carpark-reviews__photo'}>
               <Image
-                src='/media/user.png'
+                src={
+                  review.user_avatar
+                    ? URL_IMG + 'users/' + review.user_avatar
+                    : '/media/user-bg.png'
+                }
                 width={100}
                 height={100}
                 sizes='100%'

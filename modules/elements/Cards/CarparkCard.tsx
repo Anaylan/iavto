@@ -36,7 +36,7 @@ export const CarparkCard: FC<ICard> = ({ title, sold, src, tarif, alt }) => {
 
             <h1 className={'carpark-main__title'}>{title}</h1>
             <div className={'carpark-main__subtitle'}>
-              <span>{sold}</span> автомобиля
+              <span>{sold}</span> автомобилей
             </div>
           </div>
         </div>

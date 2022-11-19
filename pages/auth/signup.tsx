@@ -32,7 +32,7 @@ const phoneNumberMask = [
   /\d/,
   /\d/,
 ];
-
+// 16
 export const registrationSchema = Yup.object().shape({
   firstname: Yup.string()
     .min(3, 'Имя: Минимум 3 символа')
@@ -44,10 +44,17 @@ export const registrationSchema = Yup.object().shape({
   lastname: Yup.string()
     .min(3, 'Фамилия: Минимум 3 символа')
     .max(50, 'Фамилия: Максимум 50 символов')
-    .required('LФамилия обязательна для заполнения'),
+    .required('Фамилия обязательна для заполнения'),
+  phone: Yup.string()
+    .min(16, 'Номер телефона: Минимум 16 символов')
+    .max(16, 'Номер телефона: Максимум 16 символов')
+    .required('Номер телефона обязателен для заполнения'),
   password: Yup.string()
-    .min(3, 'Пароль: Минимум 8 символов')
-    .required('Пароль обязателен для заполнения'),
+    .required('Пароль обязателен для заполнения')
+    .matches(/[0-9]/, 'Password requires a number')
+    .matches(/[a-z]/, 'Password requires a lowercase letter')
+    .matches(/[A-Z]/, 'Password requires an uppercase letter')
+    .matches(/[^\w]/, 'Password requires a symbol'),
   terms: Yup.bool().oneOf(
     [true],
     'Для регистрации вы должны принять пользовательское соглашение',
@@ -78,7 +85,7 @@ export const Register: React.FC<UserModel> = () => {
       firstname: '',
       email: '',
       password: '',
-      phone: '',
+      phone: '+7 ',
       terms: false,
     },
     validationSchema: registrationSchema,
@@ -115,145 +122,147 @@ export const Register: React.FC<UserModel> = () => {
       <Head>
         <title>Регистрация | {TITLE}</title>
       </Head>
-      <section className='auth'>
+      <section className='auth reg'>
         <div className='container'>
-          <div className={'auth__body'}>
-            <h1 className={'auth__title'}>Регистрация</h1>
-
-            <Form onSubmit={formik.handleSubmit}>
-              <div className={'mt-2'}>
-                {formik.errors.email && formik.touched.email ? (
-                  <div>{formik.errors.email}</div>
-                ) : null}
-                {formik.touched.lastname && formik.errors.lastname ? (
-                  <div className={'form__notification'}>
-                    {formik.errors.lastname}
-                  </div>
-                ) : null}
-                {formik.touched.firstname && formik.errors.firstname ? (
-                  <div className={'form__notification'}>
-                    {formik.errors.firstname}
-                  </div>
-                ) : null}
-                {formik.touched.email && formik.errors.email ? (
-                  <div className={'form__notification'}>
-                    {formik.errors.email}
-                  </div>
-                ) : null}
-                {formik.touched.password && formik.errors.password ? (
-                  <div className={'form__notification'}>
-                    {formik.errors.password}
-                  </div>
-                ) : null}
-                {formik.touched.phone && formik.errors.phone ? (
-                  <div className={'form__notification'}>
-                    {formik.errors.phone}
-                  </div>
-                ) : null}
+          <div className='auth__wrapper'>
+            <div className={'auth__body'}>
+              <div className='auth__header'>
+                <Link className={'header-top__logo'} href={'/'}>
+                  яавто.рф
+                </Link>
+              </div>
+              <h1 className={'auth__title'}>Регистрация</h1>
+              {error && <div className={'form__notification'}>{error}</div>}
+              <Form onSubmit={formik.handleSubmit}>
+                {error ? <div>{error}</div> : null}
+                <div className={'form__body'}>
+                  {formik.touched.email && formik.errors.email ? (
+                    <div className={'form__notification'}>
+                      {formik.errors.email}
+                    </div>
+                  ) : null}
+                  <FormInputWithLabel
+                    placeholder={'E-Mail'}
+                    name={'email'}
+                    type={'email'}
+                    onChange={formik.handleChange}
+                    className={
+                      '' +
+                      (formik.touched.email && !formik.errors.email
+                        ? 'form-control is-valid'
+                        : 'is-invalid form-control form-control-lg form-control-solid')
+                    }
+                  />
+                  {formik.touched.firstname && formik.errors.firstname ? (
+                    <div className={'form__notification'}>
+                      {formik.errors.firstname}
+                    </div>
+                  ) : null}
+                  <FormInputWithLabel
+                    placeholder={'Имя'}
+                    name={'firstname'}
+                    type={'firstname'}
+                    onChange={formik.handleChange}
+                    className={
+                      '' +
+                      (formik.touched.firstname && !formik.errors.firstname
+                        ? 'form-control is-valid'
+                        : 'is-invalid form-control form-control-lg form-control-solid')
+                    }
+                  />
+                  {formik.touched.lastname && formik.errors.lastname ? (
+                    <div className={'form__notification'}>
+                      {formik.errors.lastname}
+                    </div>
+                  ) : null}
+                  <FormInputWithLabel
+                    placeholder={'Фамилия'}
+                    name={'lastname'}
+                    type={'lastname'}
+                    onChange={formik.handleChange}
+                    className={
+                      '' +
+                      (formik.touched.lastname && !formik.errors.lastname
+                        ? 'form-control is-valid'
+                        : 'is-invalid form-control form-control-lg form-control-solid')
+                    }
+                  />
+                  {formik.touched.phone && formik.errors.phone ? (
+                    <div className={'form__notification'}>
+                      {formik.errors.phone}
+                    </div>
+                  ) : null}
+                  <FormInputWithMask
+                    title={'Номер телефона'}
+                    name={'phone'}
+                    type={'phone'}
+                    mask={phoneNumberMask}
+                    value={formik.values.phone}
+                    placeholder={formik.values.phone}
+                    onChange={formik.handleChange}
+                    className={
+                      '' +
+                      (formik.touched.phone && !formik.errors.phone
+                        ? 'form-control is-valid'
+                        : 'is-invalid form-control form-control-lg form-control-solid')
+                    }
+                  />
+                  {formik.touched.password && formik.errors.password ? (
+                    <div className={'form__notification'}>
+                      {formik.errors.password}
+                    </div>
+                  ) : null}
+                  <FormInputWithLabel
+                    placeholder={'Пароль'}
+                    name={'password'}
+                    type={'password'}
+                    onChange={formik.handleChange}
+                    className={
+                      '' +
+                      (formik.touched.password && !formik.errors.password
+                        ? 'form-control is-valid'
+                        : 'is-invalid form-control form-control-lg form-control-solid')
+                    }
+                  />
+                </div>
                 {formik.touched.terms && formik.errors.terms ? (
                   <div className={'form__notification'}>
                     {formik.errors.terms}
                   </div>
                 ) : null}
-              </div>
-              {formik.status && (
-                <div className='mb-lg-15 alert alert-danger'>
-                  <div className='alert-text font-weight-bold'>
-                    {formik.status}
+                <div className={'form__bottom'}>
+                  <div className={'form__link-wrap'}>
+                    <span>Есть учетная запись?</span>
+                    <Link href={'/auth/signin'}>Войти</Link>
+                  </div>
+                  <div className={'form__btn-group'}>
+                    <div className={'form__btn-wrap'}>
+                      <div className='form__terms-wrap'>
+                        <label
+                          className={`form__terms search-tariffs__checkbox ${
+                            formik.values.terms ? 'checkbox-active' : ''
+                          }`}>
+                          <input
+                            type='checkbox'
+                            name='terms'
+                            defaultChecked={false}
+                            onChange={formik.handleChange}
+                            className={'form-check-input'}
+                          />{' '}
+                          <span>Я принимаю</span>{' '}
+                        </label>
+                        <Link href='/documents/terms'>
+                          Пользовательское соглашение
+                        </Link>
+                      </div>
+                      <button type={'submit'} className={`btn-main`}>
+                        Зарегистрироваться
+                      </button>
+                    </div>
                   </div>
                 </div>
-              )}
-              {error ? <div>{error}</div> : null}
-              <div className={'form__body'}>
-                <FormInputWithLabel
-                  title={'E-Mail'}
-                  name={'email'}
-                  type={'email'}
-                  onChange={formik.handleChange}
-                  placeholder={formik.values.email}
-                  className={
-                    '' +
-                    (formik.touched.email && formik.errors.email
-                      ? 'form-control is-valid'
-                      : 'is-invalid form-control form-control-lg form-control-solid')
-                  }
-                />
-                <FormInputWithLabel
-                  title={'Имя'}
-                  name={'firstname'}
-                  type={'firstname'}
-                  onChange={formik.handleChange}
-                  placeholder={formik.values.firstname}
-                  className={
-                    '' +
-                    (formik.touched.firstname && formik.errors.firstname
-                      ? 'form-control is-valid'
-                      : 'is-invalid form-control form-control-lg form-control-solid')
-                  }
-                />
-                <FormInputWithLabel
-                  title={'Фамилия'}
-                  name={'lastname'}
-                  type={'lastname'}
-                  onChange={formik.handleChange}
-                  placeholder={formik.values.lastname}
-                  className={
-                    '' +
-                    (formik.touched.lastname && formik.errors.lastname
-                      ? 'form-control is-valid'
-                      : 'is-invalid form-control form-control-lg form-control-solid')
-                  }
-                />
-                <FormInputWithMask
-                  title={'Номер телефона'}
-                  name={'phone'}
-                  type={'phone'}
-                  mask={phoneNumberMask}
-                  placeholder={formik.values.phone}
-                  onChange={formik.handleChange}
-                  className={
-                    '' +
-                    (formik.touched.phone && formik.errors.phone
-                      ? 'form-control is-valid'
-                      : 'is-invalid form-control form-control-lg form-control-solid')
-                  }
-                />
-                <FormInputWithLabel
-                  title={'Пароль'}
-                  name={'password'}
-                  type={'password'}
-                  onChange={formik.handleChange}
-                  placeholder={formik.values.password}
-                  className={
-                    '' +
-                    (formik.touched.password && formik.errors.password
-                      ? 'form-control is-valid'
-                      : 'is-invalid form-control form-control-lg form-control-solid')
-                  }
-                />
-              </div>
-              <div className={'form__bottom'}>
-                <div className={'form__btn-group'}>
-                  <div className={'form__btn-wrap'}>
-                    <input
-                      type='checkbox'
-                      name='terms'
-                      onChange={formik.handleChange}
-                    />{' '}
-                    Я принимаю{' '}
-                    <Link href='/documents/terms'>
-                      Пользовательское соглашение
-                    </Link>
-                    <button
-                      type={'submit'}
-                      className={`btn-main btn-main-trp mt-2`}
-                      style={{ background: 'transparent' }}>
-                      Зарегистрироваться
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </Form>
+              </Form>
+            </div>
           </div>
         </div>
       </section>

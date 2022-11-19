@@ -40,23 +40,29 @@ export const ProfileCard: FC<IProfile> = ({ profile }) => {
       <Col md={6} xs={12} className={'profile__col'}>
         <div className={'profile__item'}>
           <div className={`profile__top profile-top`}>
-            <div className={'profile-top__row'}>
-              <div className={'profile-top__photo'}>
-                <Image
-                  src={URL_IMG + 'users/' + profile.avatar}
-                  fill
-                  alt={profile.firstname}
-                />
-              </div>
-              <div className={'profile-top__main'}>
-                <h1 className={'profile-top__title'}>
-                  {profile.firstname} {profile.lastname}
-                </h1>
-                <a
-                  className={'profile-top__tel'}
-                  href={`tel:${profile.telephone}`}>
-                  {profile.telephone}
-                </a>
+            <div className={'profile-top__row justify-content-between'}>
+              <div className='d-flex align-items-center'>
+                <div className={'profile-top__photo'}>
+                  <Image
+                    src={
+                      profile.avatar
+                        ? URL_IMG + 'users/' + profile.avatar
+                        : '/media/user-bg.png'
+                    }
+                    fill
+                    alt={profile.firstname}
+                  />
+                </div>
+                <div className={'profile-top__main'}>
+                  <h1 className={'profile-top__title'}>
+                    {profile.firstname} {profile.lastname}
+                  </h1>
+                  <a
+                    className={'profile-top__tel'}
+                    href={`tel:${profile.telephone}`}>
+                    {profile.telephone}
+                  </a>
+                </div>
               </div>
               <a className={'profile-top__btn'} href='#'>
                 <div className={'icon'}>
@@ -252,7 +258,7 @@ export const ProfileFavorites: FC<IProfileFavorites> = ({
 }) => {
   return (
     <Col xs={12} md={6} className={'profile__col'}>
-      <Link className={'profile__item'} href={'#'}>
+      <Link className={'profile__item'} href={'/favorites'}>
         <div className={`profile__body'} profile-body`}>
           <h3 className={'profile-body__title'}>
             Избранное: <span>{type ? 'Автомобили' : 'Автопарков'}</span>

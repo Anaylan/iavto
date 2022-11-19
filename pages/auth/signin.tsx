@@ -19,6 +19,7 @@ export const Login: FC<UserModel> = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+  const [error, setError] = useState<string>();
 
   const user = useSelector(
     ({ header }: { header: auth.IAuthState }) => header.title,
@@ -41,6 +42,12 @@ export const Login: FC<UserModel> = () => {
         .then(({ data }) => {
           console.log(data);
           setLoading(false);
+
+          if (data.message) {
+            setError(data.message);
+            return;
+          }
+
           dispatch(auth.actions.login(data.token));
           if (data.token) {
             router.push('/');
@@ -64,45 +71,51 @@ export const Login: FC<UserModel> = () => {
           )}
         </div>
         <Container>
-          <div className={'auth__body'}>
-            <h1 className={'auth__title'}>Вход в существующий аккаунт</h1>
-            <Form onSubmit={formik.handleSubmit}>
-              <div className={'form__body'}>
-                <FormInputWithLabel
-                  title={'Email'}
-                  name={'email'}
-                  required
-                  type={'email'}
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                />
-                <FormInputWithLabel
-                  title={'Пароль'}
-                  name={'password'}
-                  required
-                  type={'password'}
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                />
-                <div className={'form__help'}>
-                  <Link href='/auth/forgot-password'>Забыли пароль?</Link>
-                </div>
+          <div className='auth__wrapper'>
+            <div className={'auth__body'}>
+              <div className='auth__header'>
+                <Link className={'header-top__logo'} href={'/'}>
+                  яавто.рф
+                </Link>
               </div>
-              <div className={'form_' + '_bottom'}>
-                <div className={'form__btn-group'}>
-                  <div className={'form__btn-wrap'}>
-                    <Button type={'submit'}>Войти</Button>
+
+              <h1 className={'auth__title'}>Вход в существующий аккаунт</h1>
+              {error && <div className={'form__notification'}>{error}</div>}
+              <Form onSubmit={formik.handleSubmit}>
+                <div className={'form__body'}>
+                  <FormInputWithLabel
+                    placeholder={'Ваш email'}
+                    name={'email'}
+                    required
+                    type={'email'}
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                  />
+                  <FormInputWithLabel
+                    placeholder={'Пароль'}
+                    name={'password'}
+                    required
+                    type={'password'}
+                    onChange={formik.handleChange}
+                    value={formik.values.password}>
+                    <div className={'form__help'}>
+                      <Link href='/auth/forgot-password'>Забыли пароль?</Link>
+                    </div>
+                  </FormInputWithLabel>
+                </div>
+                <div className={'form_' + '_bottom'}>
+                  <div className={'form__link-wrap'}>
+                    <span>Нет учетной записи?</span>
+                    <Link href={'/auth/signup'}>Зарегистрироваться</Link>
                   </div>
-                  <div className={'form__btn-wrap'}>
-                    <Link
-                      className={`btn-main btn-main-trp`}
-                      href={'/auth/signup'}>
-                      Зарегистрироваться
-                    </Link>
+                  <div className={'form__btn-group'}>
+                    <div className={'form__btn-wrap'}>
+                      <Button type={'submit'}>Войти</Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Form>
+              </Form>
+            </div>
           </div>
         </Container>
       </section>

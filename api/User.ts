@@ -2,12 +2,14 @@ import axiosAuth from 'app/axiosAuth';
 import { API_URL } from 'app/config';
 import { UserModel } from 'app/models';
 import { IFavoritesModel } from 'app/models/favorite/Favorites';
-
+import axios from 'axios';
 // auth
 export const GET_USER_BY_ACCESSTOKEN_URL = `${API_URL}/auth/token`;
 export const LOGIN_URL = `${API_URL}/auth`;
 export const REGISTER_URL = `${API_URL}/auth/new`;
-export const REQUEST_PASSWORD_URL = `${API_URL}/auth/forgot-password`;
+export const REQUEST_RESTORE_CODE_URL = `${API_URL}/auth/resetpassword`;
+export const REQUEST_RESTORE_PASSWORD_URL = `${API_URL}/auth/resetpassword/getcode`;
+export const REQUEST_PASSWORD_URL = `${API_URL}/auth/resetpassword/getnewpassword`;
 
 // edit
 export const REQUEST_VERIFICATION_URL = `${API_URL}/user/verification`;
@@ -48,8 +50,8 @@ export function register(
 }
 
 // Server should return object => { result: boolean } (Is Email in DB)
-export function requestPassword(email: string) {
-  return axiosAuth.post<{ result: boolean }>(REQUEST_PASSWORD_URL, { email });
+export function requestCode(email: string) {
+  return axiosAuth.get(REQUEST_RESTORE_CODE_URL, { params: { email } });
 }
 
 export async function getUserByToken() {
@@ -58,8 +60,27 @@ export async function getUserByToken() {
   return axiosAuth.get<UserModel>(GET_USER_BY_ACCESSTOKEN_URL);
 }
 
-export async function reset(email: string) {
-  return { data: 'отправил' };
+export async function requestPassword(token: string, code: string) {
+  return axios.get<UserModel>(REQUEST_RESTORE_PASSWORD_URL, {
+    params: {
+      token,
+      code,
+    },
+  });
+}
+
+export async function requestNewPassword(
+  token: string,
+  code: string,
+  password: string,
+) {
+  return axios.get<UserModel>(REQUEST_PASSWORD_URL, {
+    params: {
+      token,
+      code,
+      password,
+    },
+  });
 }
 
 export async function requestVerification(options: any) {

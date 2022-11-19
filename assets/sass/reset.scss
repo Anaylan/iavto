@@ -52,6 +52,13 @@ input::-ms-clear {
   display: none;
 }
 
+input {
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
 button {
   cursor: pointer;
 }

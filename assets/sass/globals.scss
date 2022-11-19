@@ -531,10 +531,11 @@ input[type='number']:focus {
 
     & .icon {
       position: relative;
+      position: relative;
       top: -2px;
-      width: 18px;
-      height: 18px;
-      margin: 0 8px 0 0;
+      width: 16px;
+      height: 16px;
+      margin: 0 5px 0 0;
     }
   }
 
@@ -735,6 +736,13 @@ input[type='number']:focus {
 .carparks {
   padding: 40px 0 0 0;
 
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   &__body {
     margin: 0 -19.5px;
   }
@@ -750,21 +758,32 @@ input[type='number']:focus {
     height: 100%;
   }
 
+  &__main {
+    display: block;
+    position: relative;
+    margin: 0 0 18px 0;
+
+    &:hover {
+      .carparks__img {
+        img {
+          transform: scale(1.05);
+        }
+      }
+
+      .carparks-hover__item {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
   &__img {
     display: block;
     position: relative;
     border-radius: 20px;
     height: 194px;
-    max-width: 194px;
+    width: 100%;
     overflow: hidden;
-    margin: 0 0 18px 0;
-
-    &:hover {
-      & .carparks-hover__item {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
 
     img {
       position: relative;
@@ -774,6 +793,7 @@ input[type='number']:focus {
       top: 0;
       left: 0;
       will-change: transform;
+      transition: transform 0.5s ease;
     }
   }
 
@@ -869,6 +889,7 @@ input[type='number']:focus {
     padding: 7px 12px 7px 16px;
     opacity: 0;
     visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
 
     &:hover {
       div {
@@ -885,7 +906,7 @@ input[type='number']:focus {
       font-weight: 500;
       color: #acacac;
       margin: 0 9px 0 0;
-      transition: color 0.1s linear;
+      transition: color 0.25s ease;
     }
 
     .icon {
@@ -920,6 +941,37 @@ input[type='number']:focus {
     }
   }
 }
+.carparks-slider {
+  .carparks__body {
+    margin: 0;
+  }
+
+  &__container {
+    padding: 0 0 50px 0;
+  }
+
+  .carparks__img {
+    max-width: 100%;
+  }
+
+  .swiper-horizontal
+    > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic,
+  .swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+    min-width: 86px;
+  }
+
+  .swiper-pagination-bullet {
+    width: var(
+      --swiper-pagination-bullet-width,
+      var(--swiper-pagination-bullet-size, 15px)
+    );
+    height: var(
+      --swiper-pagination-bullet-height,
+      var(--swiper-pagination-bullet-size, 15px)
+    );
+    background: #2774ac;
+  }
+}
 
 /* Carparks-large
 ===================*/
@@ -930,10 +982,12 @@ input[type='number']:focus {
   padding: 0 11px;
   margin: 0 0 30px 0;
 }
+.carparks-large .carparks__main {
+  margin: 0 0 18px 0;
+}
 .carparks-large .carparks__img {
   height: 265px;
   max-width: 265px;
-  margin: 0 0 18px 0;
 }
 .carparks-large .carparks__item-title {
   font-size: 22px;
@@ -1900,9 +1954,12 @@ input[type='number']:focus {
       margin: 0 0 30px 0;
     }
 
+    &__main {
+      margin: 0 0 15px 0;
+    }
+
     &__img {
       height: 174px;
-      margin: 0 0 15px 0;
     }
 
     &__item-title {
@@ -1966,9 +2023,11 @@ input[type='number']:focus {
     padding: 0 12px;
     margin: 0 0 30px 0;
   }
+  .carparks-large .carparks__main {
+    margin: 0 0 15px 0;
+  }
   .carparks-large .carparks__img {
     height: 174px;
-    margin: 0 0 15px 0;
   }
   .carparks-large .carparks__item-title {
     font-size: 15px;

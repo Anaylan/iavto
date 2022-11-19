@@ -12,12 +12,14 @@ export const ReviewCard = ({ review }: { review: IReviewDataModel }) => {
         <Row>
           <Col xs={12} md={4} className='d-flex'>
             <Link className={'cars-item__img'} href={`/car/${review.pid}`}>
-              <Image
-                src={URL_IMG + `/` + review.cid + `/` + review.img![0]}
-                fill
-                sizes='100%'
-                alt={`${review.mark} ${review.model}`}
-              />
+              {review.img && (
+                <Image
+                  src={URL_IMG + `/` + review.cid + `/` + review.img![0]}
+                  fill
+                  sizes='100%'
+                  alt={`${review.mark} ${review.model}`}
+                />
+              )}
             </Link>
           </Col>
           <Col xs={12} md={8}>
@@ -29,7 +31,6 @@ export const ReviewCard = ({ review }: { review: IReviewDataModel }) => {
                   {review.mark} {review.model}
                   <span>{review.year}</span>
                 </Link>
-
                 <div className={'cars-item__subtitle'}>
                   Автопарк:
                   <Link href={`/carpark/${review.cid}`}>
