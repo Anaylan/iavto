@@ -50,7 +50,7 @@ export const Login: FC<UserModel> = () => {
 
           dispatch(auth.actions.login(data.token));
           if (data.token) {
-            router.push('/');
+            router.back();
           }
         })
         .catch((err) => console.log(err));

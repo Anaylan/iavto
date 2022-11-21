@@ -74,7 +74,7 @@ export default function Car({ car }: { car: ICarModel }) {
             <div className={`carpark__intro carpark-intro`}>
               <Image
                 className={'carpark-intro__banner'}
-                src={URL_IMG + carpark.cid + '/' + carpark.banner}
+                src={URL_IMG + '/img/cid/' + carpark.cid + '/' + carpark.banner}
                 fill
                 priority={false}
                 alt={carpark.company_name ? carpark.company_name : ''}
@@ -83,7 +83,7 @@ export default function Car({ car }: { car: ICarModel }) {
               <CarparkCard
                 alt={carpark.company_name}
                 tarif={carpark.tarif}
-                src={URL_IMG + carpark.cid + '/' + carpark.img}
+                src={URL_IMG + '/img/cid/' + carpark.cid + '/' + carpark.img}
                 title={carpark.company_name}
                 sold={carpark.count_product}
               />

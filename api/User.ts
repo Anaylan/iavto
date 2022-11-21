@@ -1,5 +1,5 @@
 import axiosAuth from 'app/axiosAuth';
-import { API_URL } from 'app/config';
+import { API_URL, URL_IMG } from 'app/config';
 import { UserModel } from 'app/models';
 import { IFavoritesModel } from 'app/models/favorite/Favorites';
 import axios from 'axios';
@@ -24,6 +24,9 @@ export const GET_COMPANIES_COUNT = `${API_URL}/user/getcountfavoritescarpark`;
 export const GET_CARS_COUNT = `${API_URL}/user/getcountfavoritescar`;
 export const GET_ORDERS_COUNT = `${API_URL}/user/getcountorder`;
 export const GET_REVIEWS_COUNT = `${API_URL}/user/getcountreviews`;
+
+// image
+export const REQUEST_IMG_URL = `${URL_IMG}/image/download/user`;
 
 // Server should return AuthModel
 export async function login(email: string, password: string) {
@@ -117,4 +120,12 @@ export function getOrdersCount() {
 
 export function getReviewsCount() {
   return axiosAuth.get<number>(GET_REVIEWS_COUNT);
+}
+
+export async function requestSendImg(options: any) {
+  return axiosAuth.post(REQUEST_IMG_URL, options, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 }

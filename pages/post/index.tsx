@@ -45,7 +45,7 @@ const Posts: FC<IPostsChild> = ({ posts }) => {
                   <Link className='news-page__item' href={`/post/${post.id}`}>
                     <span className='news-page__img'>
                       <Image
-                        src={URL_IMG + post.img}
+                        src={URL_IMG + '/img/news/' + post.img}
                         alt={''}
                         width={100}
                         height={100}

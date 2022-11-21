@@ -119,10 +119,10 @@ export const useLoaded = (onLoaded: CallableFunction) => {
     onLoaded();
   }
   useEffect(() => {
-    window.addEventListener('load', handleLoaded, false);
+    document.addEventListener('load', handleLoaded, false);
     return () => {
       // Unbind the event listener on clean up
-      window.removeEventListener('load', handleLoaded, false);
+      document.removeEventListener('load', handleLoaded, false);
     };
   }, [onLoaded]);
 };

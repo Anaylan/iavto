@@ -4,8 +4,54 @@ import { IOrderModel } from 'app/models';
 import { Col, Row } from 'react-bootstrap';
 import Link from 'next/link';
 import { URL_IMG } from 'app/config';
+import { Button, SearchSelect, SearchSelectOption } from 'modules/UI';
+import { orderCancel } from 'api/Orders';
+import { Modal } from 'react-bootstrap';
+import { useState, ReactNode } from 'react';
+
 export const OrderCard = ({ order }: { order: IOrderModel }) => {
   console.log(order);
+  const [showTime, setShowTime] = useState<boolean>(false);
+  const handleCloseTime = () => setShowTime(false);
+  const [from, setFrom] = useState(0);
+  const makeOptions = (from?: number) => {
+    let options: ReactNode[] = [];
+    let time = 0;
+    let hour = '';
+    let minutes = '';
+    if (from) {
+      let time = 30 * from;
+      for (let i = from; i < 48; i++) {
+        hour = String((time - (time % 60)) / 60);
+        minutes = String(time % 60);
+        options.push(
+          <SearchSelectOption value={i}>
+            <time>
+              {hour.length == 1 ? `0${hour}` : hour}:
+              {minutes.length == 1 ? `0${minutes}` : minutes}
+            </time>
+          </SearchSelectOption>,
+        );
+        time += 30;
+      }
+    } else {
+      for (let i = 0; i < 48; i++) {
+        hour = String((time - (time % 60)) / 60);
+        minutes = String(time % 60);
+        options.push(
+          <SearchSelectOption value={i}>
+            <time>
+              {hour.length == 1 ? `0${hour}` : hour}:
+              {minutes.length == 1 ? `0${minutes}` : minutes}
+            </time>
+          </SearchSelectOption>,
+        );
+        time += 30;
+      }
+    }
+    return options;
+  };
+
   return (
     <Col xs={12} sm={6} lg={12} className={'cars__col'}>
       <div className={`cars-item`}>
@@ -16,7 +62,7 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
                 priority={false}
                 fill
                 sizes='100%'
-                src={URL_IMG + `/` + order.cid + `/` + order.img![0]}
+                src={URL_IMG + '/img/cid/' + order.cid + `/` + order.img![0]}
                 alt={`${order.mark} ${order.model}`}
               />
             </Link>
@@ -47,7 +93,37 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
                   (order.status == 1 ? '' : 'orders-btn-wait')
                 }>
                 Статус заказа:{' '}
-                <span>{order.status == 1 ? 'Одобренно' : 'Ожидается'}</span>
+                <span>
+                  {
+                    {
+                      0: <span>Отказано</span>,
+                      1: <span>Одобренно</span>,
+                      2: <span>Ожидается</span>,
+                      3: <span>Активен</span>,
+                      4: <span>Архив</span>,
+                    }[order.status]
+                  }
+                </span>
+              </div>
+              <div className='order-card__btns'>
+                {order.status == 1 && (
+                  <div className='order-btn'>
+                    <Button onClick={() => setShowTime(true)}>
+                      Назначить время
+                    </Button>
+                  </div>
+                )}
+                {order.status == 2 && (
+                  <div className='order-btn'>
+                    <Button
+                      onClick={() => {
+                        orderCancel(order.id);
+                        order.status = 0;
+                      }}>
+                      Отменить заказ
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </Col>
@@ -60,9 +136,15 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
                     <div>руб / сут</div>
                   </div>
                   <ul className={`cars-item__list`}>
-                    <li>Без залога</li>
-                    <li>Без комиссии</li>
-                    <li>Есть возможность долгой аренды</li>
+                    {order.pledge == 0 ? (
+                      <li>Без залога</li>
+                    ) : (
+                      <li>
+                        Залог <span>{order.pledge}</span> руб
+                      </li>
+                    )}
+                    {/* <li>Без комиссии</li>
+                    <li>Есть возможность долгой аренды</li> */}
                   </ul>
                 </div>
                 <a
@@ -75,8 +157,18 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
                     `'cars-item__btn orders-btn btn-main d-lg-none ` +
                     (order.status == 1 ? '' : 'orders-btn-wait')
                   }>
-                  Статус заказа:{' '}
-                  <span>{order.status == 1 ? 'Одобренно' : 'Ожидается'}</span>
+                  Статус заказа:
+                  <span>
+                    {
+                      {
+                        0: <span>Отказано</span>,
+                        1: <span>Одобренно</span>,
+                        2: <span>Ожидается</span>,
+                        3: <span>Активен</span>,
+                        4: <span>Архив</span>,
+                      }[order.status]
+                    }
+                  </span>
                 </div>
               </div>
               <div className='d-flex align-items-center justify-content-between'>
@@ -92,6 +184,31 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
           </Col>
         </Row>
       </div>
+      <Modal centered show={showTime} onHide={handleCloseTime}>
+        <Modal.Header closeButton>
+          <Modal.Title>Выбор времени</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Row>
+            <Col xs='6' className='gy-2'>
+              <p className='mb-3'>С</p>
+              <SearchSelect onChange={(e) => setFrom(Number(e.target.value))}>
+                {makeOptions()}
+              </SearchSelect>
+            </Col>
+            <Col xs='6' className='gy-2'>
+              <p className='mb-3'>До</p>
+              <SearchSelect>{makeOptions(from)}</SearchSelect>
+            </Col>
+          </Row>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleCloseTime}>Выбрать</Button>
+          <Button className={'btn-main-trp'} onClick={handleCloseTime}>
+            Закрыть
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Col>
   );
 };

@@ -251,7 +251,7 @@ export const Register: React.FC<UserModel> = () => {
                           />{' '}
                           <span>Я принимаю</span>{' '}
                         </label>
-                        <Link href='/documents/terms'>
+                        <Link href='/documents/terms' target='_blank'>
                           Пользовательское соглашение
                         </Link>
                       </div>

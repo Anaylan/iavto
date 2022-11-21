@@ -25,4 +25,15 @@ export interface ICarModel {
   img?: string[];
   city?: ICityItem;
   viewed?: number;
+  repair?: number;
+  maintenance?: number;
+  tires?: number;
+  support?: number;
+  wanted?: number;
+  dtp?: number;
+  mileage?: number;
+  washing?: number;
+  CASCO?: number;
+  phone?: number;
+  fuel?: number;
 }

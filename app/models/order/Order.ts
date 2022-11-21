@@ -9,6 +9,7 @@ export interface IOrderModel {
   model: string;
   pid: number;
   price: string;
+  pledge: number;
   status: number;
   uid: number;
   year: number;

@@ -1,8 +1,15 @@
 export interface IMessageModel {
+  message: string;
   companion: string;
   date: string;
-  sender: string;
-  mini_message: string;
-  full_message: string;
-  time: string;
+  MeSend: boolean;
+}
+
+export interface IDialogModel {
+  cid: number;
+  company_img: string;
+  company_name: string;
+  hash: string;
+  dialogId: number;
+  message: string;
 }

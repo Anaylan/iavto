@@ -46,7 +46,11 @@ export const ProfileCard: FC<IProfile> = ({ profile }) => {
                   <Image
                     src={
                       profile.avatar
-                        ? URL_IMG + 'users/' + profile.avatar
+                        ? URL_IMG +
+                          '/img/uid/' +
+                          profile.id +
+                          '/' +
+                          profile.avatar
                         : '/media/user-bg.png'
                     }
                     fill
@@ -166,7 +170,6 @@ export const ProfileBalance = ({
       window.open(data.src);
       setToken(data.token);
       handleClosePay();
-      handleShowCheck();
     });
   };
 

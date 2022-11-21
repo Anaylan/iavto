@@ -1,8 +1,9 @@
 import { ICarModel } from 'app/models';
 import { Location } from 'assets/icon/icons';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { setCarRent } from 'api/Rent';
 import { CarRentModal } from 'modules/elements';
+import { useRouter } from 'next/router';
 
 //Swiper styles
 import Link from 'next/link';
@@ -12,10 +13,13 @@ export const CarCardInfo: React.FC<ICarModel> = ({
   company_name,
   id,
   cid,
+  pledge,
 }) => {
   const [show, setShow] = useState<boolean>(false);
   const [status, setStatus] = useState<number>(0);
+  const router = useRouter();
 
+  console.log(pledge);
   return (
     <div className={`car__item-info`}>
       <div className={'cars-item__info-content'}>
@@ -36,9 +40,15 @@ export const CarCardInfo: React.FC<ICarModel> = ({
             Автопарк:<Link href={`/carpark/${cid}`}>{company_name}</Link>
           </div>
           <ul className={'cars-item__list'}>
-            <li>Без залога</li>
-            <li>Без комиссии</li>
-            <li>Есть возможность долгой аренды</li>
+            {pledge == 0 ? (
+              <li>Без залога</li>
+            ) : (
+              <li>
+                Залог <span>{pledge}</span> руб
+              </li>
+            )}
+            {/* <li>Без комиссии</li>
+            <li>Есть возможность долгой аренды</li> */}
           </ul>
         </div>
         <CarRentModal show={show} setShow={setShow} status={status} />

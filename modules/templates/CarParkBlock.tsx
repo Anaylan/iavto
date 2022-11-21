@@ -82,7 +82,7 @@ export function CarparkItem({
                 loading={lazy ? 'eager' : 'lazy'}
                 fill
                 sizes={'100%'}
-                src={URL_IMG + carPark.cid + '/' + carPark.img}
+                src={URL_IMG + '/img/cid/' + carPark.cid + '/' + carPark.img}
                 alt=''
               />
             ) : (

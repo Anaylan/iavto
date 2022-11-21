@@ -71,7 +71,7 @@ export const EditInfo = ({ user }: { user: UserDataModel }) => {
             Информация профиля
           </h1>
           <Col xs={12} sm={5} md={4}>
-            <ProfileImg avatar={user.avatar} />
+            <ProfileImg id={user.id} avatar={user.avatar} />
           </Col>
           <Col xs={12} md={8} sm={7}>
             <div className={'info-profile__body'}>

@@ -68,10 +68,10 @@ export const PostPreview: React.FC<PostProps> = ({ postInfo }) => {
       <div className='news__item news-item'>
         <div className='news-item__img'>
           <Image
-            src={URL_IMG + '/news/' + postInfo.img}
+            src={URL_IMG + '/img/news/' + postInfo.img}
             width={100}
             height={100}
-            alt=''
+            alt='Новость'
           />
         </div>
         <div className='news-item__content'>

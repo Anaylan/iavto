@@ -220,7 +220,7 @@ export default function Cars() {
                         formik.values.transmission = '';
                       } else setTransChange(1);
                     }}
-                    value={'auto'}
+                    value={'Автоматическая'}
                     id='automatic'
                     name='transmission'
                     checked={transChange === 1}>
@@ -235,7 +235,7 @@ export default function Cars() {
                       } else setTransChange(2);
                     }}
                     id='mechanics'
-                    value={'mechanics'}
+                    value={'Механическая'}
                     name='transmission'
                     checked={transChange === 2}>
                     Механическая

@@ -48,7 +48,7 @@ export default function Post({ post }: { post: IPostModel }) {
             </div>
             <div className='post__img'>
               <Image
-                src={URL_IMG + post.img}
+                src={URL_IMG + '/img/news/' + post.img}
                 alt={post.title}
                 width={100}
                 height={100}

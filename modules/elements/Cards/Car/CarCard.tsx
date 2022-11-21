@@ -15,6 +15,7 @@ interface ICarInfo {
 }
 
 export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
+  console.log(car);
   return (
     <>
       {car && (
@@ -28,9 +29,20 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
           />
           <div className='car__body car'>
             <Row className='car__row'>
-              <Col md={7} xs={12} className='car__col order-1 order-md-2'>
+              <Col md={7} xs={12} className='car__222col order-1 order-md-2'>
                 <CarCardSwiper cid={car.cid} images={car.img!} />
-                <CarCardBonuses />
+                <CarCardBonuses
+                  bonuses={{
+                    repair: Number(car.repair),
+                    maintenance: Number(car.maintenance),
+                    tires: Number(car.tires),
+                    support: Number(car.support),
+                    washing: Number(car.washing),
+                    CASCO: Number(car.CASCO),
+                    phone: Number(car.phone),
+                    fuel: Number(car.fuel),
+                  }}
+                />
               </Col>
 
               <Col md={5} xs={12} className='car__col order-2 order-md-1'>
@@ -39,12 +51,20 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
                   company_name={car.company_name}
                   cid={car.cid}
                   id={car.id}
+                  pledge={car.pledge}
                 />
                 <CarCardDetails
                   fuel_type={car.fuel_type}
                   horse_power={car.horse_power}
+                  transmission={car.transmission}
+                  mileage={car.mileage}
                 />
-                <CarCardVerify />
+                <CarCardVerify
+                  report={{
+                    wanted: Number(car.wanted),
+                    dtp: Number(car.dtp),
+                  }}
+                />
 
                 <div className='car__details'>
                   <div className='cars-item__label'>Описание автомобиля</div>

@@ -22,10 +22,10 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <script
+        {/* <script
           type='text/javascript'
           dangerouslySetInnerHTML={{ __html: script }}
-        />
+        /> */}
         <noscript>
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}

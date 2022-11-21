@@ -1,5 +1,7 @@
 // actions
 export * from './actions/Action';
+// bonuses
+export * from './bonuses/Bonuse';
 // buttons
 export * from './buttons/Button';
 // form
@@ -42,3 +44,5 @@ export * from './pagination/Pagination';
 export * from './reviews/Review';
 // radio
 export * from './radio/FilterRadio';
+// message
+export * from './message/Message';

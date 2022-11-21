@@ -112,42 +112,39 @@ export const TabReviews = ({ id }: { id: string }) => {
   useEffect(() => {
     getCompanyReviews(id).then(({ data }) => {
       setReviews(data);
+      console.log(data);
     });
   }, [id]);
 
   return (
     <>
-      <Row>
-        <Col xs={12} md={8} className='order-2 order-md-1'>
-          {reviews &&
-            reviews.reviews.map((review, key) => (
+      {reviews && (
+        <Row>
+          <Col xs={12} md={8} className='order-2 order-md-1'>
+            {reviews.reviews.map((review, key) => (
               <Review review={review} key={key} />
             ))}
-        </Col>
-        <Col xs={12} md={4} className='order-1 order-md-2'>
-          <div className={'carpark-reviews__aside reviews-aside'}>
-            <div className={'reviews-aside__content'}>
-              <div className={'reviews-aside__top'}>
-                <div className={'reviews-aside__rate'}>
-                  {reviews && getStars(Math.floor(reviews.aveRating))}
-                  {/* {Array(5)
+          </Col>
+          <Col xs={12} md={4} className='order-1 order-md-2'>
+            <div className={'carpark-reviews__aside reviews-aside'}>
+              <div className={'reviews-aside__content'}>
+                <div className={'reviews-aside__top'}>
+                  <div className={'reviews-aside__rate'}>
+                    {getStars(Math.floor(reviews.aveRating))}
+                    {/* {Array(5)
                     .fill(1, 0, 4)
                     .map((star, key) => (
                       <div key={key} className={'icon'}>
                         <Star />
                       </div>
                     ))} */}
+                  </div>
+                  <div className={'reviews-aside__overall-rate'}>
+                    <span>{Math.round(reviews.aveRating * 10) / 10}</span> / 5
+                  </div>
                 </div>
-                <div className={'reviews-aside__overall-rate'}>
-                  <span>
-                    {reviews && Math.round(reviews.aveRating * 10) / 10}
-                  </span>{' '}
-                  / 5
-                </div>
-              </div>
-              <div className={'reviews-aside__body'}>
-                {reviews &&
-                  reviews.count.map((star, key) => (
+                <div className={'reviews-aside__body'}>
+                  {reviews.count.map((star, key) => (
                     <div key={key} className={'reviews-aside__progress-item'}>
                       <div className={'reviews-aside__progress-label'}>
                         {star.id} звезд
@@ -163,11 +160,12 @@ export const TabReviews = ({ id }: { id: string }) => {
                       </div>
                     </div>
                   ))}
+                </div>
               </div>
             </div>
-          </div>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      )}
     </>
   );
 };
@@ -182,7 +180,7 @@ export const TabFeedback = ({ id }: { id: string }) => {
     },
   });
   return (
-    <div className={`carpark-contact carpark-tab__body`}>
+    <div className='carpark-contact carpark-tab__body'>
       <h1 className={`cars__title title`}>Задайте ваш вопрос автопарку</h1>
       <Form onSubmit={formik.handleSubmit} className={'form'}>
         <div className={'form__item'}>

@@ -1,0 +1,43 @@
+﻿.orders {
+  .cars-item__main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .cars-item__main-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+
+  .order-card__btns {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .orders-btn {
+    background: transparent;
+    border: 2px solid #00ba29;
+    font-size: 20px;
+    font-weight: 400;
+    color: #00ba29;
+    padding: 12px;
+    margin: 0 0 16px 0;
+
+    &:hover {
+      background: transparent;
+      border: 2px solid #00ba29;
+      color: #00ba29;
+    }
+  }
+  .orders-btn-wait {
+    border: 2px solid #acacac;
+    color: #acacac;
+
+    &:hover {
+      background: transparent;
+      border: 2px solid #acacac;
+      color: #acacac;
+    }
+  }
+}

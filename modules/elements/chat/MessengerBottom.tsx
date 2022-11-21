@@ -1,5 +1,6 @@
 import { PaperClip, Send } from 'assets/icon/icons';
-import { ButtonHTMLAttributes } from 'react';
+import { sanitize } from 'libs/functions';
+import { ButtonHTMLAttributes, useEffect } from 'react';
 import { forwardRef } from 'react';
 
 interface IChildProps extends ButtonHTMLAttributes<HTMLButtonElement> {

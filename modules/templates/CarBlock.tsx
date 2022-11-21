@@ -20,9 +20,6 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
   const router = useRouter();
   const [cars, setCars] = useState<ICarModel[]>([]);
   // const [isLoading, setLoading] = useState<boolean>(false)
-  const location: string | undefined = useSelector(
-    ({ region }: { region: IRegionState }) => region.name,
-  );
   let triggerElement: React.RefObject<any> = useRef();
   let totalCars = 10;
 
@@ -143,9 +140,15 @@ export function CarItem({
                     </div>
                     <ul className={'cars-item__list'}>
                       {/* Чего-то не хватает */}
-                      <li>Без залога</li>
-                      <li>Без комиссии</li>
-                      <li>Есть возможность долгой аренды</li>
+                      {car.pledge == 0 ? (
+                        <li>Без залога</li>
+                      ) : (
+                        <li>
+                          Залог <span>{car.pledge}</span> руб
+                        </li>
+                      )}
+                      {/* <li>Без комиссии</li>
+                      <li>Есть возможность долгой аренды</li> */}
                     </ul>
                   </div>
                   <div

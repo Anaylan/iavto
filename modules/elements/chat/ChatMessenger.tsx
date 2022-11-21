@@ -1,33 +1,63 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { ArrowLeft } from 'assets/icon/icons';
 import Image from 'next/image';
-
-interface dataMessage {
-  MeSend: boolean;
-  message: string;
-}
+import { useRouter } from 'next/router';
+import { IMessageModel } from 'app/models';
+import { MessageItem } from 'modules/UI';
 
 export const ChatMessenger = ({
-  companion,
   messages,
+  status,
+  init,
+  setShowDialog,
 }: {
-  companion: string;
   messages: MessageEvent[];
+  status: string;
+  init: IMessageModel[];
+  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [data, setData] = useState<dataMessage[]>([]);
+  const [data, setData] = useState<IMessageModel[]>([]);
+  const [id, setId] = useState<number>();
+  const router = useRouter();
+  const messageRef = useRef<HTMLDivElement>(null);
+  // console.log(messages);
+  useEffect(() => {
+    if (id != router.query.dialog) {
+      setData([]);
+      setId(Number(router.query.dialog));
+    }
+  }, [id, router]);
+
+  useEffect(() => {
+    if (messageRef) {
+      setTimeout(() => {
+        messageRef.current?.scrollTo({
+          top: 99999999,
+          behavior: 'smooth',
+        });
+      }, 500);
+    }
+    //
+  }, [data, messageRef]);
 
   useEffect(() => {
     messages.map((message, key) => {
       setData([...data, JSON.parse(message.data)]);
-      console.log(JSON.parse(message.data));
+      // console.log([...data]);
     });
+
+    console.log(messageRef.current);
   }, [messages]);
+
+  // console.log(data);
   return (
     <>
       <div className={`messenger__header messenger-header`}>
         <div className={`messenger-header__row`}>
           <div className='d-flex align-items-center'>
-            <button className={`messenger-header__back d-lg-none `}>
+            <button
+              onClick={() => setShowDialog(false)}
+              className={`messenger-header__back d-lg-none `}>
               <span className={`icon`}>
                 <ArrowLeft />
               </span>
@@ -36,52 +66,31 @@ export const ChatMessenger = ({
               <span className={`messenger-header__img`}>
                 <Image width={100} height={100} src='/media/user.png' alt='' />
               </span>
-              <span className={`messenger-header__username`}>{companion}</span>
+              <span className={`messenger-header__username`}>Поменять</span>
             </a>
           </div>
+          <p>{status}</p>
           <button className='btn-param' type='button'>
             <span></span>
           </button>
         </div>
       </div>
-      <div className={`messenger__body messenger-body`}>
+      <div ref={messageRef} className={`messenger__body messenger-body`}>
         <ul className={`messenger-body__list`}>
           <li className={`messenger-body__date`}>
             <time dateTime='2022-10-15'>15.10.2022</time>
           </li>
+          {init.map((msg, key) => (
+            <MessageItem message={msg} key={key} />
+          ))}
           {data.map((msg, key) => (
-            <Fragment key={key}>
-              <li
-                className={
-                  'messenger-body__message message ' +
-                  (msg.MeSend ? 'message-you' : 'message-companion')
-                }>
-                <div className={`message__wrapper`}>
-                  <div className={`message__body`}>
-                    <div className={`message__top message-top`}>
-                      <div className={`message-top__username`}>
-                        {msg.MeSend ? 'Вы' : companion}
-                      </div>
-                      <time
-                        className={`message-top__time`}
-                        dateTime='2022-10-15 10:01'>
-                        {}
-                      </time>
-                    </div>
-                    <div className={`message__main message-main`}>
-                      <div className={`message-main__text`}>
-                        <p className='text-break' key={key}>
-                          {msg.message}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </Fragment>
+            <MessageItem message={msg} key={key} />
           ))}
         </ul>
       </div>
     </>
   );
 };
+function componentDidMount() {
+  throw new Error('Function not implemented.');
+}

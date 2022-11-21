@@ -10,7 +10,7 @@ export const MessageChat = ({ message }: { message: IMessageModel }) => {
             <div className={`message__top message-top`}>
               <div className={`message-top__username`}>Вы</div>
               <time className={`message-top__time`} dateTime='2022-10-15 10:01'>
-                {message.time}
+                message.date
               </time>
             </div>
             <div className={`message__main message-main`}>

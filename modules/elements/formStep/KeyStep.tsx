@@ -62,7 +62,7 @@ export const KeyStep = ({
           <div className={'form_' + '_bottom'}>
             <div className={'form__btn-group'}>
               <div className={'form__btn-wrap'}>
-                <Button type={'submit'}>Сохранить</Button>
+                <Button type={'submit'}>Далее</Button>
               </div>
             </div>
           </div>

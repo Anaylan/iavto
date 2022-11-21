@@ -14,6 +14,12 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai',
       },
+      {
+        // The `src` property hostname must end with `.example.com`,
+        // otherwise the API will respond with 400 Bad Request.
+        protocol: 'http',
+        hostname: 'sellerapi.iavto.team',
+      },
     ],
   },
   optimizeFonts: true,
@@ -44,20 +50,15 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: '/rules',
-        destination: '/in_dev',
-        permanent: false,
-      },
-      {
         source: '/search',
         destination: '/in_dev',
         permanent: false,
       },
-      {
-        source: '/chat',
-        destination: '/in_dev',
-        permanent: false,
-      },
+      // {
+      //   source: '/chat',
+      //   destination: '/in_dev',
+      //   permanent: false,
+      // },
     ];
   },
 };

@@ -45,6 +45,25 @@ export const CarRentModal = ({
 
   return (
     <>
+      {status == -1 && (
+        <Modal centered show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Авторизуйтесь</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className='form'>
+            <Button
+              onClick={() => {
+                handleClose;
+                router.push('/auth/signin');
+              }}>
+              Авторизоваться
+            </Button>
+            <Button className={'ms-2 btn-main-trp'} onClick={handleClose}>
+              Закрыть
+            </Button>
+          </Modal.Body>
+        </Modal>
+      )}
       {status == 0 && (
         <Modal centered show={show} onHide={handleClose}>
           <Modal.Header closeButton>
