@@ -1,4 +1,5 @@
 import { IMessageModel } from 'app/models';
+import { sanitize } from 'libs/functions';
 import React, { Fragment } from 'react';
 
 export const MessageItem = ({ message }: { message: IMessageModel }) => {
@@ -21,7 +22,9 @@ export const MessageItem = ({ message }: { message: IMessageModel }) => {
             </div>
             <div className={`message__main message-main`}>
               <div className={`message-main__text`}>
-                <p className='text-break'>{message.message}</p>
+                <p
+                  className='text-break'
+                  dangerouslySetInnerHTML={sanitize(message.message)}></p>
               </div>
             </div>
           </div>

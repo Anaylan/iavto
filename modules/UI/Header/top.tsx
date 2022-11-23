@@ -2,13 +2,15 @@ import Link from 'next/link';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
-import { getUserByToken } from 'api/User';
-import { ILink, UserModel } from 'app/models';
-import * as auth from 'app/redux/reducers/authReducer';
+import { ILink, UserDataModel } from 'app/models';
+
 import { User } from 'assets/icon/icons';
 
 import { HeaderMenu, SearchInput } from 'modules/UI';
 import { useDispatch, useSelector } from 'react-redux';
+
+import * as auth from 'app/redux/reducers/authReducer';
+import { useRouter } from 'next/router';
 
 // import {Button} from '../buttons/Button'
 
@@ -54,16 +56,17 @@ export const HeaderTopLink: React.FC<Children> = ({
 
 export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
   const button: React.RefObject<any> = useRef();
+  const router = useRouter();
 
   const dispatch = useDispatch();
 
   const [active, setActive] = useState<boolean>(false);
 
-  const token = useSelector(
-    ({ header }: { header: auth.IAuthState }) => header.title,
+  const authentif = useSelector(
+    ({ header }: { header: auth.IAuthState }) => header.user,
   );
 
-  const [user, setUser] = useState<UserModel>({ status: 403, data: null });
+  const [user, setUser] = useState<UserDataModel>();
 
   const onClick = () => {
     setActive(!active);
@@ -78,16 +81,12 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
   };
 
   useEffect(() => {
-    getUserByToken().then(({ data }: { data: UserModel }) => {
-      if (data.status !== 403) {
-        setUser(data);
-      } else {
-        if (token) {
-          dispatch(auth.actions.logout());
-        }
-      }
-    });
-  }, [dispatch, token]);
+    if (authentif) {
+      setUser(authentif);
+    } else {
+      setUser(undefined);
+    }
+  }, [dispatch, authentif, router]);
 
   // useChange(token, ()=>{
   //   getUserByToken().then(({ data }: { data: UserModel }) => {
@@ -150,10 +149,8 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                         {link.children}
                       </HeaderTopLink>
                     ))}
-                    {user.status === 201 ? (
-                      <HeaderTopLink
-                        href={'/profile'}
-                        title={user.data?.firstname}>
+                    {user?.firstname ? (
+                      <HeaderTopLink href={'/profile'} title={user.firstname}>
                         <User />
                       </HeaderTopLink>
                     ) : (
@@ -169,7 +166,7 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
         </Container>
       </Col>
       {/*Рендерить на мобилке*/}
-      {active ? <HeaderMenu onClick={onClick} user={user.data} /> : null}
+      {active ? <HeaderMenu onClick={onClick} user={user} /> : null}
     </>
   );
 });

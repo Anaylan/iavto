@@ -17,6 +17,13 @@
   }
 }
 
+.chat__want {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
 @media (max-width: 991px) {
   .messenger {
     border: none;

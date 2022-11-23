@@ -17,7 +17,26 @@ import 'assets/sass/globals.scss';
 import { PersistGate } from 'redux-persist/integration/react';
 
 export default function MyApp({ Component, ...rest }: AppProps) {
-  console.log('%cНе лезьте сюда пожалуйста', 'font-size: 45px; color:blue');
+  console.log(
+    '%cСтоп-стоп-стоп!',
+    '-webkit-text-stroke: 2px black; color: #06799F !important; font-size: 45px; font-weight: bold',
+  );
+  console.log(
+    '%cЕсли вас попросили скопировать/вставить что-то сюда, 11 шансов из 10, что вы жертва мошенников.',
+    'font-size: 20px;',
+  );
+  console.log(
+    '%cВвод сюда информации может дать мошенникам доступ к вашей учётной записи ЯАВТО.РФ',
+    'font-size: 15px; color: red',
+  );
+  console.log(
+    '%cЕсли вы не до конца уверены в том, что вы делаете, лучше закройте это окно и оставайтесь в безопасности.',
+    'font-size: 15px;',
+  );
+  console.log(
+    '%cЕсли вы действительно понимаете, что делаете, то приходите к нам работать ',
+    'font-size: 15px;',
+  );
   const { store, props }: any = wrapper.useWrappedStore(rest);
   setupAxios(axiosAuth, store);
   setupRegion(axios, store);

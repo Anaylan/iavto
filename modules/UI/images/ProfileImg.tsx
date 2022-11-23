@@ -1,20 +1,26 @@
-import { requestSendImg } from 'api/User';
+import { getUserByToken, requestSendImg } from 'api/User';
 import { URL_IMG } from 'app/config';
 import Image from 'next/image';
-import { ChangeEvent, FC, useEffect, useRef } from 'react';
+import { ChangeEvent } from 'react';
+import * as auth from 'app/redux/reducers/authReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserDataModel } from 'app/models';
 
-interface IImg {
-  avatar: string | undefined;
-  id: number;
-}
-
-export const ProfileImg: FC<IImg> = ({ avatar, id }) => {
+export const ProfileImg = () => {
+  const dispatch = useDispatch();
+  const user: UserDataModel = useSelector(
+    ({ header }: { header: UserDataModel }) => header.user,
+  );
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files![0]) {
       const formData = new FormData();
       formData.append('file', e.target.files![0]);
       requestSendImg(formData).then(({ data }) => {
-        data;
+        getUserByToken().then(({ data }) => {
+          if (data.data) {
+            dispatch(auth.actions.fulfillUser(data.data));
+          }
+        });
       });
     }
   };
@@ -34,8 +40,8 @@ export const ProfileImg: FC<IImg> = ({ avatar, id }) => {
               <Image
                 fill
                 src={
-                  avatar
-                    ? URL_IMG + '/img/uid/' + id + '/' + avatar
+                  user.avatar
+                    ? URL_IMG + '/img/uid/' + user.id + '/' + user.avatar
                     : '/media/user-bg.png'
                 }
                 alt='Аватар пользователя'

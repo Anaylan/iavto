@@ -13,6 +13,7 @@ import { Review } from '../reviews/Review';
 import { useFormik } from 'formik';
 import { countAndFormatMonth } from 'libs/functions';
 import { EmptyComponent } from 'modules/elements';
+import { sendMessage } from 'api/Chat';
 
 export const TabCars = () => {
   const [cars, setCars] = useState<ICarModel[]>([]);
@@ -171,12 +172,18 @@ export const TabReviews = ({ id }: { id: string }) => {
 };
 
 export const TabFeedback = ({ id }: { id: string }) => {
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       text: '',
     },
     onSubmit: (values) => {
-      console.log(values);
+      sendMessage(id, values.text).then(({ data }) => {
+        console.log(data);
+        if (data) {
+          router.push(`/chat?dialog=${data}`);
+        }
+      });
     },
   });
   return (

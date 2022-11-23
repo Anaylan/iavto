@@ -95,7 +95,7 @@ export const verifSchema = Yup.object().shape({
   pass_place: Yup.string().required(
     'Поле кем выдан обязательно для заполнения',
   ),
-  pass_date: Yup.string().required('Дата выдачи обязательна для заполнения'),
+  pass_date: Yup.date().required('Дата выдачи обязательна для заполнения'),
   subdivision: Yup.string().required(
     'Код подразделения обязателен для заполнения',
   ),
@@ -183,6 +183,9 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
     onSubmit(values) {
       requestVerification(values).then(({ data }) => {
         console.log(data);
+        if (Boolean(data) == true) {
+          window.location.reload();
+        }
       });
     },
     validationSchema: verifSchema,
@@ -418,7 +421,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
                 <FormInputWithoutLabel
-                  type='text'
+                  type='date'
                   id='pass_date'
                   placeholder='Как в паспорте'
                   onChange={formik.handleChange}

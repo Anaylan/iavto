@@ -46,15 +46,15 @@ export const registrationSchema = Yup.object().shape({
     .max(50, 'Фамилия: Максимум 50 символов')
     .required('Фамилия обязательна для заполнения'),
   phone: Yup.string()
-    .min(16, 'Номер телефона: Минимум 16 символов')
-    .max(16, 'Номер телефона: Максимум 16 символов')
+    .min(16, 'Номер телефона обязателен для заполнения')
+    .max(16, 'Номер телефона обязателен для заполнения')
     .required('Номер телефона обязателен для заполнения'),
   password: Yup.string()
     .required('Пароль обязателен для заполнения')
-    .matches(/[0-9]/, 'Password requires a number')
-    .matches(/[a-z]/, 'Password requires a lowercase letter')
-    .matches(/[A-Z]/, 'Password requires an uppercase letter')
-    .matches(/[^\w]/, 'Password requires a symbol'),
+    .matches(/[0-9]/, 'Пароль требует минимум 1 цирфу')
+    .matches(/[a-z]/, 'Пароль требует минимум 1 прописную букву')
+    .matches(/[A-Z]/, 'Пароль требует минимум 1 заглавную букву')
+    .matches(/[^\w]/, 'Пароль требует минимум 1 спец. символ'),
   terms: Yup.bool().oneOf(
     [true],
     'Для регистрации вы должны принять пользовательское соглашение',
@@ -88,7 +88,6 @@ export const Register: React.FC<UserModel> = () => {
       phone: '+7 ',
       terms: false,
     },
-    validationSchema: registrationSchema,
     onSubmit: (values) => {
       setLoading(true);
       register(
@@ -115,6 +114,7 @@ export const Register: React.FC<UserModel> = () => {
           console.log(err);
         });
     },
+    validationSchema: registrationSchema,
   });
 
   return (
@@ -148,7 +148,7 @@ export const Register: React.FC<UserModel> = () => {
                     onChange={formik.handleChange}
                     className={
                       '' +
-                      (formik.touched.email && !formik.errors.email
+                      (!formik.errors.email
                         ? 'form-control is-valid'
                         : 'is-invalid form-control form-control-lg form-control-solid')
                     }
@@ -165,7 +165,7 @@ export const Register: React.FC<UserModel> = () => {
                     onChange={formik.handleChange}
                     className={
                       '' +
-                      (formik.touched.firstname && !formik.errors.firstname
+                      (!formik.errors.firstname
                         ? 'form-control is-valid'
                         : 'is-invalid form-control form-control-lg form-control-solid')
                     }
@@ -182,7 +182,7 @@ export const Register: React.FC<UserModel> = () => {
                     onChange={formik.handleChange}
                     className={
                       '' +
-                      (formik.touched.lastname && !formik.errors.lastname
+                      (!formik.errors.lastname
                         ? 'form-control is-valid'
                         : 'is-invalid form-control form-control-lg form-control-solid')
                     }
@@ -202,7 +202,7 @@ export const Register: React.FC<UserModel> = () => {
                     onChange={formik.handleChange}
                     className={
                       '' +
-                      (formik.touched.phone && !formik.errors.phone
+                      (!formik.errors.phone
                         ? 'form-control is-valid'
                         : 'is-invalid form-control form-control-lg form-control-solid')
                     }
@@ -219,7 +219,7 @@ export const Register: React.FC<UserModel> = () => {
                     onChange={formik.handleChange}
                     className={
                       '' +
-                      (formik.touched.password && !formik.errors.password
+                      (!formik.errors.password
                         ? 'form-control is-valid'
                         : 'is-invalid form-control form-control-lg form-control-solid')
                     }

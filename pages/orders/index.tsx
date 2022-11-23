@@ -6,23 +6,11 @@ import { Fragment, useEffect, useState } from 'react';
 import { getUserOrders } from 'api/Orders';
 import { OrderCard } from 'modules/elements';
 import { IOrderModel } from 'app/models/order/Order';
-import { SearchBlock, SearchItem, PriceFromTo } from 'modules/templates';
-import {
-  SearchMainRow,
-  SearchAdditonalRow,
-  SearchAdditionalCol,
-  SearchSelectOption,
-  SearchSelect,
-  Button,
-  FilterInput,
-} from 'modules/UI';
-import {
-  FilterRadioGroup,
-  FilterRadioItem,
-} from 'modules/UI/radio/FilterRadio';
-import { useFormik } from 'formik';
+
 import { useRouter } from 'next/router';
-import { getCarFilters } from 'api/Filter';
+
+import { UserDataModel } from 'app/models';
+import { useSelector } from 'react-redux';
 
 interface IMark {
   mark: string;
@@ -55,12 +43,21 @@ export default function Orders() {
   const [models, setModel] = useState<IModel[]>([]);
   const router = useRouter();
 
+  const user = useSelector(
+    ({ header }: { header: UserDataModel }) => header.user,
+  );
+
   useEffect(() => {
-    getUserOrders(router.query).then(({ data }: { data: IOrderModel[] }) => {
-      setOrders(data);
-      console.log(data);
-    });
-  }, [router]);
+    console.log(user);
+    if (user) {
+      getUserOrders(router.query).then(({ data }: { data: IOrderModel[] }) => {
+        setOrders(data);
+        console.log(data);
+      });
+    } else {
+      router.push('/auth/signin');
+    }
+  }, [router, user]);
 
   return (
     <>

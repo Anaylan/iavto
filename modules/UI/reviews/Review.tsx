@@ -14,7 +14,11 @@ export const Review = ({ review }: { review: IReviewDataModel }) => {
               <Image
                 src={
                   review.user_avatar
-                    ? URL_IMG + 'users/' + review.user_avatar
+                    ? URL_IMG +
+                      '/img/uid/' +
+                      review.uid +
+                      '/' +
+                      review.user_avatar
                     : '/media/user-bg.png'
                 }
                 width={100}

@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "dev": "node --trace-warnings server.js",
+    "dev": "node --trace-warnings serv.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

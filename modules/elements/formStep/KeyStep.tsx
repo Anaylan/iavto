@@ -30,7 +30,7 @@ export const KeyStep = ({
     onSubmit: (values) => {
       requestPassword(token, values.key)
         .then(({ data }) => {
-          if (data) {
+          if (Boolean(data) == true) {
             setCode(values.key);
             console.log(data);
             setStep(step + 1);

@@ -13,4 +13,7 @@ export interface IOrderModel {
   status: number;
   uid: number;
   year: number;
+  from_time: number;
+  to_time: number;
+  order_date: string;
 }

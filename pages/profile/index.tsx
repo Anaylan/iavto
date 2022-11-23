@@ -68,12 +68,18 @@ const Profile = () => {
         if (data.status === 403) {
           router.push('/auth/signin');
         }
-        if (user.id == data.data?.id) {
-          setProfile(data);
+        if (data.data) {
+          if (user.id == data.data?.id) {
+            setProfile(data);
+
+            dispatch(auth.actions.fulfillUser(data.data));
+          } else {
+            dispatch(auth.actions.logout());
+            router.push('/');
+          }
         } else {
           dispatch(auth.actions.logout());
           router.push('/');
-          console.log(data);
         }
       })
       .catch((err) => {
@@ -95,7 +101,7 @@ const Profile = () => {
     getCompaniesCount().then(({ data }) => {
       setCompanyCount(data);
     });
-  }, [user, dispatch, router]);
+  }, [router]);
 
   return (
     <>

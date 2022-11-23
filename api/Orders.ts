@@ -4,6 +4,7 @@ import { IOrderModel } from 'app/models';
 
 export const GET_USER_ORDERS = `${API_URL}/order/user`;
 export const GET_ORDER_CANCEL = `${API_URL}/order/cancel`;
+export const SET_ORDER_TIME = `${API_URL}/order/set_time`;
 
 // Server should return AuthModel
 export async function getUserOrders(options: any) {
@@ -14,4 +15,10 @@ export async function getUserOrders(options: any) {
 
 export async function orderCancel(id: number) {
   return axiosAuth.get(GET_ORDER_CANCEL, { params: { id: id } });
+}
+
+export async function orderTime(id: number, time: string) {
+  return axiosAuth
+    .post(SET_ORDER_TIME, { id: id, time: time })
+    .then((response) => console.log(response));
 }

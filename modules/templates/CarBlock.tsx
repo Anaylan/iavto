@@ -104,7 +104,7 @@ export function CarItem({
                   priority={false}
                   fill
                   sizes={'100%'}
-                  src={URL_IMG + `/` + car.cid + `/` + car.img![0]}
+                  src={URL_IMG + `/img/cid/` + car.cid + `/` + car.img![0]}
                   alt={`${car.mark} ${car.model}`}
                 />
               </Link>

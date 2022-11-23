@@ -9,10 +9,11 @@ import {
   Button,
 } from 'modules/UI';
 import { Col, Container, Form, Row } from 'react-bootstrap';
-import { requestEdit } from 'api/User';
+import { getUserByToken, requestEdit } from 'api/User';
 import * as Yup from 'yup';
 import { useState } from 'react';
-
+import { useDispatch } from 'react-redux';
+import * as auth from 'app/redux/reducers/authReducer';
 const phoneNumberMask = [
   '+',
   '7',
@@ -45,7 +46,7 @@ export const editSchema = Yup.object().shape({
 
 export const EditInfo = ({ user }: { user: UserDataModel }) => {
   const [error, setError] = useState<string>();
-
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       firstname: user.firstname,
@@ -56,7 +57,11 @@ export const EditInfo = ({ user }: { user: UserDataModel }) => {
     validationSchema: editSchema,
     onSubmit(values) {
       requestEdit({ ...values }).then(({ data }) => {
-        console.log(data);
+        getUserByToken().then(({ data }) => {
+          if (data.data) {
+            dispatch(auth.actions.fulfillUser(data.data));
+          }
+        });
         if (data.message) {
           setError(data.message);
         }
@@ -71,7 +76,7 @@ export const EditInfo = ({ user }: { user: UserDataModel }) => {
             Информация профиля
           </h1>
           <Col xs={12} sm={5} md={4}>
-            <ProfileImg id={user.id} avatar={user.avatar} />
+            <ProfileImg />
           </Col>
           <Col xs={12} md={8} sm={7}>
             <div className={'info-profile__body'}>

@@ -113,7 +113,7 @@ export default function Cars() {
         <Container>
           <SearchBlock
             title='Поиск автомобилей'
-            subtitle='Более 10 800 проверенных автомобилей'
+            subtitle='Множество проверенных автомобилей'
             onSubmit={formik.handleSubmit}>
             <SearchMainRow>
               <SearchItem

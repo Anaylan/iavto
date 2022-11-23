@@ -18,7 +18,7 @@ export interface UserDataModel {
 }
 
 export interface UserModel {
-  data?: UserDataModel | null;
+  data: UserDataModel | null;
   status: number;
   token?: string | undefined;
   message?: string;

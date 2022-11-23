@@ -62,7 +62,9 @@ export default function Carpark({ autopark }: { autopark: ICarparkModel }) {
               <div className={`carpark__intro carpark-intro`}>
                 <Image
                   className={'carpark-intro__banner'}
-                  src={URL_IMG + autopark.cid + '/' + autopark.banner}
+                  src={
+                    URL_IMG + '/img/cid/' + autopark.cid + '/' + autopark.banner
+                  }
                   fill
                   alt={autopark.company_name ? autopark.company_name : ''}
                 />
@@ -70,7 +72,9 @@ export default function Carpark({ autopark }: { autopark: ICarparkModel }) {
                 <CarparkCard
                   alt={autopark.company_name}
                   tarif={autopark.tarif}
-                  src={URL_IMG + autopark.cid + '/' + autopark.img}
+                  src={
+                    URL_IMG + '/img/cid/' + autopark.cid + '/' + autopark.img
+                  }
                   title={autopark.company_name}
                   sold={autopark.count_product}
                 />

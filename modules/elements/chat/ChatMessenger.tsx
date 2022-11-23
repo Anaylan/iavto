@@ -2,25 +2,28 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { ArrowLeft } from 'assets/icon/icons';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { IMessageModel } from 'app/models';
+import { IDialogModel, IMessageModel } from 'app/models';
 import { MessageItem } from 'modules/UI';
+import { URL_IMG } from 'app/config';
 
 export const ChatMessenger = ({
   messages,
   status,
   init,
   setShowDialog,
+  activeDialog,
 }: {
   messages: MessageEvent[];
   status: string;
   init: IMessageModel[];
   setShowDialog: React.Dispatch<React.SetStateAction<boolean>>;
+  activeDialog: IDialogModel;
 }) => {
   const [data, setData] = useState<IMessageModel[]>([]);
   const [id, setId] = useState<number>();
   const router = useRouter();
   const messageRef = useRef<HTMLDivElement>(null);
-  // console.log(messages);
+  console.log(activeDialog);
   useEffect(() => {
     if (id != router.query.dialog) {
       setData([]);
@@ -64,12 +67,27 @@ export const ChatMessenger = ({
             </button>
             <a className={`messenger-header__user`} href='#'>
               <span className={`messenger-header__img`}>
-                <Image width={100} height={100} src='/media/user.png' alt='' />
+                {activeDialog ? (
+                  <Image
+                    width={100}
+                    height={100}
+                    src={
+                      URL_IMG +
+                      '/img/cid/' +
+                      activeDialog.cid +
+                      '/' +
+                      activeDialog.company_img
+                    }
+                    alt=''
+                  />
+                ) : null}
               </span>
-              <span className={`messenger-header__username`}>Поменять</span>
+              <span className={`messenger-header__username`}>
+                {activeDialog && activeDialog.company_name}
+              </span>
             </a>
           </div>
-          <p>{status}</p>
+          {/* <p>{status}</p> */}
           <button className='btn-param' type='button'>
             <span></span>
           </button>

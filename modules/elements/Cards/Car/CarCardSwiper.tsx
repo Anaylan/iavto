@@ -43,7 +43,7 @@ export const CarCardSwiper: React.FC<ICarCardSwiper> = ({ images, cid }) => {
             <div className={'car-slider__img'}>
               <Image
                 sizes={'100%'}
-                src={URL_IMG + '/img/pid/' + cid + '/' + image}
+                src={URL_IMG + '/img/cid/' + cid + '/' + image}
                 fill
                 priority={true}
                 alt='изображение автомобиля'
@@ -70,7 +70,7 @@ export const CarCardSwiper: React.FC<ICarCardSwiper> = ({ images, cid }) => {
             <div className={'car-mini-slider__img'}>
               <Image
                 sizes={'100%'}
-                src={URL_IMG + '/img/pid/' + cid + '/' + image}
+                src={URL_IMG + '/img/cid/' + cid + '/' + image}
                 width={100}
                 priority={false}
                 height={100}

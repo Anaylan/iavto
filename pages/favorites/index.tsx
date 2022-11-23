@@ -2,7 +2,7 @@ import { getUserFavor } from 'api/User';
 import { useEffect, useState } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, A11y, Autoplay } from 'swiper';
+import { Pagination, A11y, Autoplay } from 'swiper';
 import { TITLE } from 'app/config';
 import { IFavoritesModel } from 'app/models/favorite/Favorites';
 import { CarItem } from 'modules/templates/CarBlock';
@@ -11,30 +11,28 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import * as auth from 'app/redux/reducers/authReducer';
-import Image from 'next/link';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState<IFavoritesModel | null>(null);
   const router = useRouter();
-  const token = useSelector(
-    ({ header }: { header: auth.IAuthState }) => header.title,
+  const authen = useSelector(
+    ({ header }: { header: auth.IAuthState }) => header.user,
   );
 
   useEffect(() => {
-    if (!token) {
-      console.log(token);
+    if (!authen) {
       router.push('/auth/signin');
     }
-  }, [token, router]);
+  }, [authen, router]);
 
   useEffect(() => {
     getUserFavor().then(({ data }) => {
       setFavorites(data);
     });
   }, []);
-  console.log(favorites);
 
   // TODO: Обновление получаемых данных
   // const [isLoading, Errors] = useFetch(() => {
@@ -66,30 +64,31 @@ export default function Favorites() {
         <Container>
           <h1 className='title'>Автопарки</h1>
           <div className='carparks__body'>
-            <Swiper
-              modules={[Pagination, A11y, Autoplay]}
-              spaceBetween={24}
-              grabCursor={true}
-              slidesPerView={1}
-              loop={favorites ? favorites?.company.length > 5 : false}
-              autoplay={{ delay: 5000, disableOnInteraction: false }}
-              className={'carparks-slider__container'}
-              pagination={{ clickable: true, dynamicBullets: true }}
-              breakpoints={{
-                576: {
-                  slidesPerView: 2,
-                  spaceBetween: 24,
-                },
-                768: {
-                  slidesPerView: 4,
-                  spaceBetween: 24,
-                },
-                992: {
-                  slidesPerView: 5,
-                  spaceBetween: 22,
-                },
-              }}>
-              {/* {Array(10)
+            {favorites && (
+              <Swiper
+                modules={[Pagination, A11y, Autoplay]}
+                spaceBetween={24}
+                grabCursor={true}
+                slidesPerView={1}
+                loop={favorites ? favorites?.company.length > 5 : false}
+                autoplay={{ delay: 5000, disableOnInteraction: false }}
+                className={'carparks-slider__container'}
+                pagination={{ clickable: true, dynamicBullets: true }}
+                breakpoints={{
+                  576: {
+                    slidesPerView: 2,
+                    spaceBetween: 24,
+                  },
+                  768: {
+                    slidesPerView: 4,
+                    spaceBetween: 24,
+                  },
+                  992: {
+                    slidesPerView: 5,
+                    spaceBetween: 22,
+                  },
+                }}>
+                {/* {Array(10)
                 .fill(1, 1, 20)
                 .map((item, key) => (
                   <SwiperSlide key={key}>
@@ -101,13 +100,14 @@ export default function Favorites() {
                     />
                   </SwiperSlide>
                 ))} */}
-              {favorites &&
-                favorites.company.map((company, key: number) => (
+
+                {favorites.company.map((company, key: number) => (
                   <SwiperSlide key={key}>
                     <CarparkItem lazy={true} carPark={company} />
                   </SwiperSlide>
                 ))}
-            </Swiper>
+              </Swiper>
+            )}
           </div>
         </Container>
       </section>

@@ -8,14 +8,28 @@ import { getUserReviews } from 'api/Review';
 import { IReviewDataModel, IReviewModel } from 'app/models';
 import { Load } from 'assets/icon/icons';
 
+import { useRouter } from 'next/router';
+
+import { UserDataModel } from 'app/models';
+import { useSelector } from 'react-redux';
 export default function Reviews() {
   const [reviews, setReviews] = useState<IReviewDataModel[]>();
   const [isLoading, errors] = useFetch(() => {
-    getUserReviews().then(({ data }: { data: IReviewDataModel[] }) => {
-      setReviews(data);
-      console.log(data);
-    });
+    if (user) {
+      getUserReviews().then(({ data }: { data: IReviewDataModel[] }) => {
+        setReviews(data);
+        console.log(data);
+      });
+    } else {
+      router.push('/auth/signin');
+    }
   });
+  const router = useRouter();
+
+  const user = useSelector(
+    ({ header }: { header: UserDataModel }) => header.user,
+  );
+
   return (
     <>
       <Head>

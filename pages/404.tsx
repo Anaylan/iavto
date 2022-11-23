@@ -9,7 +9,11 @@ export default function Custom404() {
       </Head>
       <section>
         <div className='d-flex align-items-center h-max justify-content-center'>
-          <h1 className='display-1 fw-bold text-black'>
+          <h1
+            className='display-1 fw-bold text-black'
+            style={{
+              WebkitTextStroke: '1px blue ',
+            }}>
             404 - Страница не найдена
           </h1>
         </div>

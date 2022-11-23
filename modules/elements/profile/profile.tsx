@@ -287,7 +287,7 @@ export const ProfileOrders = ({ data }: { data: number }) => {
         </div>
         <div className={`profile__bottom profile-bottom`}>
           <div className={'profile__subtitle'}>
-            <span className={'profile__value'}>{data}</span>завершенных заказов
+            <span className={'profile__value'}>{data}</span> заказов
           </div>
         </div>
       </Link>

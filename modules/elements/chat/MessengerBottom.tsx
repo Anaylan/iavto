@@ -1,6 +1,6 @@
 import { PaperClip, Send } from 'assets/icon/icons';
 import { sanitize } from 'libs/functions';
-import { ButtonHTMLAttributes, useEffect } from 'react';
+import { ButtonHTMLAttributes, useEffect, useState } from 'react';
 import { forwardRef } from 'react';
 
 interface IChildProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,6 +8,8 @@ interface IChildProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const MessengerBottom = forwardRef<any, IChildProps>((props, ref) => {
+  const [message, setMessage] = useState<string>('');
+
   return (
     <div className={`messenger__bottom messenger-bottom`}>
       <form
@@ -24,6 +26,8 @@ export const MessengerBottom = forwardRef<any, IChildProps>((props, ref) => {
           <div className={`messenger-bottom__message`}>
             <div
               id='message'
+              inputMode={'text'}
+              spellCheck={true}
               ref={ref}
               className={`messenger-bottom__input text-break`}
               contentEditable='true'

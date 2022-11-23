@@ -5,7 +5,12 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { getUserByToken } from 'api/User';
+import { UserModel } from 'app/models';
+
 import * as ref from 'app/redux/reducers/referralReducer';
+import * as auth from 'app/redux/reducers/authReducer';
 
 type Props = {
   children?: React.ReactNode;
@@ -25,6 +30,9 @@ const MasterLayout: React.FC<Props> = ({ children }) => {
   const [showFooter, setShowFooter] = useState(true);
   const dispatch = useDispatch();
 
+  const token = useSelector(
+    ({ header }: { header: auth.IAuthState }) => header.title,
+  );
   const expired = useSelector(
     ({ referral }: { referral: ref.IReferralState }) => referral.expired,
   );
@@ -46,7 +54,15 @@ const MasterLayout: React.FC<Props> = ({ children }) => {
         !router.pathname.includes('/invite') &&
         !router.pathname.includes('/chat'),
     );
-  }, [router]);
+
+    getUserByToken().then(({ data }: { data: UserModel }) => {
+      if (!data.data) {
+        if (token) {
+          dispatch(auth.actions.logout());
+        }
+      }
+    });
+  }, [dispatch, expired, router, token]);
   return (
     <>
       {showHeader ? (
