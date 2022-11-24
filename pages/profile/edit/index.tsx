@@ -21,7 +21,6 @@ const EditProfile = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
       });
   }, []);
 

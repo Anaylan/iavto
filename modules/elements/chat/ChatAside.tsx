@@ -1,7 +1,6 @@
 import { IDialogModel, IMessageModel } from 'app/models';
 import { SearchInput } from 'modules/UI';
 import { MessageAside } from 'modules/UI/message/MessageAside';
-import Image from 'next/image';
 
 export const ChatAside = ({
   dialogs,

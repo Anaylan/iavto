@@ -14,6 +14,7 @@ import * as auth from 'app/redux/reducers/authReducer';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { EmptyComponent } from 'modules/elements';
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState<IFavoritesModel | null>(null);
@@ -64,31 +65,33 @@ export default function Favorites() {
         <Container>
           <h1 className='title'>Автопарки</h1>
           <div className='carparks__body'>
-            {favorites && (
-              <Swiper
-                modules={[Pagination, A11y, Autoplay]}
-                spaceBetween={24}
-                grabCursor={true}
-                slidesPerView={1}
-                loop={favorites ? favorites?.company.length > 5 : false}
-                autoplay={{ delay: 5000, disableOnInteraction: false }}
-                className={'carparks-slider__container'}
-                pagination={{ clickable: true, dynamicBullets: true }}
-                breakpoints={{
-                  576: {
-                    slidesPerView: 2,
-                    spaceBetween: 24,
-                  },
-                  768: {
-                    slidesPerView: 4,
-                    spaceBetween: 24,
-                  },
-                  992: {
-                    slidesPerView: 5,
-                    spaceBetween: 22,
-                  },
-                }}>
-                {/* {Array(10)
+            {favorites ? (
+              <>
+                {favorites.company.length > 0 ? (
+                  <Swiper
+                    modules={[Pagination, A11y, Autoplay]}
+                    spaceBetween={24}
+                    grabCursor={true}
+                    slidesPerView={1}
+                    loop={favorites ? favorites?.company.length > 5 : false}
+                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    className={'carparks-slider__container'}
+                    pagination={{ clickable: true, dynamicBullets: true }}
+                    breakpoints={{
+                      576: {
+                        slidesPerView: 2,
+                        spaceBetween: 24,
+                      },
+                      768: {
+                        slidesPerView: 4,
+                        spaceBetween: 24,
+                      },
+                      992: {
+                        slidesPerView: 5,
+                        spaceBetween: 22,
+                      },
+                    }}>
+                    {/* {Array(10)
                 .fill(1, 1, 20)
                 .map((item, key) => (
                   <SwiperSlide key={key}>
@@ -101,12 +104,20 @@ export default function Favorites() {
                   </SwiperSlide>
                 ))} */}
 
-                {favorites.company.map((company, key: number) => (
-                  <SwiperSlide key={key}>
-                    <CarparkItem lazy={true} carPark={company} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+                    {favorites.company.map((company, key: number) => (
+                      <SwiperSlide key={key}>
+                        <CarparkItem lazy={true} carPark={company} />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                ) : (
+                  <EmptyComponent />
+                )}
+              </>
+            ) : (
+              <>
+                <EmptyComponent />
+              </>
             )}
           </div>
         </Container>
@@ -114,10 +125,19 @@ export default function Favorites() {
       <section className={'cars'}>
         <Container>
           <h2 className='title'>Автомобили</h2>
-          {favorites &&
-            favorites.car.map((car, key: number) => (
-              <CarItem car={car} key={key} />
-            ))}
+          {favorites ? (
+            <>
+              {favorites.car.length ? (
+                favorites.car.map((car, key: number) => (
+                  <CarItem car={car} key={key} />
+                ))
+              ) : (
+                <EmptyComponent />
+              )}
+            </>
+          ) : (
+            <EmptyComponent />
+          )}
         </Container>
       </section>
     </>

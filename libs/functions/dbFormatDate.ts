@@ -61,3 +61,19 @@ export function countAndFormatMonth(dbDate: string | undefined) {
     }
   }
 }
+
+export function dbFormatChatDate(dbDate: string | undefined, month: object) {
+  if (dbDate) {
+    let date: string | string[] = dbDate.slice(5, 10);
+    let time: string | any[] = dbDate.slice(11, 16);
+    date = date.split('-');
+    time = time.split(':');
+    date[1][0] === '0' && (date[2] = date[2][1]);
+    date[0] = month[date[0] as keyof object];
+    time[0] = Number(time[0]) - (new Date().getTimezoneOffset() + 180) / 60;
+    date = date.reverse();
+    return `${date.join(' ')} ${time[0]}:${time[1]}`;
+  } else {
+    return '';
+  }
+}

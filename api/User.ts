@@ -18,6 +18,7 @@ export const REQUEST_EDIT_URL = `${API_URL}/user/edit`;
 // favorite
 export const REQUEST_TO_FAVOR = `${API_URL}/user/addfavorites`;
 export const GET_FAVOR = `${API_URL}/user/getfavorites`;
+export const REMOVE_FAVOR = `${API_URL}/user/delfavorites`;
 
 // count
 export const GET_COMPANIES_COUNT = `${API_URL}/user/getcountfavoritescarpark`;
@@ -126,6 +127,14 @@ export async function requestSendImg(options: any) {
   return axiosAuth.post(REQUEST_IMG_URL, options, {
     headers: {
       'Content-Type': 'multipart/form-data',
+    },
+  });
+}
+
+export function requestDelFromFavor(id: number) {
+  return axiosAuth.get<IFavoritesModel>(REMOVE_FAVOR, {
+    params: {
+      id_content: id,
     },
   });
 }

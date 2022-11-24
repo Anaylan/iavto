@@ -12,4 +12,5 @@ export interface IDialogModel {
   hash: string;
   dialogId: number;
   message: string;
+  new_msg?: number;
 }

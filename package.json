@@ -27,13 +27,11 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.4",
     "react-text-mask": "^5.5.0",
-    "react-use-websocket": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.1",
     "sass": "^1.55.0",
     "swiper": "^8.4.4",
-    "websocket": "^1.0.34",
     "xss": "^1.0.14",
     "yup": "^0.32.11"
   },

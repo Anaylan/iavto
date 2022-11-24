@@ -41,7 +41,6 @@ export const TabProfile = ({
 }: {
   carpark: ICarparkModel | undefined;
 }) => {
-  console.log(carpark);
   return (
     <>
       <h2 className='carpark-profile__title title'>Профиль автопарка</h2>
@@ -113,7 +112,6 @@ export const TabReviews = ({ id }: { id: string }) => {
   useEffect(() => {
     getCompanyReviews(id).then(({ data }) => {
       setReviews(data);
-      console.log(data);
     });
   }, [id]);
 
@@ -179,7 +177,6 @@ export const TabFeedback = ({ id }: { id: string }) => {
     },
     onSubmit: (values) => {
       sendMessage(id, values.text).then(({ data }) => {
-        console.log(data);
         if (data) {
           router.push(`/chat?dialog=${data}`);
         }

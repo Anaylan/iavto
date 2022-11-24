@@ -9,8 +9,7 @@ import {
   YandexZen,
   Youtube,
 } from 'assets/icon/icons';
-import { useAccordionButton } from 'react-bootstrap';
-import { totalmem } from 'os';
+
 import Collapse from 'react-bootstrap/Collapse';
 
 const Footer: React.FC = () => {
@@ -20,9 +19,7 @@ const Footer: React.FC = () => {
     carpark: false,
     parthner: false,
   });
-  const accordion = useAccordionButton(eventKey, () => {
-    console.log(totalmem);
-  });
+
   return (
     <footer className='footer' id='footer'>
       <div className='container'>

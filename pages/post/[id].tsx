@@ -21,9 +21,7 @@ export async function getServerSideProps({ params }: any) {
 export default function Post({ post }: { post: IPostModel }) {
   // console.log(post);
   useEffect(() => {
-    requestViewPost(post.id).then(({ data }) => {
-      console.log(data);
-    });
+    requestViewPost(post.id).then(({ data }) => {});
   }, [post]);
   return (
     <>

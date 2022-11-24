@@ -12,13 +12,13 @@ import { useRouter } from 'next/router';
 
 import { UserDataModel } from 'app/models';
 import { useSelector } from 'react-redux';
+import { EmptyComponent } from 'modules/elements';
 export default function Reviews() {
   const [reviews, setReviews] = useState<IReviewDataModel[]>();
   const [isLoading, errors] = useFetch(() => {
     if (user) {
       getUserReviews().then(({ data }: { data: IReviewDataModel[] }) => {
         setReviews(data);
-        console.log(data);
       });
     } else {
       router.push('/auth/signin');
@@ -41,10 +41,19 @@ export default function Reviews() {
             <div className={'carpark-reviews__body'}>
               <h2 className={`carpark-reviews__title title`}>Мои отзывы</h2>
               <Row>
-                {reviews &&
-                  reviews.map((review: IReviewDataModel, index: number) => (
-                    <ReviewCard review={review} key={index} />
-                  ))}
+                {reviews ? (
+                  <>
+                    {reviews.length > 0 ? (
+                      reviews.map((review: IReviewDataModel, index: number) => (
+                        <ReviewCard review={review} key={index} />
+                      ))
+                    ) : (
+                      <EmptyComponent />
+                    )}
+                  </>
+                ) : (
+                  <EmptyComponent />
+                )}
               </Row>
             </div>
             {isLoading ? <Load /> : null}

@@ -98,10 +98,11 @@ export const ProfileDescription = ({
   const [prevDescr, setPrevDescr] = useState('');
 
   const handleClose = () => {
-    requestEdit({ prevDescr }).then(({ data }) => {
-      console.log(data);
-    });
+    requestEdit({ prevDescr });
     setShow(false);
+
+    // Так не делать, ПЕРЕПИСАТЬ
+    window.location.reload();
   };
   const handleShow = () => setShow(true);
 
@@ -178,7 +179,6 @@ export const ProfileBalance = ({
       handleCloseCheck();
       setToken('');
       setValue('');
-      console.log(data);
     });
   };
 

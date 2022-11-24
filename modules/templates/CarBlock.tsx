@@ -28,21 +28,23 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
     getData(0, totalCars, { ...router.query })
       .then(({ data }: { data: ICarModel[] }) => {
         setCars([...cars, ...data]);
-        console.log(data);
+
         // window.location.reload()
       })
-      .catch((err: string) => {});
+      .catch(() => {
+        console.log('Где-то возникла ошибка');
+      });
   });
 
   useObserver(triggerElement, true, isLoading, () => {
     getData(0, totalCars, { ...router.query })
       .then(({ data }: { data: ICarModel[] }) => {
-        console.log(data);
         setCars([...cars, ...data]);
         totalCars += 10;
-        console.log(isLoading);
       })
-      .catch((err: string) => {});
+      .catch(() => {
+        console.log('Где-то возникла ошибка');
+      });
   });
 
   return (

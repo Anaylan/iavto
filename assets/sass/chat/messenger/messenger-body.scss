@@ -9,7 +9,27 @@
   overflow-y: scroll;
   overflow: overlay;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  cursor: pointer;
+  cursor: auto;
+
+  &::-webkit-scrollbar {
+    width: 18px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #fff;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #dadada;
+    border-radius: 10px;
+    border: 5px solid transparent;
+    background-clip: content-box;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #cecece;
+    background-clip: content-box;
+  }
 
   &__list {
     position: relative;
@@ -41,30 +61,6 @@
   }
 
   &__message {
-  }
-}
-
-@media (min-width: 992px) {
-  .messenger-body {
-    &::-webkit-scrollbar {
-      width: 18px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: #fff;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #dadada;
-      border-radius: 10px;
-      border: 5px solid transparent;
-      background-clip: content-box;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #cecece;
-      background-clip: content-box;
-    }
   }
 }
 

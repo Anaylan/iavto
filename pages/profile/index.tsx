@@ -85,7 +85,6 @@ const Profile = () => {
       .catch((err) => {
         dispatch(auth.actions.logout());
         router.push('/');
-        console.log('oh no!' + err);
       });
 
     getOrdersCount().then(({ data }) => {

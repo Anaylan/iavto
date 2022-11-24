@@ -15,5 +15,6 @@ export interface IOrderModel {
   year: number;
   from_time: number;
   to_time: number;
+  user_time: string | null;
   order_date: string;
 }

@@ -51,10 +51,9 @@ export const registrationSchema = Yup.object().shape({
     .required('Номер телефона обязателен для заполнения'),
   password: Yup.string()
     .required('Пароль обязателен для заполнения')
-    .matches(/[0-9]/, 'Пароль требует минимум 1 цирфу')
-    .matches(/[a-z]/, 'Пароль требует минимум 1 прописную букву')
-    .matches(/[A-Z]/, 'Пароль требует минимум 1 заглавную букву')
-    .matches(/[^\w]/, 'Пароль требует минимум 1 спец. символ'),
+    .matches(/[0-9]/, 'Пароль должен иметь минимум 1 цифру')
+    .matches(/[a-z]/, 'Пароль должен иметь минимум 1 прописную букву')
+    .matches(/[A-Z]/, 'Пароль должен иметь минимум 1 заглавную букву'),
   terms: Yup.bool().oneOf(
     [true],
     'Для регистрации вы должны принять пользовательское соглашение',
@@ -100,7 +99,6 @@ export const Register: React.FC<UserModel> = () => {
       )
         .then(({ data }) => {
           setLoading(false);
-          console.log(data);
           if (data.message) {
             setError(data.message);
           }
@@ -111,7 +109,6 @@ export const Register: React.FC<UserModel> = () => {
         })
         .catch((err) => {
           setLoading(false);
-          console.log(err);
         });
     },
     validationSchema: registrationSchema,
@@ -213,7 +210,7 @@ export const Register: React.FC<UserModel> = () => {
                     </div>
                   ) : null}
                   <FormInputWithLabel
-                    placeholder={'Пароль'}
+                    placeholder={'Пароль (латинские буквы)'}
                     name={'password'}
                     type={'password'}
                     onChange={formik.handleChange}

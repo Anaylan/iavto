@@ -11,7 +11,6 @@ export function RefCodeToClipboard(ref_code: number) {
   document.body.appendChild(textArea);
   textArea.focus();
   textArea.select();
-  console.log(textArea);
   alert('Ссылка скопирована');
   return new Promise<void>((res, rej) => {
     // here the magic happens

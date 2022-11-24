@@ -10,8 +10,15 @@ import { Modal } from 'react-bootstrap';
 import { useState, ReactNode } from 'react';
 import { dbFormatDate, month } from 'libs/functions';
 
-export const OrderCard = ({ order }: { order: IOrderModel }) => {
-  console.log(order);
+export const OrderCard = ({
+  order,
+  user,
+  changeInvoke,
+}: {
+  order: IOrderModel;
+  user: any;
+  changeInvoke: () => void;
+}) => {
   const [showTime, setShowTime] = useState<boolean>(false);
   const handleCloseTime = () => setShowTime(false);
 
@@ -26,6 +33,16 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
     let minutesFrom = String(from % 60);
     let hourTo = String((to - (to % 60)) / 60);
     let minutesTo = String(to % 60);
+    order.user_time = `
+      ${
+        (hourFrom.length == 1 ? '0' + hourFrom : hourFrom) +
+        ':' +
+        (minutesFrom.length == 1 ? '0' + minutesFrom : minutesFrom)
+      }-${
+      (hourTo.length == 1 ? '0' + hourTo : hourTo) +
+      ':' +
+      (minutesTo.length == 1 ? '0' + minutesTo : minutesTo)
+    }`;
     orderTime(
       order.id,
       `
@@ -123,25 +140,32 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
                   }
                   <p>
                     {order.status == 1 &&
-                      `На ${dbFormatDate(order.order_date, month)}`}
+                      `Назначено на ${dbFormatDate(order.order_date, month)} ${
+                        order.user_time ? order.user_time : ''
+                      }`}
                   </p>
                 </span>
               </div>
               <div className='order-card__btns'>
-                {order.status == 1 && (
-                  <div className='order-btn mb-3'>
-                    <Button onClick={() => setShowTime(true)}>
-                      Назначить время
-                    </Button>
-                  </div>
-                )}
+                {order.status == 1 &&
+                  (order.user_time == '' || order.user_time == null) && (
+                    <div className='order-btn mb-3'>
+                      <Button
+                        onClick={() => {
+                          setShowTime(true);
+                          changeInvoke();
+                        }}>
+                        Назначить время
+                      </Button>
+                    </div>
+                  )}
                 {order.status == 2 ||
                   (order.status == 1 && (
                     <div className='order-btn'>
                       <Button
                         onClick={() => {
                           orderCancel(order.id);
-                          order.status = 0;
+                          changeInvoke();
                         }}>
                         Отменить заказ
                       </Button>
@@ -191,6 +215,13 @@ export const OrderCard = ({ order }: { order: IOrderModel }) => {
                         4: <span>Архив</span>,
                       }[order.status]
                     }
+                    <p>
+                      {order.status == 1 &&
+                        `Назначено на ${dbFormatDate(
+                          order.order_date,
+                          month,
+                        )} ${order.user_time ? order.user_time : ''}`}
+                    </p>
                   </span>
                 </div>
               </div>

@@ -182,7 +182,6 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
     },
     onSubmit(values) {
       requestVerification(values).then(({ data }) => {
-        console.log(data);
         if (Boolean(data) == true) {
           window.location.reload();
         }

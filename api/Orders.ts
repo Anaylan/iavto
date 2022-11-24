@@ -19,6 +19,6 @@ export async function orderCancel(id: number) {
 
 export async function orderTime(id: number, time: string) {
   return axiosAuth
-    .post(SET_ORDER_TIME, { id: id, time: time })
+    .post(SET_ORDER_TIME, JSON.stringify({ id: id, time: time }))
     .then((response) => console.log(response));
 }

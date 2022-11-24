@@ -1,9 +1,9 @@
-import { requestAddToFavor } from 'api/User';
 import { ICarModel } from 'app/models';
 import { Eye, Heart, Prohibit } from 'assets/icon/icons';
 import { Button } from 'modules/UI/buttons/Button';
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { requestAddToFavor, requestDelFromFavor } from 'api/User';
 
 export const CarCardHeader: React.FC<ICarModel> = ({
   mark,
@@ -11,9 +11,24 @@ export const CarCardHeader: React.FC<ICarModel> = ({
   year,
   id,
   viewed,
+  favorite,
 }) => {
+  const [active, setActive] = useState<boolean>(favorite || false);
   const toFavor = (id: number) => {
-    requestAddToFavor(id);
+    console.log(id);
+    if (active) {
+      requestDelFromFavor(id).then(({ data }) => {
+        if (data) {
+          setActive(false);
+        }
+      });
+    } else {
+      requestAddToFavor(id).then(({ data }) => {
+        if (data) {
+          setActive(true);
+        }
+      });
+    }
   };
   return (
     <>
@@ -42,12 +57,29 @@ export const CarCardHeader: React.FC<ICarModel> = ({
                   }}
                   className='btn-main'
                   type={'button'}>
-                  <div className='d-flex align-items-center'>
-                    <div className={'icon'}>
-                      <Heart />
+                  {!active ? (
+                    <div
+                      onClick={() => {
+                        toFavor(Number(id));
+                      }}
+                      className='d-flex align-items-center'>
+                      <div className={'icon'}>
+                        <Heart />
+                      </div>
+                      <span>В избранное</span>
                     </div>
-                    <span>В избранное</span>
-                  </div>
+                  ) : (
+                    <div
+                      onClick={() => {
+                        toFavor(Number(id));
+                      }}
+                      className='d-flex align-items-center'>
+                      <div className={'icon active'}>
+                        <Heart />
+                      </div>
+                      <span>В избранном</span>
+                    </div>
+                  )}
                 </Button>
                 <Button type={'button'} className='btn-main btn-main-white'>
                   <div className='d-flex align-items-center'>

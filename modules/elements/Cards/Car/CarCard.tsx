@@ -1,11 +1,10 @@
-import { useSanitize } from 'app/hooks';
 import { ICarModel } from 'app/models';
 import { CarCardBonuses } from 'modules/elements';
 import { CarCardDetails } from 'modules/elements';
 import { CarCardHeader } from 'modules/elements';
 import { CarCardInfo } from 'modules/elements';
 import { CarCardVerify } from 'modules/elements';
-import React from 'react';
+import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { CarCardSwiper } from 'modules/elements';
 import { sanitize } from 'libs/functions';
@@ -15,7 +14,6 @@ interface ICarInfo {
 }
 
 export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
-  console.log(car);
   return (
     <>
       {car && (
@@ -26,6 +24,7 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
             model={car.model}
             year={car.year}
             viewed={car.viewed}
+            favorite={car.favorite}
           />
           <div className='car__body car'>
             <Row className='car__row'>

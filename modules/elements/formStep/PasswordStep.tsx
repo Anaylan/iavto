@@ -10,10 +10,9 @@ import { Button } from 'modules/UI';
 export const passwordSchema = Yup.object().shape({
   password: Yup.string()
     .required('Пароль обязателен для заполнения')
-    .matches(/[0-9]/, 'Password requires a number')
-    .matches(/[a-z]/, 'Password requires a lowercase letter')
-    .matches(/[A-Z]/, 'Password requires an uppercase letter')
-    .matches(/[^\w]/, 'Password requires a symbol'),
+    .matches(/[0-9]/, 'Пароль должен иметь минимум 1 цифру')
+    .matches(/[a-z]/, 'Пароль должен иметь минимум 1 прописную букву')
+    .matches(/[A-Z]/, 'Пароль должен иметь минимум 1 заглавную букву'),
 });
 
 export const PasswordStep = ({
@@ -36,16 +35,11 @@ export const PasswordStep = ({
     validationSchema: passwordSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
-      requestNewPassword(token, code, values.password)
-        .then(({ data }) => {
-          if (data) {
-            console.log(data);
-            router.push('/auth/signin');
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      requestNewPassword(token, code, values.password).then(({ data }) => {
+        if (data) {
+          router.push('/auth/signin');
+        }
+      });
       setStep(step + 1);
     },
   });

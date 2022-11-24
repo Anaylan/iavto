@@ -5,13 +5,12 @@ import React, { useEffect, useState } from 'react';
 import { URL_IMG } from 'app/config';
 import Link from 'next/link';
 import { Col, Container, Row } from 'react-bootstrap';
-import { useRouter } from 'next/router';
 import { IRegionState } from 'app/redux/reducers/regionReducer';
 
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { EmptyComponent } from 'modules/elements';
-import { requestAddToFavor } from 'api/User';
+import { requestAddToFavor, requestDelFromFavor } from 'api/User';
 
 const CarParkBlock: React.FC<ICarparkBlock> = ({
   getData,
@@ -27,6 +26,7 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
   useEffect(() => {
     getData().then(({ data }: { data: ICarparkModel[] }) => {
       setCarparks(data);
+      console.log(data);
     });
   }, [setCarparks, getData, location]);
 
@@ -65,10 +65,22 @@ export function CarparkItem({
   carPark: ICarparkModel;
   lazy: boolean;
 }) {
+  const [active, setActive] = useState<boolean>(carPark.favorite);
+
   const toFavor = (id: number) => {
-    requestAddToFavor(id).then(({ data }) => {
-      console.log(data);
-    });
+    if (active) {
+      requestDelFromFavor(id).then(({ data }) => {
+        if (data) {
+          setActive(false);
+        }
+      });
+    } else {
+      requestAddToFavor(id).then(({ data }) => {
+        if (data) {
+          setActive(true);
+        }
+      });
+    }
   };
 
   return (
@@ -96,7 +108,7 @@ export function CarparkItem({
             )}
           </Link>
           <div className={`carparks__hover carparks-hover`}>
-            {/* {carPark.favor ? (
+            {!active ? (
               <div
                 onClick={() => {
                   toFavor(Number(carPark.cid));
@@ -108,32 +120,22 @@ export function CarparkItem({
                 </span>
               </div>
             ) : (
-              <>
-                <div class='carparks-hover__item carparks-hover-act'>
-                  <span class='icon'>
-                    <svg class='icon__item'>
-                      <Heart />
-                    </svg>
-                  </span>
-                </div>
-              </>
-            )} */}
-            <div
-              onClick={() => {
-                toFavor(Number(carPark.cid));
-              }}
-              className={'carparks-hover__item'}>
-              <div>Добавить в</div>
-              <span className={'icon'}>
-                <Heart />
-              </span>
-            </div>
+              <div
+                className={'carparks-hover__item carparks-hover-act'}
+                onClick={() => {
+                  toFavor(Number(carPark.cid));
+                }}>
+                <span className={'icon'}>
+                  <Heart />
+                </span>
+              </div>
+            )}
           </div>
         </div>
         <Link
           className={'carparks__item-title'}
           href={`/carpark/${carPark.cid}`}>
-          <span>{carPark.company_name}</span>
+          <p className='text-truncate'>{carPark.company_name}</p>
         </Link>
         <div className={'carparks__content'}>
           <Link className={'carparks__value'} href={`/carpark/${carPark.cid}`}>

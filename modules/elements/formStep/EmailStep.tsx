@@ -29,16 +29,12 @@ export const EmailStep = ({
     enableReinitialize: true,
     validationSchema: EmailStepSchema,
     onSubmit: (values) => {
-      requestCode(values.email)
-        .then(({ data }) => {
-          if (data.token) {
-            setStep(step + 1);
-            setToken(data.token);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      requestCode(values.email).then(({ data }) => {
+        if (data.token) {
+          setStep(step + 1);
+          setToken(data.token);
+        }
+      });
     },
   });
   return (

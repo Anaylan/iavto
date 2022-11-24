@@ -216,6 +216,62 @@ input[type='number']:focus {
   }
 }
 
+.btn-update {
+  background: none;
+
+  .icon {
+    width: 24px;
+    height: 24px;
+
+    &__item {
+      fill: #2e2f31;
+    }
+  }
+
+  &.btn-update-anim {
+    .icon {
+      &__item {
+        fill: #2774ac;
+      }
+    }
+  }
+
+  &:hover {
+    .icon {
+      &__item {
+        fill: #2774ac;
+      }
+    }
+  }
+}
+.btn-update-anim {
+  animation: 0.5s linear 0s normal forwards running rot;
+  -webkit-animation: 0.5s linear 0s normal forwards running rot;
+}
+
+@keyframes rot {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes rot {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .col-1-5,
 .col-sm-1-5,
 .col-md-1-5,
@@ -798,8 +854,11 @@ input[type='number']:focus {
   }
 
   &__item-title {
-    flex: 1 1 auto;
-    display: flex;
+    -webkit-box-flex: 1 !important;
+    -ms-flex-positive: 1 !important;
+    flex-grow: 1 !important;
+    overflow: hidden !important;
+
     font-size: 18px;
     font-weight: 500;
     color: #2774ac;
@@ -820,6 +879,10 @@ input[type='number']:focus {
 
     &:hover {
       color: #2774ac;
+    }
+
+    p {
+      display: block;
     }
   }
 
@@ -920,6 +983,7 @@ input[type='number']:focus {
   }
 
   &__item.carparks-hover-act {
+    transition: all 0.6s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2282,6 +2346,13 @@ input[type='number']:focus {
     }
   }
 
+  .btn-update {
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
   /* Header
 	===================*/
   .header {
@@ -2904,5 +2975,38 @@ input[type='number']:focus {
       display: inline-block;
       width: auto;
     }
+  }
+}
+
+.orb {
+  height: 10px;
+  width: 10px;
+
+  border-radius: 50%;
+  display: inline-block;
+
+  animation: 2s flash infinite;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #2774ac;
+  }
+  50% {
+    background-color: #a0b1bd;
+  }
+  100% {
+    background-color: #2774ac;
+  }
+}
+@-webkit-keyframes flash {
+  0% {
+    background-color: #2774ac;
+  }
+  50% {
+    background-color: #a0b1bd;
+  }
+  100% {
+    background-color: #2774ac;
   }
 }

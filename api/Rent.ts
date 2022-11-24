@@ -8,10 +8,6 @@ export async function setCarRent(car_id: number) {
   return axiosAuth
     .post(SET_RENT_URL, { car_id: car_id })
     .then(function (response) {
-      console.log(response.data.status);
       return response.data.status;
-    })
-    .catch(function (error) {
-      console.log(error);
     });
 }

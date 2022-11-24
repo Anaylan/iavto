@@ -7,9 +7,7 @@ interface IChildProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   props?: ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
-export const MessengerBottom = forwardRef<any, IChildProps>((props, ref) => {
-  const [message, setMessage] = useState<string>('');
-
+export const MessengerBottom = forwardRef<any, any>((props, ref) => {
   return (
     <div className={`messenger__bottom messenger-bottom`}>
       <form
@@ -17,33 +15,39 @@ export const MessengerBottom = forwardRef<any, IChildProps>((props, ref) => {
         acceptCharset='UTF-8'
         id='formMessenger'>
         <div className={`messenger-bottom__row`}>
-          <div className={`messenger-bottom__attach-file`}>
-            <input type='file' name='' id='chatAttachFile' />
-            <label className={'icon'} htmlFor='chatAttachFile'>
-              <PaperClip />
-            </label>
-          </div>
+          <input type='file' name='' id='chatAttachFile' />
+          <label
+            className={`messenger-bottom__btn messenger-bottom__attach-file`}
+            htmlFor='chatAttachFile'>
+            <div className={`messenger-bottom__btn-wrap`}>
+              <div className={'icon'}>
+                <PaperClip />
+              </div>
+            </div>
+          </label>
           <div className={`messenger-bottom__message`}>
             <div
               id='message'
               inputMode={'text'}
               spellCheck={true}
               ref={ref}
+              tabIndex={0}
+              onKeyDown={props.onKeyDown}
               className={`messenger-bottom__input text-break`}
               contentEditable='true'
               placeholder='Напишите сообщение...'
             />
           </div>
-          <div className={`messenger-bottom__send`}>
-            <button
-              className={`messenger-bottom__btn`}
-              type='submit'
-              {...props}>
+          <button
+            className={`messenger-bottom__btn messenger-bottom__send`}
+            type='submit'
+            onClick={props.onClick}>
+            <div className={`messenger-bottom__btn-wrap`}>
               <span className={'icon'}>
                 <Send />
               </span>
-            </button>
-          </div>
+            </div>
+          </button>
         </div>
       </form>
     </div>

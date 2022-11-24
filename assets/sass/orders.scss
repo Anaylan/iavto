@@ -41,3 +41,9 @@
     }
   }
 }
+
+@media (max-width: 1023px) {
+  .order-btn:first-child {
+    margin-right: 10px;
+  }
+}

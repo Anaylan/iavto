@@ -6,7 +6,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { getUserOrders } from 'api/Orders';
 import { OrderCard } from 'modules/elements';
 import { IOrderModel } from 'app/models/order/Order';
-
+import { EmptyComponent } from 'modules/elements';
 import { useRouter } from 'next/router';
 
 import { UserDataModel } from 'app/models';
@@ -48,16 +48,24 @@ export default function Orders() {
   );
 
   useEffect(() => {
-    console.log(user);
     if (user) {
       getUserOrders(router.query).then(({ data }: { data: IOrderModel[] }) => {
         setOrders(data);
-        console.log(data);
       });
     } else {
       router.push('/auth/signin');
     }
   }, [router, user]);
+
+  const sendInvoke = () => {
+    if (user) {
+      getUserOrders(router.query).then(({ data }: { data: IOrderModel[] }) => {
+        setOrders(data);
+      });
+    } else {
+      router.push('/auth/signin');
+    }
+  };
 
   return (
     <>
@@ -70,12 +78,25 @@ export default function Orders() {
           <section className='cars orders'>
             <h1 className='title'>Мои заказы</h1>
             <Row>
-              {orders &&
-                orders.map((order, key) => (
-                  <Fragment key={key}>
-                    <OrderCard order={order} />
-                  </Fragment>
-                ))}
+              {orders ? (
+                <>
+                  {orders.length > 0 ? (
+                    orders.map((order, key) => (
+                      <Fragment key={key}>
+                        <OrderCard
+                          order={order}
+                          user={user}
+                          changeInvoke={sendInvoke}
+                        />
+                      </Fragment>
+                    ))
+                  ) : (
+                    <EmptyComponent />
+                  )}
+                </>
+              ) : (
+                <EmptyComponent />
+              )}
             </Row>
           </section>
         </Row>

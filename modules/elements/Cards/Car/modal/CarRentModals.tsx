@@ -39,7 +39,6 @@ export const CarRentModal = ({
       handleCloseCheck();
       setToken('');
       setValue('');
-      console.log(data);
     });
   };
 

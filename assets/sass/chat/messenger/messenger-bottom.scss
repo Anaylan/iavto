@@ -1,38 +1,43 @@
 .messenger-bottom {
   position: relative;
   width: 100%;
-  background-color: #f6f7fb;
-  border-top: 1px solid #fff;
+  background-color: #fff;
+  border-top: 1px solid #f6f7fb;
 
   &__form {
-    padding: 12px 0;
   }
 
   &__row {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
   }
 
-  &__attach-file {
+  #chatAttachFile {
+    display: none !important;
+  }
+
+  &__btn {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    width: 9%;
+    width: 65px;
+    min-width: 65px;
+    max-width: 65px;
+    height: 65px;
+    min-height: 65px;
+    max-height: 65px;
     background: none;
+    cursor: pointer;
 
-    input {
-      display: none;
-    }
+    &:hover {
+      .messenger-bottom__btn-wrap {
+        background: #f1faff;
+      }
 
-    label {
-      margin: 0 0 3px 0;
-      cursor: pointer;
-
-      &:hover {
-        .icon {
-          &__item {
-            fill: #2774ac !important;
-          }
+      .icon {
+        &__item {
+          fill: #009ef7;
         }
       }
     }
@@ -42,30 +47,46 @@
       height: 28px;
 
       &__item {
-        fill: #686f6d !important;
+        fill: #686f6d;
+      }
+    }
+  }
+
+  &__btn-wrap {
+    border-radius: 10px;
+    padding: 8px 12px;
+    transition: background 0.25s ease;
+  }
+
+  &__attach-file {
+  }
+
+  &__send {
+    .icon {
+      &__item {
+        fill: #2774ac;
       }
     }
   }
 
   &__message {
-    width: 82%;
-    overflow: hidden;
+    display: block;
+    width: 100%;
   }
 
   &__input {
     display: block;
     width: 100%;
-    min-height: 36px;
+    min-height: 65px;
     max-height: 200px;
     resize: none;
     overflow-x: hidden;
-    background-color: #fff;
     border-radius: 8px;
-    border: 1px solid #fff;
     font-size: 15px;
     line-height: 1.2;
-    word-wrap: break-word;
-    padding: 8px 20px;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    padding: 23px 12px;
 
     &::-webkit-scrollbar {
       display: none;
@@ -87,93 +108,37 @@
       content: '';
     }
   }
+}
 
-  &__btn {
-    background: none;
-    cursor: pointer;
-    margin: 0 0 6px 0;
-
-    &:hover {
+@media (max-width: 991px) {
+  .messenger-bottom {
+    &__btn {
+      width: 56px;
+      min-width: 56px;
+      max-width: 56px;
+      height: 60px;
+      min-height: 60px;
+      max-height: 60px;
       .icon {
-        &__item {
-          fill: #2774ac !important;
-        }
+        width: 24px;
+        height: 24px;
       }
     }
-
-    .icon {
-      width: 23px;
-      height: 23px;
-
-      &__item {
-        fill: #686f6d !important;
-      }
+    &__btn-wrap {
+      padding: 6px 8px;
     }
-  }
-
-  &__send {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    background: none;
-    width: 9%;
-
-    .messenger-bottom__btn {
-      margin: 0 10px 6px 0;
-    }
-
-    .icon {
-      &__item {
-        fill: #2774ac !important;
-      }
+    &__input {
+      min-height: 60px;
+      max-height: 180px;
+      padding: 21px 10px;
     }
   }
 }
 
-@media (max-width: 767px) {
+@media (min-width: 992px) and (max-height: 770px) {
   .messenger-bottom {
-    &__attach-file {
-      width: 12%;
-    }
-
-    &__message {
-      width: 76%;
-    }
-
-    &__send {
-      width: 12%;
-    }
-  }
-}
-
-@media (max-width: 575px) {
-  .messenger-bottom {
-    &__attach-file {
-      width: 15%;
-    }
-
-    &__message {
-      width: 70%;
-    }
-
-    &__send {
-      width: 15%;
-    }
-  }
-}
-
-@media (max-width: 374px) {
-  .messenger-bottom {
-    &__attach-file {
-      width: 16.5%;
-    }
-
-    &__message {
-      width: 67%;
-    }
-
-    &__send {
-      width: 16.5%;
+    &__input {
+      max-height: 140px;
     }
   }
 }

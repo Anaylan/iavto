@@ -40,7 +40,6 @@ export const Login: FC<UserModel> = () => {
       setLoading(true);
       login(values.email, values.password)
         .then(({ data }) => {
-          console.log(data);
           setLoading(false);
 
           if (data.message) {

@@ -28,7 +28,7 @@ export const HeaderTopLinks: LinkType[] = [
 export const HeaderBodyLinks: LinkType[] = [
   { href: '/carpark', children: <></>, title: 'Автопарки' },
   { href: '/car', children: <></>, title: 'Автомобили' },
-  { href: '/rules', children: <></>, title: 'Правила' },
+  // { href: '/rules', children: <></>, title: 'Правила' },
   { href: '/pay', children: <></>, title: 'Оплата' },
   { href: '/partners', children: <></>, title: 'Партнеры' },
   { href: '/feedback', children: <></>, title: 'Обратная связь' },

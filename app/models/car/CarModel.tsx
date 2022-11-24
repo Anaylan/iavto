@@ -36,4 +36,5 @@ export interface ICarModel {
   CASCO?: number;
   phone?: number;
   fuel?: number;
+  favorite?: boolean;
 }

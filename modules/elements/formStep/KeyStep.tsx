@@ -28,17 +28,12 @@ export const KeyStep = ({
     validationSchema: forgotSchema,
     enableReinitialize: true,
     onSubmit: (values) => {
-      requestPassword(token, values.key)
-        .then(({ data }) => {
-          if (Boolean(data) == true) {
-            setCode(values.key);
-            console.log(data);
-            setStep(step + 1);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      requestPassword(token, values.key).then(({ data }) => {
+        if (Boolean(data) == true) {
+          setCode(values.key);
+          setStep(step + 1);
+        }
+      });
     },
   });
   return (

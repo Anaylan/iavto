@@ -17,9 +17,6 @@ export const CarCardInfo: React.FC<ICarModel> = ({
 }) => {
   const [show, setShow] = useState<boolean>(false);
   const [status, setStatus] = useState<number>(0);
-  const router = useRouter();
-
-  console.log(pledge);
   return (
     <div className={`car__item-info`}>
       <div className={'cars-item__info-content'}>

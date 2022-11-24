@@ -1,6 +1,7 @@
 import { IMessageModel } from 'app/models';
 import { sanitize } from 'libs/functions';
 import React, { Fragment } from 'react';
+import { dbFormatChatDate, month } from 'libs/functions';
 
 export const MessageItem = ({ message }: { message: IMessageModel }) => {
   return (
@@ -16,8 +17,8 @@ export const MessageItem = ({ message }: { message: IMessageModel }) => {
               <div className={`message-top__username`}>
                 {message.MeSend ? 'Вы' : message.companion}
               </div>
-              <time className={`message-top__time`} dateTime='2022-10-15 10:01'>
-                message.date
+              <time className={`message-top__time`} dateTime={message.date}>
+                {dbFormatChatDate(message.date, month)}
               </time>
             </div>
             <div className={`message__main message-main`}>

@@ -12,6 +12,7 @@ export interface ICarparkModel {
   tarif: number | null;
   place: number | null;
   count_product: number | null;
+  favorite: boolean;
   created: string;
 }
 
