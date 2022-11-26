@@ -15,7 +15,6 @@ export const CarCardHeader: React.FC<ICarModel> = ({
 }) => {
   const [active, setActive] = useState<boolean>(favorite || false);
   const toFavor = (id: number) => {
-    console.log(id);
     if (active) {
       requestDelFromFavor(id).then(({ data }) => {
         if (data) {

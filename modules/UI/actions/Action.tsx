@@ -9,11 +9,8 @@ export const ActionFollow = ({
   id: number;
   favorite: boolean;
 }) => {
-  console.log(id);
-  console.log(favorite);
   const [active, setActive] = useState<boolean>(favorite || false);
   const toFavor = (id: number) => {
-    console.log(id);
     if (active) {
       requestDelFromFavor(id).then(({ data }) => {
         if (data) {

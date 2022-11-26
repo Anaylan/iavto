@@ -6,7 +6,7 @@ import { FormInputWithMask, FormInputWithoutLabel, Textarea } from 'modules/UI';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { getErrorMessages } from 'modules/elements/profile/verification/FormVerification';
-import { requestFeedback } from 'api/Feedback';
+import { requestInvestor } from 'api/Feedback';
 
 const phoneNumberMask = [
   '+',
@@ -37,7 +37,7 @@ export const feedbackSchema = Yup.object().shape({
 
 // сделано перенаправление на in_dev
 
-export default function Feedback() {
+export default function Partners() {
   const formik = useFormik({
     initialValues: {
       firstname: '',
@@ -47,26 +47,45 @@ export default function Feedback() {
     },
     validationSchema: feedbackSchema,
     onSubmit: (values) => {
-      // console.log(values);
-      requestFeedback(values).then(({ data }) => {
-        console.log(data);
-      });
+      console.log(values);
+      requestInvestor(values);
       // TODO: метод для отправки
     },
   });
   return (
     <>
       <Head>
-        <title>Обратная связь | {TITLE}</title>
+        <title>Партнёры | {TITLE}</title>
       </Head>
       <Container>
         <section>
-          <h1 className='title'>Форма обратной связи</h1>
-          <p>Вы можете задать свой вопрос в форме обратной связи</p>
-          <p>
-            Наша поддержка ответит вам на него в ближайшее время. Ответ придет
-            на почту.
+          <h1 className='title'>Информация для партнёров</h1>
+          <p className='mb-4 text-muted'>Вы можете стать нашим партнёром!</p>
+          <p className='mb-4 text-muted'>
+            Для этого вам нужно подать заявку и мы рассмотрим ваше предложение.
           </p>
+          <p className='mb-4 text-muted'>Что даёт партнерство с ЯАВТО.РФ?</p>
+          <p className='mb-4 text-muted'>
+            Ваш Телеграм канал, группа в ВКонтакте или любой другой продукт
+            будет размещен на нашем официальном сайте, который увидят водители
+            такси и автопарки. Вам нужно только подать заявку на вступление, мы
+            рассмотрим ваш продукт и пришлем письмо на указанную вами почту. В
+            письме будет ответ на предложение, и в случае положительного ответа
+            - заявка на оплату партнерства на месяц или более.
+          </p>
+          <h3 className='mb-4 text-muted'>Что указать в графе информации?</h3>
+          <ol className='text-muted list-group-circle'>
+            <li className='list-group-item'>
+              Cсылку на ваш продукт для ознакомления
+            </li>
+            <li className='list-group-item'>
+              Возможные вопросы, которые у вас имеются
+            </li>
+            <li className='list-group-item'>
+              Срок партнерства, если уже определились и уверены, что хотите
+              стать нашими партнерами ( 1 месяц, 2 месяца и т.д.)
+            </li>
+          </ol>
         </section>
 
         <section className='verification'>
@@ -151,7 +170,7 @@ export default function Feedback() {
                     lg={4}
                     className='d-flex justify-content-md-end'>
                     <FormLabel type='text'>
-                      Расскажите с чем нужна помощь
+                      Расскажите, информацию о вас или о вашем продукте
                     </FormLabel>
                   </Col>
                   <Col xs={12} md={7} lg={8}>

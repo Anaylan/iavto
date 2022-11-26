@@ -61,7 +61,7 @@ export default function Car() {
       ]);
     }
   }, [car, carpark]);
-  console.log(TabItems);
+
   return (
     <>
       {car && (

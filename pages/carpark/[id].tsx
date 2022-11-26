@@ -48,9 +48,6 @@ export default function Carpark() {
     });
   }, []);
 
-  console.log(TabItems);
-
-  console.log(autopark);
   return (
     <>
       {autopark && (

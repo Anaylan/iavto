@@ -26,7 +26,6 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
   useEffect(() => {
     getData().then(({ data }: { data: ICarparkModel[] }) => {
       setCarparks(data);
-      console.log(data);
     });
   }, [setCarparks, getData, location]);
 
