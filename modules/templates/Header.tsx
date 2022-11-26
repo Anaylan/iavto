@@ -42,7 +42,7 @@ export const HeaderBottomLinks: LinkType[] = [
   },
   // { href: '/', children: <></>, title: 'Для автопарков' },
   { href: '/referrals', children: <></>, title: 'Для реферальных партнеров' },
-  { href: '/partners', children: <></>, title: 'Для партнеров' },
+  { href: '/for-partners', children: <></>, title: 'Для партнеров' },
   { href: '/about', children: <></>, title: 'О нас' },
 ];
 

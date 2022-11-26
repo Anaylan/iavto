@@ -1,8 +1,8 @@
 import { API_URL } from 'app/config';
 import axios from 'axios';
 
-export const REQUEST_FEEDBACK = `${API_URL}/feedback`;
-export const REQUEST_INVESTOR = `${API_URL}/investor`;
+export const REQUEST_FEEDBACK = `${API_URL}/user/feedback`;
+export const REQUEST_INVESTOR = `${API_URL}/user/invest`;
 
 export function requestFeedback(options: any) {
   // Authorization head should be fulfilled in interceptor.

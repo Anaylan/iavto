@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Container } from 'react-bootstrap';
 
 import { getCar } from 'api/Car';
@@ -25,7 +25,7 @@ export default function Car() {
   const [TabItems, setTabItems] = useState<ITabItems[] | null>();
   const router = useRouter();
 
-  useEffect(() => {
+  useMemo(() => {
     getCar(Number(router.query.id)).then(({ data }) => {
       setCar(data);
       getCarpark(data.cid).then(({ data }: { data: ICarparkModel }) => {
@@ -33,7 +33,7 @@ export default function Car() {
       });
       requestVisit(data.id);
     });
-  }, []);
+  }, [router.query.id]);
 
   useEffect(() => {
     if (car) {

@@ -49,7 +49,8 @@ export const CarRentModal = ({
           <Modal.Header closeButton>
             <Modal.Title>Авторизуйтесь</Modal.Title>
           </Modal.Header>
-          <Modal.Body className='form'>
+          <Modal.Body className='form'></Modal.Body>
+          <Modal.Footer>
             <Button
               onClick={() => {
                 handleClose;
@@ -60,7 +61,7 @@ export const CarRentModal = ({
             <Button className={'ms-2 btn-main-trp'} onClick={handleClose}>
               Закрыть
             </Button>
-          </Modal.Body>
+          </Modal.Footer>
         </Modal>
       )}
       {status == 0 && (
@@ -68,11 +69,11 @@ export const CarRentModal = ({
           <Modal.Header closeButton>
             <Modal.Title>Автомобиль не доступен для аренды</Modal.Title>
           </Modal.Header>
-          <Modal.Body className='form'>
+          <Modal.Footer className='form'>
             <Button className={'btn-main-trp'} onClick={handleClose}>
               Закрыть
             </Button>
-          </Modal.Body>
+          </Modal.Footer>
         </Modal>
       )}
       {status == 1 && (
@@ -80,7 +81,7 @@ export const CarRentModal = ({
           <Modal.Header closeButton>
             <Modal.Title>Аккаунт не верифицирован</Modal.Title>
           </Modal.Header>
-          <Modal.Body className='form'>
+          <Modal.Footer className='form'>
             <Button
               onClick={() => {
                 router.push('/profile/edit');
@@ -90,7 +91,7 @@ export const CarRentModal = ({
             <Button className={'ms-2 btn-main-trp'} onClick={handleClose}>
               Закрыть
             </Button>
-          </Modal.Body>
+          </Modal.Footer>
         </Modal>
       )}
       {status == 2 && (
@@ -98,7 +99,7 @@ export const CarRentModal = ({
           <Modal.Header closeButton>
             <Modal.Title>На вашем счете не достаточно средств</Modal.Title>
           </Modal.Header>
-          <Modal.Body className='form'>
+          <Modal.Footer className='form'>
             <Button
               onClick={() => {
                 setShowPay(true);
@@ -109,7 +110,7 @@ export const CarRentModal = ({
             <Button className={'ms-2 btn-main-trp'} onClick={handleClose}>
               Закрыть
             </Button>
-          </Modal.Body>
+          </Modal.Footer>
         </Modal>
       )}
       {status == 3 && (

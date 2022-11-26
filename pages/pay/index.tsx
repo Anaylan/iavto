@@ -15,15 +15,15 @@ export default function Pay() {
         <Container>
           <article>
             <h1 className='title'>Информация об оплате</h1>
-            <p className='subtitle'>
+            <h2 className='subtitle fw-semibold mb-4'>
               Каждый человек, который желает арендовать автомобиль на ЯАВТО.РФ
               должен совершить ряд определенный действий!
-            </p>
-            <ol className='list-group-numbered'>
-              <li className='list-group-item'>
-                Пройти полную верификацию учетной записи на ЯАВТО.РФ
+            </h2>
+            <ol className='list-group-numbered subtitle mb-2'>
+              <li className='list-group-item mb-2'>
+                &nbsp;Пройти полную верификацию учетной записи на ЯАВТО.РФ
               </li>
-              <li className='list-group-item'>
+              <li className='list-group-item mb-2'>
                 Найти подходящее авто на сайте ЯАВТО.РФ или в приложении
               </li>
               <li className='list-group-item'>
@@ -32,19 +32,17 @@ export default function Pay() {
             </ol>
           </article>
           <article>
-            <p className='subtitle'>
+            <h3 className='subtitle fw-semibold mt-4 mb-3'>
               На какой срок я могу арендовать автомобиль на ЯАВТО.РФ?
+            </h3>
+            <p className='subtitle line-height-sm'>
+              &nbsp;- Автомобиль, который вы арендуете на ЯАВТО.РФ будет оплачен
+              на 1 сутки.
             </p>
-            <p
-              style={{
-                whiteSpace: 'break-spaces',
-                wordWrap: 'normal',
-              }}>
-              {' '}
-              - Автомобиль, который вы арендуете на ЯАВТО.РФ будет оплачен на 1
-              сутки.{'\n'}Все последущие дни - оплата снимается у вас в
-              агрегаторе, но сумма за аренду автомобиля повыситься не может.
-              Цена останется прежней, или может уменьшится.
+            <p className='subtitle line-height-sm'>
+              Все последующие дни - оплата снимается у вас в агрегаторе, но
+              сумма за аренду автомобиля повыситься не может. Цена останется
+              прежней, или может уменьшится.
             </p>
           </article>
         </Container>

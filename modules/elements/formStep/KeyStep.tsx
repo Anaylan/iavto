@@ -45,7 +45,7 @@ export const KeyStep = ({
           ) : null}
           {/* <Field /> */}
           <div className='form__label-auth'>
-            Введите код, отпраленный вам на эл. почту
+            Введите код, отправленный вам на эл. почту
           </div>
           <FormInputWithoutLabel
             placeholder='Код восстановления'

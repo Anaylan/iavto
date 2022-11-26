@@ -65,3 +65,12 @@
     padding: 16px 20px;
   }
 }
+
+@media (max-width: 374px) {
+  .modal-footer {
+    .btn-main {
+      display: inline-block !important;
+      width: auto !important;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { URL_IMG } from 'app/config';
+import { sanitize } from 'libs/functions';
 interface NewsProps {
   posts?: IPostModel[];
 }
@@ -73,12 +74,13 @@ export const PostPreview: React.FC<PostProps> = ({ postInfo }) => {
             src={URL_IMG + '/img/news/' + postInfo.img}
             width={100}
             height={100}
+            sizes='100%'
             alt='Новость'
           />
         </div>
         <div className='news-item__content'>
           <h4 className='news-item__title'>{postInfo.title}</h4>
-          <p>{postInfo.description}</p>
+          <p dangerouslySetInnerHTML={sanitize(postInfo.description)} />
           <Link href={`/post/${postInfo.id}`}>Подробнеe</Link>
         </div>
       </div>

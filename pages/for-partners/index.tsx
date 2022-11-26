@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { TITLE } from 'app/config';
 import { Col, Container, FormLabel, Row } from 'react-bootstrap';
@@ -38,6 +38,7 @@ export const feedbackSchema = Yup.object().shape({
 // сделано перенаправление на in_dev
 
 export default function Partners() {
+  const [messages, setMessages] = useState('');
   const formik = useFormik({
     initialValues: {
       firstname: '',
@@ -48,7 +49,11 @@ export default function Partners() {
     validationSchema: feedbackSchema,
     onSubmit: (values) => {
       console.log(values);
-      requestInvestor(values);
+      requestInvestor(values).then(({ data }) => {
+        if (data == true) {
+          setMessages('Предложение отправлено');
+        }
+      });
       // TODO: метод для отправки
     },
   });
@@ -60,32 +65,42 @@ export default function Partners() {
       <Container>
         <section>
           <h1 className='title'>Информация для партнёров</h1>
-          <p className='mb-4 text-muted'>Вы можете стать нашим партнёром!</p>
-          <p className='mb-4 text-muted'>
-            Для этого вам нужно подать заявку и мы рассмотрим ваше предложение.
-          </p>
-          <p className='mb-4 text-muted'>Что даёт партнерство с ЯАВТО.РФ?</p>
-          <p className='mb-4 text-muted'>
-            Ваш Телеграм канал, группа в ВКонтакте или любой другой продукт
-            будет размещен на нашем официальном сайте, который увидят водители
-            такси и автопарки. Вам нужно только подать заявку на вступление, мы
-            рассмотрим ваш продукт и пришлем письмо на указанную вами почту. В
-            письме будет ответ на предложение, и в случае положительного ответа
-            - заявка на оплату партнерства на месяц или более.
-          </p>
-          <h3 className='mb-4 text-muted'>Что указать в графе информации?</h3>
-          <ol className='text-muted list-group-circle'>
-            <li className='list-group-item'>
-              Cсылку на ваш продукт для ознакомления
-            </li>
-            <li className='list-group-item'>
-              Возможные вопросы, которые у вас имеются
-            </li>
-            <li className='list-group-item'>
-              Срок партнерства, если уже определились и уверены, что хотите
-              стать нашими партнерами ( 1 месяц, 2 месяца и т.д.)
-            </li>
-          </ol>
+          <div className='subtitle'>
+            <p className='mb-3 fw-bold'>Вы можете стать нашим партнёром!</p>
+            <p className='mb-4'>
+              Для этого вам нужно подать заявку и мы рассмотрим ваше
+              предложение.
+            </p>
+            <p className='mb-3 fw-bold'>Что даёт партнерство с ЯАВТО.РФ?</p>
+            <p className='mb-4 line-height'>
+              Ваш Телеграм канал, группа в ВКонтакте или любой другой продукт
+              будет размещен на нашем официальном сайте, который увидят водители
+              такси и автопарки. Вам нужно только подать заявку на вступление,
+              мы рассмотрим ваш продукт и пришлем письмо на указанную вами
+              почту. В письме будет ответ на предложение, и в случае
+              положительного ответа - заявка на оплату партнерства на месяц или
+              более.
+            </p>
+            <h3 className='mb-3 fw-bold'>Что указать в графе информации?</h3>
+            <ul className='cars-item__list'>
+              <li
+                className='list-group-item'
+                style={{ fontSize: '18px', color: '#686f6d' }}>
+                Cсылку на ваш продукт для ознакомления
+              </li>
+              <li
+                className='list-group-item'
+                style={{ fontSize: '18px', color: '#686f6d' }}>
+                Возможные вопросы, которые у вас имеются
+              </li>
+              <li
+                className='list-group-item'
+                style={{ fontSize: '18px', color: '#686f6d' }}>
+                Срок партнерства, если уже определились и уверены, что хотите
+                стать нашими партнерами ( 1 месяц, 2 месяца и т.д.)
+              </li>
+            </ul>
+          </div>
         </section>
 
         <section className='verification'>
@@ -98,7 +113,7 @@ export default function Partners() {
                     md={5}
                     lg={4}
                     className='d-flex justify-content-md-end'>
-                    <FormLabel type='text'>Ваше имя</FormLabel>
+                    <label className='form__label'>Ваше имя</label>
                   </Col>
                   <Col xs={12} md={7} lg={8}>
                     <div className='form__wrap'>
@@ -122,7 +137,7 @@ export default function Partners() {
                     md={5}
                     lg={4}
                     className='d-flex justify-content-md-end'>
-                    <FormLabel type='text'>Номер телефона</FormLabel>
+                    <label className='form__label'>Номер телефона</label>
                   </Col>
                   <Col xs={12} md={7} lg={8}>
                     <div className='form__wrap'>
@@ -130,7 +145,6 @@ export default function Partners() {
                         type='text'
                         id={'phone'}
                         mask={phoneNumberMask}
-                        placeholder='+7 (999) 000-00-00'
                         onChange={formik.handleChange}
                         className={
                           '' +
@@ -146,7 +160,7 @@ export default function Partners() {
                     md={5}
                     lg={4}
                     className='d-flex justify-content-md-end'>
-                    <FormLabel type='text'>Email</FormLabel>
+                    <label className='form__label'>Email</label>
                   </Col>
                   <Col xs={12} md={7} lg={8}>
                     <div className='form__wrap'>
@@ -169,9 +183,9 @@ export default function Partners() {
                     md={5}
                     lg={4}
                     className='d-flex justify-content-md-end'>
-                    <FormLabel type='text'>
+                    <label className='form__label'>
                       Расскажите, информацию о вас или о вашем продукте
-                    </FormLabel>
+                    </label>
                   </Col>
                   <Col xs={12} md={7} lg={8}>
                     <div className='form__wrap'>
@@ -184,6 +198,7 @@ export default function Partners() {
                   </Col>
                   {getErrorMessages(formik.errors)}
                 </Row>
+                {messages && <div className={'complete'}>{messages}</div>}
                 <div className='d-flex align-items-center justify-content-center'>
                   <button className={`btn-main btn-main`} type='submit'>
                     Отправить

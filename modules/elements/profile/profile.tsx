@@ -177,9 +177,11 @@ export const ProfileBalance = ({
 
   const checkPayment = () => {
     requestTransaction(value, token).then(({ data }) => {
-      handleCloseCheck();
-      setToken('');
-      setValue('');
+      if (data.message) {
+        handleCloseCheck();
+        setToken('');
+        setValue('');
+      }
     });
   };
 

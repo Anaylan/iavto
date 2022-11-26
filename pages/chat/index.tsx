@@ -39,9 +39,6 @@ export default function Chat() {
   }, [auth, router]);
 
   useMemo(() => {
-    // setMessageHistory(messageHistory.filter((p) => !p));
-    // console.log(messageHistory);
-    //
     getDialogs().then(({ data }) => {
       setInitDialogs(data);
     });
@@ -50,14 +47,27 @@ export default function Chat() {
     });
   }, [router.query.dialog]);
 
+  // useEffect(() => {
+  //   document.addEventListener(
+  //     'popstate',
+  //     function (e) {
+  //       console.log('123');
+  //       setActiveDialog(null);
+  //     },
+  //     false,
+  //   );
+  // }, []);
+
   useEffect(() => {
     if (initDialogs) {
-      setActiveDialog(
-        initDialogs.find(
-          (p: IDialogModel) =>
-            Number(p.dialogId) === Number(router.query.dialog),
-        ),
-      );
+      if (router.query.dialog) {
+        setActiveDialog(
+          initDialogs.find(
+            (p: IDialogModel) =>
+              Number(p.dialogId) === Number(router.query.dialog),
+          ),
+        );
+      }
     }
   }, [initDialogs, router.query.dialog]);
 
@@ -87,6 +97,16 @@ export default function Chat() {
       setActive(false);
     }, 600);
   };
+
+  useEffect(() => {
+    window.onpopstate = function (event) {
+      console.log(event);
+      setShowDialog(false);
+    };
+    return () => {
+      window.onpopstate = () => {};
+    };
+  }, []);
 
   const onKeyDown = (e: any) => {
     if (e.keyCode === 13) {
@@ -150,9 +170,13 @@ export default function Chat() {
                 </div>
               </div>
             ) : (
-              <div className='messenger chat__want'>
-                Выберите, кому хотели бы написать
-              </div>
+              <>
+                {window.innerWidth > 991 && (
+                  <div className='messenger chat__want'>
+                    Выберите, кому хотели бы написать
+                  </div>
+                )}
+              </>
             )}
           </div>
         </Container>

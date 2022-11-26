@@ -165,7 +165,6 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
           </Row>
         </Container>
       </Col>
-      {/*Рендерить на мобилке*/}
       {active ? <HeaderMenu onClick={onClick} user={user} /> : null}
     </>
   );

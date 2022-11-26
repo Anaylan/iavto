@@ -34,10 +34,10 @@ export default function MyApp({ Component, ...rest }: AppProps) {
       '%cЕсли вы не до конца уверены в том, что вы делаете, лучше закройте это окно и оставайтесь в безопасности.',
       'font-size: 15px;',
     );
-    console.log(
-      '%cЕсли вы действительно понимаете, что делаете, то приходите к нам работать https://t.me/vodilaNikita',
-      'font-size: 15px;',
-    );
+    // console.log(
+    //   '%cЕсли вы действительно понимаете, что делаете, то приходите к нам работать https://t.me/vodilaNikita',
+    //   'font-size: 15px;',
+    // );
   }, []);
 
   const { store, props }: any = wrapper.useWrappedStore(rest);

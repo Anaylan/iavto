@@ -123,6 +123,34 @@
   }
 }
 
+.rating-reviews {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 0 16px 0;
+
+  .icon {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    margin: 0 7px 0 0;
+
+    &:last-child {
+      margin: 0;
+    }
+
+    &__item {
+      fill: #d9d9d9;
+    }
+  }
+
+  .icon.star-active {
+    .icon__item {
+      fill: #ffe600 !important;
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   .carpark-reviews {
     &__item {
@@ -179,6 +207,14 @@
       p {
         font-size: 14px;
       }
+    }
+  }
+
+  .rating-reviews {
+    .icon {
+      width: 24px;
+      height: 24px;
+      margin: 0 5px 0 0;
     }
   }
 }

@@ -302,7 +302,7 @@ export default function Cars() {
                   md: 12,
                 }}
                 className={'justify-content-between d-flex flex-row-reverse'}>
-                <Button type='submit'>Потвердить</Button>
+                <Button type='submit'>Поиск</Button>
               </SearchAdditionalCol>
             </SearchAdditonalRow>
           </SearchBlock>

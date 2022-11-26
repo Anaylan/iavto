@@ -196,7 +196,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Ваше имя</FormLabel>
+              <label className='form__label'>Ваше имя</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -220,7 +220,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className={'d-flex justify-content-md-end'}>
-              <FormLabel type='text'>Ваша фамилия</FormLabel>
+              <label className='form__label'>Ваша фамилия</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -244,7 +244,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Ваше отчество</FormLabel>
+              <label className='form__label'>Ваше отчество</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -268,7 +268,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Номер телефона для связи</FormLabel>
+              <label className='form__label'>Номер телефона для связи</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -293,7 +293,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Дата рождения</FormLabel>
+              <label className='form__label'>Дата рождения</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -315,7 +315,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Место рождения</FormLabel>
+              <label className='form__label'>Место рождения</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -338,9 +338,9 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>
+              <label className='form__label'>
                 Ссылки на ваши социальные сети (через запятую)
-              </FormLabel>
+              </label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -363,7 +363,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Серия и номер паспорта</FormLabel>
+              <label className='form__label'>Серия и номер паспорта</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -387,7 +387,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Кем выдан</FormLabel>
+              <label className='form__label'>Кем выдан</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -410,7 +410,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Дата выдачи</FormLabel>
+              <label className='form__label'>Дата выдачи</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -433,7 +433,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Место регистрации</FormLabel>
+              <label className='form__label'>Место регистрации</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -456,7 +456,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Код подразделения</FormLabel>
+              <label className='form__label'>Код подразделения</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -480,9 +480,9 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>
+              <label className='form__label'>
                 Номер водительского удостоверения
-              </FormLabel>
+              </label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -506,9 +506,9 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>
+              <label className='form__label'>
                 Дата получения водительского удостоверения
-              </FormLabel>
+              </label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -530,7 +530,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>ФИО Родственника №1</FormLabel>
+              <label className='form__label'>ФИО Родственника №1</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -553,7 +553,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Кем он для вас является</FormLabel>
+              <label className='form__label'>Кем он для вас является</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -576,7 +576,9 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Номер телефона родственника №1</FormLabel>
+              <label className='form__label'>
+                Номер телефона родственника №1
+              </label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -600,7 +602,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>ФИО Родственника №2</FormLabel>
+              <label className='form__label'>ФИО Родственника №2</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -623,7 +625,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Кем он для вас является</FormLabel>
+              <label className='form__label'>Кем он для вас является</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -646,7 +648,9 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Номер телефона родственника №2</FormLabel>
+              <label className='form__label'>
+                Номер телефона родственника №2
+              </label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -670,7 +674,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>ФИО Родственника №3</FormLabel>
+              <label className='form__label'>ФИО Родственника №3</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -693,7 +697,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Кем он для вас является</FormLabel>
+              <label className='form__label'>Кем он для вас является</label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>
@@ -716,7 +720,9 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
               md={5}
               lg={4}
               className='d-flex justify-content-md-end'>
-              <FormLabel type='text'>Номер телефона родственника №3</FormLabel>
+              <label className='form__label'>
+                Номер телефона родственника №3
+              </label>
             </Col>
             <Col xs={12} md={7} lg={8}>
               <div className='form__wrap'>

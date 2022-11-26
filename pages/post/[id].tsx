@@ -7,13 +7,14 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
 import { URL_IMG } from 'app/config';
+import { dbFormatDate, sanitize } from 'libs/functions';
 
 export async function getServerSideProps({ params }: any) {
-  const res = await getPost(params.id);
+  const { data } = await getPost(params.id);
 
   return {
     props: {
-      post: res.data,
+      post: data,
     },
   };
 }
@@ -41,8 +42,8 @@ export default function Post({ post }: { post: IPostModel }) {
         <Container>
           <div className='post__body'>
             <div className='post__header'>
-              <div className='post__date'>2022-08-29</div>
-              <h1 className='post__title title'>Мы открылись!</h1>
+              <div className='post__date'>{post.created}</div>
+              <h1 className='post__title title'>{post.title}</h1>
             </div>
             <div className='post__img'>
               <Image
@@ -53,9 +54,11 @@ export default function Post({ post }: { post: IPostModel }) {
                 sizes={'100%'}
               />
             </div>
-            <div className='post__text'>
-              {post.description}
-              {/* 
+            <div
+              className='post__text'
+              dangerouslySetInnerHTML={sanitize(post.description)}
+            />
+            {/* 
               <div className='table-responsive'>
                 <table className='table'>
                   <thead>
@@ -224,13 +227,13 @@ export default function Post({ post }: { post: IPostModel }) {
                   </tbody>
                 </table>
               </div> */}
-            </div>
+
             {/* <Link className='post__banner' href='#'>
-              <img
-                src='https://iavto.team/_next/image?url=https%3A%2F%2Fxn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai%2Fimg%2F100000%2FScreenshot_44.jpg&w=1920&q=75'
-                alt=''
-              />
-            </Link> */}
+                <img
+                  src='https://iavto.team/_next/image?url=https%3A%2F%2Fxn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai%2Fimg%2F100000%2FScreenshot_44.jpg&w=1920&q=75'
+                  alt=''
+                />
+              </Link> */}
             <Link className='post__banner-none' href='#'>
               <p>Здесь могла быть ваша реклама</p>
             </Link>

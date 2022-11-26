@@ -3,7 +3,7 @@ import { API_URL } from 'app/config';
 import { UserModel } from 'app/models';
 
 export const GET_TRANSACTION_TOKEN_URL = `${API_URL}/transaction/getUrl`;
-export const ADD_TRANSACTION_URL = `${API_URL}/auth/new`;
+export const ADD_TRANSACTION_URL = `${API_URL}/transaction/add`;
 
 // Server should return AuthModel
 export async function requestURLTransaction(amount: string) {

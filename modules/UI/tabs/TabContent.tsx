@@ -4,17 +4,18 @@ import { ICarModel, ICarparkModel, IReviewModel } from 'app/models';
 import CarBlock from 'modules/templates/CarBlock';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Col, ProgressBar, Row } from 'react-bootstrap';
+import { Col, Modal, ProgressBar, Row } from 'react-bootstrap';
 import { Button } from '../buttons/Button';
 import Form from '../forms/Form';
 import { Textarea } from '../textarea/textarea';
-import { getCompanyReviews } from 'api/Review';
+import { checkOrder, createOrder, getCompanyReviews } from 'api/Review';
 import { Review } from '../reviews/Review';
 import { useFormik } from 'formik';
 import { countAndFormatMonth } from 'libs/functions';
 import { EmptyComponent } from 'modules/elements';
 import { sendMessage } from 'api/Chat';
 import { Container } from 'react-bootstrap';
+import { Star } from 'assets/icon/icons';
 
 export const TabCars = () => {
   const [cars, setCars] = useState<ICarModel[]>([]);
@@ -113,6 +114,27 @@ export const TabProfile = ({
 
 export const TabReviews = ({ id }: { id: string }) => {
   const [reviews, setReviews] = useState<IReviewModel | null>(null);
+  const [show, setShow] = useState(false);
+  const [star, setStar] = useState(0);
+  const [comment, setComment] = useState('');
+
+  const callModal = () => {
+    checkOrder(`${id}`).then(({ data }) => {
+      if (data) {
+        setShow(true);
+      }
+    });
+  };
+
+  const confirm = () => {
+    createOrder(id, comment, star).then(({ data }: { data: boolean }) => {
+      if (data) {
+        setShow(false);
+        setComment('');
+        setStar(0);
+      }
+    });
+  };
 
   useEffect(() => {
     getCompanyReviews(id).then(({ data }) => {
@@ -125,7 +147,84 @@ export const TabReviews = ({ id }: { id: string }) => {
       <Container>
         {reviews && (
           <Row>
+            <Modal show={show} onHide={() => setShow(false)}>
+              <Modal.Header closeButton>
+                <Modal.Title>Оставить отзыв</Modal.Title>
+              </Modal.Header>
+              <Modal.Body className='form'>
+                <label className='form__label-auth'>Оценка:</label>
+                <div className='rating-reviews'>
+                  <label
+                    onClick={() => {
+                      setStar(1);
+                    }}
+                    className={star >= 1 ? 'icon star-active' : 'icon'}
+                    htmlFor='rating'>
+                    <Star />
+                  </label>
+                  <label
+                    onClick={() => {
+                      setStar(2);
+                    }}
+                    className={star >= 2 ? 'icon star-active' : 'icon'}
+                    htmlFor='rating'>
+                    <Star />
+                  </label>
+                  <label
+                    onClick={() => {
+                      setStar(3);
+                    }}
+                    className={star >= 3 ? 'icon star-active' : 'icon'}
+                    htmlFor='rating'>
+                    <Star />
+                  </label>
+                  <label
+                    onClick={() => {
+                      setStar(4);
+                    }}
+                    className={star >= 4 ? 'icon star-active' : 'icon'}
+                    htmlFor='rating'>
+                    <Star />
+                  </label>
+                  <label
+                    onClick={() => {
+                      setStar(5);
+                    }}
+                    className={star === 5 ? 'icon star-active' : 'icon'}
+                    htmlFor='rating'>
+                    <Star />
+                  </label>
+                </div>
+                <label className='form__label-auth'>Отзыв</label>
+                <Textarea
+                  value={comment}
+                  placeholder={'Напишите отзыв'}
+                  className={'form__input mb-3'}
+                  style={{ height: '140px' }}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+              </Modal.Body>
+              <Modal.Footer>
+                <button
+                  onClick={() => {
+                    confirm();
+                  }}
+                  className='btn-main'
+                  type='button'>
+                  Отправить
+                </button>
+              </Modal.Footer>
+            </Modal>
             <Col xs={12} md={8} className='order-2 order-md-1'>
+              <button
+                onClick={() => {
+                  callModal();
+                }}
+                className='btn-main btn-main-big mb-4'
+                style={{ opacity: '1' }}
+                type='button'>
+                Оставить отзыв
+              </button>
               {reviews.reviews.map((review, key) => (
                 <Review review={review} key={key} />
               ))}

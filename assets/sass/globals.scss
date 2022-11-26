@@ -54,13 +54,25 @@ input[type='number']:focus {
 }
 .subtitle {
   font-size: 18px;
-  font-weight: 300;
-  color: #acacac;
+  font-weight: 400;
+  color: #686f6d;
 }
 .title-sm {
   font-size: 30px;
   font-weight: 500;
   color: #2e2f31;
+}
+.line-height {
+  line-height: 1.3;
+}
+.line-height-sm {
+  line-height: 1.2;
+}
+.fw-medium {
+  font-weight: 500;
+}
+.fw-semibold {
+  font-weight: 600;
 }
 
 .icon {
@@ -177,61 +189,9 @@ input[type='number']:focus {
     }
   }
 }
-
-.btn-param {
-  position: relative;
-  display: block;
-  background: none;
-  height: 36px;
-  width: 20px;
-  margin: 0 0 0 8px;
-
-  &:hover {
-    span {
-      background-color: #2e2f31;
-
-      &::before,
-      &::after {
-        background-color: #2e2f31;
-      }
-    }
-  }
-
-  span {
-    position: absolute;
-    top: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: inline-block;
-    border-radius: 50%;
-    background-color: #2774ac;
-    width: 6px;
-    height: 6px;
-    transition: background-color 0.1s linear;
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      z-index: 5;
-      display: inline-block;
-      top: 0;
-      left: 0;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: #2774ac;
-      transition: background-color 0.1s linear;
-    }
-
-    &::before {
-      top: 10px;
-    }
-
-    &::after {
-      top: 20px;
-    }
-  }
+.btn-main-big {
+  font-size: 20px;
+  padding: 12px 32px;
 }
 
 .btn-fav {
@@ -971,9 +931,9 @@ section:first-child.carparks {
       margin: 0 6px 0 0;
     }
 
-    img {
+    .icon {
       position: relative;
-      top: -2px;
+      top: -1px;
       width: 18px;
       height: 18px;
     }
@@ -1839,6 +1799,10 @@ section:first-child.carparks {
 ===================*/
 @import 'rules.scss';
 
+/* Partners
+===================*/
+@import 'partners.scss';
+
 /* Modal
 ===================*/
 @import 'modal.scss';
@@ -1873,16 +1837,22 @@ section:first-child.carparks {
     }
 
     &:last-child {
-      padding: 0 0 60px 0 !important;
+      padding: 0 0 80px 0 !important;
     }
 
     &:first-child {
-      padding: 10px 0 60px 0 !important;
+      padding: 30px 0 80px 0 !important;
     }
 
     &:first-child:not(:last-child) {
-      padding: 10px 0 30px 0 !important;
+      padding: 30px 0 30px 0 !important;
     }
+  }
+
+  /* Chat
+	===================*/
+  section.chat {
+    padding: 30px 0 80px 0 !important;
   }
 
   .title {
@@ -1896,33 +1866,12 @@ section:first-child.carparks {
 
   .btn-main {
     font-size: 14px;
-    padding: 8px 10px;
+    padding: 10px 10px;
   }
 
-  .btn-param {
-    height: 30px;
-    width: 18px;
-    margin: 0 0 0 5px;
-
-    span {
-      top: 5px;
-      width: 5px;
-      height: 5px;
-
-      &::before,
-      &::after {
-        width: 5px;
-        height: 5px;
-      }
-
-      &::before {
-        top: 8px;
-      }
-
-      &::after {
-        top: 16px;
-      }
-    }
+  .btn-main-big {
+    font-size: 16px;
+    padding: 12px 20px;
   }
 
   /* Header
@@ -2058,13 +2007,13 @@ section:first-child.carparks {
   /* Carparks
 	===================*/
   section:not(:last-child).carparks {
-    padding: 0 0 10px 0 !important;
+    padding: 0 0 15px 0 !important;
   }
   section:last-child.carparks {
     padding: 0 0 30px 0 !important;
   }
   section:first-child.carparks {
-    padding: 10px 0 10px 0 !important;
+    padding: 15px 0 15px 0 !important;
   }
 
   .carparks {
@@ -2212,12 +2161,6 @@ section:first-child.carparks {
         padding: 0 !important;
       }
     }
-  }
-
-  /* Chat
-	===================*/
-  section.chat {
-    padding: 0 !important;
   }
 
   /* Search
@@ -2461,6 +2404,44 @@ section:first-child.carparks {
 }
 
 @media (max-width: 991px) {
+  section {
+    padding: 0 0 30px 0;
+
+    &:nth-last-child(-n + 2) {
+      padding: 0;
+    }
+
+    &:last-child {
+      padding: 0 0 60px 0 !important;
+    }
+
+    &:first-child {
+      padding: 10px 0 60px 0 !important;
+    }
+
+    &:first-child:not(:last-child) {
+      padding: 10px 0 30px 0 !important;
+    }
+  }
+
+  /* Chat
+	===================*/
+  section.chat {
+    padding: 0 !important;
+  }
+
+  /* Carparks
+	===================*/
+  section:not(:last-child).carparks {
+    padding: 0 0 10px 0 !important;
+  }
+  section:last-child.carparks {
+    padding: 0 0 30px 0 !important;
+  }
+  section:first-child.carparks {
+    padding: 10px 0 10px 0 !important;
+  }
+
   .btn-update {
     .icon {
       width: 20px;

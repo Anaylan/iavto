@@ -1,5 +1,5 @@
 section.chat {
-  padding: 30px 0 70px 0 !important;
+  padding: 40px 0 100px 0 !important;
 }
 .chat {
   position: relative;
@@ -9,7 +9,7 @@ section.chat {
     display: flex;
     border-radius: 10px;
     overflow: hidden;
-    height: calc(100vh - 274px);
+    height: calc(100vh - 309px);
     min-height: 300px;
   }
 
@@ -29,17 +29,20 @@ section.chat {
 
 @media (max-width: 1024px) {
   section.chat {
-    padding: 0 !important;
+    padding: 30px 0 80px 0 !important;
   }
 
   .chat {
     &__body {
-      height: calc(100vh - 249px);
+      height: calc(100vh - 259px);
     }
   }
 }
 
 @media (max-width: 991px) {
+  section.chat {
+    padding: 0 !important;
+  }
   .chat {
     background: #fff;
     padding: 0 !important;

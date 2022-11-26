@@ -140,10 +140,10 @@ const Footer: React.FC = () => {
                 <div className='footer__list-title'>Партнерам</div>
                 <ul className='footer__list'>
                   <li>
-                    <Link href='partners'>Для партнеров</Link>
+                    <Link href='/for-partners'>Для партнеров</Link>
                   </li>
                   <li>
-                    <Link href='referrals'>Для реферальных партнеров</Link>
+                    <Link href='/referrals'>Для реферальных партнеров</Link>
                   </li>
                   {/* <li>
                     <a className='footer__link-app' href='#'>

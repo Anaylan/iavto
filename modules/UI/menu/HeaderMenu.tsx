@@ -16,7 +16,7 @@ const Links = [
     children: 'Заказы',
   },
   {
-    href: '/',
+    href: '/favorites',
     children: 'Избранное',
   },
   {

@@ -22,8 +22,6 @@ interface IModel {
 
 export default function Orders() {
   const [orders, setOrders] = useState<IOrderModel[]>();
-  const [marks, setMark] = useState<IMark[]>([]);
-  const [models, setModel] = useState<IModel[]>([]);
   const router = useRouter();
 
   const user = useSelector(

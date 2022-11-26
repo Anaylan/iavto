@@ -14,6 +14,7 @@ export const CarCardHeader: React.FC<ICarModel> = ({
   favorite,
 }) => {
   const [active, setActive] = useState<boolean>(favorite || false);
+  console.log(id);
   const toFavor = (id: number) => {
     if (active) {
       requestDelFromFavor(id).then(({ data }) => {
@@ -58,22 +59,14 @@ export const CarCardHeader: React.FC<ICarModel> = ({
                   style={{ opacity: '1' }}
                   className={active ? `btn-main btn-fav` : `btn-main`}>
                   {!active ? (
-                    <div
-                      onClick={() => {
-                        toFavor(Number(id));
-                      }}
-                      className='d-flex align-items-center'>
+                    <div className='d-flex align-items-center'>
                       <div className={'icon'}>
                         <Heart />
                       </div>
                       <span>В избранное</span>
                     </div>
                   ) : (
-                    <div
-                      onClick={() => {
-                        toFavor(Number(id));
-                      }}
-                      className='d-flex align-items-center'>
+                    <div className='d-flex align-items-center'>
                       <div className={'icon'}>
                         <Heart />
                       </div>
@@ -81,7 +74,7 @@ export const CarCardHeader: React.FC<ICarModel> = ({
                     </div>
                   )}
                 </Button>
-                <Button
+                {/* <Button
                   type={'button'}
                   className='btn-main btn-main-white'
                   style={{ opacity: '1' }}>
@@ -91,7 +84,7 @@ export const CarCardHeader: React.FC<ICarModel> = ({
                     </div>
                     <span>Пожаловаться</span>
                   </div>
-                </Button>
+                </Button> */}
               </div>
               <div className={`car__top-views d-none d-md-flex`}>
                 <div className={'icon'}>

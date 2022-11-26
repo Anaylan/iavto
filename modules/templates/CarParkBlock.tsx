@@ -33,21 +33,21 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
     <>
       <section className={large ? `carparks carparks-large` : `carparks`}>
         <Container>
-          <h1 className={`carparks__title title`}>{title}</h1>
-          <Row
-            className={
-              large ? `carparks__body gx-0 gy-0` : `carparks__body gx-0 gy-0`
-            }>
-            {Carparks.length ? (
-              Carparks.map((tender: ICarparkModel, key: number) => (
+          <h2 className={`carparks__title title`}>{title}</h2>
+          {Carparks.length ? (
+            <Row
+              className={
+                large ? `carparks__body gx-0 gy-0` : `carparks__body gx-0 gy-0`
+              }>
+              {Carparks.map((tender: ICarparkModel, key: number) => (
                 <Col key={key} {...columns}>
                   <CarparkItem carPark={tender} lazy={large} />
                 </Col>
-              ))
-            ) : (
-              <EmptyComponent />
-            )}
-          </Row>
+              ))}
+            </Row>
+          ) : (
+            <EmptyComponent />
+          )}
         </Container>
       </section>
     </>
