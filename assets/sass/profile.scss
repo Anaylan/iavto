@@ -1,6 +1,13 @@
+section:last-child.profile {
+  padding: 0 0 70px 0 !important;
+}
+section:first-child.profile {
+  padding: 40px 0 30px 0 !important;
+}
+section.profile {
+  padding: 40px 0 30px 0 !important;
+}
 .profile {
-  padding: 40px 0 0 0;
-
   &__body {
   }
 
@@ -294,7 +301,16 @@
   justify-content: space-between;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
+  section:last-child.profile {
+    padding: 0 0 45px 0 !important;
+  }
+  section:first-child.profile {
+    padding: 30px 0 15px 0 !important;
+  }
+  section.profile {
+    padding: 30px 0 15px 0 !important;
+  }
   .profile {
     padding: 30px 0 0 0;
 

@@ -51,7 +51,7 @@ const Header: React.FC = () => {
   const header = useRef<HTMLElement>(null);
 
   useDesktop(header, () => {
-    if (window.innerWidth <= 992) {
+    if (window.innerWidth <= 991) {
       setDesktop(false);
     } else {
       if (document.body.classList.contains('lock')) {
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
 
   useScroll(header, () => {
     if (header && header.current) {
-      if (window.innerWidth > 992) {
+      if (window.innerWidth >= 992) {
         if (window.pageYOffset > 700) {
           if (!header.current.classList.contains('header-fixed')) {
             header.current.classList.add('header-fixed');
@@ -72,7 +72,7 @@ const Header: React.FC = () => {
           header.current.classList.remove('header-fixed');
         }
       } else {
-        if (window.pageYOffset > 65) {
+        if (window.pageYOffset > 90) {
           if (!header.current.classList.contains('header-fixed')) {
             header.current.classList.add('header-fixed');
           }

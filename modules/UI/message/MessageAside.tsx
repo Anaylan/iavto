@@ -29,11 +29,13 @@ export const MessageAside = ({
               <span className={`chat-aside__photo`}>
                 <Image
                   src={
-                    URL_IMG +
-                    '/img/cid/' +
-                    message.cid +
-                    '/' +
                     message.company_img
+                      ? URL_IMG +
+                        '/img/cid/' +
+                        message.cid +
+                        '/' +
+                        message.company_img
+                      : '/media/user-bg.png'
                   }
                   width={100}
                   height={100}

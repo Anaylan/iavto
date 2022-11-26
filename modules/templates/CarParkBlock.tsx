@@ -1,5 +1,5 @@
 import { ICarparkBlock, ICarparkModel } from 'app/models';
-import { Heart, Star } from 'assets/icon/icons';
+import { HeartFill, Star } from 'assets/icon/icons';
 import React, { useEffect, useState } from 'react';
 
 import { URL_IMG } from 'app/config';
@@ -37,9 +37,7 @@ const CarParkBlock: React.FC<ICarparkBlock> = ({
           <h1 className={`carparks__title title`}>{title}</h1>
           <Row
             className={
-              large
-                ? `carparks__body gx-0 gy-0 carparks__large`
-                : `carparks__body gx-0 gy-0 carparks`
+              large ? `carparks__body gx-0 gy-0` : `carparks__body gx-0 gy-0`
             }>
             {Carparks.length ? (
               Carparks.map((tender: ICarparkModel, key: number) => (
@@ -102,12 +100,17 @@ export function CarparkItem({
                 priority={true}
                 fill
                 sizes={'100%'}
-                src={URL_IMG + 'images.png'}
+                src={URL_IMG + '/img/images.png'}
                 alt=''
               />
             )}
           </Link>
-          <div className={`carparks__hover carparks-hover`}>
+          <div
+            className={
+              active
+                ? `carparks__hover carparks-hover carparks-hover_visible`
+                : `carparks__hover carparks-hover`
+            }>
             {!active ? (
               <div
                 onClick={() => {
@@ -115,8 +118,8 @@ export function CarparkItem({
                 }}
                 className={'carparks-hover__item'}>
                 <div>Добавить в</div>
-                <span className={'icon'}>
-                  <Heart />
+                <span className={'icon icon-heart'}>
+                  <HeartFill />
                 </span>
               </div>
             ) : (
@@ -125,8 +128,8 @@ export function CarparkItem({
                 onClick={() => {
                   toFavor(Number(carPark.cid));
                 }}>
-                <span className={'icon'}>
-                  <Heart />
+                <span className={'icon icon-heart'}>
+                  <HeartFill />
                 </span>
               </div>
             )}

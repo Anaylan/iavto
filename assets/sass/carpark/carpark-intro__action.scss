@@ -13,13 +13,14 @@
     width: 35px;
     height: 35px;
     background-color: #fff;
-    border-radius: 50%;
+    border-radius: 20px;
     overflow: hidden;
+    box-shadow: -2px -2px 6px rgb(0 0 0 / 3%), 2px 2px 6px rgb(0 0 0 / 3%);
 
     &:hover {
       .icon {
-        &__item {
-          fill: #ffe600 !important;
+        .icon__item {
+          stroke: #2774ac;
         }
       }
     }
@@ -30,15 +31,39 @@
       width: 21px;
       height: 21px;
 
-      &__item {
-        fill: #2e2f31 !important;
-        transition: fill 0.1s linear;
+      .icon__item {
+        fill: #2e2f31;
+      }
+    }
+
+    .icon-heart {
+      .icon__item {
+        fill: none;
+        stroke: #2e2f31;
+      }
+    }
+  }
+
+  .carpark-fav {
+    &:hover {
+      .icon-heart {
+        .icon__item {
+          stroke: #2774ac;
+          fill: #2774ac;
+        }
+      }
+    }
+
+    .icon-heart {
+      .icon__item {
+        fill: #fc0321;
+        stroke: #fc0321;
       }
     }
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .carpark-intro {
     &__action-btn {
       width: 32px;

@@ -13,7 +13,7 @@
 
   &__tabs {
     section {
-      padding: 0;
+      padding: 0 !important;
     }
   }
 }
@@ -22,11 +22,17 @@
   fill: #ffe600;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .carpark {
     &__intro {
       min-height: 270px;
       padding: 25px 20px 45px 20px;
+    }
+
+    &__tabs {
+      section {
+        padding: 0 !important;
+      }
     }
   }
 }

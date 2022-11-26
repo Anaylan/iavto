@@ -33,6 +33,7 @@ export const MessengerBottom = forwardRef<any, any>((props, ref) => {
               ref={ref}
               tabIndex={0}
               onKeyDown={props.onKeyDown}
+              onPaste={props.onPaste}
               className={`messenger-bottom__input text-break`}
               contentEditable='true'
               placeholder='Напишите сообщение...'

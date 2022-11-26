@@ -17,85 +17,97 @@ import {
   TabProfile,
   TabReviews,
 } from 'modules/UI';
+import { useRouter } from 'next/router';
 
-export async function getServerSideProps({ params }: any) {
-  const { data } = await getCar(params.id);
-  return {
-    props: {
-      car: data,
-    },
-  };
-}
-
-export default function Car({ car }: { car: ICarModel }) {
+export default function Car() {
   const [carpark, setCarpark] = useState<ICarparkModel>();
+  const [car, setCar] = useState<ICarModel>();
+  const [TabItems, setTabItems] = useState<ITabItems[] | null>();
+  const router = useRouter();
 
   useEffect(() => {
-    getCarpark(car.cid).then(({ data }: { data: ICarparkModel }) => {
-      setCarpark(data);
+    getCar(Number(router.query.id)).then(({ data }) => {
+      setCar(data);
+      getCarpark(data.cid).then(({ data }: { data: ICarparkModel }) => {
+        setCarpark(data);
+      });
+      requestVisit(data.id);
     });
+  }, []);
 
-    requestVisit(car.id).then(({ data }) => {});
-  }, [car]);
-
-  const TabItems: ITabItems[] = [
-    {
-      title: 'Автомобиль',
-      eventKey: 'car',
-      contentChild: <CarInfo car={car} />,
-    },
-    {
-      title: 'Профиль',
-      eventKey: 'profile',
-      contentChild: <TabProfile carpark={carpark} />,
-    },
-    {
-      title: 'Отзывы',
-      eventKey: 'reviews',
-      contentChild: <TabReviews id={`${car.cid}`} />,
-    },
-    {
-      title: 'СВЯЗАТЬСЯ С АВТОПАРКОМ',
-      eventKey: 'contact',
-      contentChild: <TabFeedback id={`${car.cid}`} />,
-    },
-  ];
-
+  useEffect(() => {
+    if (car) {
+      setTabItems([
+        {
+          title: 'Автомобиль',
+          eventKey: 'car',
+          contentChild: <CarInfo car={car} />,
+        },
+        {
+          title: 'Профиль',
+          eventKey: 'profile',
+          contentChild: <TabProfile carpark={carpark} />,
+        },
+        {
+          title: 'Отзывы',
+          eventKey: 'reviews',
+          contentChild: <TabReviews id={`${car.cid}`} />,
+        },
+        {
+          title: 'СВЯЗАТЬСЯ С АВТОПАРКОМ',
+          eventKey: 'contact',
+          contentChild: <TabFeedback id={`${car.cid}`} />,
+        },
+      ]);
+    }
+  }, [car, carpark]);
+  console.log(TabItems);
   return (
     <>
-      <Head>
-        <title>
-          {car.mark} {car.model} | {TITLE}
-        </title>
-      </Head>
-      <section className='carpark'>
-        <Container>
-          {carpark ? (
-            <div className={`carpark__intro carpark-intro`}>
-              <Image
-                className={'carpark-intro__banner'}
-                src={URL_IMG + '/img/cid/' + carpark.cid + '/' + carpark.banner}
-                fill
-                priority={false}
-                alt={carpark.company_name ? carpark.company_name : ''}
-              />
-              <ActionFollow id={Number(carpark.cid)} />
-              <CarparkCard
-                alt={carpark.company_name}
-                tarif={carpark.tarif}
-                src={URL_IMG + '/img/cid/' + carpark.cid + '/' + carpark.img}
-                title={carpark.company_name}
-                sold={carpark.count_product}
-              />
-              <CarparkInfo
-                orders={carpark.geo_city}
-                rating={carpark.rait || 5}
-              />
-            </div>
-          ) : null}
-        </Container>
-        {car && <CarparkTabs tabs={TabItems}></CarparkTabs>}
-      </section>
+      {car && (
+        <>
+          <Head>
+            <title>
+              {car.mark} {car.model} | {TITLE}
+            </title>
+          </Head>
+          <section className='carpark'>
+            <Container>
+              {carpark ? (
+                <div className={`carpark__intro carpark-intro`}>
+                  <Image
+                    className={'carpark-intro__banner'}
+                    src={
+                      URL_IMG + '/img/cid/' + carpark.cid + '/' + carpark.banner
+                    }
+                    fill
+                    priority={false}
+                    alt={carpark.company_name ? carpark.company_name : ''}
+                  />
+                  <ActionFollow
+                    favorite={carpark.favorite}
+                    id={Number(carpark.cid)}
+                  />
+                  <CarparkCard
+                    alt={carpark.company_name}
+                    tarif={carpark.tarif}
+                    src={
+                      URL_IMG + '/img/cid/' + carpark.cid + '/' + carpark.img
+                    }
+                    title={carpark.company_name}
+                    sold={carpark.count_product}
+                  />
+                  <CarparkInfo
+                    orders={carpark.orders_count || 0}
+                    rating={carpark.rait || 5}
+                  />
+                </div>
+              ) : null}
+            </Container>
+            {car && TabItems && <CarparkTabs tabs={TabItems}></CarparkTabs>}
+          </section>
+        </>
+      )}
     </>
   );
 }

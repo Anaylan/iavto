@@ -6,8 +6,16 @@ export default function setupAxios(axios: any, store: any) {
           header: { title },
         } = store.getState();
 
+        const {
+          region: { id },
+        } = store.getState();
+
         if (title) {
           config.headers.authorization = `${title}`;
+        }
+
+        if (id) {
+          config.headers.region = `${id}`;
         }
 
         return config;

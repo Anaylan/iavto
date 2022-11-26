@@ -55,8 +55,9 @@ export const CarCardHeader: React.FC<ICarModel> = ({
                   onClick={() => {
                     toFavor(Number(id));
                   }}
-                  className='btn-main'
-                  type={'button'}>
+                  type={'button'}
+                  style={{ opacity: '1' }}
+                  className={active ? `btn-main btn-fav` : `btn-main`}>
                   {!active ? (
                     <div
                       onClick={() => {
@@ -74,14 +75,17 @@ export const CarCardHeader: React.FC<ICarModel> = ({
                         toFavor(Number(id));
                       }}
                       className='d-flex align-items-center'>
-                      <div className={'icon active'}>
+                      <div className={'icon'}>
                         <Heart />
                       </div>
                       <span>В избранном</span>
                     </div>
                   )}
                 </Button>
-                <Button type={'button'} className='btn-main btn-main-white'>
+                <Button
+                  type={'button'}
+                  className='btn-main btn-main-white'
+                  style={{ opacity: '1' }}>
                   <div className='d-flex align-items-center'>
                     <div className={'icon'}>
                       <Prohibit />

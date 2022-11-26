@@ -22,16 +22,17 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <script
-          type='text/javascript'
-          dangerouslySetInnerHTML={{ __html: script }}
-        />
+        {process.env.NODE_ENV == 'production' ? (
+          <script
+            type='text/javascript'
+            dangerouslySetInnerHTML={{ __html: script }}
+          />
+        ) : null}
         <noscript>
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src='
-              '
+              src='https://mc.yandex.ru/watch/89821857'
               style={{
                 position: 'absolute',
                 left: '-9999px',

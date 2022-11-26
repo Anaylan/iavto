@@ -12,42 +12,45 @@ import {
 } from 'modules/UI';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 
-export async function getServerSideProps({ params }: any) {
-  const res = await getCarpark(params.id);
+export default function Carpark() {
+  const [autopark, setAutopark] = useState<ICarparkModel>();
+  const router = useRouter();
+  const [TabItems, setTabItems] = useState<ITabItems[]>([]);
+  useEffect(() => {
+    getCarpark(Number(router.query.id)).then(({ data }) => {
+      setAutopark(data);
+      setTabItems([
+        {
+          title: 'Автомобили',
+          eventKey: 'cars',
+          contentChild: <TabCars />,
+        },
+        {
+          title: 'Профиль',
+          eventKey: 'profile',
+          contentChild: <TabProfile carpark={data} />,
+        },
+        {
+          title: 'Отзывы',
+          eventKey: 'reviews',
+          contentChild: <TabReviews id={`${data.cid}`} />,
+        },
+        {
+          title: 'СВЯЗАТЬСЯ С АВТОПАРКОМ',
+          eventKey: 'contact',
+          contentChild: <TabFeedback id={`${data.cid}`} />,
+        },
+      ]);
+    });
+  }, []);
 
-  return {
-    props: {
-      autopark: res.data,
-    },
-  };
-}
+  console.log(TabItems);
 
-export default function Carpark({ autopark }: { autopark: ICarparkModel }) {
-  const TabItems: ITabItems[] = [
-    {
-      title: 'Автомобили',
-      eventKey: 'cars',
-      contentChild: <TabCars />,
-    },
-    {
-      title: 'Профиль',
-      eventKey: 'profile',
-      contentChild: <TabProfile carpark={autopark} />,
-    },
-    {
-      title: 'Отзывы',
-      eventKey: 'reviews',
-      contentChild: <TabReviews id={`${autopark.cid}`} />,
-    },
-    {
-      title: 'СВЯЗАТЬСЯ С АВТОПАРКОМ',
-      eventKey: 'contact',
-      contentChild: <TabFeedback id={`${autopark.cid}`} />,
-    },
-  ];
-
+  console.log(autopark);
   return (
     <>
       {autopark && (
@@ -68,7 +71,10 @@ export default function Carpark({ autopark }: { autopark: ICarparkModel }) {
                   fill
                   alt={autopark.company_name ? autopark.company_name : ''}
                 />
-                <ActionFollow id={Number(autopark.cid)} />
+                <ActionFollow
+                  favorite={autopark.favorite}
+                  id={Number(autopark.cid)}
+                />
                 <CarparkCard
                   alt={autopark.company_name}
                   tarif={autopark.tarif}
@@ -79,12 +85,14 @@ export default function Carpark({ autopark }: { autopark: ICarparkModel }) {
                   sold={autopark.count_product}
                 />
                 <CarparkInfo
-                  orders={autopark.geo_city}
+                  orders={autopark.orders_count || 0}
                   rating={autopark.rait || 5}
                 />
               </div>
             </Container>
-            <CarparkTabs tabs={TabItems}></CarparkTabs>
+            {TabItems.length > 0 ? (
+              <CarparkTabs tabs={TabItems}></CarparkTabs>
+            ) : null}
           </section>
         </>
       )}

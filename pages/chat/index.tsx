@@ -48,7 +48,9 @@ export default function Chat() {
     getMessage(Number(router.query.dialog)).then(({ data }) => {
       setMessages(data);
     });
+  }, [router.query.dialog]);
 
+  useEffect(() => {
     if (initDialogs) {
       setActiveDialog(
         initDialogs.find(
@@ -57,25 +59,17 @@ export default function Chat() {
         ),
       );
     }
-    console.log(activeDialog);
-  }, [router.query]);
+  }, [initDialogs, router.query.dialog]);
 
-  useEffect(() => {
-    const onPaste = (e: any) => {
-      var text = e.clipboardData.getData('text/plain');
-      setTimeout(() => {
-        if (messageBottomRef.current) {
-          // messageBottomRef.current. = '';
-          messageBottomRef.current.textContent = text;
-        }
-      }, 1);
-    };
-
-    messageBottomRef.current?.addEventListener('paste', onPaste);
-    return () => {
-      messageBottomRef.current?.removeEventListener('paste', onPaste);
-    };
-  }, [messageBottomRef]);
+  const onPaste = (e: any) => {
+    var text = e.clipboardData.getData('text/plain');
+    setTimeout(() => {
+      if (messageBottomRef.current) {
+        // messageBottomRef.current. = '';
+        messageBottomRef.current.textContent = text;
+      }
+    }, 1);
+  };
 
   useEffect(() => {
     return () => {
@@ -150,6 +144,7 @@ export default function Chat() {
                   <MessengerBottom
                     onClick={handleClickSendMessage}
                     onKeyDown={onKeyDown}
+                    onPaste={onPaste}
                     ref={messageBottomRef}
                   />
                 </div>

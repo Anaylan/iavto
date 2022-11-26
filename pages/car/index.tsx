@@ -317,9 +317,7 @@ export default function Cars() {
         getData={getHotTender}
         large={true}
       />
-      <Container>
-        <DynamicCarBlock title={'Автомобили'} getData={getCars} />
-      </Container>
+      <DynamicCarBlock title={'Автомобили'} getData={getCars} />
     </>
   );
 }

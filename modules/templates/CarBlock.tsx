@@ -5,6 +5,7 @@ import { IRegionState } from 'app/redux/reducers/regionReducer';
 import { Load, Location } from 'assets/icon/icons';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Container } from 'react-bootstrap';
 import { ReactNode, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -50,38 +51,40 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
   return (
     <>
       <section className={'cars'}>
-        <h1 className={`cars__title title`}>{title}</h1>
-        <Row>
-          {cars && cars.length ? (
-            cars.map((car: ICarModel, key: number) => (
-              <CarItem key={key} car={car}>
-                <div className={'cars-item__label'}>Характеристики</div>
-                <ul className={'cars-item__charact'}>
-                  <li>
-                    <div>Топливо</div>
-                    <div>
-                      <span>{car.fuel_type}</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div>Мощность</div>
-                    <div>
-                      <span>{car.horse_power}</span> л.с.
-                    </div>
-                  </li>
-                </ul>
-              </CarItem>
-            ))
-          ) : (
-            <EmptyComponent />
+        <Container>
+          <h1 className={`cars__title title`}>{title}</h1>
+          <Row>
+            {cars && cars.length ? (
+              cars.map((car: ICarModel, key: number) => (
+                <CarItem key={key} car={car}>
+                  <div className={'cars-item__label'}>Характеристики</div>
+                  <ul className={'cars-item__charact'}>
+                    <li>
+                      <div>Топливо</div>
+                      <div>
+                        <span>{car.fuel_type}</span>
+                      </div>
+                    </li>
+                    <li>
+                      <div>Мощность</div>
+                      <div>
+                        <span>{car.horse_power}</span> л.с.
+                      </div>
+                    </li>
+                  </ul>
+                </CarItem>
+              ))
+            ) : (
+              <EmptyComponent />
+            )}
+          </Row>
+          <div ref={triggerElement} />
+          {isLoading && (
+            <>
+              <Load />
+            </>
           )}
-        </Row>
-        <div ref={triggerElement} />
-        {isLoading && (
-          <>
-            <Load />
-          </>
-        )}
+        </Container>
       </section>
     </>
   );

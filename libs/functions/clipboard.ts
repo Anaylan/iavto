@@ -3,7 +3,7 @@ import { RefObject } from 'react';
 export function RefCodeToClipboard(ref_code: number) {
   // text area method
   let textArea = document.createElement('textarea');
-  textArea.value = `${window.location.protocol}//${window.location.host}/invite?ref_code=${ref_code}`;
+  textArea.value = `https://яавто.рф/invite?ref_code=${ref_code}`;
   // make the textarea out of viewport
   textArea.style.position = 'fixed';
   textArea.style.left = '-999999px';

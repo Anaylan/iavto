@@ -33,7 +33,7 @@
       padding: 6px 18px;
 
       &:nth-child(odd) {
-        margin: 0 36px 0 0;
+        margin: 0 18px 0 0;
       }
     }
 
@@ -70,7 +70,7 @@
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .car {
     &__top {
       margin: 0 0 25px 0;
@@ -96,10 +96,10 @@
     &__top-actions {
       .btn-main {
         font-size: 14px;
-        padding: 6px 14px;
+        padding: 6px 8px;
 
         &:nth-child(odd) {
-          margin: 0 15px 0 0;
+          margin: 0 10.5px 0 0;
         }
 
         .d-flex {
@@ -127,6 +127,27 @@
 
     &__slider-body {
       margin: 0 0 35px 0;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .car {
+    .cars-item__btn {
+      display: block;
+      width: 100%;
+      background: #2774ac;
+      border: 2px solid #2774ac;
+      font-size: 18px;
+      color: #2774ac;
+      padding: 12px;
+      margin: 0;
+
+      &:hover {
+        background: #2e2f31;
+        border: 2px solid #2e2f31;
+        color: #fff;
+      }
     }
   }
 }
@@ -188,7 +209,7 @@
   }
 }
 
-@media (max-width: 374px) {
+@media (max-width: 335px) {
   .car {
     &__top-actions {
       flex-wrap: wrap;
@@ -202,6 +223,10 @@
 
         &:last-child {
           margin: 0;
+        }
+
+        .d-flex {
+          justify-content: center;
         }
       }
     }

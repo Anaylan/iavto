@@ -1,7 +1,9 @@
+section.chat {
+  padding: 30px 0 70px 0 !important;
+}
 .chat {
   position: relative;
   background: #f6f7fb;
-  padding: 30px 0 70px 0 !important;
 
   &__body {
     display: flex;
@@ -25,7 +27,11 @@
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
+  section.chat {
+    padding: 0 !important;
+  }
+
   .chat {
     &__body {
       height: calc(100vh - 249px);

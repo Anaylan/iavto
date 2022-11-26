@@ -73,6 +73,7 @@
   }
 
   &__progress-value {
+    text-align: right;
     font-size: 15px;
     color: #2e2f31;
     min-width: 35px;
@@ -80,7 +81,7 @@
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .reviews-aside {
     padding: 0;
 

@@ -69,11 +69,13 @@ export const ChatMessenger = ({
                       width={100}
                       height={100}
                       src={
-                        URL_IMG +
-                        '/img/cid/' +
-                        activeDialog.cid +
-                        '/' +
                         activeDialog.company_img
+                          ? URL_IMG +
+                            '/img/cid/' +
+                            activeDialog.cid +
+                            '/' +
+                            activeDialog.company_img
+                          : '/media/user-bg.png'
                       }
                       alt=''
                     />

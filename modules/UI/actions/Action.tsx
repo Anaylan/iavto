@@ -1,9 +1,32 @@
-import { requestAddToFavor } from 'api/User';
-import { Heart } from 'assets/icon/icons';
+import { requestAddToFavor, requestDelFromFavor } from 'api/User';
+import { HeartFill } from 'assets/icon/icons';
+import { useState } from 'react';
 
-export const ActionFollow = ({ id }: { id: number }) => {
+export const ActionFollow = ({
+  id,
+  favorite,
+}: {
+  id: number;
+  favorite: boolean;
+}) => {
+  console.log(id);
+  console.log(favorite);
+  const [active, setActive] = useState<boolean>(favorite || false);
   const toFavor = (id: number) => {
-    requestAddToFavor(id);
+    console.log(id);
+    if (active) {
+      requestDelFromFavor(id).then(({ data }) => {
+        if (data) {
+          setActive(false);
+        }
+      });
+    } else {
+      requestAddToFavor(id).then(({ data }) => {
+        if (data) {
+          setActive(true);
+        }
+      });
+    }
   };
 
   return (
@@ -13,9 +36,15 @@ export const ActionFollow = ({ id }: { id: number }) => {
           toFavor(id);
         }}
         className={'carpark-intro__action'}>
-        <button className={'carpark-intro__action-btn'} type='button'>
-          <div className={'icon'}>
-            <Heart />
+        <button
+          className={
+            active
+              ? 'carpark-fav carpark-intro__action-btn'
+              : 'carpark-intro__action-btn'
+          }
+          type='button'>
+          <div className={'icon icon-heart'}>
+            <HeartFill />
           </div>
         </button>
       </div>

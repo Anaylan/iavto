@@ -114,6 +114,19 @@ export const Heart = () => {
   );
 };
 
+export const HeartFill = () => {
+  return (
+    <svg className={`icon__item`} viewBox='0 0 22 20'>
+      <g>
+        <path
+          d='M11,18.9c-0.1,0-0.1,0-0.4-0.1c-0.4-0.2-9.5-5.3-9.6-11.9c0-3,2.4-5.6,5.5-5.6c1.8,0,3.5,0.8,4.4,2.1
+	        c0,0,0.1,0,0.1,0c1.5-1.9,4.1-2.7,6.5-1.7c2,0.9,3.4,2.8,3.4,5.1c0,6.5-9.2,11.7-9.6,12C11.2,18.9,11.2,18.9,11,18.9z'
+        />
+      </g>
+    </svg>
+  );
+};
+
 export const Hot = () => {
   return (
     <svg className={`icon__item`} viewBox='0 0 17 19'>

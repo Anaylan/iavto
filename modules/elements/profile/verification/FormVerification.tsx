@@ -1,15 +1,10 @@
 import { requestVerification } from 'api/User';
 import { UserDataModel } from 'app/models';
 import { useFormik } from 'formik';
-import {
-  FormInputWithoutLabel,
-  FormInputWithMaskNotLabel,
-  FormInputWithMask,
-} from 'modules/UI';
+import { FormInputWithoutLabel, FormInputWithMaskNotLabel } from 'modules/UI';
 import React from 'react';
 import { Row, Col, FormLabel } from 'react-bootstrap';
-import { DocumentsDataInputs } from './DocumentsDataInputs';
-import { RelativeDataInputs } from './RelativeDataInputs';
+
 import * as Yup from 'yup';
 import Link from 'next/link';
 
@@ -137,7 +132,7 @@ export const verifSchema = Yup.object().shape({
   ),
 });
 
-const getErrorMessages = (errors: object) => {
+export const getErrorMessages = (errors: object) => {
   for (let error in errors) {
     const item = errors[error as keyof object];
     let content = [];

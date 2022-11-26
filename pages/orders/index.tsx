@@ -20,23 +20,6 @@ interface IModel {
   model: string;
 }
 
-const tarifs = [
-  { name: 'Эконом' },
-  { name: 'Комфорт' },
-  { name: 'Комфорт +' },
-  { name: 'Минивэн' },
-  { name: 'Business' },
-  { name: 'Premier' },
-  { name: 'Élite' },
-  { name: 'Cruise' },
-];
-
-const statuses = [
-  { name: 'Одобрено' },
-  { name: 'Ожидается' },
-  { name: 'Отклонено' },
-];
-
 export default function Orders() {
   const [orders, setOrders] = useState<IOrderModel[]>();
   const [marks, setMark] = useState<IMark[]>([]);
@@ -72,35 +55,33 @@ export default function Orders() {
       <Head>
         <title>Мои заказы | {TITLE}</title>
       </Head>
-      <Container>
-        <Row>
-          {/* <SearchBodyOrders/> */}
-          <section className='cars orders'>
-            <h1 className='title'>Мои заказы</h1>
-            <Row>
-              {orders ? (
-                <>
-                  {orders.length > 0 ? (
-                    orders.map((order, key) => (
-                      <Fragment key={key}>
-                        <OrderCard
-                          order={order}
-                          user={user}
-                          changeInvoke={sendInvoke}
-                        />
-                      </Fragment>
-                    ))
-                  ) : (
-                    <EmptyComponent />
-                  )}
-                </>
-              ) : (
-                <EmptyComponent />
-              )}
-            </Row>
-          </section>
-        </Row>
-      </Container>
+      {/* <SearchBodyOrders/> */}
+      <section className='cars orders'>
+        <Container>
+          <h1 className='title'>Мои заказы</h1>
+          <Row>
+            {orders ? (
+              <>
+                {orders.length > 0 ? (
+                  orders.map((order, key) => (
+                    <Fragment key={key}>
+                      <OrderCard
+                        order={order}
+                        user={user}
+                        changeInvoke={sendInvoke}
+                      />
+                    </Fragment>
+                  ))
+                ) : (
+                  <EmptyComponent />
+                )}
+              </>
+            ) : (
+              <EmptyComponent />
+            )}
+          </Row>
+        </Container>
+      </section>
     </>
   );
 }

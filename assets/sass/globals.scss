@@ -11,10 +11,22 @@ body {
 }
 
 section {
-  padding: 40px 0;
+  padding: 0 0 50px 0;
+
+  &:nth-last-child(-n + 2) {
+    padding: 0;
+  }
 
   &:last-child {
-    padding: 40px 0 70px 0;
+    padding: 0 0 100px 0 !important;
+  }
+
+  &:first-child {
+    padding: 40px 0 100px 0 !important;
+  }
+
+  &:first-child:not(:last-child) {
+    padding: 40px 0 50px 0 !important;
   }
 }
 
@@ -58,7 +70,7 @@ input[type='number']:focus {
   width: 15px;
   height: 15px;
 
-  &__item {
+  .icon__item {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -67,6 +79,13 @@ input[type='number']:focus {
     align-items: center;
     fill: #2774ac;
     transition: fill 0.25s ease, stroke 0.25s ease;
+  }
+}
+.icon-heart {
+  .icon__item {
+    stroke: #2e2f31;
+    stroke-width: 2px;
+    fill: none;
   }
 }
 
@@ -92,7 +111,6 @@ input[type='number']:focus {
 
       &__item {
         fill: #fff;
-        transition: color 0.25s ease;
       }
     }
   }
@@ -212,6 +230,32 @@ input[type='number']:focus {
 
     &::after {
       top: 20px;
+    }
+  }
+}
+
+.btn-fav {
+  background-color: #2e2f31;
+  border: 2px solid #2e2f31;
+  color: #ffe600;
+
+  .d-flex {
+    .icon {
+      &__item {
+        fill: #ffe600;
+      }
+    }
+  }
+
+  &:hover {
+    color: #fff;
+
+    .d-flex {
+      .icon {
+        &__item {
+          fill: #fff;
+        }
+      }
     }
   }
 }
@@ -641,7 +685,7 @@ input[type='number']:focus {
     }
 
     &::after {
-      content: 'Регион, город, населенный пункт';
+      content: 'Регион, город';
       position: absolute;
       z-index: 5;
       display: inline-block;
@@ -789,9 +833,16 @@ input[type='number']:focus {
 
 /* Carparks
 ===================*/
+section:not(:last-child).carparks {
+  padding: 0 0 20px 0 !important;
+}
+section:last-child.carparks {
+  padding: 0 0 90px 0 !important;
+}
+section:first-child.carparks {
+  padding: 40px 0 50px 0 !important;
+}
 .carparks {
-  padding: 40px 0 0 0;
-
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -826,7 +877,7 @@ input[type='number']:focus {
         }
       }
 
-      .carparks-hover__item {
+      .carparks-hover {
         opacity: 1;
         visibility: visible;
       }
@@ -943,24 +994,34 @@ input[type='number']:focus {
   -ms-user-select: none;
   user-select: none;
 
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+
+  &_visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
   &__item {
     display: flex;
     align-items: center;
     background-color: #fff;
     overflow: hidden;
     border-radius: 20px;
+    box-shadow: -2px -2px 6px rgb(0 0 0 / 3%), 2px 2px 6px rgb(0 0 0 / 3%);
     padding: 7px 12px 7px 16px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
+    transition: background-color 0.25s ease;
 
     &:hover {
       div {
-        color: #ffe600;
+        color: #2774ac;
       }
 
-      .icon__item {
-        fill: #ffe600;
+      .icon-heart {
+        .icon__item {
+          stroke: #2774ac;
+        }
       }
     }
 
@@ -972,18 +1033,17 @@ input[type='number']:focus {
       transition: color 0.25s ease;
     }
 
-    .icon {
+    .icon-heart {
       width: 18px;
       height: 18px;
 
-      &__item {
-        fill: #acacac;
+      .icon__item {
+        stroke: #acacac;
       }
     }
   }
 
   &__item.carparks-hover-act {
-    transition: all 0.6s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -992,15 +1052,22 @@ input[type='number']:focus {
     width: 32px;
     height: 32px;
     padding: 0;
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
 
-    .icon {
-      width: 18px;
-      height: 18px;
+    &:hover {
+      .icon-heart {
+        .icon__item {
+          stroke: #2774ac;
+          fill: #2774ac;
+        }
+      }
+    }
 
-      &__item {
-        fill: #ffe600;
+    .icon-heart {
+      .icon__item {
+        fill: #fc0321;
+        stroke: #fc0321;
       }
     }
   }
@@ -1316,7 +1383,7 @@ input[type='number']:focus {
   &::after {
     content: '';
     position: absolute;
-    top: 20px;
+    top: 23px;
     right: 34px;
     z-index: 1;
     width: 12px;
@@ -1768,7 +1835,13 @@ input[type='number']:focus {
 ===================*/
 @import 'privacy_policy.scss';
 
+/* Rules
+===================*/
 @import 'rules.scss';
+
+/* Modal
+===================*/
+@import 'modal.scss';
 
 /* News
 ===================*/
@@ -1787,16 +1860,28 @@ input[type='number']:focus {
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   body {
     font-size: 14px;
   }
 
   section {
-    padding: 30px 0;
+    padding: 0 0 30px 0;
+
+    &:nth-last-child(-n + 2) {
+      padding: 0;
+    }
 
     &:last-child {
-      padding: 30px 0 60px 0;
+      padding: 0 0 60px 0 !important;
+    }
+
+    &:first-child {
+      padding: 10px 0 60px 0 !important;
+    }
+
+    &:first-child:not(:last-child) {
+      padding: 10px 0 30px 0 !important;
     }
   }
 
@@ -1972,9 +2057,17 @@ input[type='number']:focus {
 
   /* Carparks
 	===================*/
-  .carparks {
-    padding: 30px 0 0 0;
+  section:not(:last-child).carparks {
+    padding: 0 0 10px 0 !important;
+  }
+  section:last-child.carparks {
+    padding: 0 0 30px 0 !important;
+  }
+  section:first-child.carparks {
+    padding: 10px 0 10px 0 !important;
+  }
 
+  .carparks {
     &__body {
       margin: 0 -12px;
     }
@@ -2022,10 +2115,16 @@ input[type='number']:focus {
     }
   }
   .carparks-hover {
+    visibility: visible !important;
+    opacity: 1 !important;
     padding: 6px;
 
     &__item {
-      padding: 7px 12px 7px 16px;
+      padding: 7px;
+
+      div:first-child {
+        display: none;
+      }
 
       .icon {
         width: 16px;
@@ -2036,6 +2135,15 @@ input[type='number']:focus {
     &__item.carparks-hover-act {
       width: 30px;
       height: 30px;
+
+      &:hover {
+        .icon-heart {
+          .icon__item {
+            stroke: #fc0321;
+            fill: #fc0321;
+          }
+        }
+      }
 
       .icon {
         width: 16px;
@@ -2091,6 +2199,25 @@ input[type='number']:focus {
       width: 16px;
       height: 16px;
     }
+  }
+
+  /* Carpark
+	===================*/
+  section.carpark {
+    padding-top: 0 !important;
+  }
+  .carpark {
+    &__tabs {
+      section {
+        padding: 0 !important;
+      }
+    }
+  }
+
+  /* Chat
+	===================*/
+  section.chat {
+    padding: 0 !important;
   }
 
   /* Search
@@ -2334,18 +2461,6 @@ input[type='number']:focus {
 }
 
 @media (max-width: 991px) {
-  section {
-    padding: 30px 0;
-
-    &:first-child {
-      padding: 10px 0 30px 0;
-    }
-
-    &:last-child {
-      padding: 30px 0 60px 0;
-    }
-  }
-
   .btn-update {
     .icon {
       width: 20px;
@@ -2940,16 +3055,6 @@ input[type='number']:focus {
     width: 100%;
   }
 
-  /* Header
-	===================*/
-  .menu {
-    .header-region {
-      &__btn-region {
-        max-width: 240px;
-      }
-    }
-  }
-
   /* Search
 	===================*/
   .search-additional {
@@ -3009,4 +3114,12 @@ input[type='number']:focus {
   100% {
     background-color: #2774ac;
   }
+}
+
+.list-group-numbered {
+  list-style: decimal inside;
+}
+
+.list-group-circle {
+  list-style: circle inside;
 }
