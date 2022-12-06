@@ -30,12 +30,15 @@ const phoneNumberMask = [
 
 export const feedbackSchema = Yup.object().shape({
   firstname: Yup.string().required('Имя обязательно для заполнения'),
-  email: Yup.string().required('Email обязательна для заполнения'),
-  phone: Yup.string().required('Номер телефона обязательно для заполнения'),
+  email: Yup.string().email('Неправильный формат email').required('Email обязательна для заполнения'),
+  phone: Yup.string()
+    .required('Номер телефона обязательно для заполнения')
+    .matches(
+      /^(\+7|7|8)\(?[489][0-9]{2}\)[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/,
+      'Номер телефона введён неправильно',
+    ),
   info: Yup.string().required('Сообщение обязательно для заполнения'),
 });
-
-// сделано перенаправление на in_dev
 
 export default function Partners() {
   const [messages, setMessages] = useState('');
@@ -148,7 +151,7 @@ export default function Partners() {
                         onChange={formik.handleChange}
                         className={
                           '' +
-                          (formik.errors.firstname
+                          (formik.errors.phone
                             ? 'is-invalid form-control form-control-lg form-control-solid'
                             : 'form-control is-valid')
                         }
@@ -165,13 +168,13 @@ export default function Partners() {
                   <Col xs={12} md={7} lg={8}>
                     <div className='form__wrap'>
                       <FormInputWithoutLabel
-                        type='text'
+                        type='email'
                         id='email'
                         value={formik.values.email}
                         onChange={formik.handleChange}
                         className={
                           '' +
-                          (formik.errors.firstname
+                          (formik.errors.email
                             ? 'is-invalid form-control form-control-lg form-control-solid'
                             : 'form-control is-valid')
                         }

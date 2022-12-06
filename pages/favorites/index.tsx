@@ -86,9 +86,9 @@ export default function Favorites() {
                         slidesPerView: 4,
                         spaceBetween: 24,
                       },
-                      992: {
+                      1025: {
                         slidesPerView: 5,
-                        spaceBetween: 22,
+                        spaceBetween: 39,
                       },
                     }}>
                     {/* {Array(10)

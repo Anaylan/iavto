@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding: 4px 6px 4px 0px;
   }
   .cars-item__main-body {
     display: flex;
@@ -10,9 +11,22 @@
     flex: 1 1 auto;
   }
 
-  .order-card__btns {
+  .order-card__btn-group {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 -4px;
+  }
+
+  .order-card__btn-wrap {
+    flex: 0 1 50%;
+    padding: 0 4px;
+
+    .btn-main, .btn-main-trp {
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      padding: 10px 6px !important;
+    }
   }
 
   .orders-btn {
@@ -30,6 +44,7 @@
       color: #00ba29;
     }
   }
+
   .orders-btn-wait {
     border: 2px solid #acacac;
     color: #acacac;
@@ -45,5 +60,53 @@
 @media (max-width: 1024px) {
   .order-btn:first-child {
     margin-right: 10px;
+  }
+}
+
+@media (max-width: 991px) {
+  .orders {
+    .order-card__btn-wrap {
+      margin: 0 0 10px 0;
+
+      .btn-main, .btn-main-trp {
+        padding: 8px 6px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 670px) {
+  .orders {
+    .order-card__btn-group {
+      flex-wrap: wrap;
+    }
+
+    .order-card__btn-wrap {
+      flex: 0 1 100%;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .orders {
+    .order-card__btn-group {
+      flex-wrap: nowrap;
+    }
+
+    .order-card__btn-wrap {
+      flex: 0 1 50%;
+    }
+  }
+}
+
+@media (max-width: 352px) {
+  .orders {
+    .order-card__btn-group {
+      flex-wrap: wrap;
+    }
+
+    .order-card__btn-wrap {
+      flex: 0 1 100%;
+    }
   }
 }

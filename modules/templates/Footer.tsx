@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import {
   OK,
   Rutube,
@@ -91,9 +90,6 @@ const Footer: React.FC = () => {
                 <div className='footer__list-title'>Водителям</div>
                 <ul className='footer__list'>
                   <li>
-                    <Link href='/auth/signin'>Авторизация</Link>
-                  </li>
-                  <li>
                     <Link href='/carpark'>Автопарки</Link>
                   </li>
                   <li>
@@ -145,6 +141,9 @@ const Footer: React.FC = () => {
                   <li>
                     <Link href='/referrals'>Для реферальных партнеров</Link>
                   </li>
+                  <li>
+                    <Link href='/investors'>Инвесторам</Link>
+                  </li>
                   {/* <li>
                     <a className='footer__link-app' href='#'>
                       <Image
@@ -179,9 +178,6 @@ const Footer: React.FC = () => {
                     {' '}
                     {/* На такой див стили не навешивать (и не создавать родительский и дочерний див со стилями!) */}
                     <ul className='footer__list'>
-                      <li>
-                        <Link href='/auth/signin'>Авторизация</Link>
-                      </li>
                       <li>
                         <Link href='/carpark'>Автопарки</Link>
                       </li>
@@ -232,7 +228,7 @@ const Footer: React.FC = () => {
                   <div id='collapseLink2'>
                     <ul className='footer__list'>
                       <li>
-                        <Link href='https://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/main/'>
+                        <Link href='https://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/register'>
                           Открыть автопарк
                         </Link>
                       </li>
@@ -259,6 +255,9 @@ const Footer: React.FC = () => {
                       </li>
                       <li>
                         <Link href='referrals'>Для реферальных партнеров</Link>
+                      </li>
+                      <li>
+                        <Link href='referrals'>Инвесторам</Link>
                       </li>
                     </ul>
                   </div>

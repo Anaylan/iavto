@@ -15,7 +15,7 @@ export const MessengerBottom = forwardRef<any, any>((props, ref) => {
         acceptCharset='UTF-8'
         id='formMessenger'>
         <div className={`messenger-bottom__row`}>
-          <input type='file' name='' id='chatAttachFile' />
+          {/* <input type='file' name='' id='chatAttachFile' />
           <label
             className={`messenger-bottom__btn messenger-bottom__attach-file`}
             htmlFor='chatAttachFile'>
@@ -24,7 +24,7 @@ export const MessengerBottom = forwardRef<any, any>((props, ref) => {
                 <PaperClip />
               </div>
             </div>
-          </label>
+          </label> */}
           <div className={`messenger-bottom__message`}>
             <div
               id='message'

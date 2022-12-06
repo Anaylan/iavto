@@ -86,7 +86,8 @@
     line-height: 1.2;
     word-wrap: break-word !important;
     word-break: break-word !important;
-    padding: 23px 12px;
+    // padding: 23px 12px;
+    padding: 23px 23px;
 
     &::-webkit-scrollbar {
       display: none;
@@ -130,7 +131,8 @@
     &__input {
       min-height: 60px;
       max-height: 180px;
-      padding: 21px 10px;
+      // padding: 21px 10px;
+      padding: 21px 21px;
     }
   }
 }

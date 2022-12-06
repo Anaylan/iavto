@@ -15,15 +15,15 @@ import {
   SearchSelect,
   Button,
   FilterInput,
+  FilterRadioGroup,
+  FilterRadioItem,
 } from 'modules/UI';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { getCarFilters } from 'api/Filter';
+import { getCarFilters, getCarTarifs } from 'api/Filter';
 import { useFormik } from 'formik';
-import {
-  FilterRadioGroup,
-  FilterRadioItem,
-} from 'modules/UI/radio/FilterRadio';
+
+import { useSelector } from 'react-redux';
 
 const DynamicCarBlock = dynamic(() => import('modules/templates/CarBlock'), {
   suspense: true,
@@ -37,23 +37,31 @@ interface IModel {
   model: string;
 }
 
-const tarifs = [
-  { name: 'Эконом' },
-  { name: 'Комфорт' },
-  { name: 'Комфорт +' },
-  { name: 'Минивэн' },
-  { name: 'Business' },
-  { name: 'Premier' },
-  { name: 'Élite' },
-  { name: 'Cruise' },
-];
+interface ITarif {
+  id: string;
+  name: string;
+}
+
+// const tarifs = [
+//   { name: 'Эконом' },
+//   { name: 'Комфорт' },
+//   { name: 'Комфорт +' },
+//   { name: 'Минивэн' },
+//   { name: 'Business' },
+//   { name: 'Premier' },
+//   { name: 'Élite' },
+//   { name: 'Cruise' },
+// ];
 
 export default function Cars() {
   const [marks, setMark] = useState<IMark[]>([]);
   const [models, setModel] = useState<IModel[]>([]);
+  const [tarifs, setTarifs] = useState<ITarif[]>([]);
 
   const [fuelChange, setFuelChange] = useState<number>(0);
   const [transChange, setTransChange] = useState<number>(0);
+
+  const city_id = useSelector(({ region }: { region: any }) => region.id);
 
   const router = useRouter();
   const formik = useFormik({
@@ -79,30 +87,51 @@ export default function Cars() {
   });
 
   useEffect(() => {
-    if (formik.values.mark) {
-      getCarFilters({
-        getcell: 'model',
-        wherecell: 'mark',
-        where: formik.values.mark,
-      }).then(({ data }: { data: IModel[] }) => {
-        setModel(data);
+    if (formik.values.tarif) {
+      getCarTarifs(city_id).then(({ data }: { data: ITarif[] }) => {
+        setTarifs(data);
       });
     } else {
-      getCarFilters({
-        getcell: 'model',
-      }).then(({ data }: { data: IModel[] }) => {
-        setModel(data);
+      getCarTarifs(city_id).then(({ data }: { data: ITarif[] }) => {
+        setTarifs(data);
       });
     }
+  }, []);
+
+  useEffect(() => {
+    // if (formik.values.mark) {
+    getCarFilters(
+      {
+        getcell: 'model',
+        where: `mark='${formik.values.mark}'`,
+      },
+      city_id,
+    ).then(({ data }: { data: IModel[] }) => {
+      setModel(data);
+    });
+    // } else {
+    //   getCarFilters(
+    //     {
+    //       getcell: 'model',
+    //     },
+    //     city_id,
+    //   ).then(({ data }: { data: IModel[] }) => {
+    //     setModel(data);
+    //   });
+    // }
   }, [formik.values.mark]);
 
   useEffect(() => {
-    getCarFilters({
-      getcell: 'mark',
-    }).then(({ data }: { data: IMark[] }) => {
+    getCarFilters(
+      {
+        getcell: 'mark',
+        where: 'type=' + formik.values.tarif,
+      },
+      city_id,
+    ).then(({ data }: { data: IMark[] }) => {
       setMark(data);
     });
-  }, []);
+  }, [formik.values.tarif]);
 
   return (
     <>
@@ -130,9 +159,9 @@ export default function Cars() {
                     Выберите тариф
                   </SearchSelectOption>
                   <SearchSelectOption value={''}>Все тарифы</SearchSelectOption>
-                  {tarifs &&
+                  {tarifs.length > 0 &&
                     tarifs.map((tarif, key) => (
-                      <SearchSelectOption key={key} value={tarif.name}>
+                      <SearchSelectOption key={key} value={tarif.id}>
                         {tarif.name}
                       </SearchSelectOption>
                     ))}
@@ -147,12 +176,13 @@ export default function Cars() {
                 <SearchSelect
                   name='mark'
                   defaultValue={''}
-                  onChange={formik.handleChange}>
+                  onChange={formik.handleChange}
+                  disabled={formik.values.tarif == '' ? true : false}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите марку
                   </SearchSelectOption>
                   <SearchSelectOption value={''}>Все марки</SearchSelectOption>
-                  {marks &&
+                  {marks.length > 0 &&
                     marks.map((mark, key) => (
                       <SearchSelectOption key={key} value={mark.mark}>
                         {mark.mark}
@@ -170,12 +200,12 @@ export default function Cars() {
                   name='model'
                   defaultValue={''}
                   onChange={formik.handleChange}
-                  disabled={false}>
+                  disabled={formik.values.mark == '' ? true : false}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите модель
                   </SearchSelectOption>
                   <SearchSelectOption value={''}>Все модели</SearchSelectOption>
-                  {models &&
+                  {models.length > 0 &&
                     models.map((model, key) => (
                       <SearchSelectOption key={key} value={model.model}>
                         {model.model}

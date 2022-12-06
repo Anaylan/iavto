@@ -92,7 +92,7 @@ export const OrderCard = ({
       <div className={`cars-item`}>
         <Row>
           <Col xs={12} lg={4} className='d-flex'>
-            <Link className={`cars-item__img`} href='#'>
+            <Link className={`cars-item__img`} href={`/car/${order.pid}`}>
               <Image
                 priority={false}
                 fill
@@ -146,10 +146,11 @@ export const OrderCard = ({
                   </p>
                 </span>
               </div>
-              <div className='order-card__btns'>
-                {order.status == 1 &&
+              <div className='order-card__btn-group'>
+                {
+                  window.innerWidth >= 992 ? order.status == 1 &&
                   (order.user_time == '' || order.user_time == null) && (
-                    <div className='order-btn mb-3'>
+                    <div className='order-card__btn-wrap'>
                       <Button
                         onClick={() => {
                           setShowTime(true);
@@ -158,11 +159,14 @@ export const OrderCard = ({
                         Назначить время
                       </Button>
                     </div>
-                  )}
-                {order.status == 2 ||
+                  ) : null
+                }
+                {
+                  window.innerWidth >= 992 ? order.status == 2 ||
                   (order.status == 1 && (
-                    <div className='order-btn'>
+                    <div className='order-card__btn-wrap'>
                       <Button
+                        className='btn-main-trp'
                         onClick={() => {
                           orderCancel(order.id);
                           changeInvoke();
@@ -170,7 +174,8 @@ export const OrderCard = ({
                         Отменить заказ
                       </Button>
                     </div>
-                  ))}
+                  )) : null
+                }
               </div>
             </div>
           </Col>
@@ -194,11 +199,11 @@ export const OrderCard = ({
                     <li>Есть возможность долгой аренды</li> */}
                   </ul>
                 </div>
-                <a
+                <Link
                   className={`cars-item__btn btn-main d-none d-lg-block`}
-                  href='#'>
+                  href={`/car/${order.pid}`}>
                   Подробнее
-                </a>
+                </Link>
                 <div
                   className={
                     `'cars-item__btn orders-btn btn-main d-lg-none ` +
@@ -224,15 +229,46 @@ export const OrderCard = ({
                     </p>
                   </span>
                 </div>
+                <div className='order-card__btn-group'>
+                {
+                  window.innerWidth <= 991 ? order.status == 1 &&
+                  (order.user_time == '' || order.user_time == null) && (
+                    <div className='order-card__btn-wrap'>
+                      <Button
+                        onClick={() => {
+                          setShowTime(true);
+                          changeInvoke();
+                        }}>
+                        Назначить время
+                      </Button>
+                    </div>
+                  ) : null
+                }
+                {
+                  window.innerWidth <= 991 ? order.status == 2 ||
+                  (order.status == 1 && (
+                    <div className='order-card__btn-wrap'>
+                      <Button
+                        className='btn-main-trp'
+                        onClick={() => {
+                          orderCancel(order.id);
+                          changeInvoke();
+                        }}>
+                        Отменить заказ
+                      </Button>
+                    </div>
+                  )) : null
+                }
+              </div>
               </div>
               <div className='d-flex align-items-center justify-content-between'>
                 <div className={`cars-item__price d-lg-none`}>
                   <span>2800</span>
                   <div>руб / сут</div>
                 </div>
-                <a className={`cars-item__btn btn-main d-lg-none`} href='#'>
+                <Link className={`cars-item__btn btn-main d-lg-none`} href={`/car/${order.pid}`}>
                   Подробнее
-                </a>
+                </Link>
               </div>
             </div>
           </Col>
@@ -245,26 +281,30 @@ export const OrderCard = ({
         <Modal.Body>
           <Row>
             <Col xs='6' className='gy-2'>
-              <p className='mb-3'>С</p>
-              <SearchSelect
-                onChange={(e) => {
-                  setFromTo({
-                    ...fromTo,
-                    from: Number(e.target.value),
-                    userFrom: Number(e.target.value),
-                  });
-                }}>
-                {makeOptions(order.from_time, order.to_time)}
-              </SearchSelect>
+              <p className='mb-2'>С</p>
+              <div className='select-wrap'>
+                <SearchSelect
+                  onChange={(e) => {
+                    setFromTo({
+                      ...fromTo,
+                      from: Number(e.target.value),
+                      userFrom: Number(e.target.value),
+                    });
+                  }}>
+                  {makeOptions(order.from_time, order.to_time)}
+                </SearchSelect>
+              </div>
             </Col>
             <Col xs='6' className='gy-2'>
-              <p className='mb-3'>До</p>
-              <SearchSelect
-                onChange={(e) =>
-                  setFromTo({ ...fromTo, to: Number(e.target.value) })
-                }>
-                {makeOptions(fromTo.userFrom, order.to_time)}
-              </SearchSelect>
+              <p className='mb-2'>До</p>
+              <div className='select-wrap'>
+                <SearchSelect
+                  onChange={(e) =>
+                    setFromTo({ ...fromTo, to: Number(e.target.value) })
+                  }>
+                  {makeOptions(fromTo.userFrom, order.to_time)}
+                </SearchSelect>
+              </div>
             </Col>
           </Row>
         </Modal.Body>

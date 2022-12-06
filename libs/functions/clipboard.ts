@@ -1,5 +1,3 @@
-import { RefObject } from 'react';
-
 export function RefCodeToClipboard(ref_code: number) {
   // text area method
   let textArea = document.createElement('textarea');

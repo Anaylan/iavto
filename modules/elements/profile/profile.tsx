@@ -68,12 +68,12 @@ export const ProfileCard: FC<IProfile> = ({ profile }) => {
                   </a>
                 </div>
               </div>
-              <a className={'profile-top__btn'} href='#'>
+              {/* <a className={'profile-top__btn'} href='#'>
                 <div className={'icon'}>
                   <Notification />
                 </div>
                 <span className={'profile-top__btn-bullet'}></span>
-              </a>
+              </a> */}
             </div>
           </div>
           <div className={'profile-bottom'}>
@@ -168,9 +168,7 @@ export const ProfileBalance = ({
   const handleShowCheck = () => setShowCheck(true);
 
   const addMoney = () => {
-    requestURLTransaction(value).then(({ data }) => {
-      window.open(data.src);
-      setToken(data.token);
+    requestURLTransaction(value).then(() => {
       handleClosePay();
     });
   };
@@ -198,6 +196,7 @@ export const ProfileBalance = ({
           <div onClick={handleShowPay} className={'profile-body__action'}>
             Пополнить
           </div>
+          {/* <Link className={'profile-body__action'} href={'/finances'}>Просмотр</Link> */}
         </div>
       </Link>
       <Modal centered show={showPay} onHide={handleClosePay}>
@@ -220,6 +219,7 @@ export const ProfileBalance = ({
             Закрыть
           </Button>
           <Button onClick={addMoney}>Пополнить</Button>
+          
         </Modal.Footer>
       </Modal>
       <Modal centered show={showCheck}>

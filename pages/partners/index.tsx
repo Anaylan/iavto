@@ -61,11 +61,7 @@ export default function Partners() {
                           <span className='partners__title'>
                             {/* <span>Телеграм канал:</span> */}
                             <span
-                            // target={'_blank'}
-                            // rel='noreferrer'
-                            // href={partner.url}
                             >
-                              {/* Нормально, только ненужные аттрибуты убрать */}
                               {partner.name}
                             </span>
                           </span>
@@ -78,12 +74,9 @@ export default function Partners() {
                         </span>
                         <span className='partners__bottom'>
                           <span
-                            // href={partner.url}
                             className='partners__link'
-                            // target={'_blank'}
-                            // rel='noreferrer'
                           >
-                            Ссылка
+                            Перейти
                           </span>
                         </span>
                       </a>

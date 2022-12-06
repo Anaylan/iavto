@@ -76,7 +76,13 @@ export const RegionSearch = ({
   useEffect(() => {
     if (!name) {
       getLocation().then(({ data }) => {
-        dispatch(regionActions.update(data.name, data.id));
+        console.log(data)
+        if (!data.name) {
+          dispatch(regionActions.update('Москва', 1))
+        } else {
+          dispatch(regionActions.update(data.name, data.id));
+        }
+        
       });
     }
     setCurrentLocation(name);

@@ -6,6 +6,7 @@ export const GET_DIALOGS = `${API_URL}/dialogs/getUser`;
 
 export const CREATE_CHAT = `${API_URL}/chat/newchat`;
 export const SEND_MESSAGE = `${API_URL}/chat/sendmessage`;
+export const GET_NOT_READ_AMOUNT = `${API_URL}/chat/get_not_read`;
 
 // Server should return AuthModel
 export function getDialogs() {
@@ -32,5 +33,9 @@ export function requestMessage(
   // Check common redux folder => setupAxios
   return axiosAuth.post(`${SEND_MESSAGE}/${cid}`, { cid, message });
 }
+
+export function getNotReadAmount() {
+  return axiosAuth.get(GET_NOT_READ_AMOUNT);
+} 
 
 // /chat/newchat

@@ -34,12 +34,10 @@ export const ChatMessenger = ({
 
   useEffect(() => {
     if (messageRef) {
-      setTimeout(() => {
-        messageRef.current?.scrollTo({
-          top: 99999999,
-          behavior: 'smooth',
-        });
-      }, 500);
+      messageRef.current?.scrollTo({
+        top: 99999999,
+        behavior: 'auto',
+      });
     }
     //
   }, [data, messageRef]);

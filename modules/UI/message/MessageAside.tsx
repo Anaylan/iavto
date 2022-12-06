@@ -3,7 +3,7 @@ import { IDialogModel } from 'app/models';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC } from 'react';
-import { notInitialized } from 'react-redux/es/utils/useSyncExternalStore';
+
 
 export const MessageAside = ({
   message,

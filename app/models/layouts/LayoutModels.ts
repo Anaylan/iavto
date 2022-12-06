@@ -156,10 +156,10 @@ export interface ILayoutCSSVariables {
 export interface LinkType {
   href: string;
   children: React.ReactNode;
-  title: string;
+  title: React.ReactNode;
 }
 
 export interface ILink {
   href: string;
-  title: string | undefined;
+  title: React.ReactNode;
 }

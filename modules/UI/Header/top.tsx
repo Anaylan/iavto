@@ -2,15 +2,16 @@ import Link from 'next/link';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
-import { ILink, UserDataModel } from 'app/models';
+import { ILink, LinkType, UserDataModel } from 'app/models';
 
-import { User } from 'assets/icon/icons';
+import { Heart, Package, User } from 'assets/icon/icons';
 
 import { HeaderMenu, SearchInput } from 'modules/UI';
 import { useDispatch, useSelector } from 'react-redux';
 
 import * as auth from 'app/redux/reducers/authReducer';
 import { useRouter } from 'next/router';
+
 
 // import {Button} from '../buttons/Button'
 
@@ -47,7 +48,7 @@ export const HeaderTopLink: React.FC<Children> = ({
       <li className={`header-top__item`}>
         <Link className={`header-top__link`} href={href}>
           <div className={'icon'}>{children}</div>
-          <span>{title}</span>
+          {title}
         </Link>
       </li>
     </>
@@ -150,11 +151,11 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
                       </HeaderTopLink>
                     ))}
                     {user?.firstname ? (
-                      <HeaderTopLink href={'/profile'} title={user.firstname}>
+                      <HeaderTopLink href={'/profile'} title={<span>{user.firstname}</span>}>
                         <User />
                       </HeaderTopLink>
                     ) : (
-                      <HeaderTopLink href={'/auth/signin'} title={'Войти'}>
+                      <HeaderTopLink href={'/auth/signin'} title={<span>Войти</span>}>
                         <User />
                       </HeaderTopLink>
                     )}
@@ -165,9 +166,9 @@ export const HeaderTop = forwardRef<HTMLElement, IChildProps>((props, ref) => {
           </Row>
         </Container>
       </Col>
-      {active ? <HeaderMenu onClick={onClick} user={user} /> : null}
+      {active && window.innerWidth < 992 ? <HeaderMenu onClick={onClick} user={user} /> : null}
     </>
   );
 });
 
-HeaderTop.displayName = 'HeaderTop';
+

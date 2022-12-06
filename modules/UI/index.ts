@@ -46,3 +46,5 @@ export * from './reviews/Review';
 export * from './radio/FilterRadio';
 // message
 export * from './message/Message';
+// tables
+export * from './tables/table';

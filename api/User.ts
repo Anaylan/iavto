@@ -19,12 +19,14 @@ export const REQUEST_EDIT_URL = `${API_URL}/user/edit`;
 export const REQUEST_TO_FAVOR = `${API_URL}/user/addfavorites`;
 export const GET_FAVOR = `${API_URL}/user/getfavorites`;
 export const REMOVE_FAVOR = `${API_URL}/user/delfavorites`;
+export const GET_FAVOR_COUNT = `${API_URL}/user/favorites`;
 
 // count
 export const GET_COMPANIES_COUNT = `${API_URL}/user/getcountfavoritescarpark`;
 export const GET_CARS_COUNT = `${API_URL}/user/getcountfavoritescar`;
 export const GET_ORDERS_COUNT = `${API_URL}/user/getcountorder`;
 export const GET_REVIEWS_COUNT = `${API_URL}/user/getcountreviews`;
+export const GET_SUCCES_ORDERS_COUNT = `${API_URL}/user/orders`;
 
 // image
 export const REQUEST_IMG_URL = `${URL_IMG}/image/download/user`;
@@ -137,4 +139,12 @@ export function requestDelFromFavor(id: number) {
       id_content: id,
     },
   });
+}
+
+export function getSuccessOrdersCount() {
+  return axiosAuth.get(GET_SUCCES_ORDERS_COUNT);
+}
+
+export function getFavoriteCount() {
+  return axiosAuth.get(GET_FAVOR_COUNT);
 }

@@ -13,10 +13,6 @@ body {
 section {
   padding: 0 0 50px 0;
 
-  &:nth-last-child(-n + 2) {
-    padding: 0;
-  }
-
   &:last-child {
     padding: 0 0 100px 0 !important;
   }
@@ -480,6 +476,7 @@ input[type='number']:focus {
   }
 
   &__link {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -745,6 +742,22 @@ input[type='number']:focus {
     font-size: 13px;
     font-weight: 300;
   }
+}
+
+.btn-bullet {
+  position: absolute;
+  top: -7px;
+  display: inline-block;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: #fc0321 !important;
+  font-size: 12px !important;
+  color: #fff !important;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 3px 6px;
+  margin-left: 50px;
 }
 
 #mt {
@@ -1038,7 +1051,7 @@ section:first-child.carparks {
   }
 
   &__container {
-    padding: 0 0 50px 0;
+    padding: 0 0 50px 0 !important;
   }
 
   .carparks__img {
@@ -1717,8 +1730,6 @@ section:first-child.carparks {
 }
 .cars-premium {
 }
-.cars-premium {
-}
 
 /* Auth
 ===================*/
@@ -1738,6 +1749,7 @@ section:first-child.carparks {
 @import 'carpark/reviews-aside.scss';
 @import 'carpark/carpark-contact.scss';
 @import 'loading.scss';
+
 /* Profile
 ===================*/
 @import 'profile.scss';
@@ -1832,10 +1844,6 @@ section:first-child.carparks {
   section {
     padding: 0 0 30px 0;
 
-    &:nth-last-child(-n + 2) {
-      padding: 0;
-    }
-
     &:last-child {
       padding: 0 0 80px 0 !important;
     }
@@ -1853,6 +1861,12 @@ section:first-child.carparks {
 	===================*/
   section.chat {
     padding: 30px 0 80px 0 !important;
+  }
+
+  /* Tables
+	===================*/
+  section.tables__tab {
+    padding: 0 !important;
   }
 
   .title {
@@ -2098,6 +2112,28 @@ section:first-child.carparks {
         width: 16px;
         height: 16px;
       }
+    }
+  }
+  .carparks-slider {
+    &__container {
+      padding: 0 0 40px 0 !important;
+    }
+    
+    .swiper-horizontal
+      > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic,
+    .swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+      min-width: 74px;
+    }
+
+    .swiper-pagination-bullet {
+      width: var(
+        --swiper-pagination-bullet-width,
+        var(--swiper-pagination-bullet-size, 12px)
+      );
+      height: var(
+        --swiper-pagination-bullet-height,
+        var(--swiper-pagination-bullet-size, 12px)
+      );
     }
   }
 
@@ -2407,10 +2443,6 @@ section:first-child.carparks {
   section {
     padding: 0 0 30px 0;
 
-    &:nth-last-child(-n + 2) {
-      padding: 0;
-    }
-
     &:last-child {
       padding: 0 0 60px 0 !important;
     }
@@ -2427,6 +2459,18 @@ section:first-child.carparks {
   /* Chat
 	===================*/
   section.chat {
+    padding: 0 !important;
+  }
+
+  /* Carpark
+	===================*/
+  section.carpark {
+    padding: 0 0 60px 0 !important;
+  }
+
+  /* Tables
+	===================*/
+  section.tables__tab {
     padding: 0 !important;
   }
 
@@ -2485,7 +2529,7 @@ section:first-child.carparks {
     }
 
     .container {
-      height: calc(100vh - 59px);
+      height: calc(100vh - 52px);
     }
 
     &__wrapper {
@@ -2498,7 +2542,7 @@ section:first-child.carparks {
       -ms-flex-direction: column;
       flex-direction: column;
       overflow-x: hidden;
-      padding: 0 0 22px 0;
+      padding: 12px 0 22px 0;
     }
 
     &__main {
@@ -2514,8 +2558,12 @@ section:first-child.carparks {
       margin: 0 0 22px 0;
 
       li {
+
         a {
+          position: relative;
           display: block;
+          display: flex;
+          align-items: center;
           font-size: 18px;
           color: #2e2f31;
           padding: 7px 0;
@@ -2523,6 +2571,12 @@ section:first-child.carparks {
 
           &:hover {
             background-color: #e2e2e2;
+          }
+
+          .btn-bullet {
+            position: relative;
+            top: 0;
+            margin-left: 7px;
           }
         }
       }
@@ -3065,35 +3119,37 @@ section:first-child.carparks {
 }
 
 .orb {
-  height: 10px;
-  width: 10px;
-
-  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  transform: translateY(-50%);
   display: inline-block;
-
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
   animation: 2s flash infinite;
 }
 
 @keyframes flash {
   0% {
-    background-color: #2774ac;
+    background-color: #009ef7;
   }
   50% {
     background-color: #a0b1bd;
   }
   100% {
-    background-color: #2774ac;
+    background-color: #009ef7;
   }
 }
 @-webkit-keyframes flash {
   0% {
-    background-color: #2774ac;
+    background-color: #009ef7;
   }
   50% {
     background-color: #a0b1bd;
   }
   100% {
-    background-color: #2774ac;
+    background-color: #009ef7;
   }
 }
 

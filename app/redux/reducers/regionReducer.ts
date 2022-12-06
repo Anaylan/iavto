@@ -12,8 +12,8 @@ export interface IRegionState {
 }
 
 const InitialAuthState: IRegionState = {
-  name: 'Москва',
-  id: 365,
+  name: undefined,
+  id: undefined,
 };
 
 export const regionActions = {

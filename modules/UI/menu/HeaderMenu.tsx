@@ -1,3 +1,5 @@
+import { getNotReadAmount } from 'api/Chat';
+import { getFavoriteCount, getSuccessOrdersCount } from 'api/User';
 import { ILink, UserDataModel } from 'app/models';
 import { HeaderBottomLinks } from 'modules/templates';
 import {
@@ -9,19 +11,20 @@ import {
 import { RegionSearch } from 'modules/UI/Header/bottom';
 import { SearchInput } from 'modules/UI/inputs/SearchInput';
 import Link from 'next/link';
+import { Bullet } from '../bullet/Bullet';
 
 const Links = [
   {
     href: '/orders',
-    children: 'Заказы',
+    children: <>Заказы<Bullet getData={getSuccessOrdersCount} /></>,
   },
   {
     href: '/favorites',
-    children: 'Избранное',
+    children: <>Избранное<Bullet getData={getFavoriteCount}/></>,
   },
   {
     href: '/chat',
-    children: 'Сообщения',
+    children: <>Сообщения<Bullet getData={getNotReadAmount}/></>,
   },
   {
     href: '/carpark',

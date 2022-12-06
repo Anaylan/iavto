@@ -6,22 +6,25 @@ import { HeaderBody, HeaderBottom, HeaderTop } from 'modules/UI';
 
 import { useDesktop, useScroll } from 'app/hooks';
 import { Container } from 'react-bootstrap';
+import { Bullet } from 'modules/UI/bullet/Bullet';
+import { getFavoriteCount, getSuccessOrdersCount } from 'api/User';
+import { getNotReadAmount } from 'api/Chat';
 
 export const HeaderTopLinks: LinkType[] = [
   {
     href: '/favorites',
     children: <Heart />,
-    title: 'Избранное',
+    title: <><span>Избранное</span><Bullet getData={getFavoriteCount}/></>,
   },
   {
     href: '/orders',
     children: <Package />,
-    title: 'Заказы',
+    title: <><span>Заказы</span><Bullet getData={getSuccessOrdersCount}/></>,
   },
   {
     href: '/chat',
     children: <Chat />,
-    title: 'Сообщения',
+    title: <><span>Сообщения</span><Bullet getData={getNotReadAmount}/></>,
   },
 ];
 
@@ -36,7 +39,7 @@ export const HeaderBodyLinks: LinkType[] = [
 
 export const HeaderBottomLinks: LinkType[] = [
   {
-    href: 'https://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/main/',
+    href: 'https://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/register',
     children: <></>,
     title: 'Открыть автопарк',
   },
@@ -44,6 +47,7 @@ export const HeaderBottomLinks: LinkType[] = [
   { href: '/referrals', children: <></>, title: 'Для реферальных партнеров' },
   { href: '/for-partners', children: <></>, title: 'Для партнеров' },
   { href: '/about', children: <></>, title: 'О нас' },
+  { href: '/investors', children: <></>, title: 'Инвесторам' },
 ];
 
 const Header: React.FC = () => {

@@ -69,9 +69,27 @@
       width: 32px;
       height: 32px;
 
+      &:hover {
+        .icon {
+          .icon__item {
+            stroke: #fc0321;
+          }
+        }
+      }
+
       .icon {
         width: 18px;
         height: 18px;
+      }
+    }
+    .carpark-fav {
+      &:hover {
+        .icon-heart {
+          .icon__item {
+            stroke: #fc0321;
+            fill: #fc0321;
+          }
+        }
       }
     }
   }

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import Head from 'next/head';
 import { TITLE } from 'app/config';
-import { Col, Container, FormLabel, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { FormInputWithMask, FormInputWithoutLabel, Textarea } from 'modules/UI';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { getErrorMessages } from 'modules/elements/profile/verification/FormVerification';
-import { requestFeedback } from 'api/Feedback';
+import { requestInvestor } from 'api/Feedback';
 
 const phoneNumberMask = [
   '+',
@@ -28,22 +28,23 @@ const phoneNumberMask = [
   /\d/,
 ];
 
+// Для номера телефона, почему-то не работает
+
 export const feedbackSchema = Yup.object().shape({
   email: Yup.string().email('Неправильный формат email').required('Email обязательна для заполнения'),
   phone: Yup.string()
     .required('Номер телефона обязательно для заполнения')
     .matches(
       /^(\+7|7|8)\(?[489][0-9]{2}\)[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/,
-      'Номер телефона введён неправильно',
+      'Номер телефона неправильный',
     ),
   info: Yup.string().required('Сообщение обязательно для заполнения'),
   firstname: Yup.string().required('Имя обязательно для заполнения'),
-
 });
 
 // сделано перенаправление на in_dev
 
-export default function Feedback() {
+export default function Investors() {
   const [messages, setMessages] = useState('');
   const formik = useFormik({
     initialValues: {
@@ -55,7 +56,7 @@ export default function Feedback() {
     validationSchema: feedbackSchema,
     onSubmit: (values) => {
       // console.log(values);
-      requestFeedback(values).then(({ data }: { data: boolean }) => {
+      requestInvestor(values).then(({ data }: { data: boolean }) => {
         if (data == true) {
           setMessages('Сообщение отправлено');
         }
@@ -66,18 +67,18 @@ export default function Feedback() {
   return (
     <>
       <Head>
-        <title>Обратная связь | {TITLE}</title>
+        <title>Инвесторам | {TITLE}</title>
       </Head>
       <Container>
         <section>
-          <h1 className='title'>Форма обратной связи</h1>
+          <h1 className='title'>Инвесторам</h1>
           <h2 className='subtitle'>
+            <p className='mb-3 fw-bold'>Вы можете стать инвестором проекта ЯАВТО.РФ</p>
             <p className='mb-1'>
-              Вы можете задать свой вопрос в форме обратной связи
+              Если вы желаете стать инвестором и участником нового и современного IT проекта ЯАВТО.РФ, заполните форму обратной связи.
             </p>
             <p>
-              Наша поддержка ответит вам на него в ближайшее время. Ответ придет
-              на почту.
+              Мы рассмотрим ваше заявление и свяжемся с вами в ближайшее время.
             </p>
           </h2>
         </section>
@@ -123,6 +124,7 @@ export default function Feedback() {
                       <FormInputWithMask
                         type='text'
                         id={'phone'}
+                        value={formik.values.phone}
                         mask={phoneNumberMask}
                         onChange={formik.handleChange}
                         className={

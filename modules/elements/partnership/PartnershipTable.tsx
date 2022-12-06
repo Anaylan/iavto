@@ -1,4 +1,4 @@
-﻿import { THead, TCell } from 'modules/UI/tables/table';
+﻿import { THead, TCell } from 'modules/UI';
 import { dbFormatDate, month } from 'libs/functions';
 import { IRefModel } from 'app/models';
 import Link from 'next/link';

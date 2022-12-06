@@ -16,6 +16,12 @@ import { getAllReferer, getAllRefCompany } from 'api/Refferal';
 import { RefCodeToClipboard } from 'libs/functions';
 import { PartnershipTable } from 'modules/elements/partnership/PartnershipTable';
 import * as auth from 'app/redux/reducers/authReducer';
+import { Button, FormInputWithoutLabel } from 'modules/UI';
+import { Modal } from 'react-bootstrap';
+import {
+  requestTransactionOutput,
+  requestURLTransaction,
+} from 'api/Transaction';
 
 const THeadReferrals = [
   'Водитель',
@@ -53,7 +59,22 @@ export default function Partners() {
   const dispatch = useDispatch();
   const [referrals, setReferrals] = useState<IRefModel[]>([]);
   const [refCompanies, setRefCompanies] = useState<IRefModel[]>([]);
-  const [test, setTest] = useState([]);
+  const [balance, setBalance] = useState();
+  const [status, setStatus] = useState<string>();
+  const [message, setMessage] = useState<string>();
+  const [modalState, setModalState] = useState({
+    show: false,
+    output: '',
+    token: '',
+    // status: '',
+    // message: '',
+  });
+  const handleCloseModal = () => {
+    setModalState({ ...modalState, show: false });
+    setStatus('');
+    setMessage('');
+  };
+
   const router = useRouter();
   const user = useSelector(
     ({ header }: { header: UserDataModel }) => header.user,
@@ -67,8 +88,9 @@ export default function Partners() {
         if (user.id !== data.data?.id) {
           dispatch(auth.actions.logout());
         }
+        setBalance(user.partners_balance);
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(auth.actions.logout());
 
         router.push('/auth/signin');
@@ -84,6 +106,27 @@ export default function Partners() {
     });
   }, []);
 
+  const outputMoney = () => {
+    if (balance) {
+      if (Number(balance) >= Number(modalState.output)) {
+        requestURLTransaction(modalState.output)
+          .then(({ data }) => {
+            setModalState({ ...modalState, token: data.token });
+          })
+          .catch(() => {});
+
+        requestTransactionOutput(modalState.output, modalState.token)
+          .then(({ data }) => {
+            setMessage(data.message);
+            setStatus(data.status);
+          })
+          .catch(() => {});
+      } else {
+        setMessage('На вашем счете не достаточно средств');
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -93,19 +136,26 @@ export default function Partners() {
         <Container>
           <div className={'charts__header'}>
             <h1 className='title'>Информация о партнерстве</h1>
-            <button
-              onClick={() => {
-                RefCodeToClipboard(user.id);
-              }}
-              className='btn-main btn-ref'
-              type='button'>
-              <div className='d-flex align-items-center'>
-                <div className={`icon`}>
-                  <Copy />
+            <div className='d-flex align-items-stretch'>
+              <button
+                onClick={() => {
+                  RefCodeToClipboard(user.id);
+                }}
+                className='btn-main btn-ref'
+                type='button'>
+                <div className='d-flex align-items-center'>
+                  <div className={`icon`}>
+                    <Copy />
+                  </div>
+                  <span>Реферальная ссылка (нажмите, чтобы скопировать)</span>
                 </div>
-                <span>Реферальная ссылка (нажмите, чтобы скопировать)</span>
-              </div>
-            </button>
+              </button>
+              <Button
+                onClick={() => setModalState({ ...modalState, show: true })}
+                className='ms-3'>
+                Вывод средств
+              </Button>
+            </div>
           </div>
 
           <Row>
@@ -212,6 +262,36 @@ export default function Partners() {
           </div>
         </Container>
       </section>
+      <Modal centered show={modalState.show} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Вывод средств</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {status != '200' && (
+            <p className='mb-4 text-center'>
+              Ваш текущий баланс: {balance} рублей
+            </p>
+          )}
+          {status != '200' && (
+            <FormInputWithoutLabel
+              onChange={(e) => {
+                setModalState({ ...modalState, output: e.target.value });
+              }}
+              value={modalState.output}
+              placeholder='Введите сумму вывода'
+              className='mb-3 form-control'
+              type={'number'}
+            />
+          )}
+          {message && <p>{message}</p>}
+        </Modal.Body>
+        <Modal.Footer>
+          {status != '200' && <Button onClick={outputMoney}>Вывести</Button>}
+          <Button className='btn-main-trp' onClick={handleCloseModal}>
+            Закрыть
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

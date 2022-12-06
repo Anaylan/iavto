@@ -14,9 +14,9 @@ export const MessageItem = ({ message }: { message: IMessageModel }) => {
         <div className={`message__wrapper`}>
           <div className={`message__body`}>
             <div className={`message__top message-top`}>
-              <div className={`message-top__username`}>
+              {/* <div className={`message-top__username`}>
                 {message.MeSend ? 'Вы' : message.companion}
-              </div>
+              </div> */}
               <time className={`message-top__time`} dateTime={message.date}>
                 {dbFormatChatDate(message.date, month)}
               </time>

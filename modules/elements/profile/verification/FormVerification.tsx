@@ -745,6 +745,7 @@ export const FormVerification = ({ user }: { user: UserDataModel }) => {
           </Row>
           <Link
             href='/documents/privacy_policy'
+            target={'_blank'}
             className='d-flex justify-content-center'>
             Политика конфиденциальности
           </Link>

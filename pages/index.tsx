@@ -20,10 +20,11 @@ import {
   FilterRadioItem,
 } from 'modules/UI';
 import { useFormik } from 'formik';
-import { getCarFilters } from 'api/Filter';
+import { getCarFilters, getCarTarifs } from 'api/Filter';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { useSelector } from 'react-redux';
 
 // Эконом
 // Комфорт
@@ -42,27 +43,34 @@ interface IModel {
   model: string;
 }
 
-const tarifs = [
-  { name: 'Эконом' },
-  { name: 'Комфорт' },
-  { name: 'Комфорт +' },
-  { name: 'Минивэн' },
-  { name: 'Business' },
-  { name: 'Premier' },
-  { name: 'Élite' },
-  { name: 'Cruise' },
-];
+interface ITarif {
+  id: string;
+  name: string;
+}
+
+// const tarifs = [
+//   { name: 'Эконом' },
+//   { name: 'Комфорт' },
+//   { name: 'Комфорт +' },
+//   { name: 'Минивэн' },
+//   { name: 'Business' },
+//   { name: 'Premier' },
+//   { name: 'Élite' },
+//   { name: 'Cruise' },
+// ];
 
 const DynamicCarParkBlock = dynamic(
   () => import('modules/templates/CarParkBlock'),
 );
 
 const Home: NextPage<IHome> = () => {
+  const [tarifs, setTarifs] = useState<ITarif[]>([]);
   const [marks, setMark] = useState<IMark[]>([]);
   const [models, setModel] = useState<IModel[]>([]);
-
   const [fuelChange, setFuelChange] = useState<number>(0);
   const [transChange, setTransChange] = useState<number>(0);
+
+  const city_id = useSelector(({ region }: { region: any }) => region.id);
 
   const router = useRouter();
   const formik = useFormik({
@@ -85,30 +93,51 @@ const Home: NextPage<IHome> = () => {
   });
 
   useEffect(() => {
-    if (formik.values.mark) {
-      getCarFilters({
-        getcell: 'model',
-        wherecell: 'mark',
-        where: formik.values.mark,
-      }).then(({ data }: { data: IModel[] }) => {
-        setModel(data);
+    if (formik.values.tarif) {
+      getCarTarifs(city_id).then(({ data }: { data: ITarif[] }) => {
+        setTarifs(data);
       });
     } else {
-      getCarFilters({
-        getcell: 'model',
-      }).then(({ data }: { data: IModel[] }) => {
-        setModel(data);
+      getCarTarifs(city_id).then(({ data }: { data: ITarif[] }) => {
+        setTarifs(data);
       });
     }
+  }, []);
+
+  useEffect(() => {
+    // if (formik.values.mark) {
+    getCarFilters(
+      {
+        getcell: 'model',
+        where: `mark='${formik.values.mark}'`,
+      },
+      city_id,
+    ).then(({ data }: { data: IModel[] }) => {
+      setModel(data);
+    });
+    // } else {
+    //   getCarFilters(
+    //     {
+    //       getcell: 'model',
+    //     },
+    //     city_id,
+    //   ).then(({ data }: { data: IModel[] }) => {
+    //     setModel(data);
+    //   });
+    // }
   }, [formik.values.mark]);
 
   useEffect(() => {
-    getCarFilters({
-      getcell: 'mark',
-    }).then(({ data }: { data: IMark[] }) => {
+    getCarFilters(
+      {
+        getcell: 'mark',
+        where: 'type=' + formik.values.tarif,
+      },
+      city_id,
+    ).then(({ data }: { data: IMark[] }) => {
       setMark(data);
     });
-  }, []);
+  }, [formik.values.tarif]);
 
   return (
     <>
@@ -158,7 +187,7 @@ const Home: NextPage<IHome> = () => {
                   <SearchSelectOption value={''}>Все тарифы</SearchSelectOption>
                   {tarifs &&
                     tarifs.map((tarif, key) => (
-                      <SearchSelectOption key={key} value={tarif.name}>
+                      <SearchSelectOption key={key} value={tarif.id}>
                         {tarif.name}
                       </SearchSelectOption>
                     ))}
@@ -173,12 +202,13 @@ const Home: NextPage<IHome> = () => {
                 <SearchSelect
                   name='mark'
                   defaultValue={''}
+                  disabled={formik.values.tarif == '' ? true : false}
                   onChange={formik.handleChange}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите марку
                   </SearchSelectOption>
                   <SearchSelectOption value={''}>Все марки</SearchSelectOption>
-                  {marks &&
+                  {marks.length > 0 &&
                     marks.map((mark, key) => (
                       <SearchSelectOption key={key} value={mark.mark}>
                         {mark.mark}
@@ -196,12 +226,12 @@ const Home: NextPage<IHome> = () => {
                   name='model'
                   defaultValue={''}
                   onChange={formik.handleChange}
-                  disabled={false}>
+                  disabled={formik.values.mark == '' ? true : false}>
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите модель
                   </SearchSelectOption>
                   <SearchSelectOption value={''}>Все модели</SearchSelectOption>
-                  {models &&
+                  {models.length > 0 &&
                     models.map((model, key) => (
                       <SearchSelectOption key={key} value={model.model}>
                         {model.model}
