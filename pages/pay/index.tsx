@@ -17,7 +17,7 @@ export default function Pay() {
             <h1 className='title'>Информация об оплате</h1>
             <h2 className='subtitle fw-semibold mb-4'>
               Каждый человек, который желает арендовать автомобиль на ЯАВТО.РФ
-              должен совершить ряд определенный действий!
+              должен совершить ряд определенных действий!
             </h2>
             <ol className='list-group-numbered subtitle mb-2'>
               <li className='list-group-item mb-2'>
@@ -42,7 +42,7 @@ export default function Pay() {
             <p className='subtitle line-height-sm'>
               Все последующие дни - оплата снимается у вас в агрегаторе, но
               сумма за аренду автомобиля повыситься не может. Цена останется
-              прежней, или может уменьшится.
+              прежней, или может уменьшиться.
             </p>
           </article>
         </Container>
