@@ -96,7 +96,7 @@ export default function Cars() {
         setTarifs(data);
       });
     }
-  }, []);
+  }, [city_id]);
 
   useEffect(() => {
     // if (formik.values.mark) {
@@ -119,7 +119,7 @@ export default function Cars() {
     //     setModel(data);
     //   });
     // }
-  }, [formik.values.mark]);
+  }, [formik.values.mark, city_id]);
 
   useEffect(() => {
     getCarFilters(
@@ -131,7 +131,7 @@ export default function Cars() {
     ).then(({ data }: { data: IMark[] }) => {
       setMark(data);
     });
-  }, [formik.values.tarif]);
+  }, [formik.values.tarif, city_id]);
 
   return (
     <>
@@ -167,52 +167,61 @@ export default function Cars() {
                     ))}
                 </SearchSelect>
               </SearchItem>
-              <SearchItem
-                columns={{
-                  xs: 12,
-                  sm: 6,
-                  md: 4,
-                }}>
-                <SearchSelect
-                  name='mark'
-                  defaultValue={''}
-                  onChange={formik.handleChange}
-                  disabled={formik.values.tarif == '' ? true : false}>
-                  <SearchSelectOption value={''} disabled={true}>
-                    Выберите марку
-                  </SearchSelectOption>
-                  <SearchSelectOption value={''}>Все марки</SearchSelectOption>
-                  {marks.length > 0 &&
-                    marks.map((mark, key) => (
-                      <SearchSelectOption key={key} value={mark.mark}>
-                        {mark.mark}
-                      </SearchSelectOption>
-                    ))}
-                </SearchSelect>
-              </SearchItem>
-              <SearchItem
-                columns={{
-                  xs: 12,
-                  sm: 6,
-                  md: 4,
-                }}>
-                <SearchSelect
-                  name='model'
-                  defaultValue={''}
-                  onChange={formik.handleChange}
-                  disabled={formik.values.mark == '' ? true : false}>
-                  <SearchSelectOption value={''} disabled={true}>
-                    Выберите модель
-                  </SearchSelectOption>
-                  <SearchSelectOption value={''}>Все модели</SearchSelectOption>
-                  {models.length > 0 &&
-                    models.map((model, key) => (
-                      <SearchSelectOption key={key} value={model.model}>
-                        {model.model}
-                      </SearchSelectOption>
-                    ))}
-                </SearchSelect>
-              </SearchItem>
+              {marks.length > 0 && (
+                <SearchItem
+                  columns={{
+                    xs: 12,
+                    sm: 6,
+                    md: 4,
+                  }}>
+                  <SearchSelect
+                    name='mark'
+                    defaultValue={''}
+                    onChange={formik.handleChange}
+                    disabled={formik.values.tarif == '' ? true : false}>
+                    <SearchSelectOption value={''} disabled={true}>
+                      Выберите марку
+                    </SearchSelectOption>
+                    <SearchSelectOption value={''}>
+                      Все марки
+                    </SearchSelectOption>
+                    {marks.length > 0 &&
+                      marks.map((mark, key) => (
+                        <SearchSelectOption key={key} value={mark.mark}>
+                          {mark.mark}
+                        </SearchSelectOption>
+                      ))}
+                  </SearchSelect>
+                </SearchItem>
+              )}
+              {models.length > 0 && (
+                <SearchItem
+                  columns={{
+                    xs: 12,
+                    sm: 6,
+                    md: 4,
+                  }}>
+                  <SearchSelect
+                    name='model'
+                    defaultValue={''}
+                    onChange={formik.handleChange}
+                    disabled={formik.values.mark == '' ? true : false}>
+                    <SearchSelectOption value={''} disabled={true}>
+                      Выберите модель
+                    </SearchSelectOption>
+                    <SearchSelectOption value={''}>
+                      Все модели
+                    </SearchSelectOption>
+                    {models.length > 0 &&
+                      models.map((model, key) => (
+                        <SearchSelectOption key={key} value={model.model}>
+                          {model.model}
+                        </SearchSelectOption>
+                      ))}
+                  </SearchSelect>
+                </SearchItem>
+              )}
+
               <SearchAdditionalCol
                 columns={{
                   xs: 12,

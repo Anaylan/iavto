@@ -25,13 +25,11 @@ export function requestTransaction(amount: string, token: string) {
 }
 
 // Server should return AuthModel
-export function requestTransactionOutput(amount: string, token: string) {
-  return axiosAuth.get(OUTPUT_TRANSACTION_URL, {
-    params: {
-      amount,
-      token,
-    }
-  })
+export function requestTransactionOutput(amount: string, bank_card: string) {
+  return axiosAuth.post(OUTPUT_TRANSACTION_URL, JSON.stringify({
+    amount,
+    bank_card,
+  }))
 }
 
 export function getTransactions() {

@@ -28,12 +28,16 @@ export function getCars(from: number, to: number, query: any) {
   });
 }
 
-export function getCarsForCarpark(id: string | string[] | undefined) {
+// Я просто делами своими тёмными занимаюсь
+
+export function getCarsForCarpark(from: number, to: number, query: any) {
   // Authorization head should be fulfilled in interceptor.
   // Check common redux folder => setupAxios
   return axios.get<ICarModel[]>(GET_CARS_FOR_CARPARK, {
     params: {
-      id,
+      from,
+      to,
+      ...query,
     },
   });
 }

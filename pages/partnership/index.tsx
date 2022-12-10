@@ -16,12 +16,14 @@ import { getAllReferer, getAllRefCompany } from 'api/Refferal';
 import { RefCodeToClipboard } from 'libs/functions';
 import { PartnershipTable } from 'modules/elements/partnership/PartnershipTable';
 import * as auth from 'app/redux/reducers/authReducer';
-import { Button, FormInputWithoutLabel } from 'modules/UI';
+import { Button, FormInputWithoutLabel, FormInputWithMaskNotLabel } from 'modules/UI';
 import { Modal } from 'react-bootstrap';
 import {
   requestTransactionOutput,
   requestURLTransaction,
 } from 'api/Transaction';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 const THeadReferrals = [
   'Водитель',
@@ -55,6 +57,21 @@ const ConversionWidget = dynamic(
   { ssr: false },
 );
 
+const cardMask = [
+  /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/,
+];
+
+const outputSchema = Yup.object().shape({
+  bank_card: Yup.string()
+    .test(
+      'card',
+      'Введите полный номер банковской карты',
+      (value) => /^[0-9][0-9][0-9][0-9][" "][0-9][0-9][0-9][0-9][" "][0-9][0-9][0-9][0-9][" "][0-9][0-9][0-9][0-9]$/.test(value!)
+    ),
+    
+});
+
+
 export default function Partners() {
   const dispatch = useDispatch();
   const [referrals, setReferrals] = useState<IRefModel[]>([]);
@@ -64,15 +81,10 @@ export default function Partners() {
   const [message, setMessage] = useState<string>();
   const [modalState, setModalState] = useState({
     show: false,
-    output: '',
-    token: '',
-    // status: '',
-    // message: '',
   });
   const handleCloseModal = () => {
     setModalState({ ...modalState, show: false });
     setStatus('');
-    setMessage('');
   };
 
   const router = useRouter();
@@ -106,26 +118,31 @@ export default function Partners() {
     });
   }, []);
 
-  const outputMoney = () => {
-    if (balance) {
-      if (Number(balance) >= Number(modalState.output)) {
-        requestURLTransaction(modalState.output)
-          .then(({ data }) => {
-            setModalState({ ...modalState, token: data.token });
-          })
-          .catch(() => {});
+  const [error, setError] = useState<string>();
 
-        requestTransactionOutput(modalState.output, modalState.token)
+  const formik = useFormik({
+    initialValues: {
+      output: '',
+      bank_card: '',
+      password: '',
+      balance: balance,
+    },
+  onSubmit: async (values) => {
+    if (balance) {
+      if (Number(balance) >= Number(values.output)) {       
+        await requestTransactionOutput(values.output, values.bank_card)
           .then(({ data }) => {
-            setMessage(data.message);
+            setError(data.message);
             setStatus(data.status);
           })
-          .catch(() => {});
+          .catch((error) => {setError(error.message);});
       } else {
-        setMessage('На вашем счете не достаточно средств');
+        setError('На вашем счете не достаточно средств');
       }
     }
-  };
+  },
+    validationSchema: outputSchema,
+  });
 
   return (
     <>
@@ -266,31 +283,57 @@ export default function Partners() {
         <Modal.Header closeButton>
           <Modal.Title>Вывод средств</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {status != '200' && (
-            <p className='mb-4 text-center'>
-              Ваш текущий баланс: {balance} рублей
-            </p>
-          )}
-          {status != '200' && (
-            <FormInputWithoutLabel
-              onChange={(e) => {
-                setModalState({ ...modalState, output: e.target.value });
-              }}
-              value={modalState.output}
-              placeholder='Введите сумму вывода'
-              className='mb-3 form-control'
-              type={'number'}
-            />
-          )}
-          {message && <p>{message}</p>}
-        </Modal.Body>
-        <Modal.Footer>
-          {status != '200' && <Button onClick={outputMoney}>Вывести</Button>}
-          <Button className='btn-main-trp' onClick={handleCloseModal}>
-            Закрыть
-          </Button>
-        </Modal.Footer>
+        <form onSubmit={(e) => { e.preventDefault(); formik.handleSubmit(e);}}>
+          <Modal.Body>
+            {status != '200' && (
+              <p className='mb-4 text-center'>
+                Ваш текущий баланс: {balance} рублей
+              </p>
+            )}
+            {status != '200' && (
+              <>
+                <label htmlFor="card_input" className="mb-2">Введите номер банковской карты:</label>
+                  {formik.errors.bank_card &&
+                    formik.touched.bank_card ? (
+                      <div className='form__notification d-flex justify-content-center'>
+                        {formik.errors.bank_card}
+                      </div>
+                    ) : null}
+                <FormInputWithMaskNotLabel
+                  id="card_input"
+                  mask={cardMask}
+                  name="bank_card"
+                  onChange={formik.handleChange}
+                  placeholder='9999 9999 9999 9999'
+                  className='mb-3 form-control'
+                  type={'text'}
+                />
+                <label htmlFor="output_input" className="mb-2">Введите сумму для вывода:</label>
+                {formik.errors.output &&
+                  formik.touched.output ? (
+                    <div className={status != '200' ? 'form__notification d-flex justify-content-center' : ''}>
+                      {formik.errors.output}
+                    </div>
+                  ) : null}
+                <FormInputWithoutLabel
+                  id="output_input"
+                  name="output"
+                  onChange={formik.handleChange}
+                  placeholder='Сумма вывода'
+                  className='mb-3 form-control'
+                  type={'number'}
+                />
+              </>
+            )}
+            {error ? <div className='form__notification d-flex justify-content-center'>{error}</div> : null}
+          </Modal.Body>
+          <Modal.Footer>
+            {status != '200' && <Button type="submit">Вывести</Button>}
+            <Button className='btn-main-trp' onClick={handleCloseModal}>
+              Закрыть
+            </Button>
+          </Modal.Footer>
+        </form>
       </Modal>
     </>
   );

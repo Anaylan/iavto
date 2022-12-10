@@ -53,6 +53,7 @@ export const CarCardSwiper: React.FC<ICarCardSwiper> = ({ images, cid }) => {
         ))}
       </Swiper>
 
+      {images.length > 1 &&
       <Swiper
         modules={[Thumbs]}
         slidesPerView={4}
@@ -79,7 +80,7 @@ export const CarCardSwiper: React.FC<ICarCardSwiper> = ({ images, cid }) => {
             </div>
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper>}
     </div>
   );
 };

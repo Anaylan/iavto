@@ -62,17 +62,27 @@ export function countAndFormatMonth(dbDate: string | undefined) {
   }
 }
 
-export function dbFormatChatDate(dbDate: string | undefined, month: object) {
+/** функция принимает дату timestamp, и массив с названиями месяцов
+ * Возвращает в виде: 1 Января 00:00
+  */
+export function dbFormatChatDate(dbDate: string | undefined, monthObj: object) {
   if (dbDate) {
-    let date: string | string[] = dbDate.slice(5, 10);
-    let time: string | any[] = dbDate.slice(11, 16);
-    date = date.split('-');
-    time = time.split(':');
-    date[1][0] === '0' && (date[2] = date[2]);
-    date[0] = month[date[0] as keyof object];
-    time[0] = Number(time[0]) - (new Date().getTimezoneOffset() + 180) / 60;
-    date = date.reverse();
-    return `${date.join(' ')} ${time[0]}:${time[1]}`;
+    // вычислить время с часовым поясом пользователя
+    let strDate: string | string[] = dbDate.replace(' ', 'T');
+    let objDate: Date = new Date(strDate);
+    let timeZone = Number(new Date().getTimezoneOffset());
+    let timestamp = Number(objDate) + timeZone + 10800000;
+    objDate = new Date(timestamp);
+
+    // отформатировать
+    let month: string | number = objDate.getMonth() + 1;
+    month = monthObj[month as keyof object];
+    let day = objDate.getDate();
+    let hours = String(objDate.getHours());
+    hours = hours.length == 1 ? `0${hours}` : hours;
+    let minutes = String(objDate.getMinutes());
+    minutes = minutes.length == 1 ? `0${minutes}` : minutes;
+    return `${day} ${month} ${hours}:${minutes}`;
   } else {
     return '';
   }

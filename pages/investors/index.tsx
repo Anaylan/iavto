@@ -165,7 +165,7 @@ export default function Investors() {
                     lg={4}
                     className='d-flex justify-content-md-end'>
                     <label className='form__label'>
-                      Расскажите с чем нужна помощь
+                       Опишите ваше предложение
                     </label>
                   </Col>
                   <Col xs={12} md={7} lg={8}>

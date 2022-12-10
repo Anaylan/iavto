@@ -199,6 +199,7 @@ export const RegionList: React.FC<IRegionDropdown> = ({
               onChange={(event) => {
                 placeholderSearch(event.target.value);
               }}
+              value={value}
               className={'region-popup__form-input'}
               type='text'
               name='city'

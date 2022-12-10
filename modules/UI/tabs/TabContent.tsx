@@ -18,24 +18,9 @@ import { Container } from 'react-bootstrap';
 import { Star } from 'assets/icon/icons';
 
 export const TabCars = () => {
-  const [cars, setCars] = useState<ICarModel[]>([]);
-  const { query } = useRouter();
-
-  useEffect(() => {
-    getCarsForCarpark(query.id).then((res: any) => {
-      setCars(res.data);
-    });
-  }, [query.id]);
-
   return (
     <>
-      {cars.length ? (
-        <CarBlock title={'Автомобили автопарка'} getData={getCars} />
-      ) : (
-        <Container>
-          <EmptyComponent />
-        </Container>
-      )}
+      <CarBlock title={'Автомобили автопарка'} getData={getCarsForCarpark} />
     </>
   );
 };
@@ -290,6 +275,7 @@ export const TabFeedback = ({ id }: { id: string }) => {
     },
   });
   return (
+
     <div className='carpark-contact carpark-tab__body'>
       <Container>
         <h1 className={`cars__title title`}>Задайте ваш вопрос автопарку</h1>
