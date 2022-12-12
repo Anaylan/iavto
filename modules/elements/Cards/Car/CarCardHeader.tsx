@@ -39,7 +39,8 @@ export const CarCardHeader: React.FC<ICarModel> = ({
             md={5}
             className='car__col d-flex align-items-center justify-content-between'>
             <h2 className='car__title title'>
-              {mark} {model} <span>{year}</span>
+              <span>{mark} {model}</span>
+              <span>{year}</span>
             </h2>
             <div className='car__top-views d-md-none'>
               <div className={'icon'}>

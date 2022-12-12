@@ -118,7 +118,7 @@ export function CarItem({
               <Col className={`cars-item__main`}>
                 <div className={`cars-item__main-body`}>
                   <Link className={`cars-item__title`} href={`/car/${car.id}`}>
-                    {car.mark} {car.model}
+                    <span>{car.mark} {car.model}</span>
                     <span>{car.year}</span>
                   </Link>
                   <div className={`cars-item__subtitle`}>

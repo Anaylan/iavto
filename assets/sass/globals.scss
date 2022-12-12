@@ -1468,7 +1468,7 @@ section:first-child.carparks {
     font-weight: 300;
     line-height: 1.3;
     color: #6a6a6a;
-    margin: 0 0 24px 0;
+    margin: 0 0 22px 0;
 
     overflow: hidden;
     display: -webkit-box;
@@ -1484,6 +1484,7 @@ section:first-child.carparks {
     font-weight: 300;
     color: #2774ac;
     transition: color 0.1s linear;
+    margin: 0 0 10px 0;
 
     &:hover {
       color: #000;
@@ -1526,6 +1527,22 @@ section:first-child.carparks {
   border-radius: 20px;
   padding: 12px 10px;
 
+  .col-12 {
+
+    &:nth-child(1) {
+      width: 33%;
+    }
+
+    &:nth-child(2) {
+      width: 37%;
+    }
+
+    &:nth-child(3) {
+      width: 30%;
+      padding-left: 0 !important;
+    }
+  }
+
   &__img {
     position: relative;
     display: block;
@@ -1553,7 +1570,7 @@ section:first-child.carparks {
   }
 
   &__main {
-    padding: 4px 6px 4px 20px;
+    padding: 4px;
   }
 
   &__title {
@@ -1568,10 +1585,12 @@ section:first-child.carparks {
       color: #2774ac;
     }
 
-    span {
-      display: inline-block;
+    span:first-child {
+      margin: 0 10px 0 0;
+    }
+
+    span:last-child {
       font-weight: 300;
-      margin: 0 0 0 10px;
     }
   }
 
@@ -2364,8 +2383,8 @@ section:first-child.carparks {
       font-size: 22px;
       margin: 0 0 12px 0;
 
-      span {
-        margin: 0 0 0 8px;
+      span:first-child {
+        margin: 0 8px 0 0;
       }
     }
 
@@ -2757,6 +2776,7 @@ section:first-child.carparks {
   /* News
 	===================*/
   .news {
+
     &__banner-none {
       padding: 25px;
       margin: 0;
@@ -2771,6 +2791,22 @@ section:first-child.carparks {
 	===================*/
   .cars-item {
     padding: 10px;
+
+    .col-12 {
+
+      &:nth-child(1) {
+        width: 100%;
+      }
+
+      &:nth-child(2) {
+        width: 100%;
+      }
+
+      &:nth-child(3) {
+        width: 100%;
+        padding-left: 10.5px !important;
+      }
+    }
 
     &__img {
       min-height: 235px;
@@ -2993,6 +3029,26 @@ section:first-child.carparks {
   .carparks-large .carparks__img {
     max-width: 100%;
   }
+
+  
+  /* News
+	===================*/
+  .news {
+    .col-12:first-child {
+      margin: 0 0 30px 0;
+    }
+    &__banner {
+      height: 230px;
+      max-width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 0;
+    }
+    &__banner-none {
+      min-height: 230px;
+      max-width: 100%;
+    }
+  }
 }
 
 @media (max-width: 575px) {
@@ -3051,27 +3107,6 @@ section:first-child.carparks {
     .search-form__btn {
       display: block;
       width: 100%;
-    }
-  }
-
-  /* News
-	===================*/
-  .news {
-    .col-12:first-child {
-      margin: 0 0 30px 0;
-    }
-
-    &__banner {
-      height: 230px;
-      max-width: 100%;
-      border-radius: 20px;
-      overflow: hidden;
-      margin: 0;
-    }
-
-    &__banner-none {
-      min-height: 230px;
-      max-width: 100%;
     }
   }
 

@@ -43,7 +43,7 @@ const Links = [
     children: 'Оплата',
   },
   {
-    href: '/parthners',
+    href: '/partners',
     children: 'Партнеры',
   },
   {

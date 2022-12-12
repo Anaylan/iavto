@@ -16,10 +16,12 @@
     color: #2774ac;
     margin: 0;
 
-    span {
-      display: inline-block;
+    span:first-child {
+      margin: 0 14px 0 0;
+    }
+
+    span:last-child {
       font-weight: 300;
-      margin: 0 0 0 14px;
     }
   }
 
@@ -88,8 +90,8 @@
       font-size: 22px !important;
       margin: 0 !important;
 
-      span {
-        margin: 0 0 0 10px;
+      span:first-child {
+        margin: 0 10px 0 0;
       }
     }
 
@@ -194,19 +196,6 @@
       margin: 0 0 18px 0;
     }
   }
-}
-
-@media (max-width: 575px) {
-  // .car {
-  //   &__top-actions {
-  //     width: 100%;
-
-  //     .btn-main {
-  //       display: block;
-  //       width: 100%;
-  //     }
-  //   }
-  // }
 }
 
 @media (max-width: 335px) {

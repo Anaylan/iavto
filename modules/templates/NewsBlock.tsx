@@ -3,6 +3,7 @@ import { IPostModel } from 'app/models';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { Row, Col } from 'react-bootstrap';
 import { URL_IMG } from 'app/config';
 import { sanitize } from 'libs/functions';
 interface NewsProps {
@@ -26,8 +27,8 @@ const NewsBlock: React.FC<NewsProps> = () => {
   return (
     <React.Fragment>
       <div className='news__body'>
-        <div className='row gy-0'>
-          <div className='col-12 col-sm-6 col-md-7'>
+        <Row className='gy-0'>
+          <Col xs={12} md={7}>
             <h2 className='news__title title'>Новости</h2>
             <h3 className='news__subtitle subtitle'>
               Мы собираем самые лучшие и важные новости в мире автомобилей и
@@ -37,8 +38,8 @@ const NewsBlock: React.FC<NewsProps> = () => {
               posts.map((post, key: number) => (
                 <PostPreview key={key} postInfo={post} />
               ))}
-          </div>
-          <div className='col-12 col-sm-6 col-md-5'>
+          </Col>
+          <Col xs={12} md={5}>
             {/* <Link className='news__banner' href='#'>
               <Image
                 src={`/media/sber-banner.png`}
@@ -51,8 +52,8 @@ const NewsBlock: React.FC<NewsProps> = () => {
             <Link className='news__banner-none' href='#'>
               <p>Здесь могла быть ваша реклама</p>
             </Link>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
       <div className='d-flex align-items-center justify-content-center'>
         <Link className='btn-main' href='/post'>

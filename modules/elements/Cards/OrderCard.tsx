@@ -20,6 +20,7 @@ export const OrderCard = ({
   changeInvoke: () => void;
 }) => {
   const [showTime, setShowTime] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const handleCloseTime = () => setShowTime(false);
 
   const [fromTo, setFromTo] = useState({
@@ -56,6 +57,18 @@ export const OrderCard = ({
         (minutesTo.length == 1 ? '0' + minutesTo : minutesTo)
       }`,
     );
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+  const handleShow = () => {
+    setShowModal(true);
+  };
+
+  const submit = () => {
+    orderCancel(order.id);
+    changeInvoke();
   };
 
   const makeOptions = (from: number, to: number) => {
@@ -106,7 +119,9 @@ export const OrderCard = ({
             <div className={`cars-item__main`}>
               <div className={`cars-item__main-body`}>
                 <Link className={`cars-item__title`} href={`/car/${order.pid}`}>
-                  {order.mark} {order.model}
+                  <span>
+                    {order.mark} {order.model}
+                  </span>
                   <span>{order.year}</span>
                 </Link>
                 <div className={'cars-item__subtitle'}>
@@ -147,35 +162,34 @@ export const OrderCard = ({
                 </span>
               </div>
               <div className='order-card__btn-group'>
-                {
-                  window.innerWidth >= 992 ? order.status == 1 &&
-                  (order.user_time == '' || order.user_time == null) && (
-                    <div className='order-card__btn-wrap'>
-                      <Button
-                        onClick={() => {
-                          setShowTime(true);
-                          changeInvoke();
-                        }}>
-                        Назначить время
-                      </Button>
-                    </div>
-                  ) : null
-                }
-                {
-                  window.innerWidth >= 992 ? order.status == 2 ||
-                  (order.status == 1 && (
-                    <div className='order-card__btn-wrap'>
-                      <Button
-                        className='btn-main-trp'
-                        onClick={() => {
-                          orderCancel(order.id);
-                          changeInvoke();
-                        }}>
-                        Отменить заказ
-                      </Button>
-                    </div>
-                  )) : null
-                }
+                {window.innerWidth >= 992
+                  ? order.status == 1 &&
+                    (order.user_time == '' || order.user_time == null) && (
+                      <div className='order-card__btn-wrap'>
+                        <Button
+                          onClick={() => {
+                            setShowTime(true);
+                            changeInvoke();
+                          }}>
+                          Назначить время
+                        </Button>
+                      </div>
+                    )
+                  : null}
+                {window.innerWidth >= 992
+                  ? order.status == 2 ||
+                    (order.status == 1 && (
+                      <div className='order-card__btn-wrap'>
+                        <Button
+                          className='btn-main-trp'
+                          onClick={() => {
+                            handleShow();
+                          }}>
+                          Отменить заказ
+                        </Button>
+                      </div>
+                    ))
+                  : null}
               </div>
             </div>
           </Col>
@@ -230,43 +244,44 @@ export const OrderCard = ({
                   </span>
                 </div>
                 <div className='order-card__btn-group'>
-                {
-                  window.innerWidth <= 991 ? order.status == 1 &&
-                  (order.user_time == '' || order.user_time == null) && (
-                    <div className='order-card__btn-wrap'>
-                      <Button
-                        onClick={() => {
-                          setShowTime(true);
-                          changeInvoke();
-                        }}>
-                        Назначить время
-                      </Button>
-                    </div>
-                  ) : null
-                }
-                {
-                  window.innerWidth <= 991 ? order.status == 2 ||
-                  (order.status == 1 && (
-                    <div className='order-card__btn-wrap'>
-                      <Button
-                        className='btn-main-trp'
-                        onClick={() => {
-                          orderCancel(order.id);
-                          changeInvoke();
-                        }}>
-                        Отменить заказ
-                      </Button>
-                    </div>
-                  )) : null
-                }
-              </div>
+                  {window.innerWidth <= 991
+                    ? order.status == 1 &&
+                      (order.user_time == '' || order.user_time == null) && (
+                        <div className='order-card__btn-wrap'>
+                          <Button
+                            onClick={() => {
+                              setShowTime(true);
+                              changeInvoke();
+                            }}>
+                            Назначить время
+                          </Button>
+                        </div>
+                      )
+                    : null}
+                  {window.innerWidth <= 991
+                    ? order.status == 2 ||
+                      (order.status == 1 && (
+                        <div className='order-card__btn-wrap'>
+                          <Button
+                            className='btn-main-trp'
+                            onClick={() => {
+                              handleShow();
+                            }}>
+                            Отменить заказ
+                          </Button>
+                        </div>
+                      ))
+                    : null}
+                </div>
               </div>
               <div className='d-flex align-items-center justify-content-between'>
                 <div className={`cars-item__price d-lg-none`}>
                   <span>2800</span>
                   <div>руб / сут</div>
                 </div>
-                <Link className={`cars-item__btn btn-main d-lg-none`} href={`/car/${order.pid}`}>
+                <Link
+                  className={`cars-item__btn btn-main d-lg-none`}
+                  href={`/car/${order.pid}`}>
                   Подробнее
                 </Link>
               </div>
@@ -314,6 +329,24 @@ export const OrderCard = ({
           </Button>
           <Button className={'btn-main-trp'} onClick={handleCloseTime}>
             Закрыть
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal centered show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Подтверждение отмены заказа</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Подтвердите отмену заказа</Modal.Body>
+        <Modal.Footer>
+          <Button
+            onClick={() => {
+              submit();
+              handleClose()
+            }}>
+            Подтвердить
+          </Button>
+          <Button className={'btn-main-trp'} onClick={handleClose}>
+            Отмена
           </Button>
         </Modal.Footer>
       </Modal>

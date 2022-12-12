@@ -35,9 +35,10 @@ export const Review = ({ review }: { review: IReviewDataModel }) => {
             </div>
           </div>
           <div className={'carpark-reviews__review-info'}>
-            <time className={'carpark-reviews__date'} dateTime='2022-04-22'>
+            {/* <time className={'carpark-reviews__date'} dateTime='2022-04-22'> */}
+            <div className={'carpark-reviews__date'}>
               {dbFormatDate(review.date_created, month)}
-            </time>
+            </div>
             <div className={'carpark-reviews__rate'}>
               {getStars(review.rating)}
             </div>

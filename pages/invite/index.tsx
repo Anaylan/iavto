@@ -42,7 +42,7 @@ export default function Invite() {
             <Col xs={12} md={6}>
               <a
                 className={`referal__btn referal__btn_carpark`}
-                href={`http://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/main?ref_code=${router.query.ref_code}`}
+                href={`https://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/?ref_code=${router.query.ref_code}`}
                 rel='noreferrer'>
                 <span className='d-flex align-items-center justify-content-center'>
                   <div className={'icon'}>
