@@ -63,7 +63,9 @@ export default function Carpark() {
                 <Image
                   className={'carpark-intro__banner'}
                   src={
-                    URL_IMG + '/img/cid/' + autopark.cid + '/' + autopark.banner
+                    autopark.banner ?
+                    URL_IMG + '/img/cid/' + autopark.cid + '/' + autopark.banner :
+                    URL_IMG + '/img/images.png'
                   }
                   fill
                   alt={autopark.company_name ? autopark.company_name : ''}
@@ -76,7 +78,9 @@ export default function Carpark() {
                   alt={autopark.company_name}
                   tarif={autopark.tarif}
                   src={
-                    URL_IMG + '/img/cid/' + autopark.cid + '/' + autopark.img
+                    autopark.img ?
+                    URL_IMG + '/img/cid/' + autopark.cid + '/' + autopark.img :
+                    URL_IMG + '/img/images.png'
                   }
                   title={autopark.company_name}
                   sold={autopark.count_product}

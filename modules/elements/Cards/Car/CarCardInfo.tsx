@@ -14,9 +14,11 @@ export const CarCardInfo: React.FC<ICarModel> = ({
   id,
   cid,
   pledge,
+  city
 }) => {
   const [show, setShow] = useState<boolean>(false);
   const [status, setStatus] = useState<number>(0);
+
   return (
     <div className={`car__item-info`}>
       <div className={'cars-item__info-content'}>
@@ -30,7 +32,7 @@ export const CarCardInfo: React.FC<ICarModel> = ({
               <div className={'icon'}>
                 <Location />
               </div>
-              <span>Москва</span>
+              <span>{city?.name}</span>
             </div>
           </div>
           <div className={'cars-item__subtitle'}>

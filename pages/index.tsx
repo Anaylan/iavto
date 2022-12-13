@@ -184,7 +184,7 @@ const Home: NextPage<IHome> = () => {
                   <SearchSelectOption value={''} disabled={true}>
                     Выберите тариф
                   </SearchSelectOption>
-                  <SearchSelectOption value={''}>Все тарифы</SearchSelectOption>
+                  <SearchSelectOption value={'all'}>Все тарифы</SearchSelectOption>
                   {tarifs &&
                     tarifs.map((tarif, key) => (
                       <SearchSelectOption key={key} value={tarif.id}>
@@ -208,7 +208,7 @@ const Home: NextPage<IHome> = () => {
                     <SearchSelectOption value={''} disabled={true}>
                       Выберите марку
                     </SearchSelectOption>
-                    <SearchSelectOption value={''}>
+                    <SearchSelectOption value={'all'}>
                       Все марки
                     </SearchSelectOption>
                     {marks.length > 0 &&
@@ -236,7 +236,7 @@ const Home: NextPage<IHome> = () => {
                     <SearchSelectOption value={''} disabled={true}>
                       Выберите модель
                     </SearchSelectOption>
-                    <SearchSelectOption value={''}>
+                    <SearchSelectOption value={'all'}>
                       Все модели
                     </SearchSelectOption>
                     {models.length > 0 &&

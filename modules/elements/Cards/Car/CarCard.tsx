@@ -13,6 +13,7 @@ interface ICarInfo {
 }
 
 export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
+  console.log(car)
   return (
     <>
       <Container>
@@ -51,6 +52,7 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
                     cid={car.cid}
                     id={car.id}
                     pledge={car.pledge}
+                    city={car.city}
                   />
                   <CarCardDetails
                     fuel_type={car.fuel_type}
