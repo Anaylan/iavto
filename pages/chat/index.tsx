@@ -100,7 +100,6 @@ export default function Chat() {
 
   useEffect(() => {
     window.onpopstate = function (event) {
-      console.log(event);
       setShowDialog(false);
     };
     return () => {

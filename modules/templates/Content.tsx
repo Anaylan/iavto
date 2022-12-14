@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 interface IChild {
   children: React.ReactNode;
@@ -30,6 +31,9 @@ const Content: React.FC<IChild> = ({ children }) => {
   return (
     <main ref={ref} className={'main'}>
       {children}
+      {/* Тогда закрывай */}
+      {/* Мне кажется да, я посмотрел, работает при нажатии на блок, увидел сообщение и тогда появилась ссылка */}
+      <div className="open-carpark shadow-lg"><Link href="https://xn--80aaf7asgim.xn--80ae0bp6d.xn--p1ai/register">Открыть автопарк</Link></div>
     </main>
   );
 };

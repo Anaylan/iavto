@@ -78,6 +78,7 @@ const CarBlock: React.FC<ICarArray> = ({ getData, title }) => {
               <EmptyComponent />
             )}
           </Row>
+
           <div ref={triggerElement} />
           {isLoading && (
             <>
@@ -118,7 +119,9 @@ export function CarItem({
               <Col className={`cars-item__main`}>
                 <div className={`cars-item__main-body`}>
                   <Link className={`cars-item__title`} href={`/car/${car.id}`}>
-                    <span>{car.mark} {car.model}</span>
+                    <span>
+                      {car.mark} {car.model}
+                    </span>
                     <span>{car.year}</span>
                   </Link>
                   <div className={`cars-item__subtitle`}>

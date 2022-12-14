@@ -16,6 +16,7 @@ import { EmptyComponent } from 'modules/elements';
 import { sendMessage } from 'api/Chat';
 import { Container } from 'react-bootstrap';
 import { Star } from 'assets/icon/icons';
+import Link from 'next/link';
 
 export const TabCars = () => {
   return (
@@ -275,7 +276,6 @@ export const TabFeedback = ({ id }: { id: string }) => {
     },
   });
   return (
-
     <div className='carpark-contact carpark-tab__body'>
       <Container>
         <h1 className={`cars__title title`}>Задайте ваш вопрос автопарку</h1>
@@ -300,6 +300,9 @@ export const TabFeedback = ({ id }: { id: string }) => {
             </div>
           </div>
         </Form>
+        <Link className='post__banner-none mt-4 shadow' href='#'>
+          <p>Здесь могла быть ваша реклама</p>
+        </Link>
       </Container>
     </div>
   );

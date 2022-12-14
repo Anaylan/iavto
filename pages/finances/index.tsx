@@ -1,11 +1,9 @@
 import { TITLE } from 'app/config';
 import Head from 'next/head';
-import Image from 'next/image';
-import { Col, Container, Nav, Row, Tab } from 'react-bootstrap';
+import { Container, Tab } from 'react-bootstrap';
 import { dbFormatDate, month } from 'libs/functions';
-import dynamic from 'next/dynamic';
-import { useEffect, useState, Fragment } from 'react';
-import { IRefModel, UserDataModel, UserModel, ITransaction } from 'app/models';
+import { useEffect, useState } from 'react';
+import { ITransaction } from 'app/models';
 import { getTransactions } from 'api/Transaction';
 import { THead, TCell } from 'modules/UI';
 import { checkUser } from 'libs/functions/auth';
@@ -21,9 +19,8 @@ export default function Finances() {
     getTransactions()
       .then(({ data }: { data: ITransaction[] }) => {
         setTransactions(data);
-        console.log(data);
       })
-      .catch((err) => console.log(err.data));
+      .catch(() => {});
   }, []);
 
   return (

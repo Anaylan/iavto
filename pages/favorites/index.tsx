@@ -1,6 +1,6 @@
 import { getUserFavor } from 'api/User';
 import { useEffect, useState } from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, A11y, Autoplay } from 'swiper';
 import { TITLE } from 'app/config';
@@ -15,6 +15,7 @@ import * as auth from 'app/redux/reducers/authReducer';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { EmptyComponent } from 'modules/elements';
+
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState<IFavoritesModel | null>(null);
@@ -91,18 +92,6 @@ export default function Favorites() {
                         spaceBetween: 39,
                       },
                     }}>
-                    {/* {Array(10)
-                .fill(1, 1, 20)
-                .map((item, key) => (
-                  <SwiperSlide key={key}>
-                    <Image
-                      alt=''
-                      src={'/media/carpark.png'}
-                      sizes={'100%'}
-                      fill
-                    />
-                  </SwiperSlide>
-                ))} */}
 
                     {favorites.company.map((company, key: number) => (
                       <SwiperSlide key={key}>
@@ -122,6 +111,8 @@ export default function Favorites() {
           </div>
         </Container>
       </section>
+      {/* На сегодня вроде закончили, по крайней мере есть время пойти спать */}
+{/* У меня ечть работа? Мне зарялку подлючать или я через телефон зайду */}
       <section className={'cars'}>
         <Container>
           <h2 className='title'>Автомобили</h2>

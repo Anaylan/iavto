@@ -3195,3 +3195,27 @@ section:first-child.carparks {
 .list-group-circle {
   list-style: circle inside;
 }
+
+.open-carpark {
+  position: fixed;
+  margin-top: auto;
+  bottom: 10%;
+  right: 0;
+  z-index: 10000;
+  border-radius: 10px 0 0 10px;
+  padding: 1.5rem;
+  // давай посмотрим
+  background-color: #fc0321;
+  // Может просто класс применим? в бутстрапе есть shadow, а где компонент?
+  a {
+    color: white !important;
+  }
+  
+  transition-duration: .7s;
+  transform: translate(88%);
+
+  &:hover {
+    transform: translate(5%);
+  }
+
+}

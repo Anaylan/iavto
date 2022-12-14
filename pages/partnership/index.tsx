@@ -1,6 +1,6 @@
 import { TITLE } from 'app/config';
 import Head from 'next/head';
-import Image from 'next/image';
+
 import { Col, Container, Nav, Row, Tab } from 'react-bootstrap';
 
 // import verif from 'assets/sass/'
