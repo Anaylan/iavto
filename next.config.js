@@ -21,6 +21,7 @@ const nextConfig = {
         hostname: 'sellerapi.iavto.team',
       },
     ],
+    disableStaticImages: true
   },
   optimizeFonts: true,
   productionBrowserSourceMaps: false,
