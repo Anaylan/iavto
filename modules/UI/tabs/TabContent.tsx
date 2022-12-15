@@ -1,6 +1,6 @@
-import { getCars, getCarsForCarpark } from 'api/Car';
+import { getCarsForCarpark } from 'api/Car';
 import { getStars, sanitize } from 'libs/functions';
-import { ICarModel, ICarparkModel, IReviewModel } from 'app/models';
+import { ICarparkModel, IReviewModel } from 'app/models';
 import CarBlock from 'modules/templates/CarBlock';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ import { checkOrder, createOrder, getCompanyReviews } from 'api/Review';
 import { Review } from '../reviews/Review';
 import { useFormik } from 'formik';
 import { countAndFormatMonth } from 'libs/functions';
-import { EmptyComponent } from 'modules/elements';
+import { AdBlock, ISizes } from 'modules/elements';
 import { sendMessage } from 'api/Chat';
 import { Container } from 'react-bootstrap';
 import { Star } from 'assets/icon/icons';
@@ -300,9 +300,9 @@ export const TabFeedback = ({ id }: { id: string }) => {
             </div>
           </div>
         </Form>
-        <Link className='post__banner-none mt-4 shadow' href='#'>
-          <p>Здесь могла быть ваша реклама</p>
-        </Link>
+        <div className='mt-4'>
+          <AdBlock size={ISizes.Big} />
+        </div>
       </Container>
     </div>
   );

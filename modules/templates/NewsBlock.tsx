@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { URL_IMG } from 'app/config';
 import { sanitize } from 'libs/functions';
+import { AdBlock, ISizes } from 'modules/elements';
 interface NewsProps {
   posts?: IPostModel[];
 }
@@ -49,9 +50,7 @@ const NewsBlock: React.FC<NewsProps> = () => {
                 alt=''
               />
             </Link> */}
-            <Link className='news__banner-none' href='#'>
-              <p>Здесь могла быть ваша реклама</p>
-            </Link>
+            <AdBlock size={ISizes.Small}/>
           </Col>
         </Row>
       </div>

@@ -24,3 +24,5 @@ export * from './profile/verification/PrivateDataInputs';
 export * from './profile/verification/RelativeDataInputs';
 // emptyComponents
 export * from './emptyComponents/emptyComponent';
+// advert
+export * from './advert/AdBlock';

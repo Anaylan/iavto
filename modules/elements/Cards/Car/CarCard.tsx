@@ -1,5 +1,5 @@
 import { ICarModel } from 'app/models';
-import { CarCardBonuses } from 'modules/elements';
+import { AdBlock, CarCardBonuses, ISizes } from 'modules/elements';
 import { CarCardDetails } from 'modules/elements';
 import { CarCardHeader } from 'modules/elements';
 import { CarCardInfo } from 'modules/elements';
@@ -7,7 +7,7 @@ import { CarCardVerify } from 'modules/elements';
 import { Col, Row, Container } from 'react-bootstrap';
 import { CarCardSwiper } from 'modules/elements';
 import { sanitize } from 'libs/functions';
-import Link from 'next/link';
+
 
 interface ICarInfo {
   car: ICarModel;
@@ -76,9 +76,7 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
                       )}
                     />
                   </div>
-                  <Link className='post__banner-none mt-4 shadow' href='#'>
-                    <p>Здесь могла быть ваша реклама</p>
-                  </Link>
+                  <AdBlock size={ISizes.Big}/>
                 </Col>
               </Row>
             </div>

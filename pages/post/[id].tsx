@@ -3,11 +3,12 @@ import Head from 'next/head';
 import { TITLE } from 'app/config';
 import { IPostModel } from 'app/models';
 import { getPost, requestViewPost } from 'api/Post';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Link from 'next/link';
 import Image from 'next/image';
 import { URL_IMG } from 'app/config';
-import { dbFormatDate, sanitize } from 'libs/functions';
+import { sanitize } from 'libs/functions';
+import { AdBlock, ISizes } from 'modules/elements/advert/AdBlock';
 
 export async function getServerSideProps({ params }: any) {
   const { data } = await getPost(params.id);
@@ -234,9 +235,7 @@ export default function Post({ post }: { post: IPostModel }) {
                   alt=''
                 />
               </Link> */}
-            <Link className='post__banner-none' href='#'>
-              <p>Здесь могла быть ваша реклама</p>
-            </Link>
+            <AdBlock size={ISizes.Big}/>
           </div>
         </Container>
       </section>
