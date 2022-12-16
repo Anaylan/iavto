@@ -1,4 +1,4 @@
-import { ICarModel } from 'app/models';
+import { ICarModel, IPlaces } from 'app/models';
 import { AdBlock, CarCardBonuses, ISizes } from 'modules/elements';
 import { CarCardDetails } from 'modules/elements';
 import { CarCardHeader } from 'modules/elements';
@@ -76,7 +76,7 @@ export const CarInfo: React.FC<ICarInfo> = ({ car }) => {
                       )}
                     />
                   </div>
-                  <AdBlock size={ISizes.Big}/>
+                  <AdBlock type={IPlaces.car_info} size={ISizes.Big}/>
                 </Col>
               </Row>
             </div>

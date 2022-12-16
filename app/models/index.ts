@@ -14,3 +14,4 @@ export * from './order/Order';
 export * from './form/FormModel';
 export * from './message/MessageModel';
 export * from './transaction/TransactionModel';
+export * from './ads/AdvertismentModel';

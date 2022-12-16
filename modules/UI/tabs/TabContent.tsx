@@ -1,6 +1,6 @@
 import { getCarsForCarpark } from 'api/Car';
 import { getStars, sanitize } from 'libs/functions';
-import { ICarparkModel, IReviewModel } from 'app/models';
+import { ICarparkModel, IPlaces, IReviewModel } from 'app/models';
 import CarBlock from 'modules/templates/CarBlock';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -301,7 +301,7 @@ export const TabFeedback = ({ id }: { id: string }) => {
           </div>
         </Form>
         <div className='mt-4'>
-          <AdBlock size={ISizes.Big} />
+          <AdBlock type={IPlaces['feedback']} size={ISizes.Big} />
         </div>
       </Container>
     </div>

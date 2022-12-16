@@ -1,5 +1,5 @@
 import { getLastPosts } from 'api/Post';
-import { IPostModel } from 'app/models';
+import { IPlaces, IPostModel } from 'app/models';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -20,7 +20,7 @@ const NewsBlock: React.FC<NewsProps> = () => {
   useEffect(() => {
     getLastPosts().then(({ data }: { data: IPostModel[] }) => {
       if (data.length > 0) {
-        setPosts(data.slice(0, 3));
+        setPosts(data.slice(0, 1));
       }
     });
   }, []);
@@ -50,7 +50,7 @@ const NewsBlock: React.FC<NewsProps> = () => {
                 alt=''
               />
             </Link> */}
-            <AdBlock size={ISizes.Small}/>
+            <AdBlock type={IPlaces['index']} size={ISizes.Small}/>
           </Col>
         </Row>
       </div>
