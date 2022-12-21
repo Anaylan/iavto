@@ -5,6 +5,7 @@ import axiosAuth from 'app/axiosAuth';
 
 export const GET_HOTTENDER_PARK = `${API_URL}/carpark/getHotTender`;
 export const GET_LASTENDER_PARK = `${API_URL}/carpark/getLastTender`;
+export const GET_NEW_PARK = `${API_URL}/carpark/newParks`;
 export const GET_ALL_CARPARK = `${API_URL}/carpark/all`;
 export const GET_CARPARK = `${API_URL}/carpark/one`;
 export const REQUEST_VISIT = `${API_URL}/car/view`;
@@ -35,4 +36,8 @@ export function requestVisit(id: number | undefined) {
       id: id,
     },
   });
+}
+
+export function getNewCarpark() {
+  return axiosAuth.get<ICarparkModel>(GET_NEW_PARK);
 }

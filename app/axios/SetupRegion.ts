@@ -7,7 +7,7 @@ export default function setupRegion(axios: any, store: any) {
         } = store.getState();
 
         if (id) {
-          config.headers.region = `${id}`;
+          config.headers.Region = `${id}`;
         }
         return config;
       } catch (e) {

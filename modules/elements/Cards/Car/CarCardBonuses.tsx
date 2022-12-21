@@ -29,9 +29,8 @@ export const CarCardBonuses = ({
                   <Bonuse
                     key={index}
                     title={bonusesTitle[bonuse as keyof typeof bonusesTitle]}>
-                    {
-                      'Парк оплачивает ремонт кузова, если он требуется не по вине водителя'
-                    }
+
+                    {/* Парк оплачивает ремонт кузова, если он требуется не по вине водителя */}
                   </Bonuse>
                 ),
             )}

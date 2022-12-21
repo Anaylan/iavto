@@ -7,6 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 import { URL_IMG } from 'app/config';
 import { sanitize } from 'libs/functions';
 import { AdBlock, ISizes } from 'modules/elements';
+
 interface NewsProps {
   posts?: IPostModel[];
 }

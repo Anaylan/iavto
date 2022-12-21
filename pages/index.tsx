@@ -1,4 +1,4 @@
-import { getHotTender, getLastTender } from 'api/Company';
+import { getHotTender, getLastTender, getNewCarpark } from 'api/Company';
 import { TITLE } from 'app/config';
 import { IHome } from 'app/models';
 import type { NextPage } from 'next';
@@ -393,7 +393,7 @@ const Home: NextPage<IHome> = () => {
           sm: 6,
           lg: '1-5',
         }}
-        getData={getLastTender}
+        getData={getNewCarpark}
         large={false}
       />
       <section className='news'>

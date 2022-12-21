@@ -1,16 +1,16 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import Head from 'next/head';
+﻿import Head from 'next/head';
 import { TITLE, URL_IMG } from 'app/config';
-import { Col, Container, Row } from 'react-bootstrap';
-import { EmptyComponent } from 'modules/elements';
+import { useState, useEffect } from 'react';
 import { getPartners } from 'api/Partners';
-import Image from 'next/image';
 import { IPartnerModel } from 'app/models/partners/Partner';
+import { Col, Container, Row } from 'react-bootstrap';
+import Image from 'next/image';
 import { sanitize } from 'libs/functions';
+import { EmptyComponent } from 'modules/elements';
 
-export default function Partners() {
+export default function Connectors() {
   const [partners, setPartners] = useState<IPartnerModel[]>([]);
-  const partnerType = 0
+  const partnerType = 1
 
   useEffect(() => {
     getPartners(partnerType).then(({ data }) => {
@@ -21,11 +21,11 @@ export default function Partners() {
   return (
     <>
       <Head>
-        <title>Партнёры | {TITLE}</title>
+        <title>Подключатели | {TITLE}</title>
       </Head>
       <section className='partners'>
         <Container>
-          <h1 className='title'>Партнёры</h1>
+          <h1 className='title'>Подключатели</h1>
           <Row className='partners__row'>
             {partners ? (
               <>

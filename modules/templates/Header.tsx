@@ -34,6 +34,9 @@ export const HeaderBodyLinks: LinkType[] = [
   // { href: '/rules', children: <></>, title: 'Правила' },
   { href: '/pay', children: <></>, title: 'Оплата' },
   { href: '/partners', children: <></>, title: 'Партнеры' },
+  { href: '/connectors', children: <></>, title: 'Подключатели' },
+  { href: '/car-services', children: <></>, title: 'Автосервисы' },
+  { href: '/car-washes', children: <></>, title: 'Автомойки' },
   { href: '/feedback', children: <></>, title: 'Обратная связь' },
 ];
 

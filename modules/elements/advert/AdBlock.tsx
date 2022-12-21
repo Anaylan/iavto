@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { getAdvertisment, viewAdvertisment, clickAdvertisment } from 'api/Advert';
 import 'swiper/css';
@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import { IPlaces, IAdModel } from 'app/models';
 import { Autoplay, Navigation } from 'swiper';
 import { URL_IMG } from 'app/config';
+
 export enum ISizes {
   Big,
   Small,
@@ -19,12 +20,14 @@ export const AdBlock = ({ size, type }: { size: ISizes; type: IPlaces }) => {
   useEffect(() => {
     getAdvertisment(type).then(({ data }: { data: IAdModel[] }) => {
       setAds(data);
-
-      data.map((advertisment) => {
-        viewAdvertisment(advertisment.id)
-      });
     });
   }, []);
+
+  useMemo(()=>{
+    ads.map((advertisment) => {
+      viewAdvertisment(advertisment.id)
+    });
+  }, [ads])
   return (
     <Fragment>
       {ads.length > 0 ? (
